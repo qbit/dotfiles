@@ -51,43 +51,50 @@ function srm {
 	fi
 }
 
-function link_dotfile {
-	name=$( echo $2 | sed -e 's/^dot_/\./' );
-	if [[ -e ~/$name ]] || [[ -L ~/$name ]]; then
+function link_file {
+	if [[ -e $2 ]] || [[ -L $2 ]]; then
 		if [ $setup_flag = true ]; then
-			diff -q ~/$name $1/$2
+			diff -q $2 $1
 			if [ "$?" -ne "0" ]; then
-				vimdiff ~/$name $1/$2
+				vimdiff $2 $1
 			else
-				echo -n "$name already in place, but is the same. Remove and crate symlink? ( y/yes ) "
+				echo -n "$2 already in place, but is the same. Remove and crate symlink? ( y/yes ) "
 				read ANS
 				if [[ $ANS = "y" || $ANS = "yes" ]]; then
-					srm ~/$name
-					lnk $WD/$1/$2 ~/$name
+					srm $2
+					lnk $1 $2
 				else
-					echo "$ANS?"
+					exit
 				fi
 			fi
 		else 
-			srm ~/$name
-			lnk $WD/$1/$2 ~/$name
+			srm $2
+			lnk $1 $2
 		fi
 	else
-		log "file does not exist"
-		lnk $WD/$HOST/$1 ~/$name
+		lnk $1 $2
 	fi
+}
+
+function dotify {
+	echo $( echo $1 | sed -e 's/^dot_/\./' );
 }
 
 if [ -d $HOST ]; then
 	for file in $( ls $HOST ); do 
-		link_dotfile $HOST $file
+		link_file $WD/$HOST/$file ~/$( dotify $file ) 
 	done
 else 
 	for file in $( ls default ); do
-		link_dotfile 'default' $file
+		link_file $WD/default/$file ~/$( dotify $file ) 
 	done
 fi
 
 for file in $( ls common ); do
-	link_dotfile 'common' $file
+	link_file $WD/common/$file ~/$( dotify $file ) 
 done
+
+for file in $( ls bin ); do
+	link_file $WD/bin/$file ~/bin/$file
+done
+

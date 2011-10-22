@@ -1,0 +1,36 @@
+#!/bin/ksh
+
+DEBUG=1
+
+eval . ~/lib/functions
+
+# WIF=iwn0
+WIF=$(ifconfig | grep -B 4 IEEE802 | grep ^[a-z] | awk -F\: '{print $1}')
+IF=/sbin/ifconfig
+
+echo -n "SSID: "
+read SSID
+
+echo -n "WPA-PSK: "
+stty -echo
+read -s KEY
+stty echo
+echo ""
+#log "using ${KEY} on ${WIF}"
+
+echo -n "Use dhclient (y/n)? "
+read DH
+
+sudo $IF $WIF up nwid $SSID wpa wpakey $KEY
+
+if [ $? ]; then
+	log "'${WIF}' configured for '$SSID'"
+
+	if [[ $DH = "y" ]]; then
+		log "using dhclient on '${WIF}'."
+		sudo dhclient -q $WIF
+	fi
+
+	exit;
+fi
+

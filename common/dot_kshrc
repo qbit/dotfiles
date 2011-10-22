@@ -1,0 +1,25 @@
+OS=$(uname)
+
+alias vi="vim"
+
+if [ $OS == "OpenBSD" ]; then
+	export PKG_PATH="ftp://ftp.openbsd.org/pub/OpenBSD/snapshots/packages/i386/"
+	if [ ! -f ~/.cvsrc ]; then
+		export CVSROOT="anoncvs@anoncvs1.usa.openbsd.org:/cvs"
+	fi
+fi
+
+PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$HOME/Development/go/bin:.
+export PATH HOME TERM
+
+if [ "$(id -u)" -eq 0 ] ; then
+    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]# '
+else
+    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$ '
+fi
+
+KEY_CHAIN=$(which keychain);
+if [ -x $KEY_CHAIN ]; then
+	$KEY_CHAIN -q ~/.ssh/id_rsa
+	. ~/.keychain/$(hostname)-sh
+fi

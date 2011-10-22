@@ -51,7 +51,7 @@ function srm {
 	fi
 }
 
-function link_file {
+function link_dotfile {
 	name=$( echo $2 | sed -e 's/^dot_/\./' );
 	if [[ -e ~/$name ]] || [[ -L ~/$name ]]; then
 		if [ $setup_flag = true ]; then

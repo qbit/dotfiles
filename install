@@ -1,0 +1,93 @@
+#!/bin/ksh
+
+HOST=$( hostname -s )
+OS=$( uname -s )
+WD=$( pwd )
+
+RED="\033[1;31m"
+GREEN="\033[32m"
+WHITE="\033[0;39m"
+
+setup_flag=false
+verbose=false
+
+while getopts ":svh" opt; do
+	case "$opt" in
+		s)
+			setup_flag=true
+			;;
+		v)
+			verbose=true
+			;;
+		h)
+			echo "Usage:\n\t-s for setup\n\t-v for verbose"
+			exit
+			;;
+
+	esac
+done
+
+function log {
+	if [ $verbose = true ]; then
+		echo $1
+	fi
+}
+			
+function lnk {
+	log "$GREEN ln -s $1 $2 $WHITE"
+	ln -s $1 $2
+}
+
+function srm {
+	log "$RED rm $1 $WHITE"
+	if [ -L $1 ]; then 
+		if [[ $OS = "OpenBSD" ]]; then
+			rm $1
+		else
+			unlink $1
+		fi
+	else
+		rm $1
+	fi
+}
+
+function link_file {
+	name=$( echo $2 | sed -e 's/^dot_/\./' );
+	if [[ -e ~/$name ]] || [[ -L ~/$name ]]; then
+		if [ $setup_flag = true ]; then
+			diff -q ~/$name $1/$2
+			if [ "$?" -ne "0" ]; then
+				vimdiff ~/$name $1/$2
+			else
+				echo -n "$name already in place, but is the same. Remove and crate symlink? ( y/yes ) "
+				read ANS
+				if [[ $ANS = "y" || $ANS = "yes" ]]; then
+					srm ~/$name
+					lnk $WD/$1/$2 ~/$name
+				else
+					echo "$ANS?"
+				fi
+			fi
+		else 
+			srm ~/$name
+			lnk $WD/$1/$2 ~/$name
+		fi
+	else
+		log "file does not exist"
+		lnk $WD/$HOST/$1 ~/$name
+	fi
+}
+
+if [ -d $HOST ]; then
+	for file in $( ls $HOST ); do 
+		link_file $HOST $file
+	done
+else 
+	for file in $( ls default ); do
+		link_file 'default' $file
+	done
+fi
+
+for file in $( ls common ); do
+	link_file 'common' $file
+done

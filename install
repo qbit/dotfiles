@@ -80,14 +80,14 @@ function link_dotfile {
 
 if [ -d $HOST ]; then
 	for file in $( ls $HOST ); do 
-		link_file $HOST $file
+		link_dotfile $HOST $file
 	done
 else 
 	for file in $( ls default ); do
-		link_file 'default' $file
+		link_dotfile 'default' $file
 	done
 fi
 
 for file in $( ls common ); do
-	link_file 'common' $file
+	link_dotfile 'common' $file
 done

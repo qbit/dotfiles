@@ -1,0 +1,69 @@
+urxvt*loginShell: true
+urxvt.cursorColor: green
+urxvt.scrollBar: False
+urxvt.foreground: #ffffff
+urxvt.background: #000000
+urxvt.tint: black
+urxvt.shading: 10
+urxvt.color0: #000000
+urxvt.color1: #B21818
+urxvt.color2: #18B218
+urxvt.color3: #B26818
+urxvt.color4: #1818B2
+urxvt.color5: #B218B2
+urxvt.color6: #18B2B2
+urxvt.color7: #B2B2B2
+urxvt.colorBD: #FFFFFF
+urxvt.color8: #686868
+urxvt.color9: #FF5454
+urxvt.color10: #54FF54
+urxvt.color11: #FFFF54
+urxvt.color12: #5454FF
+urxvt.color13: #FF54FF
+urxvt.color14: #54FFFF
+urxvt.color15: #FFFFFF
+urxvt.saveLines: 4096
+urxvt.letterSpace: 1
+urxvt.font: xft:Anonymous PRO:pixelsize=12
+urxvt.cursorBlink: true
+
+URxvt.perl-ext-common:  default,matcher
+URxvt.urlLauncher:      /usr/local/bin/xxxterm -n $0
+URxvt.matcher.button:   1 
+
+URxvt*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
+URxvt*matcher.launcher.1: /home/qbit/bin/mtube $0
+
+URxvt*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
+URxvt*matcher.launcher.2: feh $0
+
+
+# disabled because it causes a redraw glitch
+#urxvt.inheritPixmap: true
+
+xterm*cursorColor: green
+xterm*scrollBar: False
+xterm*foreground: #ffffff
+xterm*background: #000000
+xterm*color0: #000000
+xterm*color1: #B21818
+xterm*color2: #18B218
+xterm*color3: #B26818
+xterm*color4: #1818B2
+xterm*color5: #B218B2
+xterm*color6: #18B2B2
+xterm*color7: #B2B2B2
+xterm*colorBD: #FFFFFF
+xterm*color8: #686868
+xterm*color9: #FF5454
+xterm*color10: #54FF54
+xterm*color11: #FFFF54
+xterm*color12: #5454FF
+xterm*color13: #FF54FF
+xterm*color14: #54FFFF
+xterm*color15: #FFFFFF
+xterm*saveLines: 4096
+xterm*letterSpace: 1
+xterm*faceName: Anonymous PRO:pixelsize=12
+xterm*cursorBlink: true
+XTerm*loginShell: true

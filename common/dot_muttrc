@@ -1,0 +1,54 @@
+source ~/.mutt.creds
+
+set editor = vim
+
+set header_cache =  ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/certificates
+
+set move = no
+set imap_keepalive = 900
+
+set sort = 'threads'
+set sort_aux = 'last-date-received'
+
+set mailcap_path="~/.mailcap"
+
+set sidebar_visible=yes
+set sidebar_width=30
+
+bind index \CP sidebar-prev
+bind index \CN sidebar-next
+bind index \CO sidebar-open
+bind pager \CP sidebar-prev
+bind pager \CN sidebar-next
+bind pager \CO sidebar-open
+
+macro index \cb "|urlview\n" 
+macro pager \cb "|urlview\n" 
+
+#mailboxes "=INBOX"
+set imap_check_subscribed
+set query_command="goobook query '%s'"
+bind editor <Tab> complete-query
+
+color   attachment  color61 color232
+color   header      color10 color232 "^(From|Subject|cc|date|To|X-Spam-Level|User-Agent|X-Mailer):"
+color   signature   color63 color232
+color   tree        color63 color232
+color   message     color37 color232
+color   status      color247 color235
+color   normal      color229 color232
+color   error       color231 color196
+color   indicator   color232 color215
+color   markers     color37 color232
+color   index       color196 color232 ~D
+color   index       color196 color232 ~F
+color   index       color49 color232 ~T
+color   tilde       color63 color232
+color   body        color10 color232 "(http|https|ftp|news|telnet|finger|irc)://[^ \">\t\r\n]*"
+color   body        color10 color232 "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+color   body        color37 color232 "[;:=][-][)/(|]"
+color   quoted      color130 color232
+color   quoted1     color25 color232
+color   quoted2     color207 color232

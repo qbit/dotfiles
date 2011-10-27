@@ -1,3 +1,3 @@
 [submodule "common/dot_vim"]
 	path = common/dot_vim
-	url = https://qbit@github.com/qbit/dotvim.git
+	url = git://github.com/qbit/dotvim.git

@@ -3,7 +3,7 @@ OS=$(uname)
 alias vi="vim"
 
 if [ $OS == "OpenBSD" ]; then
-	export PKG_PATH="ftp://ftp.openbsd.org/pub/OpenBSD/snapshots/packages/i386/"
+	export PKG_PATH="ftp://ftp.openbsd.org/pub/OpenBSD/snapshots/packages/$( machine )/"
 	if [ ! -f ~/.cvsrc ]; then
 		export CVSROOT="anoncvs@anoncvs1.usa.openbsd.org:/cvs"
 	fi

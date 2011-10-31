@@ -19,7 +19,9 @@ else
 fi
 
 KEY_CHAIN=$(which keychain);
-if [ -x $KEY_CHAIN ]; then
-	$KEY_CHAIN -q ~/.ssh/id_rsa
-	. ~/.keychain/$(hostname)-sh
+if [ $? -eq 0 ]; then
+	if [ -x $KEY_CHAIN ]; then
+		$KEY_CHAIN -q ~/.ssh/id_rsa
+		. ~/.keychain/$(hostname)-sh
+	fi
 fi

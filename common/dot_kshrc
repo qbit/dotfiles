@@ -3,9 +3,14 @@ OS=$(uname)
 alias vi="vim"
 
 if [ $OS == "OpenBSD" ]; then
-	export PKG_PATH="ftp://ftp.openbsd.org/pub/OpenBSD/snapshots/packages/$( machine )/"
+	export PKG_PATH="http://deftly.net/pub/OpenBSD/snapshots/packages/$( machine )/"
+
 	if [ ! -f ~/.cvsrc ]; then
 		export CVSROOT="anoncvs@anoncvs1.usa.openbsd.org:/cvs"
+	fi
+
+	if [ ! -f ~/.netrc ]; then
+		export FETCH_CMD="curl -n -s"
 	fi
 fi
 

@@ -4,7 +4,7 @@ ARCH=$( arch -s )
 VER=$( uname -r | sed -e 's/\.//' )
 OPTS=" -V "
 
-ftp $OPTS ftp://ftp.openbsd.org/pub/OpenBSD/snapshots/${ARCH}/bsd.rd
-ftp $OPTS ftp://ftp.openbsd.org/pub/OpenBSD/snapshots/${ARCH}/etc${VER}.tgz
+ftp $OPTS $PKG_PATH/bsd.rd
+ftp $OPTS $PKG_PATH/etc${VER}.tgz
 
 cp bsd.rd /bsd.rd

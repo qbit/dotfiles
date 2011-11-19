@@ -3,6 +3,7 @@ OS=$(uname)
 alias vi="vim"
 
 if [ $OS == "OpenBSD" ]; then
+
 	function pkg_add {
 
 		set -A mirrors '10.0.1.100' 'www.deftly.net' 'ftp.openbsd.org'

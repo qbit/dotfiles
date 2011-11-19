@@ -3,14 +3,31 @@ OS=$(uname)
 alias vi="vim"
 
 if [ $OS == "OpenBSD" ]; then
-	export PKG_PATH="http://10.0.1.100/pub/OpenBSD/snapshots/packages/$( machine )/"
+	function pkg_add {
 
-	if [ ! -f ~/.cvsrc ]; then
-		export CVSROOT="anoncvs@anoncvs1.usa.openbsd.org:/cvs"
-	fi
+		set -A mirrors '10.0.1.100' 'www.deftly.net' 'ftp.openbsd.org'
+		
+		for mirror in ${mirrors[@]}; do 
+			ping -q -c 1 $mirror 2>&1 > /dev/null
+			if [ "$?" -eq "0" ]; then
+				MIRROR=$mirror
+				break;
+			fi
+		done
+
+		export PKG_PATH="http://${MIRROR}/pub/OpenBSD/snapshots/packages/$( machine )/"
+
+		echo "Using ${MIRROR}"
+		sudo /usr/sbin/pkg_add $@
+
+	}
 
 	if [ -f ~/.netrc ]; then
 		export FETCH_CMD="curl -n -s"
+	fi
+
+	if [ ! -f ~/.cvsrc ]; then
+		export CVSROOT="anoncvs@anoncvs1.usa.openbsd.org:/cvs"
 	fi
 fi
 

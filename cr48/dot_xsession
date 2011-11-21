@@ -4,3 +4,4 @@ synclient ClickFinger2=2
 xset -b &
 xmodmap ~/.xmodmap &
 exec awesome
+#exec xmonad

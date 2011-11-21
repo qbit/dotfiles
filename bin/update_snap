@@ -4,7 +4,13 @@ ARCH=$( arch -s )
 VER=$( uname -r | sed -e 's/\.//' )
 OPTS=" -V "
 
+# need to update this to be able to use http-passwd mirrors
 ftp $OPTS $PKG_PATH/bsd.rd
 ftp $OPTS $PKG_PATH/etc${VER}.tgz
 
-cp bsd.rd /bsd.rd
+if [ "${USER}" = "root" ]; then
+	mv bsd.rd /bsd.rd
+else
+	sudo mv bsd.rd /bsd.rd
+fi
+

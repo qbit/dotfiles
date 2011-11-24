@@ -40,6 +40,12 @@ function git_branch_name {
 	white="\033[0m"
 	branch=$( git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' )
 	if [ "${branch}" != "" ]; then
+		if [ "${branch}" = "(no branch)" ]; then
+			# probably have a tag
+			br_ch=$( perl -e 'binmode STDOUT, ":utf8"; print "\x{16D8}";' )
+			branch="$br_ch $( git describe )"
+		fi
+
 		echo "[${bold}${branch}${white}]"
 	fi
 }

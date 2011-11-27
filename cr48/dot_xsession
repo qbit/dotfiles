@@ -1,6 +1,9 @@
 export LC_CTYPE="en_US.UTF-8"
+
 keepassx &
 synclient ClickFinger2=2
+synclient PalmDetect=1
+synclient LockedDrags=1
 xset -b &
 xmodmap ~/.xmodmap &
 exec awesome

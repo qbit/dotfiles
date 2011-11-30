@@ -27,6 +27,12 @@ while getopts ":svh" opt; do
 	esac
 done
 
+# need something to install git if it's not there.. some kinda package
+# wrapper that works with apt/dpkg and pkg_add stuff
+
+git submodule init
+git submodule update
+
 function log {
 	if [ $verbose = true ]; then
 		echo $1

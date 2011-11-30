@@ -1,0 +1,66 @@
+URxvt*loginShell: true
+URxvt*cursorColor: green
+URxvt*scrollBar: False
+URxvt*foreground: #ffffff
+URxvt*background: #000000
+URxvt*tint: black
+URxvt*shading: 10
+URxvt*color0: #000000
+URxvt*color1: #B21818
+URxvt*color2: #18B218
+URxvt*color3: #B26818
+URxvt*color4: #1818B2
+URxvt*color5: #B218B2
+URxvt*color6: #18B2B2
+URxvt*color7: #B2B2B2
+URxvt*colorBD: #FFFFFF
+URxvt*color8: #686868
+URxvt*color9: #FF5454
+URxvt*color10: #54FF54
+URxvt*color11: #FFFF54
+URxvt*color12: #5454FF
+URxvt*color13: #FF54FF
+URxvt*color14: #54FFFF
+URxvt*color15: #FFFFFF
+URxvt*saveLines: 4096
+URxvt*letterSpace: 1
+URxvt*font: xft:Anonymous PRO:pixelsize=12
+URxvt*cursorBlink: true
+
+URxvt*perl-ext-common:  default,matcher
+URxvt*urlLauncher:      /usr/local/bin/xxxterm -n $0
+URxvt*matcher.button:   1 
+
+URxvt*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
+URxvt*matcher.launcher.1: /home/qbit/bin/mtube $0
+
+URxvt*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
+URxvt*matcher.launcher.2: feh $0
+URxvt*inheritPixmap: true
+
+XTerm*cursorColor: green
+XTerm*scrollBar: False
+XTerm*foreground: #ffffff
+XTerm*background: #000000
+XTerm*color0: #000000
+XTerm*color1: #B21818
+XTerm*color2: #18B218
+XTerm*color3: #B26818
+XTerm*color4: #1818B2
+XTerm*color5: #B218B2
+XTerm*color6: #18B2B2
+XTerm*color7: #B2B2B2
+XTerm*colorBD: #FFFFFF
+XTerm*color8: #686868
+XTerm*color9: #FF5454
+XTerm*color10: #54FF54
+XTerm*color11: #FFFF54
+XTerm*color12: #5454FF
+XTerm*color13: #FF54FF
+XTerm*color14: #54FFFF
+XTerm*color15: #FFFFFF
+XTerm*saveLines: 4096
+XTerm*letterSpace: 1
+XTerm*faceName: Anonymous PRO:pixelsize=12
+XTerm*cursorBlink: true
+XTerm*loginShell: true

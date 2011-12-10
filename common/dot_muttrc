@@ -12,6 +12,8 @@ set postponed="$HOME/.mutt/postponed"
 set move = no
 set imap_keepalive = 900
 
+set askcc
+
 set sort = 'threads'
 set sort_aux = 'last-date-received'
 

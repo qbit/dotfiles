@@ -1,0 +1,11 @@
+#!/bin/ksh
+
+( 
+	cd /usr/src;
+	cvs up;
+	cd /usr/ports;
+	cvs up;
+	cd /usr/xenocara;
+	cvs up;
+)
+

@@ -4,7 +4,17 @@ keepassx &
 synclient ClickFinger2=2
 synclient PalmDetect=1
 synclient LockedDrags=1
+synclient HorizTwoFingerScroll=1
 xset -b &
 xmodmap ~/.xmodmap &
-exec awesome
+
+xset +fp /home/qbit/.fonts
+xset +fp /usr/local/lib/X11/fonts/terminus
+xset +fp /usr/local/lib/X11/fonts/anonymous-pro
+
+xset fp rehash
+
+#exec awesome
 #exec xmonad
+exec scrotwm
+#exec dwm

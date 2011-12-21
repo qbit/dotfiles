@@ -64,3 +64,13 @@ XTerm*letterSpace: 1
 XTerm*faceName: Anonymous PRO:pixelsize=12
 XTerm*cursorBlink: true
 XTerm*loginShell: true
+
+URxvt*perl-ext-common:  default,matcher
+URxvt*urlLauncher:      /usr/local/bin/xxxterm -n $0
+URxvt*matcher.button:   1 
+
+URxvt*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
+URxvt*matcher.launcher.1: /home/qbit/bin/mtube $0
+
+URxvt*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
+URxvt*matcher.launcher.2: feh $0

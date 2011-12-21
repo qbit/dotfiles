@@ -1,0 +1,32 @@
+#!/bin/sh
+
+DEBUG="-v --progress"
+
+LOCK=/tmp/mirror_openbsd.lock
+
+OPTS=" -a ${DEBUG} --delete --log-file ${LOG} "
+
+EXCLUDES="alpha arm armish hp300 hppa landisk loongson mac68k mvme68k mvme88k sgi socppc sparc sparc64 vax zaurus sh mips64 mips64el m68k mips64"
+
+EXCLUDE=""
+
+for e in $EXCLUDES; do
+	EXCLUDE="${EXCLUDE} --exclude${e} "
+done
+
+SRC="rsync://ftp3.usa.openbsd.org/ftp/snapshots/"
+DST="/media/onetb/www/pub/OpenBSD/snapshots/"
+
+if [ -e $LOCK ]; then
+    pgrep rsync
+    if [ "$?" = "1" ]; then
+        rm $LOCK
+        rsync $OPTS $EXCLUDE $SRC $DST;
+        rm $LOCK
+    fi
+    exit 0;
+else
+    touch $LOCK
+    rsync $OPTS $EXCLUDE $SRC $DST;
+    rm $LOCK
+fi

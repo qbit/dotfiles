@@ -2,5 +2,5 @@
 
 ( 
 	cd /usr/ports;
-	make search key=$1 | grep ^Port
+	make search key=$1 | grep ^Port | sort
 )

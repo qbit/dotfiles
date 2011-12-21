@@ -1,0 +1,12 @@
+#!/bin/ksh
+
+FORMAT="%A %l:%M"
+
+while :; do
+	CPU="$( /sbin/sysctl hw.cpuspeed | cut -d "=" -f2 )MHz"
+	BAT="$( apm -l )%"
+	MEM="$(/usr/bin/top | grep Free: | cut -d " " -f6 )"
+	DATE=$( date "+${FORMAT}" )
+	echo -e "$CPU | $MEM | $BAT | $DATE"
+	sleep 5;
+done

@@ -16,7 +16,7 @@ if [ $OS == "OpenBSD" ]; then
 			fi
 		done
 
-		export PKG_PATH="http://${MIRROR}/pub/OpenBSD/snapshots/packages/$( machine )/"
+		export PKG_PATH="http://${MIRROR}/pub/OpenBSD/snapshots/packages/$( arch -s )/"
 
 		echo "Using ${MIRROR}"
 		sudo /usr/sbin/pkg_add $@

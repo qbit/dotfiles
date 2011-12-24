@@ -4,9 +4,9 @@ FORMAT="%A %l:%M"
 
 while :; do
 	CPU="$( /sbin/sysctl hw.cpuspeed | cut -d "=" -f2 )MHz"
-	BAT="$( apm -l )%"
+	BAT="$( /usr/sbin/apm -l )%"
 	MEM="$(/usr/bin/top | grep Free: | cut -d " " -f6 )"
-	DATE=$( date "+${FORMAT}" )
+	DATE=$( /bin/date "+${FORMAT}" )
 	echo -e "$CPU | $MEM | $BAT | $DATE"
 	sleep 5;
 done

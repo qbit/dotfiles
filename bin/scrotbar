@@ -3,10 +3,11 @@
 FORMAT="%A %l:%M"
 
 while :; do
+	HOST="$( hostname -s )"
 	CPU="$( /sbin/sysctl hw.cpuspeed | cut -d "=" -f2 )MHz"
 	BAT="$( /usr/sbin/apm -l )%"
 	MEM="$(/usr/bin/top | grep Free: | cut -d " " -f6 )"
 	DATE=$( /bin/date "+${FORMAT}" )
-	echo -e "$CPU | $MEM | $BAT | $DATE"
+	echo -e "${HOSTNAME} | ${CPU} | ${MEM} | ${BAT} | ${DATE}"
 	sleep 5;
 done

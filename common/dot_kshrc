@@ -43,7 +43,7 @@ function git_branch_name {
 		if [ "${branch}" = "(no branch)" ]; then
 			# probably have a tag
 			br_ch=$( perl -e 'binmode STDOUT, ":utf8"; print "\x{16D8}";' )
-			branch="$br_ch $( git describe )"
+			branch="$br_ch $( git describe --tags | head -n 1 )"
 		fi
 
 		echo "[${bold}${branch}${white}]"

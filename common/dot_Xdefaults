@@ -35,7 +35,7 @@ URxvt*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\
 URxvt*matcher.launcher.1: /home/qbit/bin/mtube $0
 
 URxvt*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
-URxvt*matcher.launcher.2: feh $0
+URxvt*matcher.launcher.2: feh -x $0
 URxvt*inheritPixmap: true
 
 XTerm*cursorColor: green
@@ -73,4 +73,4 @@ XTerm*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\
 XTerm*matcher.launcher.1: /home/qbit/bin/mtube $0
 
 XTerm*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
-XTerm*matcher.launcher.2: feh $0
+XTerm*matcher.launcher.2: feh -x $0

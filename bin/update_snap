@@ -4,12 +4,13 @@ ARCH=$( arch -s )
 VER=$( uname -r | sed -e 's/\.//' )
 OPTS=" -V "
 
+find_mirror
+
 URL=$( echo $PKG_PATH | sed -e 's/\/packages//' )
 
 echo $URL
 # need to update this to be able to use http-passwd mirrors
 ftp $OPTS $URL/bsd.rd
-ftp $OPTS $URL/etc${VER}.tgz
 
 if [ "${USER}" = "root" ]; then
 	mv bsd.rd /bsd.rd

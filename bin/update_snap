@@ -4,6 +4,8 @@ ARCH=$( arch -s )
 VER=$( uname -r | sed -e 's/\.//' )
 OPTS=" -V "
 
+find_mirror
+
 URL=$( echo $PKG_PATH | sed -e 's/\/packages//' )
 
 echo $URL
@@ -16,4 +18,3 @@ echo $URL
 #else
 #	sudo mv bsd.rd /bsd.rd
 #fi
-

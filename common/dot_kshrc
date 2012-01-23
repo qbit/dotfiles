@@ -4,25 +4,15 @@ OS=$(uname)
 
 alias vi="vim"
 
+if [ -e ~/.kshlib ]; then
+	. ~/.kshlib
+fi
+
 if [ $OS == "OpenBSD" ]; then
-
 	function pkg_add {
-
-		set -A mirrors '10.0.1.100' 'ftp.openbsd.org'
-		
-		for mirror in ${mirrors[@]}; do 
-			ping -q -c 1 $mirror 2>&1 > /dev/null
-			if [ "$?" -eq "0" ]; then
-				MIRROR=$mirror
-				break;
-			fi
-		done
-
-		export PKG_PATH="http://${MIRROR}/pub/OpenBSD/snapshots/packages/$( arch -s )/"
-
+		find_mirror
 		echo "Using ${MIRROR}"
 		sudo /usr/sbin/pkg_add $@
-
 	}
 
 	if [ -f ~/.netrc ]; then

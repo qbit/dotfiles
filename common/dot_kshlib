@@ -1,0 +1,13 @@
+function find_mirror {
+	set -A mirrors '10.0.1.100' 'deftly.net' 'ftp.openbsd.org'
+	
+	for mirror in ${mirrors[@]}; do 
+		ping -q -c 1 $mirror 2>&1 > /dev/null
+		if [ "$?" -eq "0" ]; then
+			MIRROR=$mirror
+			break;
+		fi
+	done
+
+	export PKG_PATH="http://${MIRROR}/pub/OpenBSD/snapshots/packages/$( arch -s )/"
+}

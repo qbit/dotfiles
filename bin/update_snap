@@ -1,5 +1,7 @@
 #!/bin/ksh
 
+. ~/.kshlib
+
 ARCH=$( arch -s )
 VER=$( uname -r | sed -e 's/\.//' )
 OPTS=" -V "

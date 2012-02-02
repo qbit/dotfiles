@@ -2,21 +2,72 @@
 
 . ~/.kshlib
 
-ARCH=$( arch -s )
-VER=$( uname -r | sed -e 's/\.//' )
 OPTS=" -V "
+DST=/tmp/upgrade
+CPUS=$( sysctl hw.ncpu | awk -F\= '{print $2}' )
+ARCH=$( machine )
+VER=$( uname -r | sed -e 's/\.//' )
+
+# etc sets will be ignored.. make sure base is last!
+set -A sets 'comp' 'game' 'man' 'xbase' 'xfont' 'xserv' 'xshare' 'etc' 'xetc' 'base'
 
 find_mirror
 
 URL=$( echo $PKG_PATH | sed -e 's/\/packages//' )
 
-echo $URL
-# need to update this to be able to use http-passwd mirrors
-#ftp $OPTS $URL/bsd.rd
-#ftp $OPTS $URL/etc${VER}.tgz
-#
-#if [ "${USER}" = "root" ]; then
-#	mv bsd.rd /bsd.rd
-#else
-#	sudo mv bsd.rd /bsd.rd
-#fi
+if [ ! -e $DST ]; then
+	mkdir $DST
+fi
+
+( 
+	cd $DST
+
+	ftp $OPTS ${URL}bsd
+	ftp $OPTS ${URL}bsd.mp
+	ftp $OPTS ${URL}bsd.rd
+
+	for set in ${sets[@]}; do
+		ftp $OPTS ${URL}${set}${VER}.tgz
+	done
+
+	ftp $OPTS ${URL}INSTALL.${ARCH}
+
+	sudo cp /bsd /obsd
+	sudo cp /bsd.rd /obsd.rd
+	sudo cp /sbin/reboot /sbin/oreboot
+
+	if [ "${CPUS}" -eq "1" ]; then
+		echo "Using bsd.."
+		sudo cp bsd /bsd
+	else
+		echo "Using bsd.mp.."
+		sudo cp bsd.mp /bsd
+	fi
+
+	if [ $( sysctl hw.model | grep -qi qemu ) ]; then
+		echo "Please disable mpbios!"
+		sudo config -f /bsd
+	fi
+
+	sudo cp bsd.rd /bsd.rd
+
+	PV=0
+	if [ -x /usr/local/bin/pv ]; then
+		PV=1
+	fi
+
+	for set in ${sets[@]}; do
+		if [ "${set}" != "etc" ] && [ "${set}" != "xetc" ]; then
+			if [ $PV == 1 ]; then
+				sudo -s "pv ${set}${VER}.tgz | tar -C / -xzphf -"
+			else 
+				sudo tar -C / -xzphf ${set}${VER}.tgz
+			fi
+		else 
+			cp ${set}${VER}.tgz ~/
+		fi
+	done
+
+	echo "I put etc.tgz and xetc.tgz in ~/"
+	echo "Don't forget to sysmerge when done!" 
+)

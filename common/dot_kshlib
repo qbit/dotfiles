@@ -9,5 +9,5 @@ function find_mirror {
 		fi
 	done
 
-	export PKG_PATH="http://${MIRROR}/pub/OpenBSD/snapshots/packages/$( arch -s )/"
+	export PKG_PATH="http://${MIRROR}/pub/OpenBSD/snapshots/packages/$( machine)/"
 }

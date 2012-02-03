@@ -1,5 +1,5 @@
 function find_mirror {
-	set -A mirrors '10.0.1.100' 'deftly.net' 'ftp.openbsd.org'
+	set -A mirrors '10.0.1.100' 'ftp5.usa.openbsd.org' 'ftp.openbsd.org'
 	
 	for mirror in ${mirrors[@]}; do 
 		ping -q -c 1 $mirror 2>&1 > /dev/null

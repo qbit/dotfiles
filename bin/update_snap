@@ -6,7 +6,7 @@ OPTS=" -V "
 DST=/tmp/upgrade
 CPUS=$( sysctl hw.ncpu | awk -F\= '{print $2}' )
 ARCH=$( machine )
-VER=$( uname -r | sed -e 's/\.//' )
+VER=$( echo $1 | sed -e 's/\.//' ) || $( uname -r | sed -e 's/\.//' )
 
 # etc sets will be ignored.. make sure base is last!
 set -A sets 'comp' 'game' 'man' 'xbase' 'xfont' 'xserv' 'xshare' 'etc' 'xetc' 'base'
@@ -14,6 +14,7 @@ set -A sets 'comp' 'game' 'man' 'xbase' 'xfont' 'xserv' 'xshare' 'etc' 'xetc' 'b
 find_mirror
 
 URL=$( echo $PKG_PATH | sed -e 's/\/packages//' )
+echo $URL
 
 if [ ! -e $DST ]; then
 	mkdir $DST

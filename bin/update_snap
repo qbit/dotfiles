@@ -58,6 +58,10 @@ fi
 	fi
 
 	for set in ${sets[@]}; do
+		if [ ! -e ${set}${VER}.tgz ]; then
+			echo "Perhaps the set revision changed? ( example 5.0 to 5.1)"
+			exit 1;
+		fi
 		if [ "${set}" != "etc" ] && [ "${set}" != "xetc" ]; then
 			if [ $PV == 1 ]; then
 				sudo -s "pv ${set}${VER}.tgz | tar -C / -xzphf -"

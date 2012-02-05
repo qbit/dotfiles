@@ -1,5 +1,7 @@
 export LC_CTYPE="en_US.UTF-8"
 
+urxvtd -q -o -f &
+
 xset -b &
 xmodmap ~/.xmodmap &
 #exec awesome

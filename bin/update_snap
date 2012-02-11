@@ -6,7 +6,12 @@ OPTS=" -V "
 DST=/tmp/upgrade
 CPUS=$( sysctl hw.ncpu | awk -F\= '{print $2}' )
 ARCH=$( machine )
-VER=$( echo $1 | sed -e 's/\.//' ) || $( uname -r | sed -e 's/\.//' )
+
+if [ "${1}X" -eq "X" ]; then
+	VER=$( uname -r | sed -e 's/\.//' )
+else
+	VER=$( echo $1 | sed -e 's/\.//' ) 
+fi
 
 # etc sets will be ignored.. make sure base is last!
 set -A sets 'comp' 'game' 'man' 'xbase' 'xfont' 'xserv' 'xshare' 'etc' 'xetc' 'base'

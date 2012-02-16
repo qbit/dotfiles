@@ -11,7 +11,6 @@ fi
 if [ $OS == "OpenBSD" ]; then
 	function pkg_add {
 		find_mirror
-		echo "Using ${MIRROR}"
 		sudo /usr/sbin/pkg_add $@
 	}
 
@@ -28,8 +27,6 @@ PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/
 export PATH HOME TERM
 
 function git_branch_name {
-	bold="\033[01;39m"
-	white="\033[0m"
 	branch=$( git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' )
 	if [ "${branch}" != "" ]; then
 		if [ "${branch}" = "(no branch)" ]; then

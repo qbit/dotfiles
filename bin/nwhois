@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+var http = require( 'http' );
+
+if ( ! process.argv[2] ) { 
+	throw new Error( "Missing a .io domain name!" );
+}
+
+var opt = { 
+	url: "nic.io",
+	path: "/cgi-bin/whois?query=" + process.argv[2],
+	port: 80
+}
+
+http.get( opt, function( res ) {
+	console.log( res );
+});

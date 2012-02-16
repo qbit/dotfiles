@@ -1,13 +1,33 @@
-function find_mirror {
-	set -A mirrors '10.0.1.100' 'ftp5.usa.openbsd.org' 'ftp.openbsd.org'
-	
-	for mirror in ${mirrors[@]}; do 
-		ping -q -c 1 $mirror 2>&1 > /dev/null
-		if [ "$?" -eq "0" ]; then
-			MIRROR=$mirror
-			break;
-		fi
-	done
+grey="\033[01;30m"
+red="\033[01;31m"
+green="\033[01;32m"
+yellow="\033[01;33m"
+blue="\033[01;34m"
+magenta="\033[01;35m"
+cyan="\033[01;35m"
+bold="\033[01;39m"
 
-	export PKG_PATH="http://${MIRROR}/pub/OpenBSD/snapshots/packages/$( machine )/"
+white="\033[0m"
+
+function find_mirror {
+	if [ "${PKG_PATH}" == "" ]; then
+		echo -n "${bold}Finding a mirror${white}"
+		set -A mirrors '10.0.1.100' 'ftp5.usa.openbsd.org' 'ftp.openbsd.org'
+		
+		for mirror in ${mirrors[@]}; do 
+			echo -n "."
+			ping -i 1 -q -c 1 $mirror 2>&1 > /dev/null
+			if [ "$?" -eq "0" ]; then
+				MIRROR=$mirror
+				echo ""
+				break;
+			fi
+		done
+
+		export PKG_PATH="http://${MIRROR}/pub/OpenBSD/snapshots/packages/$( machine )/"
+	fi
+
+	echo "${bold}Using${white} ${green}${MIRROR}${white}"
 }
+
+# vim: set filetype=shell

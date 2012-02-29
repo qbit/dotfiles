@@ -20,10 +20,10 @@ DST="/media/onetb/www/pub/OpenBSD/snapshots/"
 if [ -e $LOCK ]; then
     pgrep rsync
     if [ "$?" = "1" ]; then
-        rm $LOCK
+		rm $LOCK
 		touch $LOCK
-        rsync $OPTS $EXCLUDE $SRC $DST;
-        rm $LOCK
+		rsync $OPTS $EXCLUDE $SRC $DST;
+		rm $LOCK
     fi
     exit 0;
 else

@@ -12,7 +12,7 @@ white="\033[0m"
 function find_mirror {
 	if [ "${PKG_PATH}" == "" ]; then
 		echo -n "${bold}Finding a mirror${white}"
-		set -A mirrors '10.0.1.100' 'ftp5.usa.openbsd.org' 'ftp.openbsd.org'
+		set -A mirrors '10.0.1.100' 'ftp3.usa.openbsd.org' 'ftp.openbsd.org'
 		
 		for mirror in ${mirrors[@]}; do 
 			echo -n "."

@@ -21,6 +21,7 @@ if [ -e $LOCK ]; then
     pgrep rsync
     if [ "$?" = "1" ]; then
         rm $LOCK
+		touch $LOCK
         rsync $OPTS $EXCLUDE $SRC $DST;
         rm $LOCK
     fi

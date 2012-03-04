@@ -9,6 +9,14 @@ bold="\033[01;39m"
 
 white="\033[0m"
 
+function lockie {
+	cmd=$1
+	# figure out a good random name for a lockfile in /tmp
+	# create said lockfile
+	# remove on exit of cmd 
+	# return code for client to use
+}
+
 function find_mirror {
 	if [ "${PKG_PATH}" == "" ]; then
 		echo -n "${bold}Finding a mirror${white}"

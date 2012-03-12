@@ -19,5 +19,5 @@ xset fp rehash
 
 #exec awesome
 #exec xmonad
-exec scrotwm
+exec spectrwm
 #exec dwm

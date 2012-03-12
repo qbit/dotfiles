@@ -52,7 +52,7 @@ fi
 
 	if [ $( sysctl hw.model | grep -qi qemu ) ]; then
 		echo "Please disable mpbios!"
-		sudo config -f /bsd
+		sudo config -e -f /bsd
 	fi
 
 	sudo cp bsd.rd /bsd.rd

@@ -9,6 +9,23 @@ bold="\033[01;39m"
 
 white="\033[0m"
 
+# usage: lockie /tmp/lockname "$CMD"
+function lockie {
+	cmd=$2
+	lock=$1
+
+	if [ ! -e $lock ]; then
+		touch $lock
+		$( $cmd )
+		code=$?
+		rm $lock
+		return $code
+	else 
+		echo "${red}lock exists${white}"
+	fi
+
+}
+
 function find_mirror {
 	if [ "${PKG_PATH}" == "" ]; then
 		echo -n "${bold}Finding a mirror${white}"

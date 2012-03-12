@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. ~/.kshlib
+
 DEBUG="-v --progress"
 
 LOCK=/tmp/mirror_openbsd.lock
@@ -17,16 +19,4 @@ done
 SRC="rsync://ftp3.usa.openbsd.org/ftp/snapshots/"
 DST="/media/onetb/www/pub/OpenBSD/snapshots/"
 
-if [ -e $LOCK ]; then
-    pgrep rsync
-    if [ "$?" = "1" ]; then
-        rm $LOCK
-        rsync $OPTS $EXCLUDE $SRC $DST;
-        rm $LOCK
-    fi
-    exit 0;
-else
-    touch $LOCK
-    rsync $OPTS $EXCLUDE $SRC $DST;
-    rm $LOCK
-fi
+lockie $LOCK "rsync ${OPTS} ${EXCLUDE} ${SRC} ${DST}"

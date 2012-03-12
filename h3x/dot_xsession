@@ -5,5 +5,5 @@ urxvtd -q -o -f &
 xset -b &
 xmodmap ~/.xmodmap &
 #exec awesome
-exec scrotwm
+exec spectrwm
 #exec xmonad

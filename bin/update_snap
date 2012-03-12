@@ -71,7 +71,7 @@ fi
 			if [ $PV == 1 ]; then
 				sudo -s "pv ${set}${VER}.tgz | tar -C / -xzphf -"
 			else 
-				sudo tar -C / -xzphf ${set}${VER}.tgz
+				sudo tar -C / -vxzphf ${set}${VER}.tgz
 			fi
 		else 
 			cp ${set}${VER}.tgz ~/

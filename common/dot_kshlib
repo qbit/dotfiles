@@ -26,32 +26,44 @@ function lockie {
 
 }
 
-function machine_to_arch {
-	set -A machines 
-	machines[amd64] = 'amd64'
-	machines[i386] = 'i386'
-	machines[macppc] = 'powerpc'
-}
+set -A openbsd_mirrors '10.0.1.100' 'ftp3.usa.openbsd.org' 'ftp.openbsd.org'
 
 function find_mirror {
-	if [ "${PKG_PATH}" == "" ]; then
-		echo -n "${bold}Finding a mirror${white}"
-		set -A mirrors '10.0.1.100' 'ftp3.usa.openbsd.org' 'ftp.openbsd.org'
-		
-		for mirror in ${mirrors[@]}; do 
-			echo -n "."
-			ping -i 1 -q -c 1 $mirror 2>&1 > /dev/null
-			if [ "$?" -eq "0" ]; then
-				MIRROR=$mirror
-				echo ""
-				break;
-			fi
-		done
+	for mirror in ${openbsd_mirrors[@]}; do 
+		ping -i 1 -q -c 1 $mirror 2>&1 > /dev/null
+		if [ "$?" -eq "0" ]; then
+			OPENBSD_MIRROR=$mirror
+			break;
+		fi
+	done
+}
 
-		export PKG_PATH="http://${MIRROR}/pub/OpenBSD/snapshots/packages/$( machine )/"
+function set_snap_path {
+	if [ "${SNAP_PATH}" == "" ]; then
+		echo "${bold}Finding a mirror${white}"
+
+		if [ "${OPENBSD_MIRROR}" == "" ]; then
+			find_mirror
+		fi
+
+		SNAP_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/snapshots/$( machine )/"
 	fi
 
-	echo "${bold}Using${white} ${green}${MIRROR}${white}"
+	echo "${bold}Using${white} ${green}${OPENBSD_MIRROR}${white}"
+}
+
+function set_pkg_path {
+	if [ "${PKG_PATH}" == "" ]; then
+		echo "${bold}Finding a mirror${white}"
+
+		if [ "${OPENBSD_MIRROR}" == "" ]; then
+			find_mirror
+		fi
+
+		PKG_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/snapshots/packages/$( arch -s )/"
+	fi
+
+	echo "${bold}Using${white} ${green}${OPENBSD_MIRROR}${white}"
 }
 
 # vim: set filetype=shell

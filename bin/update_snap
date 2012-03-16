@@ -16,10 +16,9 @@ fi
 # etc sets will be ignored.. make sure base is last!
 set -A sets 'comp' 'game' 'man' 'xbase' 'xfont' 'xserv' 'xshare' 'etc' 'xetc' 'base'
 
-find_mirror
+set_snap_path
 
-URL=$( echo $PKG_PATH | sed -e 's/\/packages//' )
-echo $URL
+echo $SNAP_PATH
 
 if [ ! -e $DST ]; then
 	mkdir $DST
@@ -28,15 +27,15 @@ fi
 ( 
 	cd $DST
 
-	ftp $OPTS ${URL}bsd
-	ftp $OPTS ${URL}bsd.mp
-	ftp $OPTS ${URL}bsd.rd
+	ftp $OPTS ${SNAP_PATH}bsd
+	ftp $OPTS ${SNAP_PATH}bsd.mp
+	ftp $OPTS ${SNAP_PATH}bsd.rd
 
 	for set in ${sets[@]}; do
-		ftp $OPTS ${URL}${set}${VER}.tgz
+		ftp $OPTS ${SNAP_PATH}${set}${VER}.tgz
 	done
 
-	ftp $OPTS ${URL}INSTALL.${ARCH}
+	ftp $OPTS ${SNAP_PATH}INSTALL.${ARCH}
 
 	sudo cp /bsd /obsd
 	sudo cp /bsd.rd /obsd.rd

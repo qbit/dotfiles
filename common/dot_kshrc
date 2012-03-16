@@ -10,7 +10,7 @@ fi
 
 if [ $OS == "OpenBSD" ]; then
 	function pkg_add {
-		find_mirror
+		set_pkg_path
 		sudo /usr/sbin/pkg_add $@
 	}
 

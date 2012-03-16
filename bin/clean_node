@@ -1,0 +1,9 @@
+NODE=/usr/ports/www/node
+
+if [ -d $NODE ]; then
+	rm -rf $NODE;
+	cd /usr && cvs checkout ports/www/node
+	cd $NODE
+else
+	echo "No ${NODE} dir, perhaps you need to checkout ports?"
+fi

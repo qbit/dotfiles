@@ -26,6 +26,13 @@ function lockie {
 
 }
 
+function machine_to_arch {
+	set -A machines 
+	machines[amd64] = 'amd64'
+	machines[i386] = 'i386'
+	machines[macppc] = 'powerpc'
+}
+
 function find_mirror {
 	if [ "${PKG_PATH}" == "" ]; then
 		echo -n "${bold}Finding a mirror${white}"

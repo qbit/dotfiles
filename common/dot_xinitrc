@@ -4,3 +4,5 @@ xset +fp /usr/local/lib/X11/fonts/terminus
 xset +fp /usr/local/lib/X11/fonts/anonymous-pro
 
 xset fp rehash
+
+feh --bg-center /home/qbit/.background.png

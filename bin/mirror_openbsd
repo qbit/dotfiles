@@ -13,7 +13,7 @@ EXCLUDES="alpha arm armish hp300 hppa landisk loongson mac68k mvme68k mvme88k sg
 EXCLUDE=""
 
 for e in $EXCLUDES; do
-	EXCLUDE="${EXCLUDE} --exclude${e} "
+	EXCLUDE="${EXCLUDE} --exclude ${e} "
 done
 
 SRC="rsync://ftp3.usa.openbsd.org/ftp/snapshots/"

@@ -18,14 +18,13 @@ function lockie {
 
 	if [ ! -e $lock ]; then
 		touch $lock
-		$( $cmd )
+		$cmd
 		code=$?
 		rm $lock
 		return $code
 	else 
 		echo "${red}lock exists${white}"
 	fi
-
 }
 
 function find_mirror {

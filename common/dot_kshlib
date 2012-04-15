@@ -23,7 +23,6 @@ function lockie {
 	else 
 		echo "${red}lock exists${white}"
 	fi
-
 }
 
 set -A openbsd_mirrors '10.0.1.100' 'ftp3.usa.openbsd.org' 'ftp.openbsd.org'

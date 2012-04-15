@@ -17,6 +17,14 @@ for e in $EXCLUDES; do
 done
 
 SRC="rsync://ftp3.usa.openbsd.org/ftp/snapshots/"
-DST="/media/onetb/www/pub/OpenBSD/snapshots/"
+
+if [ X${1} != X ]; then
+	DST=$1
+else 
+	DST="/media/onetb/www/pub/OpenBSD/snapshots/"
+fi
+
+echo $DST
+exit
 
 lockie $LOCK "rsync ${OPTS} ${EXCLUDE} ${SRC} ${DST}"

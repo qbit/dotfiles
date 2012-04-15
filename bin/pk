@@ -1,0 +1,6 @@
+#!/bin/ksh
+
+# package too wrapper for dpkg, pkg_* 
+
+OS=$( uname )
+

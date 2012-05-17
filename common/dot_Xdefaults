@@ -28,7 +28,7 @@ URxvt*font: xft:Anonymous PRO:pixelsize=12
 URxvt*cursorBlink: true
 
 URxvt*perl-ext-common:  default,matcher
-URxvt*urlLauncher:      /usr/local/bin/xxxterm -n $0
+URxvt*urlLauncher:      /usr/local/bin/xombrero -n $0
 URxvt*matcher.button:   1 
 
 URxvt*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
@@ -66,7 +66,7 @@ XTerm*cursorBlink: true
 XTerm*loginShell: true
 
 XTerm*perl-ext-common:  default,matcher
-XTerm*urlLauncher:      /usr/local/bin/xxxterm -n $0
+XTerm*urlLauncher:      /usr/local/bin/xombrero -n $0
 XTerm*matcher.button:   1 
 
 XTerm*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)

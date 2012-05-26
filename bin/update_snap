@@ -49,7 +49,7 @@ fi
 		sudo cp bsd.mp /bsd
 	fi
 
-	if [ $( sysctl hw.model | grep -qi qemu ) ]; then
+	if [ $( sysctl hw.model | cut -d\= -f 2 | awk '{print $1}' ) == "QEMU" ]; then
 		echo "Please disable mpbios!"
 		sudo config -e -f /bsd
 	fi

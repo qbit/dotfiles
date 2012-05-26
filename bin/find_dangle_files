@@ -1,0 +1,11 @@
+#!/bin/ksh
+
+# This script finds files in /usr/local that are not associated with any
+# packages.
+
+for i in $( find /usr/local -type f ); do
+	pkg_info -q -E $i > /dev/null
+	if [ "$?" == "1" ]; then
+		echo "$i : hanging file!!!"
+	fi
+done

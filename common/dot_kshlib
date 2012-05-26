@@ -1,3 +1,5 @@
+set -A openbsd_mirrors '10.0.1.100' 'deftly.net' 'ftp3.usa.openbsd.org' 'ftp.openbsd.org'
+
 grey="\033[01;30m"
 red="\033[01;31m"
 green="\033[01;32m"
@@ -16,17 +18,14 @@ function lockie {
 
 	if [ ! -e $lock ]; then
 		touch $lock
-		$( $cmd )
+		$cmd
 		code=$?
 		rm $lock
 		return $code
 	else 
 		echo "${red}lock exists${white}"
 	fi
-
 }
-
-set -A openbsd_mirrors '10.0.1.100' 'ftp3.usa.openbsd.org' 'ftp.openbsd.org'
 
 function find_mirror {
 	for mirror in ${openbsd_mirrors[@]}; do 
@@ -46,7 +45,11 @@ function set_snap_path {
 			find_mirror
 		fi
 
-		export SNAP_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/snapshots/$( machine )/"
+		if [ "X$(sysctl kern.version | egrep 'current|beta')" == "X" ]; then
+			export SNAP_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/$( uname -r )/$( machine )/"
+		else 
+			export SNAP_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/snapshots/$( machine )/"
+		fi
 	fi
 
 	echo "${bold}Using${white} ${green}${OPENBSD_MIRROR}${white}"
@@ -60,7 +63,11 @@ function set_pkg_path {
 			find_mirror
 		fi
 
-		export PKG_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/snapshots/packages/$( arch -s )/"
+		if [ "X$(sysctl kern.version | egrep 'current|beta')" == "X" ]; then
+			export PKG_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/$( uname -r )/packages/$( arch -s )/"
+		else 
+			export PKG_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/snapshots/packages/$( arch -s )/"
+		fi
 	fi
 
 	echo "${bold}Using${white} ${green}${OPENBSD_MIRROR}${white}"

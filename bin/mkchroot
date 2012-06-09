@@ -1,0 +1,66 @@
+#!/bin/ksh
+
+green="\033[01;32m"
+white="\033[0m"
+bold="\033[01;39m"
+
+dir=""
+set -A bins
+count=0
+
+for opt in $*; do
+  if [ $count -gt 0 ]; then
+    bins[$count]=$opt
+  else 
+    dir=$opt
+  fi
+  count=$(( $count + 1 ))
+done
+
+function build_chroot {
+  mkdir $1
+  echo "${green}Making skel fs in ${1}..${white}"
+  mkdir ${1}/{bin,dev,etc,root,sbin,tmp,usr,var}
+  mkdir ${1}/var/run
+  mkdir ${1}/usr/bin
+  mkdir ${1}/usr/sbin
+
+  echo "${green}Making /etc/passwd and /etc/group in ${1}..${white}"
+  echo "root:*:0:0:daemon:0:0:Charlie &:/root:/bin/sh" > ${1}/etc/master.passwd
+  echo "root:*:0:0:Charlie &:/root:/bin/sh" > ${1}/etc/passwd
+  echo "wheel:*:0:root" > ${1}/etc/group
+  echo "_shadow:*:65:" >> ${1}/etc/group
+
+  echo "${green}Making pwd.db..${white}"
+  sudo pwd_mkdb -d ${1}/etc ${1}/etc/master.passwd
+  sudo pwd_mkdb -d ${1}/etc -p ${1}/etc/master.passwd
+
+  echo "${green}Making device nodes..${white}"
+  ( cd ${1}/dev; sudo sh /dev/MAKEDEV std random )
+
+  echo "${green}Copying in need binaries..${white}"
+  sudo cp -p /bin/{ln,ls,mkdir,sh,tar} ${1}/bin/
+  sudo cp -p /bin/{ln,ls,mkdir,sh,tar} ${1}/bin/
+
+  sudo cp -p /sbin/ldconfig ${1}/sbin/
+
+  sudo cp -p /usr/bin/{dirname,env,id} ${1}/usr/bin/
+  sudo cp -p /usr/sbin/{chgrp,chown} ${1}/usr/sbin/
+}
+
+test -d $1 || build_chroot $dir
+
+for a in ${bins[@]}; do
+  FILES=$( ldd $( which $a ) | grep -v Start | awk '{print $7}' )
+
+  echo "${green}Installing ${white}${bold}${a}${green} in chroot${white}"
+  for i in $FILES; do
+    F=$( echo $i | sed -e 's/^\///' )
+    P=${1}/${F}
+    D=${1}/$( echo $F | awk -F\/ '{ $NF=""; NF--; print }' | sed -e 's/ /\//g' )
+    mkdir -p $D
+    echo "\t${green}${i}..${white}"
+    sudo cp -p $i $D;
+  done
+done
+

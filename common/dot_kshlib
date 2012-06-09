@@ -1,4 +1,4 @@
-set -A openbsd_mirrors '10.0.1.100' 'deftly.net' 'ftp3.usa.openbsd.org' 'ftp.openbsd.org'
+set -A openbsd_mirrors '10.0.1.100' 'ftp3.usa.openbsd.org' 'ftp.openbsd.org'
 
 grey="\033[01;30m"
 red="\033[01;31m"

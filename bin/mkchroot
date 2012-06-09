@@ -40,11 +40,9 @@ function build_chroot {
 
   echo "${green}Copying in need binaries..${white}"
   sudo cp -p /bin/{ln,ls,mkdir,sh,tar} ${1}/bin/
-  sudo cp -p /bin/{ln,ls,mkdir,sh,tar} ${1}/bin/
+  sudo cp -p /usr/bin/{dirname,env,id} ${1}/usr/bin/
 
   sudo cp -p /sbin/ldconfig ${1}/sbin/
-
-  sudo cp -p /usr/bin/{dirname,env,id} ${1}/usr/bin/
   sudo cp -p /usr/sbin/{chgrp,chown} ${1}/usr/sbin/
 }
 

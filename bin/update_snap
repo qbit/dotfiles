@@ -7,7 +7,7 @@ DST=/tmp/upgrade
 CPUS=$( sysctl hw.ncpu | awk -F\= '{print $2}' )
 ARCH=$( machine )
 
-if [ "${1}X" -eq "X" ]; then
+if [ "${1}X" == "X" ]; then
 	VER=$( uname -r | sed -e 's/\.//' )
 else
 	VER=$( echo $1 | sed -e 's/\.//' ) 
@@ -41,7 +41,7 @@ fi
 	sudo cp /bsd.rd /obsd.rd
 	sudo cp /sbin/reboot /sbin/oreboot
 
-	if [ "${CPUS}" -eq "1" ]; then
+	if [ "${CPUS}" == "1" ]; then
 		echo "Using bsd.."
 		sudo cp bsd /bsd
 	else

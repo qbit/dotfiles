@@ -1,9 +1,0 @@
-NODE=/usr/ports/lang/node
-
-if [ -d $NODE ]; then
-	rm -rf $NODE;
-	cd /usr && cvs checkout ports/lang/node
-	cd $NODE
-else
-	echo "No ${NODE} dir, perhaps you need to checkout ports?"
-fi

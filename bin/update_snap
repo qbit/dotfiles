@@ -41,7 +41,7 @@ fi
 	sudo cp /bsd.rd /obsd.rd
 	sudo cp /sbin/reboot /sbin/oreboot
 
-	if [ "${CPUS}" -eq "1" ]; then
+	if [ "${CPUS}" == "1" ]; then
 		echo "Using bsd.."
 		sudo cp bsd /bsd
 	else

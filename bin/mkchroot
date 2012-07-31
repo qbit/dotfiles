@@ -44,6 +44,8 @@ function build_chroot {
 
   sudo cp -p /sbin/ldconfig ${1}/sbin/
   sudo cp -p /usr/sbin/{chgrp,chown} ${1}/usr/sbin/
+
+  sudo cp -p /etc/resolv.conf ${1}/etc/
 }
 
 test -d $1 || build_chroot $dir

@@ -1,0 +1,9 @@
+#!/bin/ksh
+
+for i in lang/node databases/node-sqlite3; do 
+	rm -rf /usr/ports/$i
+	( 
+		cd /usr
+		cvs checkout ports/$i
+	)
+done

@@ -1,0 +1,61 @@
+#!/bin/ksh
+
+FORMAT="%A %l:%M"
+
+BAT_CHARG=""
+BAT_PER=""
+BAT_STAT=""
+
+red="\x04"
+normal="\x01"
+yellow="\x03"
+
+set_bat() {
+	BS=$1
+	BAT_PER=$2
+	AC=$3
+
+	if [ $AC -ne 255 -o $BS -lt 4 ]; then
+		case $AC in
+			0) 
+				BAT_CHARG="-"
+				;;
+			[1-2])
+				BAT_CHARG="+"
+				;;
+			*)
+				BAT_CHARG="?"
+				;;
+		esac;
+		case $BS in
+			0) 
+				# BAT_STAT="${normal}High${normal}"
+				BAT_STAT="High"
+				;;
+			1)
+				# BAT_STAT="${yellow}Low${normal}"
+				BAT_STAT="Low"
+				;;
+			2)
+				# BAT_STAT="${red}CRIT!${normal}"
+				BAT_STAT="CRIT!"
+				;;
+			*)
+				BAT_STAT="?"
+				;;
+		esac;
+			
+	fi
+}
+
+set_bat $( /usr/sbin/apm -alb )
+HOST="$( hostname -s )"
+CPU="CPU: $( /sbin/sysctl hw.cpuspeed | cut -d "=" -f2 )MHz"
+BAT="Bat: ${BAT_CHARG}${BAT_PER}% ${BAT_STAT}"
+MEM="Mem: $(/usr/bin/top | grep Free: | cut -d " " -f3 )"
+DATE=$( /bin/date "+${FORMAT}" )
+VOL=$( mixerctl outputs.master |  cut -d "," -f2 )
+VOL=$(( $VOL * 100 / 256 ))
+VOL="Vol: ${VOL} %"
+
+echo -e "< ${HOST} | ${CPU} | ${MEM} | ${BAT} | ${VOL} | ${DATE} >"

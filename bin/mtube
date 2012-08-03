@@ -1,9 +1,9 @@
 #!/bin/ksh
 
-YT="/usr/local/bin/youtube-dl" 
-YTOPTS="-f 18 -g " 
+YT=$( which youtube-dl )
+MP=$( which mplayer )
 
-MP="/usr/local/bin/mplayer"
+YTOPTS="-f 18 -g " 
 MPOTS="-cache 300"
 
-$MP $MPOPTS `$YT $TYOPTS "$*"`
+$MP $MPOPTS `$YT $YTOPTS "$*"`

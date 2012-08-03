@@ -3,6 +3,7 @@ export LC_CTYPE="en_US.UTF-8"
 OS=$(uname)
 
 alias vi="vim"
+alias irc="tmux at -t irc"
 
 if [ -e ~/.kshlib ]; then
 	. ~/.kshlib

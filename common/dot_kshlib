@@ -46,12 +46,20 @@ function set_snap_path {
 			find_mirror
 		fi
 
+<<<<<<< HEAD
 		#if [ "X$(sysctl | grep -v acpi | egrep 'current|beta')" == "X" ]; then
 		#	export SNAP_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/$( uname -r )/$( machine )/"
 		#else 
 		#	export SNAP_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/snapshots/$( machine )/"
 		#fi
 		export SNAP_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/snapshots/$( machine )/"
+=======
+#		if [ "X$(sysctl kern.version | egrep -i 'current|beta')" == "X" ]; then
+#			export SNAP_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/$( uname -r )/$( machine )/"
+#		else 
+			export SNAP_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/snapshots/$( machine )/"
+#		fi
+>>>>>>> 64aa336e9c5e07c1c56822eb9c586230969c09eb
 	fi
 
 	echo "${bold}Using${white} ${green}${OPENBSD_MIRROR}${white}"

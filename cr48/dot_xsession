@@ -11,7 +11,7 @@ xmodmap ~/.xmodmap &
 keepassx &
 urxvtd -q -f -o &
 
-xset +fp /home/qbit/.fonts
+xset +fp ~/.fonts
 xset +fp /usr/local/lib/X11/fonts/terminus
 xset +fp /usr/local/lib/X11/fonts/anonymous-pro
 
@@ -19,12 +19,12 @@ xset fp rehash
 
 
 while :; do
-	xsetroot -name "`/home/qbit/bin/dwmbar`"
+	xsetroot -name "`~/bin/dwmbar`"
 	sleep 5
 done &
 kill $!
 
-feh --bg-center /home/qbit/.background.png &
+feh --bg-center ~/.background.png &
 
 #exec awesome
 #exec xmonad

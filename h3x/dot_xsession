@@ -1,24 +1,32 @@
 export LC_CTYPE="en_US.UTF-8"
 
-urxvtd -q -o -f &
+synclient ClickFinger2=2
+synclient ClickFinger3=3
+synclient PalmDetect=1
+synclient LockedDrags=1
+synclient HorizTwoFingerScroll=1
+xset -b &
+xmodmap ~/.xmodmap &
 
-xset +fp ~/.fonts
+keepassx &
+urxvtd -q -f -o &
+
+xset +fp /home/qbit/.fonts
 xset +fp /usr/local/lib/X11/fonts/terminus
 xset +fp /usr/local/lib/X11/fonts/anonymous-pro
 
 xset fp rehash
 
-feh --bg-center ~/.background.png &
 
 while :; do
-	xsetroot -name "`~/bin/dwmbar`"
+	xsetroot -name "`/home/qbit/bin/dwmbar`"
 	sleep 5
 done &
 kill $!
 
-xset -b &
-xmodmap ~/.xmodmap &
+feh --bg-center /home/qbit/.background.png &
+
 #exec awesome
-#exec spectrwm
 #exec xmonad
+#exec spectrwm
 exec dwm

@@ -52,7 +52,7 @@ set_bat $( /usr/sbin/apm -alb )
 HOST="$( hostname -s )"
 CPU="CPU: $( /sbin/sysctl hw.cpuspeed | cut -d "=" -f2 )MHz"
 BAT="Bat: ${BAT_CHARG}${BAT_PER}% ${BAT_STAT}"
-MEM="Mem: $(/usr/bin/top | grep Free: | cut -d " " -f3 )"
+MEM="Mem: $(/usr/bin/top | grep Free: | cut -d " " -f6 )"
 DATE=$( /bin/date "+${FORMAT}" )
 VOL=$( mixerctl outputs.master |  cut -d "," -f2 )
 VOL=$(( $VOL * 100 / 256 ))

@@ -5,6 +5,7 @@
 
 set -A numbers $@
 set -A ticks ▁ ▂ ▃ ▄ ▅ ▆ ▇ █
+set -A new_numbers
 
 min=0xffffffff
 max=0
@@ -12,14 +13,13 @@ max=0
 for n in ${@}; do
   (( n < min )) && min=$n
   (( n > max )) && max=$n
-  numbers=$numbers${numbers:+ }$n
+  new_numbers=$new_numbers${new_numbers:+ }$n
 done
-
 
 f=$(( (($max-$min)<<8)/(${#ticks[@]}-1) ))
 (( f < 1 )) && f=1
 
-for n in $numbers; do
+for n in $new_numbers; do
   echo -n ${ticks[$(( ((($n-$min)<<8)/$f) ))]}
 done
 echo ""

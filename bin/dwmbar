@@ -48,10 +48,10 @@ set_bat() {
 	fi
 }
 
-
 while true; do
 	set_bat $( /usr/sbin/apm -alb )
 	HOST="$( hostname -s )"
+	AP=$( ifconfig | grep ieee80211 | awk '{print $3}' )
 	CPU="CPU: $( /sbin/sysctl hw.cpuspeed | cut -d "=" -f2 )MHz"
 	BAT="Bat: ${BAT_CHARG}${BAT_PER}% ${BAT_STAT}"
 	MEM="Mem: $(/usr/bin/top | grep Free: | cut -d " " -f6 )"
@@ -59,6 +59,6 @@ while true; do
 	VOL=$( mixerctl outputs.master |  cut -d "," -f2 )
 	VOL=$(( $VOL * 100 / 256 ))
 	VOL="Vol: ${VOL} %"
-	xsetroot -name "< ${HOST} | ${CPU} | ${MEM} | ${BAT} | ${VOL} | ${DATE} >"
+	xsetroot -name "< ${HOST} | AP: ${AP} | ${CPU} | ${MEM} | ${BAT} | ${VOL} | ${DATE} >"
 	sleep 5;
 done

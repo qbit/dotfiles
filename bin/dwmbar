@@ -52,6 +52,29 @@ while true; do
 	set_bat $( /usr/sbin/apm -alb )
 	HOST="$( hostname -s )"
 	AP=$( ifconfig | grep ieee80211 | awk '{print $3}' )
+  DB=$( ifconfig | awk '/ieee/ {print $8}' | cut -d d -f 1 )
+
+  GR=""
+
+  if [ $DB -gt 50 ]; then
+    GR=$( spark 0 1 2 3 )
+  fi
+
+  if [ $DB -lt 50 ] && [ $DB -gt 45 ]; then
+    GR=$( spark 0 1 2 )
+    GR="${GR} "
+  fi
+
+  if [ $DB -lt 45 ] && [ $DB -gt 35 ]; then
+    GR=$( spark 0 1 )
+    GR="${GR}  "
+  fi
+
+  if [ $DB -lt 35 ]; then
+    GR=$( spark 0 )
+    GR="${GR}   "
+  fi
+
 	CPU="CPU: $( /sbin/sysctl hw.cpuspeed | cut -d "=" -f2 )MHz"
 	BAT="Bat: ${BAT_CHARG}${BAT_PER}% ${BAT_STAT}"
 	MEM="Mem: $(/usr/bin/top | grep Free: | cut -d " " -f6 )"
@@ -59,6 +82,6 @@ while true; do
 	VOL=$( mixerctl outputs.master |  cut -d "," -f2 )
 	VOL=$(( $VOL * 100 / 256 ))
 	VOL="Vol: ${VOL} %"
-	xsetroot -name "< ${HOST} | AP: ${AP} | ${CPU} | ${MEM} | ${BAT} | ${VOL} | ${DATE} >"
+	xsetroot -name "< ${HOST} | AP: ${AP} ${GR} | ${CPU} | ${MEM} | ${BAT} | ${VOL} | ${DATE} >"
 	sleep 5;
 done

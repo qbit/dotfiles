@@ -17,12 +17,7 @@ xset +fp /usr/local/lib/X11/fonts/anonymous-pro
 
 xset fp rehash
 
-
-while :; do
-	xsetroot -name "`~/bin/dwmbar`"
-	sleep 5
-done &
-kill $!
+~/bin/dwmbar &
 
 feh --bg-center ~/.background.png &
 

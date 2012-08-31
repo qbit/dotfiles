@@ -1,10 +1,5 @@
 export LC_CTYPE="en_US.UTF-8"
 
-synclient ClickFinger2=2
-synclient ClickFinger3=3
-synclient PalmDetect=1
-synclient LockedDrags=1
-synclient HorizTwoFingerScroll=1
 xset -b &
 xmodmap ~/.xmodmap &
 

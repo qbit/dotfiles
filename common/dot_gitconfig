@@ -1,6 +1,7 @@
 [user]
-	name = Aaron Bieber
-	email = deftly@gmail.com
+  name = Aaron Bieber
+  email = deftly@gmail.com
 
 [alias]
-	rmdel = !git rm `git ls-files --deleted`
+  rmdel = !git rm `git ls-files --deleted`
+  upsync = !cvs up && git add . && git rmdel && git commit -m 'sync'

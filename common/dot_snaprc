@@ -1,3 +1,4 @@
 DEBUG:true
 DST:/tmp/upgrade
 MERGE:true
+MIRROR:10.0.1.100

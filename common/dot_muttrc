@@ -29,6 +29,8 @@ bind pager \CP sidebar-prev
 bind pager \CN sidebar-next
 bind pager \CO sidebar-open
 
+macro index t "<pipe-message>mutt2task<enter> <save-message>+TODO<enter>"
+
 macro index \cb "|urlview\n" 
 macro pager \cb "|urlview\n" 
 

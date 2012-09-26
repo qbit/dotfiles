@@ -113,3 +113,6 @@ XTerm*matcher.launcher.1: /home/qbit/bin/mtube $0
 
 XTerm*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
 XTerm*matcher.launcher.2: feh -x $0
+
+! Xft.dpi:       100  
+! Xft.antialias:        false

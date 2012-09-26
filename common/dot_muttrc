@@ -6,8 +6,11 @@ set header_cache =  ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
 
-set record="$HOME/.mutt/sent"
-set postponed="$HOME/.mutt/postponed"
+set mail_check = 120
+set timeout = 300
+set imap_keepalive = 300
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
 
 set move = no
 set imap_keepalive = 900

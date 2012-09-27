@@ -1,0 +1,23 @@
+#!/bin/ksh
+
+# pianobar control script
+
+CMD=''
+
+while getopts "npq" arg; do
+  case $arg in
+    n)
+      CMD='n'
+      ;;
+    p)
+      CMD='p'
+      ;;
+    q)
+      CMD='q'
+      ;;
+  esac
+done
+
+if [ -e /tmp/pianobar ]; then
+  echo -n $CMD > /tmp/pianobar
+fi

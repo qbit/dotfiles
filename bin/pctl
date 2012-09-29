@@ -20,4 +20,6 @@ done
 
 if [ -e /tmp/pianobar ]; then
   echo -n $CMD > /tmp/pianobar
+else
+  mkfifo /tmp/pianobar
 fi

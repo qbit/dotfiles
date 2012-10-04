@@ -1,6 +1,6 @@
 #!/bin/ksh
 
-set -A plist anonymous-pro cyphertite dmenu ettercap feh ffmpeg gimp git keychain luakit mercurial mplayer mutt nmap node pv qt4 rxvt-unicode taskwarrior terminus vim vlc xclip youtube-dl
+set -A plist anonymous-pro apg cyphertite dmenu ettercap feh ffmpeg gimp git keychain luakit mercurial mplayer mutt nmap node pv qt4 rxvt-unicode taskwarrior terminus vim vlc xclip youtube-dl offlineimap
 
 set -A rlist git,git@github.com:qbit/dotfiles.git git,git@github.com:qbit/dotvim.git,~/.vim git,git@github.com:qbit/snap hg,http://hg.suckless.org/dwm
 

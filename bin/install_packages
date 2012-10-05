@@ -1,0 +1,35 @@
+#!/bin/ksh
+
+set -A plist anonymous-pro apg cyphertite dmenu ettercap feh ffmpeg gimp git keychain luakit mercurial mplayer mutt nmap node pv qt4 rxvt-unicode taskwarrior terminus vim vlc xclip youtube-dl offlineimap
+
+set -A rlist git,git@github.com:qbit/dotfiles.git git,git@github.com:qbit/dotvim.git,~/.vim git,git@github.com:qbit/snap hg,http://hg.suckless.org/dwm
+
+if [ "${PKG_PATH}X" == "X" ]; then
+  if [ -e ~/.kshlib ]; then
+    . ~/.kshlib
+    set_pkg_path
+  else 
+    echo "Please set PKG_PATH - http://ftp3.usa.openbsd.org/pub/OpenBSD is a nice one"
+    exit;
+  fi
+fi
+
+if [ ! -d ~/Development ]; then
+  mkdir ~/Development
+fi
+
+for pkg in ${plist[@]}; do
+  pkg_add -vi $pkg;
+done
+
+for repo in ${rlist[@]}; do
+  set -A parts $( echo $repo | tr "," " " )
+  if [ "${parts[2]}X" != "X" ]; then
+    $( ${parts[0]} clone ${parts[1]} ${parts[2]} )
+  else 
+    (
+      cd ~/Development/
+      $( ${parts[0]} clone ${parts[1]} )
+    )
+  fi
+done

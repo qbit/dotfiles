@@ -1,0 +1,12 @@
+#!/bin/ksh
+
+MINE_i386=$( curl -sI http://10.0.1.100/pub/OpenBSD/snapshots/i386/bsd.mp | grep Last )
+MINE_amd64=$( curl -sI http://10.0.1.100/pub/OpenBSD/snapshots/amd64/bsd.mp | grep Last)
+MINE_macppc=$( curl -sI http://10.0.1.100/pub/OpenBSD/snapshots/macppc/bsd | grep Last)
+
+OBSD_i386=$( curl -sI http://ftp.openbsd.org/pub/OpenBSD/snapshots/i386/bsd.mp  | grep Last )
+OBSD_amd64=$( curl -sI http://ftp.openbsd.org/pub/OpenBSD/snapshots/amd64/bsd.mp | grep Last )
+OBSD_macppc=$( curl -sI http://ftp.openbsd.org/pub/OpenBSD/snapshots/macppc/bsd | grep Last )
+
+echo -n "My i386 ${MINE_i386}\nMy amd64 ${MINE_amd64}\nMy macppc ${MINE_macppc}\n"
+echo -n "OpenBSD i386 ${OBSD_i386}\nOpenBSD amd64 ${OBSD_amd64}\nOpenBSD macppc ${OBSD_macppc}\n"

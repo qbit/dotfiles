@@ -6,8 +6,11 @@ set header_cache =  ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
 
-set record="$HOME/.mutt/sent"
-set postponed="$HOME/.mutt/postponed"
+set mail_check = 120
+set timeout = 300
+set imap_keepalive = 300
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
 
 set move = no
 set imap_keepalive = 900
@@ -22,12 +25,17 @@ set mailcap_path="~/.mailcap"
 set sidebar_visible=yes
 set sidebar_width=30
 
+macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
+macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+
 bind index \CP sidebar-prev
 bind index \CN sidebar-next
 bind index \CO sidebar-open
 bind pager \CP sidebar-prev
 bind pager \CN sidebar-next
 bind pager \CO sidebar-open
+
+macro index t "<pipe-message>mutt2task<enter> <save-message>+TODO<enter>"
 
 macro index \cb "|urlview\n" 
 macro pager \cb "|urlview\n" 

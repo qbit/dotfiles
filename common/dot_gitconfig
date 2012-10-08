@@ -1,0 +1,8 @@
+[user]
+  name = Aaron Bieber
+  email = deftly@gmail.com
+
+[alias]
+  rmdel = !git rm `git ls-files --deleted`
+  upsync = !cvs up && git add . && git rmdel && git commit -m 'sync'
+  mpush = !git push origin master && git push akb master

@@ -28,7 +28,7 @@ URxvt*font: xft:Anonymous PRO:pixelsize=12
 URxvt*cursorBlink: true
 
 URxvt*perl-ext-common:  default,matcher
-URxvt*urlLauncher:      /usr/local/bin/xombrero -n $0
+! URxvt*urlLauncher:      /usr/local/bin/xombrero -n $0
 URxvt*matcher.button:   1 
 
 URxvt*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
@@ -39,6 +39,43 @@ URxvt*matcher.launcher.2: feh -x $0
 URxvt*inheritPixmap: true
 
 URxvt*urgentOnBell: true
+
+UXTerm*cursorColor: green
+UXTerm*scrollBar: False
+UXTerm*foreground: #ffffff
+UXTerm*background: #000000
+UXTerm*color0: #000000
+UXTerm*color1: #B21818
+UXTerm*color2: #18B218
+UXTerm*color3: #B26818
+UXTerm*color4: #1818B2
+UXTerm*color5: #B218B2
+UXTerm*color6: #18B2B2
+UXTerm*color7: #B2B2B2
+UXTerm*colorBD: #FFFFFF
+UXTerm*color8: #686868
+UXTerm*color9: #FF5454
+UXTerm*color10: #54FF54
+UXTerm*color11: #FFFF54
+UXTerm*color12: #5454FF
+UXTerm*color13: #FF54FF
+UXTerm*color14: #54FFFF
+UXTerm*color15: #FFFFFF
+UXTerm*saveLines: 4096
+UXTerm*letterSpace: 1
+UXTerm*faceName: Anonymous PRO:pixelsize=12
+UXTerm*cursorBlink: true
+UXTerm*loginShell: true
+
+UXTerm*perl-ext-common:  default,matcher
+! UXTerm*urlLauncher:      /usr/local/bin/xombrero -n $0
+UXTerm*matcher.button:   1 
+
+UXTerm*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
+UXTerm*matcher.launcher.1: /home/qbit/bin/mtube $0
+
+UXTerm*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
+UXTerm*matcher.launcher.2: feh -x $0
 
 XTerm*cursorColor: green
 XTerm*scrollBar: False
@@ -68,7 +105,7 @@ XTerm*cursorBlink: true
 XTerm*loginShell: true
 
 XTerm*perl-ext-common:  default,matcher
-XTerm*urlLauncher:      /usr/local/bin/xombrero -n $0
+! XTerm*urlLauncher:      /usr/local/bin/xombrero -n $0
 XTerm*matcher.button:   1 
 
 XTerm*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
@@ -76,3 +113,6 @@ XTerm*matcher.launcher.1: /home/qbit/bin/mtube $0
 
 XTerm*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
 XTerm*matcher.launcher.2: feh -x $0
+
+! Xft.dpi:       100  
+! Xft.antialias:        false

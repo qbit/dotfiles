@@ -1,0 +1,19 @@
+#!/bin/ksh
+
+N=5
+CMD=$@
+
+while getopts "n:d" arg; do
+  case $arg in 
+    n)
+      N=$OPTARG
+      $CMD=$( echo "$CMD" | sed -e "s/${OPTARG}//" )
+      ;;
+  esac
+done
+
+while true; do
+  echo "doing '$CMD' every $N"
+  #$( $@ )
+  sleep $N
+done

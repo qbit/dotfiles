@@ -4,6 +4,7 @@ OS=$(uname)
 
 alias vi="vim"
 alias irc="tmux at -t irc"
+alias tmux="tmux -2"
 
 if [ -e ~/.kshlib ]; then
 	. ~/.kshlib
@@ -37,6 +38,17 @@ function git_branch_name {
 		fi
 
 		echo "[${bold}${branch}${white}]"
+	fi
+}
+
+function hg_q_name {
+	if [ -d .hg ]; then
+		if [ -f .hg/patches/status ]; then
+			branch=$(cat .hg/patches/status | awk -F: '{print $NF}')
+			if [ "${branch}" != "" ]; then
+				echo "[${bold}${branch}${white}]"
+			fi
+		fi
 	fi
 }
 

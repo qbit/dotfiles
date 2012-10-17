@@ -25,4 +25,5 @@ feh --bg-center ~/.background.png &
 #exec awesome
 #exec xmonad
 #exec spectrwm
-exec dwm
+#exec dwm
+exec i3

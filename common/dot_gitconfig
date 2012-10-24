@@ -5,4 +5,5 @@
 [alias]
   rmdel = !git rm `git ls-files --deleted`
   upsync = !cvs up && gitsync && git commit -m 'sync'
-  mpush = !git push origin master && git push akb master
+  mpush = !git remote | xargs -L 1 git push
+  mup = !git remote update

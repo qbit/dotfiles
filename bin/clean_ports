@@ -1,6 +1,6 @@
 #!/bin/ksh
 
-for i in lang/node databases/node-sqlite3 devel/gyp lang/libv8; do 
+for i in lang/node databases/node-sqlite3 devel/gyp lang/libv8 lang/luajit www/luakit; do 
 	rm -rf /usr/ports/$i
 	( 
 		cd /usr

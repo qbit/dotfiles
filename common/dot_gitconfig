@@ -7,3 +7,4 @@
   upsync = !cvs up && gitsync && git commit -m 'sync'
   mpush = !git remote | xargs -L 1 git push
   mup = !git remote update
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --

@@ -25,18 +25,24 @@ URxvt*color15: #FFFFFF
 URxvt*saveLines: 4096
 URxvt*letterSpace: 1
 URxvt*font: xft:Anonymous PRO:pixelsize=12
-URxvt*cursorBlink: true
+! URxvt*cursorBlink: true
+URxvt*cursorBlink: false
 
-URxvt*perl-ext-common:  default,matcher
-! URxvt*urlLauncher:      /usr/local/bin/xombrero -n $0
+URxvt.underlineURLs: true
+URxvt.perl-lib: /home/qbit/.urxvt/
+URxvt.perl-ext: selection,yank-clicked-urls
+URxvt.urlLauncher: luakit
 URxvt*matcher.button:   1 
 
-URxvt*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
-URxvt*matcher.launcher.1: /home/qbit/bin/mtube $0
+! URxvt*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
+! URxvt*matcher.launcher.1: /home/qbit/bin/mtube $0
 
-URxvt*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
-URxvt*matcher.launcher.2: feh -x $0
+! URxvt*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
+! URxvt*matcher.launcher.2: feh -x $0
+
 URxvt*inheritPixmap: true
+! UXTerm*inheritPixmap: true
+! XTerm*inheritPixmap: true
 
 URxvt*urgentOnBell: true
 
@@ -44,6 +50,8 @@ UXTerm*cursorColor: green
 UXTerm*scrollBar: False
 UXTerm*foreground: #ffffff
 UXTerm*background: #000000
+UXTerm*tint: black
+UXTerm*shading: 10
 UXTerm*color0: #000000
 UXTerm*color1: #B21818
 UXTerm*color2: #18B218
@@ -64,18 +72,19 @@ UXTerm*color15: #FFFFFF
 UXTerm*saveLines: 4096
 UXTerm*letterSpace: 1
 UXTerm*faceName: Anonymous PRO:pixelsize=12
-UXTerm*cursorBlink: true
+! UXTerm*cursorBlink: true
+UXTerm*cursorBlink: false
 UXTerm*loginShell: true
 
-UXTerm*perl-ext-common:  default,matcher
-! UXTerm*urlLauncher:      /usr/local/bin/xombrero -n $0
+#UXTerm*perl-ext-common:  default,matcher
+#UXTerm*urlLauncher:      $( /bin/echo $0 | /usr/local/bin/xclip )
 UXTerm*matcher.button:   1 
 
-UXTerm*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
-UXTerm*matcher.launcher.1: /home/qbit/bin/mtube $0
+! UXTerm*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
+! UXTerm*matcher.launcher.1: /home/qbit/bin/mtube $0
 
-UXTerm*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
-UXTerm*matcher.launcher.2: feh -x $0
+! UXTerm*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
+! UXTerm*matcher.launcher.2: feh -x $0
 
 XTerm*cursorColor: green
 XTerm*scrollBar: False
@@ -101,18 +110,20 @@ XTerm*color15: #FFFFFF
 XTerm*saveLines: 4096
 XTerm*letterSpace: 1
 XTerm*faceName: Anonymous PRO:pixelsize=12
-XTerm*cursorBlink: true
+! XTerm*cursorBlink: true
+XTerm*cursorBlink: false
 XTerm*loginShell: true
 
 XTerm*perl-ext-common:  default,matcher
-! XTerm*urlLauncher:      /usr/local/bin/xombrero -n $0
+! XTerm*urlLauncher:      /bin/echo $0 | /usr/local/bin/xclip
+XTerm*urlLauncher:      $( /bin/echo $0 | /usr/local/bin/xclip )
 XTerm*matcher.button:   1 
 
-XTerm*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
-XTerm*matcher.launcher.1: /home/qbit/bin/mtube $0
+! XTerm*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)
+! XTerm*matcher.launcher.1: /home/qbit/bin/mtube $0
 
-XTerm*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
-XTerm*matcher.launcher.2: feh -x $0
+! XTerm*matcher.pattern.2: \\bhttps?:\/\/[\\w-.]*\/[\\w./?&@#-]*.(jpg|jpeg|png)
+! XTerm*matcher.launcher.2: feh -x $0
 
 ! Xft.dpi:       100  
 ! Xft.antialias:        false

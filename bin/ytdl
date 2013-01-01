@@ -1,0 +1,9 @@
+#!/bin/ksh
+
+INP=""
+for v in $@; do
+  youtube-dl -F $v
+  echo -n "Enter format: "
+  read INP
+  youtube-dl -f $INP $v
+done

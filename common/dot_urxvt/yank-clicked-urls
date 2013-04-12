@@ -1,0 +1,92 @@
+#!/usr/bin/perl
+# Author:  Bart Trojanowski <bart@jukie.net>
+# Website: http://www.jukie.net/~bart/blog/urxvt-url-yank
+# License: GPLv2
+# Completely hacked down to just hightlight and clipboard mouse clicks.
+
+use strict;
+use warnings;
+
+my $url_matcher = qr{(
+        (?:https?://|ftp://|news://|mailto:|file://|www\.)[ab-zA-Z0-9\-\@;\/?:&=%\$_.+!*\x27(),~#]+
+        [ab-zA-Z0-9\-\@;\/?&=%\$_+!*\x27()~]   # exclude some trailing characters (heuristic)
+)}x;
+
+
+sub on_start {
+    my ($term) = @_;
+
+    $term->{have_Clipboard} = eval { require Clipboard; };
+    if ($term->{have_Clipboard}) {
+        import Clipboard;
+    }
+
+	# eval { require Regexp::Common::URI };
+	# if(!$@) {
+	# 	require Regexp::Common;
+	# 	Regexp::Common->import('URI');
+
+	# 	$url_matcher = $Regexp::Common::RE{URI}{HTTP};
+	# }
+
+    $term->{browser} = $term->x_resource ("urlLauncher") || "x-www-browser";
+
+    ()
+}
+
+sub on_line_update {
+    my ($term, $row) = @_;
+
+    # Fetch the line that has changed.
+    my $line = $term->line($row);
+    my $text = $line->t;
+
+    # Find and underline URLs.
+    while ($text =~ /($url_matcher)/g) {
+        my $url = $1;
+        my $rend = $line->r;
+
+        # Mark all characters as underlined. we _must_ not toggle underline, as
+        # we might get called on an already-marked URL.
+        my $underlineURLs = $term->x_resource ('underlineURLs') || 'false';
+        if($underlineURLs eq 'true') {
+			my ($first, $last) = ($-[1], $+[1] - 1);
+
+			--$last if $url =~ s/["']$//;
+
+            $_ |= urxvt::RS_Uline for @{$rend}[$first .. $last];
+
+            $line->r($rend);
+        }
+    }
+
+    ()
+}
+
+sub on_button_release {
+    my ($term, $event) = @_;
+
+    my $mask = $term->ModLevel3Mask | $term->ModMetaMask
+    | urxvt::ShiftMask | urxvt::ControlMask;
+
+    if ($event->{button} == 1 && ($event->{state} & $mask) == 0) {
+        my $row = $event->{row};
+        my $col = $event->{col};
+
+        my $line = $term->line ($row);
+        my $text = $line->t;
+
+        while ($text =~ /($url_matcher)/g) {
+            my ($url, $first, $last) = ($1, $-[1], $+[1]);
+
+            if($first <= $col && $last >= $col) {
+                $url =~ s/["']$//;
+                Clipboard->copy($url);
+                $term->exec_async($term->{browser}, $url);
+                return 1;
+            }
+        }
+    }
+    ()
+}
+# vim: set et ts=4 sw=4:

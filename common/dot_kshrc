@@ -3,6 +3,9 @@ export LC_CTYPE="en_US.UTF-8"
 OS=$(uname)
 
 alias vi="vim"
+#alias irc="export TERM=xterm; tmux at -t irc"
+alias irc="tmux at -t irc"
+alias tmux="tmux -2"
 
 if [ -e ~/.kshlib ]; then
 	. ~/.kshlib
@@ -51,9 +54,9 @@ function hg_q_name {
 }
 
 if [ "$(id -u)" -eq 0 ] ; then
-    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]# '
+  PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]# '
 else
-	PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)$ '
+  PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)$ '
 fi
 
 KEY_CHAIN=$(which keychain);

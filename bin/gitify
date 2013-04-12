@@ -1,0 +1,22 @@
+#!/bin/ksh
+
+DIR=$( pwd | awk -F \/ '{print $NF}' )
+
+echo -n "Repo name: $DIR? (y/n) ";
+
+read Y
+
+if [ "$Y" != "y" ]; then
+  echo -n "Enter repo name: "
+  read DIR
+fi
+
+ssh akb.io "test -e /git/${DIR}.git || git init --bare /git/${DIR}.git"
+
+if [ $( git remote | grep akb ) == "akb" ]; then
+  echo "'akb' remote already exists in local branch.."
+else 
+  git remote add akb ssh://akb.io/git/${DIR}.git 
+fi
+
+git push -u akb master

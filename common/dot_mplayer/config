@@ -1,0 +1,1 @@
+lavdopts=fast=1:threads=2:skiploopfilter=nonref

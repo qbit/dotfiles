@@ -5,7 +5,7 @@
 		<OmitItemsWithDefaultValues>true</OmitItemsWithDefaultValues>
 	</Meta>
 	<Application>
-		<LastUpdateCheck>2013-02-08T02:55:35Z</LastUpdateCheck>
+		<LastUpdateCheck>2013-03-01T02:13:54Z</LastUpdateCheck>
 		<LastUsedFile>
 			<Path>../../../../Main.kdbx</Path>
 			<CredProtMode>Obf</CredProtMode>
@@ -36,7 +36,7 @@
 	</Application>
 	<Logging />
 	<MainWindow>
-		<X>256</X>
+		<X>258</X>
 		<Y>143</Y>
 		<Width>771</Width>
 		<Height>513</Height>

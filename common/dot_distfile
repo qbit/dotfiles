@@ -1,0 +1,5 @@
+HOSTS = ( localhost qbit.io )
+FILES = ( /home/qbit/patches )
+
+${FILES} -> ${HOSTS}
+	install -oremove,chknfs ;

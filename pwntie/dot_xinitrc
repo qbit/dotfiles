@@ -1,0 +1,35 @@
+export LC_CTYPE="en_US.UTF-8"
+
+mkfifo /tmp/pianobar
+
+xset -b &
+xmodmap ~/.xmodmap &
+
+#keepassx &
+if [ -x /usr/local/bin/mono ]; then
+  mono ~/.keepass/KeePass.exe &
+fi
+
+if [ -x /usr/bin/spotify ]; then
+  /usr/bin/spotify &
+fi
+
+if [ -x /usr/bin/steam ]; then
+  /usr/bin/steam &
+fi 
+
+urxvtd -q -f -o &
+
+parcellite &
+
+xset +fp ~/.fonts
+xset fp rehash
+
+feh --bg-center ~/.background.png &
+
+xrandr --output DVI-0 --mode 2560x1440 --rate 60 &
+#exec awesome
+#exec xmonad
+#exec spectrwm
+#exec dwm
+exec i3

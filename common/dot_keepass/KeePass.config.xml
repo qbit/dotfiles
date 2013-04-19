@@ -5,7 +5,7 @@
 		<OmitItemsWithDefaultValues>true</OmitItemsWithDefaultValues>
 	</Meta>
 	<Application>
-		<LastUpdateCheck>2013-03-01T02:13:54Z</LastUpdateCheck>
+		<LastUpdateCheck>2013-04-16T14:41:28Z</LastUpdateCheck>
 		<LastUsedFile>
 			<Path>../../../../Main.kdbx</Path>
 			<CredProtMode>Obf</CredProtMode>
@@ -36,13 +36,17 @@
 	</Application>
 	<Logging />
 	<MainWindow>
-		<X>258</X>
-		<Y>143</Y>
-		<Width>771</Width>
-		<Height>513</Height>
-		<SplitterHorizontalFrac>0.8309524</SplitterHorizontalFrac>
-		<SplitterVerticalFrac>0.250327647</SplitterVerticalFrac>
+		<X>631</X>
+		<Y>411</Y>
+		<Width>1117</Width>
+		<Height>763</Height>
+		<SplitterHorizontalFrac>0.8313433</SplitterHorizontalFrac>
+		<SplitterVerticalFrac>0.248872861</SplitterVerticalFrac>
 		<Layout>Default</Layout>
+		<CloseButtonMinimizesWindow>true</CloseButtonMinimizesWindow>
+		<MinimizeToTray>true</MinimizeToTray>
+		<ShowFullPathInTitle>true</ShowFullPathInTitle>
+		<DropToBackAfterClipboardCopy>true</DropToBackAfterClipboardCopy>
 		<ToolBar />
 		<EntryView />
 		<TanView />
@@ -76,20 +80,22 @@
 	</MainWindow>
 	<UI>
 		<TrayIcon />
-		<Hiding />
+		<Hiding>
+			<HideInEntryWindow>false</HideInEntryWindow>
+		</Hiding>
 		<StandardFont>
-			<Family>Microsoft Sans Serif</Family>
-			<Size>8.25</Size>
+			<Family>DejaVu Sans</Family>
+			<Size>9</Size>
 			<GraphicsUnit>Point</GraphicsUnit>
 			<Style>Regular</Style>
-			<OverrideUIDefault>false</OverrideUIDefault>
+			<OverrideUIDefault>true</OverrideUIDefault>
 		</StandardFont>
 		<PasswordFont>
-			<Family>Courier New</Family>
-			<Size>8.25</Size>
+			<Family>Anonymous Pro</Family>
+			<Size>10</Size>
 			<GraphicsUnit>Point</GraphicsUnit>
 			<Style>Regular</Style>
-			<OverrideUIDefault>false</OverrideUIDefault>
+			<OverrideUIDefault>true</OverrideUIDefault>
 		</PasswordFont>
 		<BannerStyle>WinVistaBlack</BannerStyle>
 		<DataEditorFont>
@@ -105,7 +111,7 @@
 	</UI>
 	<Security>
 		<WorkspaceLocking>
-			<LockAfterTime>0</LockAfterTime>
+			<LockAfterTime>300</LockAfterTime>
 			<LockAfterGlobalTime>0</LockAfterGlobalTime>
 		</WorkspaceLocking>
 		<Policy />
@@ -129,16 +135,16 @@
 		<UserProfiles />
 	</PasswordGenerator>
 	<Defaults>
-		<OptionsTabIndex>0</OptionsTabIndex>
+		<OptionsTabIndex>2</OptionsTabIndex>
 		<SearchParameters>
 			<ComparisonMode>InvariantCultureIgnoreCase</ComparisonMode>
 		</SearchParameters>
 		<KeySources />
 	</Defaults>
 	<Integration>
-		<HotKeyGlobalAutoType>393281</HotKeyGlobalAutoType>
+		<HotKeyGlobalAutoType>0</HotKeyGlobalAutoType>
 		<HotKeySelectedAutoType>0</HotKeySelectedAutoType>
-		<HotKeyShowWindow>393291</HotKeyShowWindow>
+		<HotKeyShowWindow>0</HotKeyShowWindow>
 		<HotKeyEntryMenu>0</HotKeyEntryMenu>
 		<UrlSchemeOverrides>
 			<BuiltInOverridesEnabled>1</BuiltInOverridesEnabled>

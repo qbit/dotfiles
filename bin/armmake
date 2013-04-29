@@ -1,0 +1,31 @@
+#!/bin/ksh
+HOST=$(uname -m)
+MACHINE=armish
+MACHINE_ARCH=arm
+MACHINE_CPU=arm
+VERSION=$(uname -r)
+
+export MAKEOBJDIR=obj.${HOST}.${MACHINE}
+
+CROSSDIR=/usr/cross/${MACHINE}
+CROSS=${MACHINE_ARCH}-unknown-openbsd${VERSION}
+PATH=$PATH:${CROSSDIR}/usr/${CROSS}/bin
+
+MACHINE=${MACHINE} \
+MACHINE_ARCH=${MACHINE_ARCH} \
+MACHINE_CPU=${MACHINE_CPU} \
+CROSSDIR=${CROSSDIR} \
+CC=${CROSS}-cc \
+CPP=${CROSS}-cpp \
+AS=${CROSS}-as \
+LD=${CROSS}-ld \
+SIZE=size \
+STRIP=${CROSS}-strip \
+OBJDUMP=${CROSS}-objdump \
+OBJCOPY=${CROSS}-objcopy \
+make \
+MACHINE=${MACHINE} \
+MACHINE_ARCH=${MACHINE_ARCH} \
+OBJMACHINE=${MACHINE_ARCH} \
+MAKEOBJDIR=obj.${HOST}.${MACHINE} \
+"$@"

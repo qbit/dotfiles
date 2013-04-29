@@ -1,4 +1,5 @@
 cvs -q -danoncvs@anoncvs1.usa.openbsd.org:/cvs
+#cvs -q -danoncvs@anoncvs3.usa.openbsd.org:/cvs
 diff -upN
 update -Pd
 checkout -P

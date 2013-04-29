@@ -12,3 +12,5 @@
 	default = simple
 [color]
 	ui = auto
+[core]
+	deltaBaseCacheLimit = 1G

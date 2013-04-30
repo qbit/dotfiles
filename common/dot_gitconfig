@@ -11,3 +11,7 @@
   graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
 [push]
 	default = simple
+[color]
+	ui = auto
+[core]
+	deltaBaseCacheLimit = 1G

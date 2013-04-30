@@ -15,6 +15,11 @@ while getopts "npq" arg; do
     q)
       CMD='q'
       ;;
+    l)
+      ;;
+    h)
+      CMD='-'
+      ;;
   esac
 done
 

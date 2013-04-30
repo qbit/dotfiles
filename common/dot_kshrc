@@ -13,6 +13,9 @@ fi
 
 if [ -e ~/.git-prompt ]; then
   . ~/.git-prompt
+  export GIT_PS1_SHOWDIRTYSTATE=true
+  export GIT_PS1_SHOWUNTRACKEDFILES=true
+  export GIT_PS1_SHOWCOLORHINTS=true
 fi
 
 if [ $OS == "OpenBSD" ]; then

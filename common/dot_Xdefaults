@@ -31,7 +31,7 @@ URxvt*cursorBlink: false
 URxvt.underlineURLs: true
 URxvt.perl-lib: /home/qbit/.urxvt/
 URxvt.perl-ext: selection,yank-clicked-urls
-URxvt.urlLauncher: luakit
+URxvt.urlLauncher: chrome
 URxvt*matcher.button:   1 
 
 ! URxvt*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)

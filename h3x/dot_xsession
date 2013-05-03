@@ -31,4 +31,5 @@ feh --bg-center ~/.background.png &
 #exec xmonad
 #exec spectrwm
 #exec dwm
+#exec enlightenment_start
 exec i3

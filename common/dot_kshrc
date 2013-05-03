@@ -11,6 +11,13 @@ if [ -e ~/.kshlib ]; then
 	. ~/.kshlib
 fi
 
+if [ -e ~/.git-prompt ]; then
+  . ~/.git-prompt
+  export GIT_PS1_SHOWDIRTYSTATE=true
+  export GIT_PS1_SHOWUNTRACKEDFILES=true
+  export GIT_PS1_SHOWCOLORHINTS=true
+fi
+
 if [ $OS == "OpenBSD" ]; then
 	function pkg_add {
 		set_pkg_path
@@ -30,7 +37,8 @@ PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/
 export PATH HOME TERM
 
 function git_branch_name {
-	branch=$( git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' )
+	# branch=$( git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' )
+  branch=$(__git_ps1 %s)
 	if [ "${branch}" != "" ]; then
 		if [ "${branch}" = "(no branch)" ]; then
 			# probably have a tag

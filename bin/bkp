@@ -39,7 +39,7 @@ ct.stdout.on('data', function(data) {
 });
 
 ct.stderr.on('data', function(data) {
-	console.log(data.toString());
+	console.log('\033[31m' + data.toString() + '\033[0m');
 });
 
 ct.on('close', function(code) {

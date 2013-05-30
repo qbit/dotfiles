@@ -1,5 +1,9 @@
 export LC_CTYPE="en_US.UTF-8"
 
+#xrandr --newmode 2560x1440 146.27  2560 2680 2944 3328  1440 1441 1444 1465  -HSync +Vsync
+#xrandr --addmode HDMI1 2560x1440
+#xrandr --output HDMI1 --mode 2560x1440
+
 mkfifo /tmp/pianobar
 
 xset -b &
@@ -31,5 +35,4 @@ feh --bg-center ~/.background.png &
 #exec xmonad
 #exec spectrwm
 #exec dwm
-#exec enlightenment_start
 exec i3

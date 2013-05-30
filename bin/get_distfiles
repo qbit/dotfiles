@@ -1,0 +1,16 @@
+#!/bin/ksh
+
+echo "Enter the path to download DISTFILES to:"
+read DIR
+
+if [ ! -d $DIR ]; then
+  mkdir -p $DIR;
+fi
+
+(
+  export DISTDIR=$DIR;
+  for i in $(make all-dir-depends | tr ' ' '\n' | sort -n | uniq | awk -F\, '{print $1}'); do
+    cd /usr/ports/$i;
+    make fetch;
+  done
+)

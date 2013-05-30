@@ -3,11 +3,19 @@ export LC_CTYPE="en_US.UTF-8"
 OS=$(uname)
 
 alias vi="vim"
-alias irc="export TERM=xterm; tmux at -t irc"
+#alias irc="export TERM=xterm; tmux at -t irc"
+alias irc="tmux at -t irc"
 alias tmux="tmux -2"
 
 if [ -e ~/.kshlib ]; then
 	. ~/.kshlib
+fi
+
+if [ -e ~/.git-prompt ]; then
+  . ~/.git-prompt
+  export GIT_PS1_SHOWDIRTYSTATE=true
+  export GIT_PS1_SHOWUNTRACKEDFILES=true
+  export GIT_PS1_SHOWCOLORHINTS=true
 fi
 
 if [ $OS == "OpenBSD" ]; then
@@ -29,7 +37,8 @@ PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/
 export PATH HOME TERM
 
 function git_branch_name {
-	branch=$( git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' )
+	# branch=$( git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' )
+  branch=$(__git_ps1 %s)
 	if [ "${branch}" != "" ]; then
 		if [ "${branch}" = "(no branch)" ]; then
 			# probably have a tag
@@ -53,9 +62,9 @@ function hg_q_name {
 }
 
 if [ "$(id -u)" -eq 0 ] ; then
-    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]# '
+  PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]# '
 else
-	PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)$ '
+  PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)$ '
 fi
 
 KEY_CHAIN=$(which keychain);

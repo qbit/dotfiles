@@ -23,7 +23,7 @@ editor=vim
 #include /usr/local/share/taskwarrior/rc/dark-red-256.theme
 
 # usable themes
-include /usr/local/share/taskwarrior/rc/dark-green-256.theme
+include ~/.task/dark-green-256.theme
 #include /usr/local/share/taskwarrior/rc/dark-blue-256.theme
 #include /usr/local/share/taskwarrior/rc/dark-yellow-green.theme
 

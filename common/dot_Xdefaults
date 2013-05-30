@@ -24,6 +24,7 @@ URxvt*color14: #54FFFF
 URxvt*color15: #FFFFFF
 URxvt*saveLines: 4096
 URxvt*letterSpace: 1
+! URxvt*faceName: liberation:regular:pixelsize=9
 URxvt*font: xft:Anonymous PRO:pixelsize=12
 ! URxvt*cursorBlink: true
 URxvt*cursorBlink: false
@@ -31,7 +32,7 @@ URxvt*cursorBlink: false
 URxvt.underlineURLs: true
 URxvt.perl-lib: /home/qbit/.urxvt/
 URxvt.perl-ext: selection,yank-clicked-urls
-URxvt.urlLauncher: luakit
+URxvt.urlLauncher: chrome
 URxvt*matcher.button:   1 
 
 ! URxvt*matcher.pattern.1: \\bhttps?:\/\/(www.youtube|youtube).com\/watch\\?v=([\\w-]*)|vimeo.com\/([\\w-]*)

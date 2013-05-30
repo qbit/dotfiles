@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+
+var spawn = require('child_process').spawn,
+cmds = {
+	list: ['-mt'],
+	backup: ['-cvRf', '$1', '$2'],
+	restore: ['-tf', '$1', '$2', '?3']
+},
+cmd = 'ct',
+i, l, ct,
+p = process.argv;
+
+if (!cmds[p[2]]) {
+	console.log( 'Unknown command: ' + p[2] );
+	process.exit();
+}
+
+if (cmds[p[2]].length > 1) {
+	for(i = 1, l = cmds[p[2]].length; i < l; i++) {
+		if (!p[i+2]) {
+			if (cmds[p[2]][i].match(/\?/)) {
+				delete cmds[p[2]][i];
+			} else {
+				console.log('Missing option for "' + p[2] + '"');
+				process.exit();
+			}
+		} else {
+			cmds[p[2]][i] = p[i+2];	
+		}
+
+
+	}
+}
+
+ct = spawn(cmd, cmds[p[2]]);
+
+ct.stdout.on('data', function(data) {
+	console.log(data.toString());
+});
+
+ct.stderr.on('data', function(data) {
+	console.log(data.toString());
+});
+
+ct.on('close', function(code) {
+	console.log(p[2] + ' ended with: ' + code);
+	process.exit();
+});

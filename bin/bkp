@@ -4,10 +4,13 @@ var spawn = require('child_process').spawn,
 cmds = {
 	list: ['-mt'],
 	backup: ['-cvRf', '$1', '$2'],
-	restore: ['-tf', '$1', '$2', '?3']
+	delete: ['-me', '$1'],
+	restore: ['-C /tmp -vxf', '$1', '?2']
 },
 cmd = 'ct',
 i, l, ct,
+re = '[\$|\?]\d',
+tre,
 p = process.argv;
 
 if (!cmds[p[2]]) {
@@ -16,7 +19,7 @@ if (!cmds[p[2]]) {
 }
 
 if (cmds[p[2]].length > 1) {
-	for(i = 1, l = cmds[p[2]].length; i < l; i++) {
+	for(i = 0, l = cmds[p[2]].length; i < l; i++) {
 		if (!p[i+2]) {
 			if (cmds[p[2]][i].match(/\?/)) {
 				delete cmds[p[2]][i];
@@ -25,7 +28,10 @@ if (cmds[p[2]].length > 1) {
 				process.exit();
 			}
 		} else {
-			cmds[p[2]][i] = p[i+2];	
+			if (cmds[p[2]][i].match(/[\$|\?]\d/)) {
+				tre = new RegExp(re.replace('\d', i));
+				cmds[p[2]][i] = cmds[p[2]][i].replace(tre,  p[i+2]);
+			}
 		}
 
 

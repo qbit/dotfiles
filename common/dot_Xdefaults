@@ -24,6 +24,7 @@ URxvt*color14: #54FFFF
 URxvt*color15: #FFFFFF
 URxvt*saveLines: 4096
 URxvt*letterSpace: 1
+! URxvt*faceName: liberation:regular:pixelsize=9
 URxvt*font: xft:Anonymous PRO:pixelsize=12
 URxvt*cursorBlink: false
 URxvt.underlineURLs: true

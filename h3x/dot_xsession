@@ -33,3 +33,4 @@ feh --bg-center ~/.background.png &
 #exec dwm
 #exec enlightenment_start
 exec i3
+#exec cwm

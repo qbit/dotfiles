@@ -1,5 +1,7 @@
-cvs -q -dqbit@10.0.1.99:/cvs
+#cvs -q -dqbit@10.0.1.99:/cvs
 #cvs -q -danoncvs@anoncvs1.usa.openbsd.org:/cvs
+cvs -q -danoncvs@anoncvs3.usa.openbsd.org:/cvs
+#cvs -q -dabieber@cvs.openbsd.org:/cvs
 diff -upN
 update -Pd
 checkout -P

@@ -37,6 +37,11 @@ if [ $OS == "OpenBSD" ]; then
 fi
 
 PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$HOME/Development/go/bin:.
+
+if [ -e /usr/ports/infrastructure/bin ]; then
+	PATH=$PATH:/usr/ports/infrastructure/bin
+fi
+
 export PATH HOME TERM
 
 function git_branch_name {

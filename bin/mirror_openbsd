@@ -16,7 +16,7 @@ for e in $EXCLUDES; do
 	EXCLUDE="${EXCLUDE} --exclude=${e}"
 done
 
-SRC="rsync://ftp5.usa.openbsd.org/ftp/snapshots/"
+SRC="rsync://ftp3.usa.openbsd.org/ftp/snapshots/"
 
 if [ X${1} != X ]; then
 	DST=$1

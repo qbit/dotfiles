@@ -24,8 +24,8 @@ URxvt*color14: #54FFFF
 URxvt*color15: #FFFFFF
 URxvt*saveLines: 4096
 URxvt*letterSpace: 1
-! URxvt*faceName: liberation:regular:pixelsize=9
-URxvt*font: xft:Anonymous PRO:pixelsize=12
+URxvt*font: xft:Anonymous PRO:regular:pixelsize=12
+! URxvt*font: xft:hermit:regular:pixelsize=12
 URxvt*cursorBlink: false
 URxvt.underlineURLs: true
 URxvt.perl-lib: /home/qbit/.urxvt/
@@ -105,3 +105,12 @@ XTerm*inheritPixmap: true
 
 ! Xft.dpi:       100  
 ! Xft.antialias:        false
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+
+! -- Fonts -- !
+! URxvt.font:xft:droid sans mono slashed:medium:pixelsize=11
+! URxvt.boldFont:xft:droid sans mono slashed:medium:pixelsize=11

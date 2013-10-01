@@ -5,7 +5,7 @@
 		<OmitItemsWithDefaultValues>true</OmitItemsWithDefaultValues>
 	</Meta>
 	<Application>
-		<LastUpdateCheck>2013-07-03T13:33:55Z</LastUpdateCheck>
+		<LastUpdateCheck>2013-07-29T15:33:10Z</LastUpdateCheck>
 		<LastUsedFile>
 			<Path>../../../../Main.kdbx</Path>
 			<CredProtMode>Obf</CredProtMode>
@@ -36,12 +36,12 @@
 	</Application>
 	<Logging />
 	<MainWindow>
-		<X>1267</X>
-		<Y>955</Y>
-		<Width>1300</Width>
-		<Height>511</Height>
-		<SplitterHorizontalFrac>0.8301435</SplitterHorizontalFrac>
-		<SplitterVerticalFrac>0.248452008</SplitterVerticalFrac>
+		<X>1</X>
+		<Y>14</Y>
+		<Width>2566</Width>
+		<Height>1452</Height>
+		<SplitterHorizontalFrac>0.8307579</SplitterHorizontalFrac>
+		<SplitterVerticalFrac>0.248240814</SplitterVerticalFrac>
 		<Layout>Default</Layout>
 		<ShowFullPathInTitle>true</ShowFullPathInTitle>
 		<MinimizeAfterLocking>false</MinimizeAfterLocking>

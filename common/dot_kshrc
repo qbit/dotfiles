@@ -19,10 +19,10 @@ if [ -e ~/.git-prompt ]; then
 fi
 
 if [ $OS == "OpenBSD" ]; then
-	function pkg_add {
-		set_pkg_path
-		sudo /usr/sbin/pkg_add $@
-	}
+	# function pkg_add {
+	# 	set_pkg_path
+	# 	sudo /usr/sbin/pkg_add $@
+	# }
 
 	# if [ -f ~/.netrc ]; then
 	# 	export FETCH_CMD="curl -n -s"

@@ -21,6 +21,7 @@ parcellite &
 xset +fp ~/.fonts
 xset +fp /usr/local/lib/X11/fonts/terminus
 xset +fp /usr/local/lib/X11/fonts/anonymous-pro
+xset +fp /usr/local/lib/X11/fonts/gohufont
 
 xset fp rehash
 
@@ -35,5 +36,5 @@ feh --bg-center ~/.background.png &
 #exec xmonad
 #exec spectrwm
 #exec dwm
-#exec i3
-exec cwm
+exec i3
+#exec cwm

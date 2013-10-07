@@ -49,6 +49,5 @@ ct.stderr.on('data', function(data) {
 });
 
 ct.on('close', function(code) {
-	console.log(p[2] + ' ended with: ' + code);
 	process.exit();
 });

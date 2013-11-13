@@ -22,6 +22,9 @@ if [ -e ~/.git-prompt ]; then
 fi
 
 if [ $OS == "OpenBSD" ]; then
+	function get_pkg_path {
+		echo $(cat /etc/pkg.conf | grep installpath | awk '{print $3}')
+	}
 	# function pkg_add {
 	# 	set_pkg_path
 	# 	sudo /usr/sbin/pkg_add $@
@@ -43,6 +46,11 @@ if [ -e /usr/ports/infrastructure/bin ]; then
 fi
 
 export PATH HOME TERM
+
+function vdiff {
+	cp -p $1 $1.orig
+	vi $1
+}
 
 function git_branch_name {
 	# branch=$( git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' )

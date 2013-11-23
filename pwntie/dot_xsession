@@ -29,6 +29,8 @@ if [ -x /sbin/shutdownd ]; then
 	/sbin/shutdownd -s 20 -w 40 -W "i3-nagbar -m 'Current battery is at \$battery_minutes. Shutdown is in \$shutdown_minutes.' -b 'shutdown now' 'sudo halt -p'"
 fi
 #~/bin/dwmbar &
+#
+xrandr --output DVI-1 --auto --right-of DVI-1 --rotate left &
 
 feh --bg-center ~/.background.png &
 

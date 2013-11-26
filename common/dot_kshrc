@@ -2,9 +2,12 @@ export LC_CTYPE="en_US.UTF-8"
 
 OS=$(uname)
 
-alias vi="vim"
-#alias irc="export TERM=xterm; tmux at -t irc"
-alias irc="tmux at -t irc"
+VIM=$(which vim);
+if [ $? -eq 0 ]; then
+	alias vi="vim"
+fi
+alias irc="export TERM=xterm; tmux at -t irc"
+#alias irc="tmux at -t irc"
 alias tmux="tmux -2"
 
 if [ -e ~/.kshlib ]; then
@@ -19,10 +22,13 @@ if [ -e ~/.git-prompt ]; then
 fi
 
 if [ $OS == "OpenBSD" ]; then
-	function pkg_add {
-		set_pkg_path
-		sudo /usr/sbin/pkg_add $@
+	function get_pkg_path {
+		echo $(cat /etc/pkg.conf | grep installpath | awk '{print $3}')
 	}
+	# function pkg_add {
+	# 	set_pkg_path
+	# 	sudo /usr/sbin/pkg_add $@
+	# }
 
 	# if [ -f ~/.netrc ]; then
 	# 	export FETCH_CMD="curl -n -s"
@@ -34,7 +40,17 @@ if [ $OS == "OpenBSD" ]; then
 fi
 
 PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$HOME/Development/go/bin:.
+
+if [ -e /usr/ports/infrastructure/bin ]; then
+	PATH=$PATH:/usr/ports/infrastructure/bin
+fi
+
 export PATH HOME TERM
+
+function vdiff {
+	cp -p $1 $1.orig
+	vi $1
+}
 
 function git_branch_name {
 	# branch=$( git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' )
@@ -64,7 +80,7 @@ function hg_q_name {
 if [ "$(id -u)" -eq 0 ] ; then
   PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]# '
 else
-  PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)$ '
+  PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)λ '
 fi
 
 KEY_CHAIN=$(which keychain);

@@ -1,5 +1,5 @@
-DEBUG:true
+INTERACTIVE:true
 DST:/tmp/upgrade
 MERGE:true
 VER:snapshots
-MIRROR:10.0.1.100
+MIRROR:ftp3.usa.openbsd.org

@@ -30,3 +30,5 @@ include ~/.task/dark-green-256.theme
 #include /usr/local/share/taskwarrior/rc/dark-violets-256.theme
 #include /usr/local/share/taskwarrior/rc/dark-gray-256.theme
 
+push.default.uri=qbit@qbit.io:~/.task/
+merge.default.uri=qbit@qbit.io:~/.task/

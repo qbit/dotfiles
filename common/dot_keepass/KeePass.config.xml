@@ -5,7 +5,7 @@
 		<OmitItemsWithDefaultValues>true</OmitItemsWithDefaultValues>
 	</Meta>
 	<Application>
-		<LastUpdateCheck>2013-04-16T14:41:28Z</LastUpdateCheck>
+		<LastUpdateCheck>2013-07-29T15:33:10Z</LastUpdateCheck>
 		<LastUsedFile>
 			<Path>../../../../Main.kdbx</Path>
 			<CredProtMode>Obf</CredProtMode>
@@ -36,28 +36,26 @@
 	</Application>
 	<Logging />
 	<MainWindow>
-		<X>631</X>
-		<Y>411</Y>
-		<Width>1117</Width>
-		<Height>763</Height>
-		<SplitterHorizontalFrac>0.8313433</SplitterHorizontalFrac>
-		<SplitterVerticalFrac>0.248872861</SplitterVerticalFrac>
+		<X>1</X>
+		<Y>14</Y>
+		<Width>2566</Width>
+		<Height>1452</Height>
+		<SplitterHorizontalFrac>0.8307579</SplitterHorizontalFrac>
+		<SplitterVerticalFrac>0.248240814</SplitterVerticalFrac>
 		<Layout>Default</Layout>
-		<CloseButtonMinimizesWindow>true</CloseButtonMinimizesWindow>
-		<MinimizeToTray>true</MinimizeToTray>
 		<ShowFullPathInTitle>true</ShowFullPathInTitle>
-		<DropToBackAfterClipboardCopy>true</DropToBackAfterClipboardCopy>
+		<MinimizeAfterLocking>false</MinimizeAfterLocking>
 		<ToolBar />
 		<EntryView />
 		<TanView />
 		<EntryListColumnCollection>
 			<Column>
 				<Type>Title</Type>
-				<Width>106</Width>
+				<Width>249</Width>
 			</Column>
 			<Column>
 				<Type>UserName</Type>
-				<Width>106</Width>
+				<Width>284</Width>
 			</Column>
 			<Column>
 				<Type>Password</Type>

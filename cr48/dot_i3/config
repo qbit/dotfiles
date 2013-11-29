@@ -30,7 +30,6 @@ bindsym $mod+Return exec /usr/local/bin/urxvt
 # cmds
 bindsym $mod+b exec /usr/local/bin/luakit
 bindsym $mod+m exec /usr/local/bin/urxvt -name "mutt" -e mutt
-bindsym $mod+i exec /usr/local/bin/urxvt -name "irssi" -e ssh qbit.io
 bindsym $mod+Shift+x exec /usr/X11R6/bin/xlock
 
 bindsym $mod+Shift+n exec ~/bin/pctl -n

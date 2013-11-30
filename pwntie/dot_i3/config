@@ -114,9 +114,11 @@ assign [class="^URxvt$" instance="^mutt$"] 4
 
 for_window [class="Gimp"] floating enable
 for_window [class="feh"] floating enable
-for_window [class="MPlayer"] floating enable
 for_window [class="KeePass"] floating enable
+for_window [class="MPlayer"] floating enable
 for_window [class="Vlc"] floating enable
+for_window [class="xine"] floating enable
+for_window [class="xine Video Window"] floating enable
 for_window [class="luakit"] border none
 
 new_window 1pixel

@@ -1,0 +1,30 @@
+#!/bin/ksh
+
+session='pcvsup'
+counter=0
+
+set -A mirrors anoncvs@anoncvs3.usa.openbsd.org:/cvs anoncvs@anoncvs1.usa.openbsd.org:/cvs anoncvs@anoncvs.obsd.esc7.net:/cvs
+set -A dirs /usr/ports /usr/src /usr/xenocara
+
+tmux -2 new-session -d -s $session
+
+for mirror in ${mirrors[@]}; do
+	if [ -d ${dirs[${counter}]} ]; then
+		if [ counter -eq 0 ]; then
+			tmux split-window -v -p 70
+		fi
+
+		tmux select-pane -t ${counter}
+		tmux send-keys "cd ${dirs[${counter}]}" C-m
+		tmux send-keys "cvs -d${mirror} up" C-m
+		tmux send-keys C-d
+
+		if [ counter -eq 1 ]; then
+			tmux split-window -v -p 50
+		fi
+
+		((counter=counter+1))
+	fi
+done
+
+tmux -2 attach-session -t $session

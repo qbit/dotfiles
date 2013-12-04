@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod4
+set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -25,14 +25,12 @@ font xft:Anonymous Pro 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec /usr/local/bin/urxvt
 
 # cmds
-# bindsym $mod+b exec /usr/local/bin/luakit
-bindsym $mod+b exec chrome
-bindsym $mod+m exec urxvt -name "mutt" -e mutt
-bindsym $mod+i exec urxvt -name "irssi" -e ssh qbit.io
-bindsym $mod+Shift+x exec xlock
+bindsym $mod+b exec /usr/local/bin/luakit
+bindsym $mod+m exec /usr/local/bin/urxvt -name "mutt" -e mutt
+bindsym $mod+Shift+x exec /usr/X11R6/bin/xlock
 
 bindsym $mod+Shift+n exec ~/bin/pctl -n
 bindsym $mod+Shift+p exec ~/bin/pctl -p
@@ -43,7 +41,7 @@ bindsym $mod+Shift+p exec ~/bin/pctl -p
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec /usr/local/bin/dmenu_run
 
 # change focus
 bindsym $mod+h focus left
@@ -114,11 +112,9 @@ assign [class="^URxvt$" instance="^mutt$"] 4
 
 for_window [class="Gimp"] floating enable
 for_window [class="feh"] floating enable
-for_window [class="KeePass"] floating enable
 for_window [class="MPlayer"] floating enable
+for_window [class="KeePass"] floating enable
 for_window [class="Vlc"] floating enable
-for_window [class="xine"] floating enable
-for_window [class="xine Video Window"] floating enable
 for_window [class="luakit"] border none
 
 new_window 1pixel

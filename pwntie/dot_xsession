@@ -30,7 +30,8 @@ if [ -x /sbin/shutdownd ]; then
 fi
 #~/bin/dwmbar &
 #
-xrandr --output DVI-1 --auto --right-of DVI-1 --rotate left &
+
+xrandr --output DVI-0 --auto --left-of DVI-1 --output DVI-1 --rotate left &
 
 feh --bg-center ~/.background.png &
 

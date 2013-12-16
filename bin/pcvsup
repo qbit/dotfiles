@@ -24,6 +24,8 @@ for mirror in ${mirrors[@]}; do
 		fi
 
 		((counter=counter+1))
+	else
+		tmux send-keys C-d
 	fi
 done
 

@@ -3,7 +3,7 @@
 session='pcvsup'
 counter=0
 
-set -A mirrors anoncvs@anoncvs3.usa.openbsd.org:/cvs anoncvs@anoncvs1.usa.openbsd.org:/cvs anoncvs@anoncvs.obsd.esc7.net:/cvs
+set -A mirrors anoncvs@anoncvs3.usa.openbsd.org:/cvs anoncvs@anoncvs1.usa.openbsd.org:/cvs anoncvs@mirror.planetunix.net:/cvs
 set -A dirs /usr/ports /usr/src /usr/xenocara
 
 tmux -2 new-session -d -s $session

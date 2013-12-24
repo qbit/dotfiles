@@ -12,7 +12,7 @@ if [ "$Y" != "y" ]; then
 fi
 
 ssh akb.io "test -e /git/${DIR}.git || git init --bare /git/${DIR}.git"
-curl -k -X POST --user qbit_:$PASS "https://api.bitbucket.org/1.0/repositories" -d "name=${DIR}"
+curl -k -X POST --user qbit_:$BITBUCKET_PASS "https://api.bitbucket.org/1.0/repositories" -d "name=${DIR}"
 
 if [ $( git remote | grep akb ) == "akb" ]; then
   echo "'akb' remote already exists in local branch.."

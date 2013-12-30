@@ -7,7 +7,7 @@ cmds = {
 	delete: ['-me', '$1'],
 	restore: ['-C /tmp -vxf', '$1', '?2']
 },
-cmd = 'ct',
+cmd = '/usr/local/bin/ct',
 i, l, ct,
 re = '[\$|\?]\d',
 tre,

@@ -25,6 +25,7 @@ URxvt*color15: #FFFFFF
 URxvt*saveLines: 4096
 URxvt*letterSpace: 1
 URxvt*font: xft:Anonymous PRO:regular:pixelsize=12
+!URxvt*font: xft:GohuFont:regular:pixelsize=12
 ! URxvt*font: xft:hermit:regular:pixelsize=12
 URxvt*cursorBlink: false
 URxvt.underlineURLs: true

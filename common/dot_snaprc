@@ -1,4 +1,4 @@
-DEBUG:true
+INTERACTIVE:true
 DST:/tmp/upgrade
 MERGE:true
 VER:snapshots

@@ -16,3 +16,8 @@
 	ui = auto
 [core]
 	deltaBaseCacheLimit = 1G
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+[merge]
+	tool = fugitive
+

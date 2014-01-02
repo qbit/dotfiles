@@ -6,9 +6,10 @@ VIM=$(which vim);
 if [ $? -eq 0 ]; then
 	alias vi="vim"
 fi
-alias irc="export TERM=xterm; tmux at -t irc"
-#alias irc="tmux at -t irc"
+
 alias tmux="tmux -2"
+alias irc="export TERM=xterm; tmux at -t irc"
+alias build="dpb -c -h /home/buildie/hosts"
 
 if [ -e ~/.kshlib ]; then
 	. ~/.kshlib

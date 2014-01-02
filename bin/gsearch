@@ -1,0 +1,3 @@
+#!/bin/ksh
+
+curl -H 'Accept: text/plain' http://godoc.org/?q=$1

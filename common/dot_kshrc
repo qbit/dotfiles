@@ -40,13 +40,14 @@ if [ $OS == "OpenBSD" ]; then
 	fi
 fi
 
-PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$HOME/Development/go/bin:.
+GOPATH=~/go
+PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$GOPATH/bin:.
 
 if [ -e /usr/ports/infrastructure/bin ]; then
 	PATH=$PATH:/usr/ports/infrastructure/bin
 fi
 
-export PATH HOME TERM
+export PATH HOME TERM GOPATH
 
 function vdiff {
 	cp -p $1 $1.orig

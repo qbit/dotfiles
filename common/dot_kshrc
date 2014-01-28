@@ -47,6 +47,10 @@ if [ -e /usr/ports/infrastructure/bin ]; then
 	PATH=$PATH:/usr/ports/infrastructure/bin
 fi
 
+if [ -e /usr/local/jdk-1.7.0/bin ]; then
+	PATH=$PATH:/usr/local/jdk-1.7.0/bin
+fi
+
 export PATH HOME TERM GOPATH
 
 function vdiff {

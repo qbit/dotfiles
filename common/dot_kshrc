@@ -9,7 +9,8 @@ fi
 
 alias tmux="tmux -2"
 alias irc="export TERM=xterm; tmux at -t irc"
-alias build="dpb -c -h /home/buildie/hosts"
+alias build="dpb -c -h /home/buildie/hosts -P"
+alias cdw='cd $(make show=WRKSRC)'
 
 if [ -e ~/.kshlib ]; then
 	. ~/.kshlib

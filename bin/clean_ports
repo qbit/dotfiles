@@ -1,6 +1,23 @@
 #!/bin/ksh
 
-for i in lang/node databases/node-sqlite3 devel/gyp lang/libv8 lang/luajit www/luakit; do 
+set -A ports \
+	comms/xastir \
+	databases/node-sqlite3 \
+	devel/gyp \
+	devel/node-async \
+	devel/node-bindings \
+	devel/node-buffer-writer \
+	devel/node-cloned \
+	fonts/hermit-font \
+	lang/libv8 \
+	lang/luajit \
+	lang/node \
+	productivity/taskwarrior \
+	sysutils/node-rmdir \
+	www/luakit \
+	x11/p5-Clipboard
+
+for i in ${ports[@]}; do 
 	rm -rf /usr/ports/$i
 	( 
 		cd /usr

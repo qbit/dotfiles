@@ -41,3 +41,4 @@ feh --bg-center ~/.background.png &
 #exec dwm
 exec i3
 #exec cwm
+#exec /home/qbit/Development/stumpwm/stumpwm

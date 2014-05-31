@@ -2,10 +2,11 @@ export LC_CTYPE="en_US.UTF-8"
 
 OS=$(uname)
 
-VIM=$(which vim);
-if [ $? -eq 0 ]; then
-	alias vi="vim"
-fi
+#VIM=$(which vim);
+#if [ $? -eq 0 ]; then
+#	alias vi="vim"
+#fi
+alias vi="emacs"
 
 alias tmux="tmux -2"
 alias irc="export TERM=xterm; tmux at -t irc"

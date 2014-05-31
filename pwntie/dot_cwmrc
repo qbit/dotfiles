@@ -1,12 +1,11 @@
 bind C4-t       vtile
 bind C4-r       htile
-command		irssi	"xterm -class irssi -e \"ssh qbit.io irc\""
 command		urxvt	"urxvt"
 command		next	"pctl -n"
 command		pause	"pctl -p"
 
 
-bind CM-Return	"urxvt"
+bind C4-Return	"urxvt"
 
 bind 4-p	"/home/qbit/bin/pctl -p"
 bind 4-n	"/home/qbit/bin/pctl -n"

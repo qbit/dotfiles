@@ -1,0 +1,11 @@
+KERL_CONFIGURE_DISABLE_APPLICATIONS="odbc erl_interface"
+
+export AUTOCONF_VERSION=2.59
+KERL_USE_AUTOCONF=yes
+
+KERL_CONFIGURE_OPTIONS="--disable-hipe \
+	--disable-jinterface \
+	--enable-threads \
+	--enable-kernel-poll \
+	--disable-hipe \
+	--enable-smp-support"

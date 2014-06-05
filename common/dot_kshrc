@@ -2,13 +2,16 @@ export LC_CTYPE="en_US.UTF-8"
 
 OS=$(uname)
 
-VIM=$(which vim);
-if [ $? -eq 0 ]; then
-	alias vi="vim"
-fi
-alias irc="export TERM=xterm; tmux at -t irc"
-#alias irc="tmux at -t irc"
+#VIM=$(which vim);
+#if [ $? -eq 0 ]; then
+#	alias vi="vim"
+#fi
+alias vi="emacs"
+
 alias tmux="tmux -2"
+alias irc="export TERM=xterm; tmux at -t irc"
+alias build="dpb -c -h /home/buildie/hosts -P"
+alias cdw='cd $(make show=WRKSRC)'
 
 if [ -e ~/.kshlib ]; then
 	. ~/.kshlib
@@ -39,13 +42,18 @@ if [ $OS == "OpenBSD" ]; then
 	fi
 fi
 
-PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$HOME/Development/go/bin:.
+GOPATH=~/go
+PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$GOPATH/bin:.
 
 if [ -e /usr/ports/infrastructure/bin ]; then
 	PATH=$PATH:/usr/ports/infrastructure/bin
 fi
 
-export PATH HOME TERM
+if [ -e /usr/local/jdk-1.7.0/bin ]; then
+	PATH=$PATH:/usr/local/jdk-1.7.0/bin
+fi
+
+export PATH HOME TERM GOPATH
 
 function vdiff {
 	cp -p $1 $1.orig

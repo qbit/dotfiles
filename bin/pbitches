@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# script to "paste" a file to http://pastebitch.com/
+cat $1 | curl -F 'pastebitch=<-' http://pastebitch.com/

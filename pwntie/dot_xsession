@@ -31,7 +31,8 @@ fi
 #~/bin/dwmbar &
 #
 
-xrandr --output DVI-0 --auto --left-of DVI-1 --output DVI-1 --rotate left &
+#xrandr --output DVI-0 --auto --left-of DVI-1 --output DVI-1 --rotate left &
+xrandr --output DVI-0 --auto --output DVI-1 --off &
 
 feh --bg-center ~/.background.png &
 
@@ -41,3 +42,6 @@ feh --bg-center ~/.background.png &
 #exec dwm
 exec i3
 #exec cwm
+#exec /home/qbit/Development/stumpwm/stumpwm
+#exec /home/qbit/Development/bspwm/bspwm
+#exec ctwm

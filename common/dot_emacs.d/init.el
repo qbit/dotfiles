@@ -16,9 +16,16 @@
 	       "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-(progn
 (load-theme 'zenburn 1)
-(evil-mode 1)
-(global-linum-mode 1)
-(setq linum-format "%d "))
 
+(evil-mode 1)
+
+(global-git-gutter-mode +1)
+(custom-set-variables
+ '(git-gutter:modified-sign "  ") ;; two space
+ '(git-gutter:added-sign "++")    ;; multiple character is OK
+ '(git-gutter:deleted-sign "--"))
+
+(require 'nlinum)
+;(global-linum-mode 1)
+;(setq linum-format "%d ")

@@ -1,12 +1,7 @@
-(add-to-list 'load-path "~/.emacs.d/")
-(add-to-list 'load-path "~/.emacs.d/plugins/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
-
-;(tool-bar-mode -1)
-(menu-bar-mode -1)
-(column-number-mode +1)
-(show-paren-mode +1)
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/plugins/"))
+(add-to-list 'load-path (expand-file-name "~/elisp"))
+(add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes"))
 
 (require 'package)
 (add-to-list 'package-archives 
@@ -15,6 +10,11 @@
 	     '("marmalade" .
 	       "http://marmalade-repo.org/packages/"))
 (package-initialize)
+
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(column-number-mode +1)
+(show-paren-mode +1)
 
 (load-theme 'zenburn 1)
 
@@ -27,5 +27,3 @@
  '(git-gutter:deleted-sign "--"))
 
 (require 'nlinum)
-;(global-linum-mode 1)
-;(setq linum-format "%d ")

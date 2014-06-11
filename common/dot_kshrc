@@ -6,7 +6,7 @@ OS=$(uname)
 #if [ $? -eq 0 ]; then
 #	alias vi="vim"
 #fi
-alias vi="emacs"
+alias vi="emacsclient -c"
 
 alias tmux="tmux -2"
 alias irc="export TERM=xterm; tmux at -t irc"

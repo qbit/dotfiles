@@ -40,8 +40,8 @@ feh --bg-center ~/.background.png &
 #exec xmonad
 #exec spectrwm
 #exec dwm
-exec i3
+#exec i3
 #exec cwm
-#exec /home/qbit/Development/stumpwm/stumpwm
+exec /home/qbit/Development/stumpwm/stumpwm
 #exec /home/qbit/Development/bspwm/bspwm
 #exec ctwm

@@ -1,7 +1,6 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/plugins/"))
-(add-to-list 'load-path (expand-file-name "~/elisp"))
-(add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/themes"))
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
 	       (add-to-list 'auto-mode-alist '("go$" . go-mode))
@@ -13,11 +12,13 @@
 
 (require 'package)
 (add-to-list 'package-archives 
-	     '("melpa" .
-	       "http://melpa.milkbox.net/packages/")
 	     '("marmalade" .
-	       "http://marmalade-repo.org/packages/"))
+	       "http://marmalade-repo.org/packages/")
+	     '("melpa" .
+	       "http://melpa.milkbox.net/packages/"))
 (package-initialize)
+
+(require 'nlinum)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -32,13 +33,15 @@
 
 ;(load-theme 'zenburn 1)
 (load-theme 'tango-dark 1)
+;(load-theme 'tronesque t)
 
 (evil-mode 1)
 
 (global-git-gutter-mode +1)
 (custom-set-variables
- '(git-gutter:modified-sign "  ") ;; two space
- '(git-gutter:added-sign "++")    ;; multiple character is OK
- '(git-gutter:deleted-sign "--"))
+ '(git-gutter:added-sign "++")
+ '(git-gutter:deleted-sign "--")
+ '(git-gutter:modified-sign "  "))
 
-(require 'nlinum)
+(require 'slime-autoloads)
+    (setq inferior-lisp-program "sbcl")

@@ -3,6 +3,9 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 
+(file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
+	       (add-to-list 'auto-mode-alist '("go$" . go-mode))
+
 ;(tool-bar-mode -1)
 (menu-bar-mode -1)
 (column-number-mode +1)

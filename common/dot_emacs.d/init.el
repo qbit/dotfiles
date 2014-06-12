@@ -19,6 +19,9 @@
 (column-number-mode +1)
 (show-paren-mode +1)
 
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "sbcl")
+
 (require 'nlinum)
 
 ;(if (daemonp)
@@ -41,6 +44,3 @@
  '(git-gutter:added-sign "++")
  '(git-gutter:deleted-sign "--")
  '(git-gutter:modified-sign "  "))
-
-(require 'slime-autoloads)
-    (setq inferior-lisp-program "sbcl")

@@ -107,6 +107,14 @@
     (run-shell-command (format nil "nohup ~A~{ ~A~}"
                                program args))))
 
+;(if (not (head-mode-line (current-head)))
+;    (toggle-mode-line (current-screen) (current-head)))
+;
+;(defun echo-urgent-window (target)
+;  (message-no-timeout "~a has an message for you." (window-title target)))
+;
+;(add-hook *urgent-window-hook* 'echo-urgent-window)
+
 ;(defvar *manifest-url*
 ;  (manifest:start))
 

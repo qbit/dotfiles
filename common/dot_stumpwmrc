@@ -113,7 +113,7 @@
                           (current-head))
 
 (defun echo-urgent-window (target)
-  (message-no-timeout "~a has an message for you." (window-title target)))
+  (message "~a has an message for you." (window-title target)))
 
 (add-hook *urgent-window-hook* 'echo-urgent-window)
 

@@ -37,7 +37,7 @@
 ;(load-theme 'solarized-dark t)
 (load-theme 'flatland t)
 
-(evil-mode 1)
+;(evil-mode 1)
 
 (global-git-gutter-mode +1)
 (custom-set-variables

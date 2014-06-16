@@ -3,7 +3,7 @@
 ;; Load swank.
 ;; *prefix-key* ; swank will kick this off
 (ql:quickload :swank)
-;(ql:quickload :manifest)
+(ql:quickload :manifest)
 (let ((server-running nil))
   (defcommand swank () ()
     "Toggle the swank server on/off"
@@ -107,16 +107,18 @@
     (run-shell-command (format nil "nohup ~A~{ ~A~}"
                                program args))))
 
-;(if (not (head-mode-line (current-head)))
-;    (toggle-mode-line (current-screen) (current-head)))
-;
-;(defun echo-urgent-window (target)
-;  (message-no-timeout "~a has an message for you." (window-title target)))
-;
-;(add-hook *urgent-window-hook* 'echo-urgent-window)
+(setf *mode-line-timeout* 1) 
 
-;(defvar *manifest-url*
-;  (manifest:start))
+(toggle-mode-line (current-screen)
+                          (current-head))
+
+(defun echo-urgent-window (target)
+  (message-no-timeout "~a has an message for you." (window-title target)))
+
+(add-hook *urgent-window-hook* 'echo-urgent-window)
+
+(defvar *manifest-url*
+  (manifest:start))
 
 (defvar *default-browser* "chrome")
 (define-key stumpwm:*root-map* (kbd "B") "run-shell-command chrome")
@@ -126,8 +128,8 @@
 (define-key *root-map* (kbd "d") "exec dmenu_run")
 (define-key *root-map* (kbd "e") "exec emacsclient -c -a \"\"")
 ;(define-key *root-map* (kbd "l") "exec xlock")
-;(define-key *root-map* (kbd "C-d")
-;  (format nil "exec ~A ~A" *default-browser* *manifest-url*))
+(define-key *root-map* (kbd "C-d")
+  (format nil "exec ~A ~A" *default-browser* *manifest-url*))
 
 ;; set FFM
 (setf *mouse-focus-policy* :sloppy)

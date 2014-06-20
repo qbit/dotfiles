@@ -112,8 +112,14 @@
 (toggle-mode-line (current-screen)
                           (current-head))
 
+(defun msg-nt (fmt &rest args)
+  "make msgs sticky"
+  (let ((*supress-echo-timeout* t))
+    (apply 'message fmt args)))
+
 (defun echo-urgent-window (target)
-  (message "~a has an message for you." (window-title target)))
+  (msg-nt "~a (~a) has an message for you."
+ (window-title target) (window-group target)))
 
 (add-hook *urgent-window-hook* 'echo-urgent-window)
 

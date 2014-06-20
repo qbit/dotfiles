@@ -6,36 +6,32 @@
 (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
 	       (add-to-list 'auto-mode-alist '("go$" . go-mode))
 
-(require 'package)
-(add-to-list 'package-archives 
-	     '("marmalade" .
-	       "http://marmalade-repo.org/packages/")
-	     '("melpa" .
-	       "http://melpa.milkbox.net/packages/"))
-(package-initialize)
+(let ((default-directory user-emacs-directory))
+      (normal-top-level-add-subdirs-to-load-path))
+
+(defvar site-lisp-directory (concat user-emacs-directory "site-lisp/"))
+
+(file-exists-p "~quicklisp/slime-helper.el")
+	       (load (expand-file-name "~/quicklisp/slime-helper.el")
+	       (setq inferior-lisp-program "sbcl"))
+
+(require 'pkgmgr)
+;(require 'externals)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (column-number-mode +1)
 (show-paren-mode +1)
-
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl")
+(rainbow-mode +1)
 
 (require 'nlinum)
 
-;(if (daemonp)
-;    (add-hook 'after-make-frame-functions
-;              (lambda (frame)
-;                (load-theme 'tronesque t)))
-;    (load-theme 'tronesque t))
-
-
 ;(load-theme 'zenburn 1)
 ;(load-theme 'tango-dark 1)
-;(load-theme 'tronesque t)
+(load-theme 'tronesque t)
+
 ;(load-theme 'solarized-dark t)
-(load-theme 'flatland t)
+;(load-theme 'flatland t)
 
 ;(evil-mode 1)
 

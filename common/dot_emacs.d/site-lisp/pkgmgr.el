@@ -18,6 +18,7 @@
 (install-if-missing 'git-gutter)
 (install-if-missing 'js2-mode)
 (install-if-missing 'magit)
+(install-if-missing 'magit-tramp)
 (install-if-missing 'nlinum)
 (install-if-missing 'org)
 (install-if-missing 'rainbow-mode)

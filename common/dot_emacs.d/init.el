@@ -28,10 +28,9 @@
 
 ;(load-theme 'zenburn 1)
 ;(load-theme 'tango-dark 1)
-(load-theme 'tronesque t)
-
+;(load-theme 'tronesque t)
 ;(load-theme 'solarized-dark t)
-;(load-theme 'flatland t)
+(load-theme 'flatland t)
 
 ;(evil-mode 1)
 

@@ -35,6 +35,7 @@
 ;(evil-mode 1)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+(global-set-key "\M- " 'hippie-expand)
 
 (global-git-gutter-mode +1)
 (custom-set-variables

@@ -34,6 +34,8 @@
 
 ;(evil-mode 1)
 
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (global-git-gutter-mode +1)
 (custom-set-variables
  '(git-gutter:added-sign "++")

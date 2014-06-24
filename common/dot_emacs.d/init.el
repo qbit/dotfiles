@@ -38,9 +38,26 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "<C-tab>") 'hippie-expand)
 
+(autoload 'scpaste "scpaste" "Paste the current buffer." t nil)
+(setq scpaste-http-destination "http://akb.io" scpaste-scp-destination
+"akb.io:/var/www/htdocs")
+
+(setq scpaste-user-name "akb.io" scpaste-user-address
+   "http://akb.io/")
 
 (global-git-gutter-mode +1)
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(git-gutter:added-sign "++")
  '(git-gutter:deleted-sign "--")
- '(git-gutter:modified-sign "  "))
+ '(git-gutter:modified-sign "  ")
+ '(org-agenda-files (quote ("~/org/kahn/LinearAlgebra.org"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -23,6 +23,7 @@
 (install-if-missing 'org)
 (install-if-missing 'rainbow-mode)
 (install-if-missing 'ruby-mode)
+(install-if-missing 'scpaste)
 (install-if-missing 'slime)
 (install-if-missing 'tronesque-theme)
 (install-if-missing 'zenburn-theme)

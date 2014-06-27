@@ -107,6 +107,8 @@
     (run-shell-command (format nil "nohup ~A~{ ~A~}"
                                program args))))
 
+(setf *screen-mode-line-format* "[^B%n^b] | %W")
+
 (setf *mode-line-timeout* 1) 
 
 (toggle-mode-line (current-screen)

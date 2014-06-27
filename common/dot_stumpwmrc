@@ -115,7 +115,10 @@
                           (current-head))
 
 (load-module "stumptray")
+(load-module "swm-emacs")
+
 (stumptray:stumptray)
+(swm-emacs:start-emacs-daemon)
 
 (defun echo-urgent-window (target)
   "modified message-window.lisp to export message-no-timeout"

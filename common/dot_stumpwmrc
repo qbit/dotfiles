@@ -114,6 +114,9 @@
 (toggle-mode-line (current-screen)
                           (current-head))
 
+(load-module "stumptray")
+(stumptray:stumptray)
+
 (defun echo-urgent-window (target)
   "modified message-window.lisp to export message-no-timeout"
   (stumpwm:message-no-timeout "~a (~a) has an message for you."

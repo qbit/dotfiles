@@ -137,7 +137,7 @@
 (define-key *root-map* (kbd "c") "exec urxvtc")
 (define-key *root-map* (kbd "d") "exec dmenu_run")
 (define-key *root-map* (kbd "e") "exec emacsclient -c -a \"\"")
-;(define-key *root-map* (kbd "l") "exec xlock")
+(define-key *root-map* (kbd "l") "exec xlock")
 (define-key *root-map* (kbd "C-d")
   (format nil "exec ~A ~A" *default-browser* *manifest-url*))
 

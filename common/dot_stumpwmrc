@@ -123,7 +123,7 @@
 
 (defun echo-urgent-window (target)
   "modified message-window.lisp to export message-no-timeout"
-  (stumpwm:message-no-timeout "~a has an message for you."
+  (stumpwm:message-no-timeout "Activity in ~a"
 			      (window-title target) (window-group target)))
 
 (add-hook *urgent-window-hook* 'echo-urgent-window)

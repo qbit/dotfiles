@@ -74,10 +74,10 @@
 (define-key *top-map* (kbd "M-\)") "gselect 19")
 
 (setf *mode-line-click-hook*
-      (list (lambda(line btn x y)
-	      (cond ((eq btn 5)
+      (list (lambda(&rest rest)
+	      (cond ((eq (second rest) 5)
 		     (run-commands "gnext"))
-		    ((eq btn 4)
+		    ((eq (second rest) 4)
 		     (run-commands "gprev"))))))
 
 (defcommand acpi-status () ()

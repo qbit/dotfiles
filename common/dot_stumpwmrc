@@ -74,7 +74,7 @@
 (define-key *top-map* (kbd "M-\)") "gselect 19")
 
 (setf *mode-line-click-hook*
-      (list (lambda(&rest rest)
+      (list (lambda (&rest rest)
 	      (cond ((eq (second rest) 5)
 		     (run-commands "gnext"))
 		    ((eq (second rest) 4)

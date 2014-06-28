@@ -121,16 +121,10 @@
 (toggle-mode-line (current-screen)
                           (current-head))
 
-(load-module "stumptray")
-(load-module "swm-emacs")
-
-(stumptray:stumptray)
-(swm-emacs:start-emacs-daemon)
-
 (defun echo-urgent-window (target)
   "modified message-window.lisp to export message-no-timeout"
-  (stumpwm:message-no-timeout "~a (~a) has an message for you."
- (window-title target) (window-group target)))
+  (stumpwm:message-no-timeout "~a has an message for you."
+			      (window-title target) (window-group target)))
 
 (add-hook *urgent-window-hook* 'echo-urgent-window)
 
@@ -153,6 +147,12 @@
 
 ;; show input bar in centre of screen
 (setf *input-window-gravity* :center)
+
+(load-module "stumptray")
+(load-module "swm-emacs")
+
+(stumptray:stumptray)
+(swm-emacs:start-emacs-daemon)
 
 ;; add ssh keys
 ;;LISP=sbcl

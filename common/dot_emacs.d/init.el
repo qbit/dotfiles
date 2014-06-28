@@ -38,6 +38,11 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "<C-tab>") 'hippie-expand)
 
+(add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
 (autoload 'scpaste "scpaste" "Paste the current buffer." t nil)
 (setq scpaste-http-destination "http://akb.io" scpaste-scp-destination
 "akb.io:/var/www/htdocs")

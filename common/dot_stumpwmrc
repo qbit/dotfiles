@@ -73,6 +73,13 @@
 (define-key *top-map* (kbd "M-\(") "gselect 18")
 (define-key *top-map* (kbd "M-\)") "gselect 19")
 
+(setf *mode-line-click-hook*
+      (list (lambda (&rest rest)
+	      (cond ((eq (second rest) 5)
+		     (run-commands "gnext"))
+		    ((eq (second rest) 4)
+		     (run-commands "gprev"))))))
+
 (defcommand acpi-status () ()
   "Print ACPI status in the StumpWM message box."
   (stumpwm:echo-string (current-screen)
@@ -107,10 +114,18 @@
     (run-shell-command (format nil "nohup ~A~{ ~A~}"
                                program args))))
 
+(setf *screen-mode-line-format* "[^B%n^b] | %W")
+
 (setf *mode-line-timeout* 1) 
 
 (toggle-mode-line (current-screen)
                           (current-head))
+
+(load-module "stumptray")
+(load-module "swm-emacs")
+
+(stumptray:stumptray)
+(swm-emacs:start-emacs-daemon)
 
 (defun echo-urgent-window (target)
   "modified message-window.lisp to export message-no-timeout"
@@ -129,7 +144,7 @@
 (define-key *root-map* (kbd "c") "exec urxvtc")
 (define-key *root-map* (kbd "d") "exec dmenu_run")
 (define-key *root-map* (kbd "e") "exec emacsclient -c -a \"\"")
-;(define-key *root-map* (kbd "l") "exec xlock")
+(define-key *root-map* (kbd "l") "exec xlock")
 (define-key *root-map* (kbd "C-d")
   (format nil "exec ~A ~A" *default-browser* *manifest-url*))
 

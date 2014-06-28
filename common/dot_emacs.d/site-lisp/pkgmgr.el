@@ -1,7 +1,11 @@
-(defun install-if-missing (pkg) 
+(defun install-if-missing (lst) 
   "Install missing packages on init"
-  (unless (package-installed-p pkg nil)
-    (package-install pkg)))
+  (when lst
+    (let ((pkg (car lst))
+	  (rest (cdr lst)))
+    (unless (package-installed-p pkg nil)
+      (package-install pkg))
+    (install-if-missing rest))))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -14,18 +18,21 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-(install-if-missing 'erlang)
-(install-if-missing 'git-gutter)
-(install-if-missing 'js2-mode)
-(install-if-missing 'magit)
-(install-if-missing 'magit-tramp)
-(install-if-missing 'nlinum)
-(install-if-missing 'org)
-(install-if-missing 'rainbow-mode)
-(install-if-missing 'ruby-mode)
-(install-if-missing 'scpaste)
-(install-if-missing 'slime)
-(install-if-missing 'tronesque-theme)
-(install-if-missing 'zenburn-theme)
+(install-if-missing 
+ '(
+   erlang
+   git-gutter
+   js2-mode
+   magit
+   magit-tramp
+   nlinum
+   org
+   rainbow-mode
+   ruby-mode
+   scpaste
+   slime
+   tronesque-theme
+   zenburn-theme
+))
 
 (provide 'pkgmgr)

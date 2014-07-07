@@ -50,6 +50,8 @@
 (setq scpaste-user-name "akb.io" scpaste-user-address
    "http://akb.io/")
 
+(setq org-log-done t)
+
 (global-git-gutter-mode +1)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -59,7 +61,9 @@
  '(git-gutter:added-sign "++")
  '(git-gutter:deleted-sign "--")
  '(git-gutter:modified-sign "  ")
- '(org-agenda-files (quote ("~/org/kahn/LinearAlgebra.org"))))
+ '(org-agenda-files (list "~/org/home.org"
+			  "~/org/openbsd.org"
+			  "~/org/work.org")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -105,7 +105,8 @@ fi
 KEY_CHAIN=$(which keychain);
 if [ $? -eq 0 ]; then
 	if [ -x $KEY_CHAIN ]; then
-		$KEY_CHAIN -q ~/.ssh/id_rsa
+		$KEY_CHAIN -q ~/.ssh/id_rsa $(cat ~/.gnupg/gpg.conf | grep default-key | awk '{print $2}')
 		. ~/.keychain/$(hostname)-sh
+		. ~/.keychain/$(hostname)-sh-gpg
 	fi
 fi

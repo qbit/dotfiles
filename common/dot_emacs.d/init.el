@@ -1,7 +1,8 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/plugins/"))
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+
+(require 'org)
 
 (if (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
     (add-to-list 'auto-mode-alist '("go$" . go-mode)))
@@ -13,6 +14,7 @@
 (when (file-exists-p "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
   (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e/")
   (require 'mu4e)
+  (require 'org-mu4e)
   (require 'smtpmail)
 
   (when (file-directory-p "/data/user_storage/qbit/Maildir")

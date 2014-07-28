@@ -45,8 +45,13 @@ if [ $OS == "OpenBSD" ]; then
 	fi
 fi
 
-if [ -d /data/user_storage/qbit/Maildir ]; then
-   MAILDIR=/data/user_storage/qbit/Maildir
+if [ -d /data/user_storage/${USER} ]; then
+   DATADIR=/data/user_storage/${USER}
+   export DATADIR
+fi
+
+if [ -d /data/user_storage/${USER}/Maildir ]; then
+   MAILDIR=/data/user_storage/${USER}/Maildir
 else
    MAILDIR=~/Maildir
 fi

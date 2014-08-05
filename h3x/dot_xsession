@@ -6,9 +6,9 @@ xset -b &
 xmodmap ~/.xmodmap &
 
 #keepassx &
-if [ -x /usr/local/bin/mono ]; then
-  mono ~/.keepass/KeePass.exe &
-fi
+#if [ -x /usr/local/bin/mono ]; then
+#  mono ~/.keepass/KeePass.exe &
+#fi
 
 urxvtd -q -f -o &
 
@@ -32,5 +32,6 @@ feh --bg-center ~/.background.png &
 #exec spectrwm
 #exec dwm
 #exec enlightenment_start
-exec i3
+#exec i3
 #exec cwm
+exec stumpwm

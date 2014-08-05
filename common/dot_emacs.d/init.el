@@ -1,15 +1,20 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/plugins/"))
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-(file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
-	       (add-to-list 'auto-mode-alist '("go$" . go-mode))
+(require 'org)
+
+(if (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
+    (add-to-list 'auto-mode-alist '("go$" . go-mode)))
 
 (let ((default-directory user-emacs-directory))
       (normal-top-level-add-subdirs-to-load-path))
 
 (defvar site-lisp-directory (concat user-emacs-directory "site-lisp/"))
+
+(when (file-exists-p "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
+  (add-to-list 'load-path "/usr/localshare/emacs/site-lisp/mu4e/")
+  (require 'mail))
 
 (file-exists-p "~quicklisp/slime-helper.el")
 	       (load (expand-file-name "~/quicklisp/slime-helper.el")
@@ -50,6 +55,8 @@
 (setq scpaste-user-name "akb.io" scpaste-user-address
    "http://akb.io/")
 
+(setq org-log-done t)
+
 (global-git-gutter-mode +1)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -59,7 +66,9 @@
  '(git-gutter:added-sign "++")
  '(git-gutter:deleted-sign "--")
  '(git-gutter:modified-sign "  ")
- '(org-agenda-files (quote ("~/org/kahn/LinearAlgebra.org"))))
+ '(org-agenda-files (list "~/org/home.org"
+			  "~/org/openbsd.org"
+			  "~/org/work.org")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -8,6 +8,9 @@ OS=$(uname)
 #fi
 alias vi="emacsclient -c"
 
+alias email="emacs -e 'mu4e'"
+alias sbcl="rlwrap sbcl"
+
 alias tmux="tmux -2"
 alias irc="export TERM=xterm; tmux at -t irc"
 alias build="dpb -c -h /home/buildie/hosts -P"
@@ -41,6 +44,19 @@ if [ $OS == "OpenBSD" ]; then
 		export CVSROOT="anoncvs@anoncvs1.usa.openbsd.org:/cvs"
 	fi
 fi
+
+if [ -d /data/user_storage/${USER} ]; then
+   DATADIR=/data/user_storage/${USER}
+   export DATADIR
+fi
+
+if [ -d /data/user_storage/${USER}/Maildir ]; then
+   MAILDIR=/data/user_storage/${USER}/Maildir
+else
+   MAILDIR=~/Maildir
+fi
+	
+export MAILDIR
 
 GOPATH=~/go
 PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$GOPATH/bin:.
@@ -94,7 +110,12 @@ fi
 KEY_CHAIN=$(which keychain);
 if [ $? -eq 0 ]; then
 	if [ -x $KEY_CHAIN ]; then
+	   if [ -f ~/.gnupg/gpg.conf ]; then
+		$KEY_CHAIN -q ~/.ssh/id_rsa $(awk '/default-key/ {print $2}' ~/.gnupg/gpg.conf)
+	   else
 		$KEY_CHAIN -q ~/.ssh/id_rsa
-		. ~/.keychain/$(hostname)-sh
+	   fi
+	   . ~/.keychain/$(hostname)-sh
+	   . ~/.keychain/$(hostname)-sh-gpg
 	fi
 fi

@@ -9,9 +9,9 @@ set -A mirrors \
 	anoncvs@anoncvs1.ca.openbsd.org:/cvs
 
 set -A dirs \
-	/usr/ports \
-	/usr/src \
-	/usr/xenocara
+	/${DATADIR}/ports \
+	/${DATADIR}/src \
+	/${DATADIR}/xenocara
 
 tmux -2 new-session -d -s $session
 

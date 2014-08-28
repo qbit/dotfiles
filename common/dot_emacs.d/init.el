@@ -2,6 +2,8 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/plugins/"))
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
+(setq backup-directory-alist '(("." . "~/.esaves")))
+
 (require 'org)
 
 (if (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")

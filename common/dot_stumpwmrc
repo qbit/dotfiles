@@ -114,7 +114,7 @@
     (run-shell-command (format nil "nohup ~A~{ ~A~}"
                                program args))))
 
-(setf *screen-mode-line-format* "[^B%n^b] | %W")
+(setf *screen-mode-line-format* "[^B%n^b] | %W ^> %B       ")
 
 (setf *mode-line-timeout* 1) 
 
@@ -150,6 +150,7 @@
 
 (load-module "stumptray")
 (load-module "swm-emacs")
+(load-module "battery-portable")
 
 (stumptray:stumptray)
 (swm-emacs:start-emacs-daemon)

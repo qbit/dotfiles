@@ -71,6 +71,9 @@
  '(org-agenda-files (list "~/org/home.org"
 			  "~/org/openbsd.org"
 			  "~/org/work.org")))
+
+(set-face-attribute 'default t :height 100)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

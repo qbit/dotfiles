@@ -20,6 +20,7 @@
 
 (install-if-missing 
  '(
+   color-theme-approximate
    erlang
    git-gutter
    js2-mode
@@ -29,6 +30,7 @@
    org
    rainbow-mode
    ruby-mode
+   rust-mode
    scpaste
    slime
    tronesque-theme

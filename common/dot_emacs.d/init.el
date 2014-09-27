@@ -3,6 +3,7 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
 (setq backup-directory-alist '(("." . "~/.esaves")))
+(setq inhibit-startup-screen t)
 
 (require 'org)
 

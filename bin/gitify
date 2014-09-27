@@ -12,15 +12,19 @@ if [ "$Y" != "y" ]; then
 fi
 
 ssh akb.io "test -e /git/${DIR}.git || git init --bare /git/${DIR}.git"
-curl -k -X POST --user qbit_:$BITBUCKET_PASS "https://api.bitbucket.org/1.0/repositories" -d "name=${DIR}"
 
-if [ $( git remote | grep akb ) == "akb" ]; then
+if [ "${BITBUCKET_PASS}X" != "X" ]; then
+    curl -k -X POST --user qbit_:$BITBUCKET_PASS "https://api.bitbucket.org/1.0/repositories" -d "name=${DIR}"
+    git remote add bb ssh://git@bitbucket.org/qbit_/${DIR}.git 
+    git@bitbucket.org:qbit_/dotfiles.git
+fi
+
+AKB_REMOTE=$(git remote | grep akb)
+if [ "$AKB_REMOTE" == "akb" ]; then
   echo "'akb' remote already exists in local branch.."
 else 
   git remote add akb ssh://akb.io/git/${DIR}.git 
 fi
 
-git remote add bb ssh://git@bitbucket.org/qbit_/${DIR}.git 
-
 git push -u akb master
-git push -u bb master
+

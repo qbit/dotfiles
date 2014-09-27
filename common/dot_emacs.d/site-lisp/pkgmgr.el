@@ -23,6 +23,7 @@
    color-theme-approximate
    erlang
    git-gutter
+   guru-mode
    js2-mode
    magit
    magit-tramp

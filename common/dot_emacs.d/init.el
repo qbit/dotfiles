@@ -15,6 +15,8 @@
 (require 'guru-mode)
 (require 'nlinum)
 
+(set-face-attribute 'default nil :height 100)
+
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
 (setq backup-directory-alist '(("." . "~/.esaves")))

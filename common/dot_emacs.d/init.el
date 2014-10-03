@@ -4,8 +4,7 @@
 
 (setq backup-directory-alist '(("." . "~/.esaves")))
 (setq inhibit-startup-screen t)
-
-(require 'org)
+(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
 
 (if (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
     (add-to-list 'auto-mode-alist '("go$" . go-mode)))

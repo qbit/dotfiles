@@ -20,7 +20,6 @@
 
 (install-if-missing 
  '(
-   color-theme-approximate
    erlang
    git-gutter
    guru-mode

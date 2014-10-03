@@ -36,7 +36,6 @@
 (column-number-mode +1)
 (show-paren-mode +1)
 (rainbow-mode +1)
-(color-theme-approximate-on)
 
 (require 'nlinum)
 

@@ -1,5 +1,4 @@
 (require 'org)
-(require 'org-compat)
 (require 'ox-publish)
 (require 'ox-html)
 

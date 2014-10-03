@@ -25,6 +25,8 @@
 (require 'pkgmgr)
 ;(require 'externals)
 (require 'keycuts)
+(require 'orger)
+
 (require 'guru-mode)
 
 (guru-global-mode +1)
@@ -49,19 +51,12 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "<C-tab>") 'hippie-expand)
 
-(add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-
 (autoload 'scpaste "scpaste" "Paste the current buffer." t nil)
 (setq scpaste-http-destination "http://akb.io" scpaste-scp-destination
 "akb.io:/var/www/htdocs")
 
 (setq scpaste-user-name "akb.io" scpaste-user-address
    "http://akb.io/")
-
-(setq org-log-done t)
 
 (global-git-gutter-mode +1)
 (custom-set-variables
@@ -71,10 +66,8 @@
  ;; If there is more than one, they won't work right.
  '(git-gutter:added-sign "++")
  '(git-gutter:deleted-sign "--")
- '(git-gutter:modified-sign "  ")
- '(org-agenda-files (list "~/org/home.org"
-			  "~/org/openbsd.org"
-			  "~/org/work.org")))
+ '(git-gutter:modified-sign "  "))
+
 
 (set-face-attribute 'default t :height 100)
 

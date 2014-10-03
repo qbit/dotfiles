@@ -32,9 +32,9 @@
   (add-to-list 'load-path "/usr/localshare/emacs/site-lisp/mu4e/")
   (require 'mail))
 
-;(file-exists-p "~quicklisp/slime-helper.el")
-;	       (load (expand-file-name "~/quicklisp/slime-helper.el")
-;	       (setq inferior-lisp-program "sbcl"))
+(file-exists-p "~quicklisp/slime-helper.el")
+	       (load (expand-file-name "~/quicklisp/slime-helper.el")
+	       (setq inferior-lisp-program "sbcl"))
 
 (guru-global-mode +1)
 

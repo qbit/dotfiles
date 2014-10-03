@@ -1,5 +1,20 @@
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/plugins/"))
+(let ((default-directory user-emacs-directory))
+  (setq load-path
+	(append
+	 (let ((load-path (copy-sequence load-path)))
+	   (append
+	    (copy-sequence (normal-top-level-add-to-load-path '(".")))
+	    (normal-top-level-add-subdirs-to-load-path)))
+	 load-path)))
+
+(require 'pkgmgr)
+;(require 'externals)
+(require 'keycuts)
+(require 'orger)
+
+(require 'guru-mode)
+(require 'nlinum)
+
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
 (setq backup-directory-alist '(("." . "~/.esaves")))
@@ -9,25 +24,15 @@
 (if (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
     (add-to-list 'auto-mode-alist '("go$" . go-mode)))
 
-(let ((default-directory user-emacs-directory))
-      (normal-top-level-add-subdirs-to-load-path))
-
 (defvar site-lisp-directory (concat user-emacs-directory "site-lisp/"))
 
 (when (file-exists-p "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
   (add-to-list 'load-path "/usr/localshare/emacs/site-lisp/mu4e/")
   (require 'mail))
 
-(file-exists-p "~quicklisp/slime-helper.el")
-	       (load (expand-file-name "~/quicklisp/slime-helper.el")
-	       (setq inferior-lisp-program "sbcl"))
-
-(require 'pkgmgr)
-;(require 'externals)
-(require 'keycuts)
-(require 'orger)
-
-(require 'guru-mode)
+;(file-exists-p "~quicklisp/slime-helper.el")
+;	       (load (expand-file-name "~/quicklisp/slime-helper.el")
+;	       (setq inferior-lisp-program "sbcl"))
 
 (guru-global-mode +1)
 
@@ -37,8 +42,6 @@
 (column-number-mode +1)
 (show-paren-mode +1)
 (rainbow-mode +1)
-
-(require 'nlinum)
 
 ;(load-theme 'zenburn 1)
 ;(load-theme 'tango-dark 1)

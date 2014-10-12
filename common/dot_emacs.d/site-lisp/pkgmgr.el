@@ -29,6 +29,7 @@
    nlinum
    org
    rainbow-mode
+   rect-mark
    ruby-mode
    rust-mode
    scpaste

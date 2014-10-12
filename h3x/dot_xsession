@@ -3,7 +3,10 @@ export LC_CTYPE="en_US.UTF-8"
 mkfifo /tmp/pianobar
 
 xset -b &
-xmodmap ~/.xmodmap &
+
+if [ -f ~/.xmodmap ]; then
+   xmodmap ~/.xmodmap &
+fi
 
 #keepassx &
 #if [ -x /usr/local/bin/mono ]; then

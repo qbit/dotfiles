@@ -8,12 +8,14 @@
     (install-if-missing rest))))
 
 (require 'package)
-(add-to-list 'package-archives
-	     '("marmalade" .
-	       "http://marmalade-repo.org/packages/")
-	     '("mlpa" .
-	       "http://melpa.milkbox.net/packages/"))
 
+(setq package-archives '(("gnu" .
+			  "http://elpa.gnu.org/packages/")
+			 ("marmalade" .
+			  "http://marmalade-repo.org/packages/")
+			 ("org" .
+			  "http://orgmode.org/elpa/")))
+			 
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -33,7 +35,6 @@
    ruby-mode
    rust-mode
    scpaste
-   slime
    tronesque-theme
    zenburn-theme
 ))

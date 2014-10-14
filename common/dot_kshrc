@@ -37,8 +37,11 @@ fi
 
 if [ -d /data/user_storage/${USER} ]; then
     DATADIR=/data/user_storage/${USER}
-    export DATADIR
+else
+    DATADIR=/usr
 fi
+
+export DATADIR
 
 if [ -d /data/user_storage/${USER}/Maildir ]; then
     MAILDIR=/data/user_storage/${USER}/Maildir

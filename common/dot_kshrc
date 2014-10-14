@@ -2,10 +2,6 @@ export LC_CTYPE="en_US.UTF-8"
 
 OS=$(uname)
 
-#VIM=$(which vim);
-#if [ $? -eq 0 ]; then
-#	alias vi="vim"
-#fi
 alias vi="emacsclient -c"
 
 alias email="emacs -e 'mu4e'"
@@ -17,43 +13,35 @@ alias build="dpb -c -h /home/buildie/hosts -P"
 alias cdw='cd $(make show=WRKSRC)'
 
 if [ -e ~/.kshlib ]; then
-	. ~/.kshlib
+    . ~/.kshlib
 fi
 
 if [ -e ~/.git-prompt ]; then
-  . ~/.git-prompt
-  export GIT_PS1_SHOWDIRTYSTATE=true
-  export GIT_PS1_SHOWUNTRACKEDFILES=true
-  export GIT_PS1_SHOWCOLORHINTS=true
+   . ~/.git-prompt
+   export GIT_PS1_SHOWDIRTYSTATE=true
+   export GIT_PS1_SHOWUNTRACKEDFILES=true
+   export GIT_PS1_SHOWCOLORHINTS=true
 fi
 
 if [ $OS == "OpenBSD" ]; then
-	function get_pkg_path {
-		echo $(cat /etc/pkg.conf | grep installpath | awk '{print $3}')
-	}
-	# function pkg_add {
-	# 	set_pkg_path
-	# 	sudo /usr/sbin/pkg_add $@
-	# }
+    function get_pkg_path {   
+	echo $(cat /etc/pkg.conf | grep installpath | awk '{print $3}')
+    }
 
-	# if [ -f ~/.netrc ]; then
-	# 	export FETCH_CMD="curl -n -s"
-	# fi
-
-	if [ ! -f ~/.cvsrc ]; then
-		export CVSROOT="anoncvs@anoncvs1.usa.openbsd.org:/cvs"
-	fi
+    if [ ! -f ~/.cvsrc ]; then
+	export CVSROOT="anoncvs@anoncvs1.usa.openbsd.org:/cvs"
+    fi
 fi
 
 if [ -d /data/user_storage/${USER} ]; then
-   DATADIR=/data/user_storage/${USER}
-   export DATADIR
+    DATADIR=/data/user_storage/${USER}
+    export DATADIR
 fi
 
 if [ -d /data/user_storage/${USER}/Maildir ]; then
-   MAILDIR=/data/user_storage/${USER}/Maildir
+    MAILDIR=/data/user_storage/${USER}/Maildir
 else
-   MAILDIR=~/Maildir
+    MAILDIR=~/Maildir
 fi
 	
 export MAILDIR
@@ -62,60 +50,58 @@ GOPATH=~/go
 PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$GOPATH/bin:.
 
 if [ -e /usr/ports/infrastructure/bin ]; then
-	PATH=$PATH:/usr/ports/infrastructure/bin
+    PATH=$PATH:/usr/ports/infrastructure/bin
 fi
 
 if [ -e /usr/local/jdk-1.7.0/bin ]; then
-	PATH=$PATH:/usr/local/jdk-1.7.0/bin
+    PATH=$PATH:/usr/local/jdk-1.7.0/bin
 fi
 
 export PATH HOME TERM GOPATH
 
 function vdiff {
-	cp -p $1 $1.orig
-	vi $1
+    cp -p $1 $1.orig
+    emacsclient -c $1
 }
 
 function git_branch_name {
-	# branch=$( git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' )
-  branch=$(__git_ps1 %s)
-	if [ "${branch}" != "" ]; then
-		if [ "${branch}" = "(no branch)" ]; then
-			# probably have a tag
-			br_ch=$( perl -e 'binmode STDOUT, ":utf8"; print "\x{16D8}";' )
-			branch="$br_ch $( git describe --tags | head -n 1 )"
-		fi
-
-		echo "[${bold}${branch}${white}]"
+    branch=$(__git_ps1 %s)
+    if [ "${branch}" != "" ]; then
+	if [ "${branch}" = "(no branch)" ]; then
+	    # probably have a tag
+	    br_ch=$( perl -e 'binmode STDOUT, ":utf8"; print "\x{16D8}";' )
+	    branch="$br_ch $( git describe --tags | head -n 1 )"
 	fi
+	echo "[${bold}${branch}${white}]"
+    fi
 }
 
 function hg_q_name {
-	if [ -d .hg ]; then
-		if [ -f .hg/patches/status ]; then
-			branch=$(cat .hg/patches/status | awk -F: '{print $NF}')
-			if [ "${branch}" != "" ]; then
-				echo "[${bold}${branch}${white}]"
-			fi
-		fi
+    if [ -d .hg ]; then
+	if [ -f .hg/patches/status ]; then
+	    branch=$(cat .hg/patches/status | awk -F: '{print $NF}')
+	    if [ "${branch}" != "" ]; then
+		echo "[${bold}${branch}${white}]"
+	    fi
 	fi
+    fi
 }
 
 if [ "$(id -u)" -eq 0 ] ; then
-  PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]# '
+    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]# '
 else
-  PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)λ '
+    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)λ '
 fi
 
 KEY_CHAIN=$(which keychain);
 if [ $? -eq 0 ]; then
-	if [ -x $KEY_CHAIN ]; then
-	   if [ -f ~/.gnupg/gpg.conf ]; then
-		$KEY_CHAIN -q ~/.ssh/id_rsa $(awk '/default-key/ {print $2}' ~/.gnupg/gpg.conf)
-	   else
-		$KEY_CHAIN -q ~/.ssh/id_rsa
-	   fi
-	   . ~/.keychain/$(hostname)-sh
-	   . ~/.keychain/$(hostname)-sh-gpg
+    if [ -x $KEY_CHAIN ]; then
+	if [ -f ~/.gnupg/gpg.conf ]; then
+	    $KEY_CHAIN -q ~/.ssh/id_rsa $(awk '/default-key/ {print $2}' ~/.gnupg/gpg.conf)
+	else
+	    $KEY_CHAIN -q ~/.ssh/id_rsa
 	fi
+	. ~/.keychain/$(hostname)-sh
+	. ~/.keychain/$(hostname)-sh-gpg
+    fi
 fi

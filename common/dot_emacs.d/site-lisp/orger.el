@@ -10,7 +10,7 @@
 (setq org-log-done t)
 
 (org-agenda-files (list
-		   (directory-files "~/org/agendas" t "\\.org$")))
+		   (directory-files "~/org/agenda" t "\\.org$")))
 
 (setq orger-pub-to "/ssh:akb.io:/var/www/htdocs/org/")
 

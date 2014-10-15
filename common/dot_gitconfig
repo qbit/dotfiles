@@ -21,3 +21,5 @@
 [merge]
 	tool = fugitive
 
+[hub]
+	protocol = git

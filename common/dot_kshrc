@@ -52,7 +52,11 @@ fi
 export MAILDIR
 
 GOPATH=~/go
-PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$GOPATH/bin:.
+PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$GOPATH/bin
+
+if [ -d ~/node_bin/node_modules/.bin ]; then
+    PATH=$PATH:~/node_bin/node_modules/.bin
+fi
 
 if [ -e /usr/ports/infrastructure/bin ]; then
     PATH=$PATH:/usr/ports/infrastructure/bin

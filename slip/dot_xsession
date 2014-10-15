@@ -4,8 +4,12 @@ mkfifo /tmp/pianobar
 
 xset -b &
 
-if [ -f ~/.xmodmap ]; then
-   xmodmap ~/.xmodmap &
+if [ -f ~/.Xmodmap ]; then
+   xmodmap ~/.Xmodmap &
+fi
+
+if [ -e /usr/local/bin/tpb ]; then
+   /usr/local/bin/tpb -d
 fi
 
 #keepassx &
@@ -16,6 +20,10 @@ fi
 urxvtd -q -f -o &
 
 parcellite &
+
+synclient ClickFinger2=2
+synclient ClickFinger3=3
+synclient PalmDetect=1
 
 xset +fp ~/.fonts
 xset +fp /usr/local/lib/X11/fonts/terminus

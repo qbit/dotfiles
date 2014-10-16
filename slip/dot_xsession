@@ -21,8 +21,8 @@ urxvtd -q -f -o &
 
 parcellite &
 
-synclient ClickFinger2=2
-synclient ClickFinger3=3
+synclient ClickFinger2=3
+synclient ClickFinger3=2
 synclient PalmDetect=1
 
 xset +fp ~/.fonts

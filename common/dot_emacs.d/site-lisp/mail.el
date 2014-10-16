@@ -14,6 +14,8 @@
 (setq mu4e-sent-folder "/[Gmail].Sent Mail")
 (setq mu4e-trash-folder "/[Gmail].Trash")
 
+(global-set-key (kdb "C-c e") 'mu4e-mark-execute-all)
+
 (set mu4e-sent-messages-behavior 'delete)
 
 (setq mu4e-headers-skip-duplicates t)

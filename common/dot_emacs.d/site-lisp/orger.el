@@ -9,8 +9,12 @@
 
 (setq org-log-done t)
 
-(org-agenda-files (list
-		   (directory-files "~/org/agenda" t "\\.org$")))
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "|" "DONE(d)")
+	(sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+	(sequence "|" "CANCELED(c)")))
+
+(setq org-agenda-files (directory-files "~/org/agenda" t "\\.org$"))
 
 (setq orger-pub-to "/ssh:akb.io:/var/www/htdocs/org/")
 

@@ -33,11 +33,11 @@
 ' (setf *window-number-map* "1234567890") ; This doesn't actually do anything
 
 (run-commands
- "gnewbg Browse" ;; F2
- "gnewbg IRC"    ;; F3
- "gnewbg Pidgin" ;; F4
+ "gnewbg G2" ;; F2
+ "gnewbg G3"    ;; F3
+ "gnewbg G4" ;; F4
  "gnewbg G5"     ;; F5
- "gnewbg-float Gimp"     ;; F6
+ "gnewbg-float F6"     ;; F6
  "gnewbg G7"     ;; F7
  "gnewbg G8"     ;; F8
  "gnewbg G9"     ;; F9

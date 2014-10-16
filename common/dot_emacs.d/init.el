@@ -60,7 +60,7 @@
 (setq scpaste-http-destination "http://akb.io" scpaste-scp-destination
 "akb.io:/var/www/htdocs")
 
-(setq scpaste-user-name "akb.io" scpaste-user-address
+(setq scpaste-user-name "Aaron" scpaste-user-address
    "http://akb.io/")
 
 (global-git-gutter-mode +1)

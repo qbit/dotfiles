@@ -111,6 +111,8 @@ if [ $? -eq 0 ]; then
 	    $KEY_CHAIN -q ~/.ssh/id_rsa
 	fi
 	. ~/.keychain/$(hostname)-sh
-	. ~/.keychain/$(hostname)-sh-gpg
+	if [ ! $(pgrep gpg-agent) ]; then
+	    . ~/.keychain/$(hostname)-sh-gpg
+	fi
     fi
 fi

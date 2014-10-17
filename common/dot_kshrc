@@ -105,14 +105,14 @@ fi
 KEY_CHAIN=$(which keychain);
 if [ $? -eq 0 ]; then
     if [ -x $KEY_CHAIN ]; then
-	if [ -f ~/.gnupg/gpg.conf ]; then
-	    $KEY_CHAIN -q ~/.ssh/id_rsa $(awk '/default-key/ {print $2}' ~/.gnupg/gpg.conf)
-	else
-	    $KEY_CHAIN -q ~/.ssh/id_rsa
+	if [ ! $(pgrep gpg-agent) ] || [ ! $(pgrep ssh-agent) ]; then
+	    if [ -f ~/.gnupg/gpg.conf ]; then
+		$KEY_CHAIN -q ~/.ssh/id_rsa $(awk '/default-key/ {print $2}' ~/.gnupg/gpg.conf)
+	    else
+		$KEY_CHAIN -q ~/.ssh/id_rsa
+	    fi
 	fi
 	. ~/.keychain/$(hostname)-sh
-	if [ ! $(pgrep gpg-agent) ]; then
-	    . ~/.keychain/$(hostname)-sh-gpg
-	fi
+	. ~/.keychain/$(hostname)-sh-gpg
     fi
 fi

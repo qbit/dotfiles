@@ -15,6 +15,18 @@
 
 (set mu4e-sent-messages-behavior 'delete)
 
+(setq mu4e-maildir-shortcuts
+    '( ("/INBOX"               . ?i)
+       ("/[Gmail].Sent Mail"   . ?s)
+       ("/[Gmail].Trash"       . ?t)
+       ("/[Gmail].All Mail"    . ?a)))
+
+;; allow for updating mail using 'U' in the main view:
+(setq mu4e-get-mail-command "offlineimap")
+
+;; don't keep message buffers around
+(setq message-kill-buffer-on-exit t)
+
 (setq mu4e-headers-skip-duplicates t)
 (setq mu4e-html2text-command "html2text -b 72")
 

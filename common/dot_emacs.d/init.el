@@ -11,6 +11,7 @@
 ;(require 'externals)
 (require 'keycuts)
 (require 'orger)
+(require 'browse)
 
 (require 'guru-mode)
 (require 'nlinum)

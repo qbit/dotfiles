@@ -3,6 +3,7 @@ export LC_CTYPE="en_US.UTF-8"
 mkfifo /tmp/pianobar
 
 xset -b &
+xidle -delay 5 -sw -program "/usr/X11R6/bin/xlock" -timeout 300 &
 
 if [ -f ~/.Xmodmap ]; then
    xmodmap ~/.Xmodmap &

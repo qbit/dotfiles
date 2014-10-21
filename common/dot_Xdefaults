@@ -1,3 +1,11 @@
+XLock.startCmd: keychain -k all; sudo -K
+Xlock.dpmsoff: 15
+XIdle.timeout: 300
+Xlock.mode: random
+XLock.mousemotion: on
+XLock.nice: 19
+XLock.program: /usr/games/fortune -a
+
 URxvt*loginShell: true
 URxvt*cursorColor: green
 URxvt*scrollBar: False

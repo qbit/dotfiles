@@ -36,6 +36,14 @@
 	 :recursive t
 	 :publishing-function org-publish-attachment
 	 )
+	("bolddaemon"
+	 :base-directory "~/org/websites/bolddaemon/"
+	 :base-extension "org"
+	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/"
+	 :recursive t
+	 :publishing-function org-publish-attachment
+	 :auto-preamble t
+	 )
 	("org" :components ("org-notes" "org-static"))
 	))
 

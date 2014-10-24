@@ -3,25 +3,27 @@
   (when lst
     (let ((pkg (car lst))
 	  (rest (cdr lst)))
-    (unless (package-installed-p pkg nil)
-      (package-install pkg))
-    (install-if-missing rest))))
+      (unless (package-installed-p pkg nil)
+	(package-install pkg))
+      (install-if-missing rest))))
 
 (require 'package)
-
-(setq package-archives '(("gnu" .
+(setq package-archives '(("melpa" .
+			  "http://melpa.org/packages/")
+			 ("gnu" .
 			  "http://elpa.gnu.org/packages/")
 			 ("marmalade" .
 			  "http://marmalade-repo.org/packages/")
 			 ("org" .
 			  "http://orgmode.org/elpa/")))
-			 
+
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 
 (install-if-missing 
  '(
+   aggressive-indent
    erlang
    git-gutter
    guru-mode
@@ -36,6 +38,7 @@
    rust-mode
    scpaste
    tronesque-theme
+   weather-metno
    zenburn-theme
 ))
 

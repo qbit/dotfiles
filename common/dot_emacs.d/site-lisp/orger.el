@@ -18,6 +18,25 @@
 
 (setq orger-pub-to "/ssh:akb.io:/var/www/htdocs/org/")
 
+(setq org-capture-templates
+      '(
+	("t" "Task"
+	 entry (file+datetree "~/org/agenda/home.org")
+	 "* %?")
+	("b" "BoldDaemon Entry"
+	 entry (file+datetree "~/org/websites/bolddaemon/index.org")
+         "* %?"
+         :empty-lines 1)
+	))
+
+(defun enable-vc ()
+  (setq vc-handled-backends (RCS CVS SVN SCCS Bzr Git Hg Mtn Arch)))
+
+(defun disable-vc ()
+  (setq vc-handled-backends nil))
+
+(setq org-html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\" />")
+
 (setq org-publish-project-alist
       '(
 	("org-notes"
@@ -25,6 +44,8 @@
 	 :base-extension "org"
 	 :publishing-directory orger-pub-to
 	 :recursive t
+	 :preparation-function disable-vc
+	 :completion-function: enable-vc
 	 :publishing-function org-html-publish-to-html
 	 :headline-levels 4             ; Just the default for this project.
 	 :auto-preamble t
@@ -36,14 +57,41 @@
 	 :recursive t
 	 :publishing-function org-publish-attachment
 	 )
-	("bolddaemon"
+	("bd-static"
+	 :base-directory "~/org/websites/bolddaemon/"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/"
+	 :recursive t
+	 :publishing-function org-publish-attachment
+	 )
+	("bd"
 	 :base-directory "~/org/websites/bolddaemon/"
 	 :base-extension "org"
 	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/"
 	 :recursive t
-	 :publishing-function org-publish-attachment
+ 	 :preparation-function disable-vc
+	 :completion-function: enable-vc
+  	 :publishing-function org-html-publish-to-html
 	 :auto-preamble t
 	 )
+	("bd-static-test"
+	 :base-directory "~/org/websites/bolddaemon/"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/test"
+	 :recursive t
+	 :publishing-function org-publish-attachment
+	 )
+	("bd-test"
+	 :base-directory "~/org/websites/bolddaemon/"
+	 :base-extension "org"
+	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/test/"
+	 :recursive t
+	 :preparation-function disable-vc
+	 :completion-function: enable-vc
+ 	 :publishing-function org-html-publish-to-html
+	 :auto-preamble t
+	 )
+	("test-bolddaemon" :components ("bd-test" "bd-static-test"))
 	("org" :components ("org-notes" "org-static"))
 	))
 

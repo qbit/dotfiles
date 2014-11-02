@@ -114,7 +114,12 @@
     (run-shell-command (format nil "nohup ~A~{ ~A~}"
                                program args))))
 
-(setf *screen-mode-line-format* "[^B%n^b] | %W ^> %B       ")
+(setf *mode-line-pad-x* 30)
+(setf *mode-line-pad-y* 0)
+
+(setf *screen-mode-line-format*
+      (list "%B | [^B%n^b] | %W ^> | "
+	    '(:eval (stumpwm:run-shell-command "date" t))))
 
 (setf *mode-line-timeout* 1) 
 

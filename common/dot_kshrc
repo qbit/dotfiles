@@ -102,19 +102,19 @@ else
     PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)λ '
 fi
 
-KEY_CHAIN=$(which keychain);
-if [ $? -eq 0 ]; then
-    if [ -x $KEY_CHAIN ]; then
-	MISSING=false
-	pgrep -q gpg-agent && pgrep -q ssh-agent || MISSING=true
-	if [ $MISSING == true ]; then
-	    if [ -f ~/.gnupg/gpg.conf ]; then
-		$KEY_CHAIN -q ~/.ssh/id_rsa $(awk '/default-key/ {print $2}' ~/.gnupg/gpg.conf)
-	    else
-		$KEY_CHAIN -q ~/.ssh/id_rsa
-	    fi
-	fi
-	. ~/.keychain/$(hostname)-sh
-	. ~/.keychain/$(hostname)-sh-gpg
-    fi
-fi
+#KEY_CHAIN=$(which keychain);
+#if [ $? -eq 0 ]; then
+#    if [ -x $KEY_CHAIN ]; then
+#	MISSING=false
+#	pgrep -q gpg-agent && pgrep -q ssh-agent || MISSING=true
+#	if [ $MISSING == true ]; then
+#	    if [ -f ~/.gnupg/gpg.conf ]; then
+#		$KEY_CHAIN -q ~/.ssh/id_rsa $(awk '/default-key/ {print $2}' ~/.gnupg/gpg.conf)
+#	    else
+#		$KEY_CHAIN -q ~/.ssh/id_rsa
+#	    fi
+#	fi
+#	. ~/.keychain/$(hostname)-sh
+#	. ~/.keychain/$(hostname)-sh-gpg
+ #   fi
+#fi

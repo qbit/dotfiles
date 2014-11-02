@@ -22,7 +22,7 @@
 
 (setq backup-directory-alist '(("." . "~/.esaves")))
 (setq inhibit-startup-screen t)
-(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>λ\n]*#?[]#$%>λ].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
 
 (if (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
     (add-to-list 'auto-mode-alist '("go$" . go-mode)))

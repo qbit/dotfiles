@@ -23,10 +23,11 @@
 	("t" "Task"
 	 entry (file+datetree "~/org/agenda/home.org")
 	 "* %?")
-	("b" "BoldDaemon Entry"
-	 entry (file+datetree "~/org/websites/bolddaemon/index.org")
-         "* %?"
-         :empty-lines 1)
+	("b" "BoldDaemon Post Entry"
+	 entry (file+headline "~/org/websites/bolddaemon/index.org" "Posts")
+         "* %?\n %U\n %i\n"
+         :empty-lines 1
+	 :prepend 1)
 	))
 
 (defun enable-vc ()

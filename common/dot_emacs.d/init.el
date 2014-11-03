@@ -53,7 +53,11 @@
 ;(load-theme 'tronesque t)
 ;(load-theme 'solarized-dark t)
 ;(load-theme 'flatland t)
-(load-theme 'moe-dark t)
+(require 'moe-theme)
+;(load-theme 'moe-dark t)
+(require 'moe-theme-switcher)
+(powerline-moe-theme)
+(moe-theme-set-color 'w/b)
 
 (global-aggressive-indent-mode)
 

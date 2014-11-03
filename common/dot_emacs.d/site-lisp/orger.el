@@ -23,7 +23,7 @@
 	("t" "Task"
 	 entry (file+datetree "~/org/agenda/home.org")
 	 "* %?")
-	("b" "BoldDaemon Post Entry"
+	("b" "BoldDaemon Entry"
 	 entry (file+headline "~/org/websites/bolddaemon/index.org" "Posts")
          "* %?\n %U\n %i\n"
          :empty-lines 1

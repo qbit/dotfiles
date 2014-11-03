@@ -39,6 +39,8 @@
 
 (guru-global-mode +1)
 
+(powerline-default-theme)
+
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -50,9 +52,10 @@
 ;(load-theme 'tango-dark 1)
 ;(load-theme 'tronesque t)
 ;(load-theme 'solarized-dark t)
-(load-theme 'flatland t)
+;(load-theme 'flatland t)
+(load-theme 'moe-dark t)
 
-;(evil-mode 1)
+(global-aggressive-indent-mode)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "<C-tab>") 'hippie-expand)

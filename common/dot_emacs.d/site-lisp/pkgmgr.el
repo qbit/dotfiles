@@ -30,8 +30,10 @@
    js2-mode
    magit
    magit-tramp
+   moe-theme
    nlinum
    org
+   powerline
    rainbow-mode
    rect-mark
    ruby-mode
@@ -40,6 +42,6 @@
    tronesque-theme
    weather-metno
    zenburn-theme
-))
+   ))
 
 (provide 'pkgmgr)

@@ -1,0 +1,9 @@
+OSMtiles
+config/*
+!config/xastir.cnf
+data
+gps
+logs
+map_cache
+tmp
+tracklogs

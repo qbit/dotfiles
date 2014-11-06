@@ -36,8 +36,6 @@
 (defun disable-vc ()
   (setq vc-handled-backends nil))
 
-(setq org-html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\" />")
-
 (setq org-publish-project-alist
       '(
 	("org-notes"
@@ -77,7 +75,7 @@
 	 )
 	("bd-static-test"
 	 :base-directory "~/org/websites/bolddaemon/"
-	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|org"
 	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/test"
 	 :recursive t
 	 :publishing-function org-publish-attachment

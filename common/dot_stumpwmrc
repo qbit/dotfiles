@@ -121,10 +121,12 @@
       (list "%B | [^B%n^b] | %W ^> | "
 	    '(:eval (stumpwm:run-shell-command "date" t))))
 
-(setf *mode-line-timeout* 1) 
+(setf *mode-line-timeout* 1)
+
+(set-font "-*-terminus-medium-r-normal-*-*-*-*-*-*-*-*-*")
 
 (toggle-mode-line (current-screen)
-                          (current-head))
+		  (current-head))
 
 (defun echo-urgent-window (target)
   "modified message-window.lisp to export message-no-timeout"

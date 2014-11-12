@@ -60,7 +60,7 @@
 	 )
 	("bd-static"
 	 :base-directory "~/org/websites/bolddaemon/"
-	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|org"
 	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/"
 	 :recursive t
 	 :publishing-function org-publish-attachment
@@ -93,6 +93,7 @@
 	 :auto-preamble t
 	 )
 	("test-bolddaemon" :components ("bd-test" "bd-static-test"))
+	("bolddaemon" :components ("bd" "bd-static"))
 	("org" :components ("org-notes" "org-static"))
 	))
 

@@ -24,11 +24,6 @@
 (setq inhibit-startup-screen t)
 (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>λ\n]*#?[]#$%>λ].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
 
-(if (file-exists-p "/usr/local/go/misc/emacs/go-mode-load.el")
-    (add-to-list 'auto-mode-alist '("go$" . go-mode)))
-
-(defvar site-lisp-directory (concat user-emacs-directory "site-lisp/"))
-
 (when (file-exists-p "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
   (add-to-list 'load-path "/usr/localshare/emacs/site-lisp/mu4e/")
   (require 'mail))

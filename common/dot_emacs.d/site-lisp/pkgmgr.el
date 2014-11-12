@@ -26,6 +26,7 @@
    aggressive-indent
    erlang
    git-gutter
+   go-mode
    guru-mode
    js2-mode
    magit

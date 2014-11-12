@@ -41,7 +41,6 @@
 (scroll-bar-mode -1)
 (column-number-mode +1)
 (show-paren-mode +1)
-(rainbow-mode +1)
 
 ;(load-theme 'zenburn 1)
 ;(load-theme 'tango-dark 1)

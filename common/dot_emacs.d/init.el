@@ -3,7 +3,7 @@
 	(append
 	 (let ((load-path (copy-sequence load-path)))
 	   (append
-	    (copy-sequence (normal-top-level-add-to-load-path '(".")))
+	    (copy-sequence (normal-top-level-add-to-load-path '("./site-lisp")))
 	    (normal-top-level-add-subdirs-to-load-path)))
 	 load-path)))
 

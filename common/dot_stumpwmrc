@@ -24,9 +24,8 @@
           (setf server-running t)))))
 
 (define-key *root-map* (kbd "C-s") "swank")
- 
-(directory "~/Development/stumpwm-contrib/") 
-    (set-contrib-dir "~/Development/stumpwm-contrib/")
+
+(set-module-dir "/home/qbit/Development/stumpwm-contrib")
 
 ;; make frames 1-numbered (i.e. for getting with ALT-FN)
 (setf *frame-number-map* "1234567890")
@@ -83,11 +82,11 @@
 (defcommand acpi-status () ()
   "Print ACPI status in the StumpWM message box."
   (stumpwm:echo-string (current-screen)
-                       (with-output-to-string (stream)
-                         (sb-ext:run-program
-                          "/usr/sbin/apm"
-                          nil
-                          :output stream))))
+		       (with-output-to-string (stream)
+			 (sb-ext:run-program
+			  "/usr/sbin/apm"
+			  nil
+			  :output stream))))
 
 (defun exec-for-status (path &rest args)
   "Run the path with args and return the status code."
@@ -135,8 +134,8 @@
 
 (add-hook *urgent-window-hook* 'echo-urgent-window)
 
-;(defvar *manifest-url*
-;  (manifest:start))
+;;(defvar *manifest-url*
+;;  (manifest:start))
 
 (defvar *default-browser* "chrome")
 (define-key stumpwm:*root-map* (kbd "B") "run-shell-command chrome")
@@ -146,8 +145,8 @@
 (define-key *root-map* (kbd "d") "exec dmenu_run")
 (define-key *root-map* (kbd "e") "exec emacsclient -c -a \"\"")
 (define-key *root-map* (kbd "l") "exec xlock")
-;(define-key *root-map* (kbd "C-d")
-;  (format nil "exec ~A ~A" *default-browser* *manifest-url*))
+;;(define-key *root-map* (kbd "C-d")
+;;  (format nil "exec ~A ~A" *default-browser* *manifest-url*))
 
 ;; set FFM
 (setf *mouse-focus-policy* :sloppy)

@@ -8,13 +8,16 @@
 	 load-path)))
 
 (require 'pkgmgr)
-;(require 'externals)
+;;(require 'externals)
 (require 'keycuts)
+(require 'location)
 (require 'orger)
 (require 'browse)
 
 (require 'guru-mode)
 (require 'nlinum)
+
+(set-location-by-ip)
 
 (set-face-attribute 'default nil :height 100)
 

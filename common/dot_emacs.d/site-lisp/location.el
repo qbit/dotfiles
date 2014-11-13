@@ -10,6 +10,4 @@
   (setq calendar-latitude (string-to-number (car str)))
   (setq calendar-longitude (string-to-number (car (cdr str)))))
 
-(set-location-by-ip)
-
 (provide 'location)

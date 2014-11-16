@@ -24,6 +24,7 @@
 (install-if-missing 
  '(
    aggressive-indent
+   emms
    erlang
    git-gutter
    go-mode
@@ -40,6 +41,7 @@
    ruby-mode
    rust-mode
    scpaste
+   soundklaus
    tronesque-theme
    weather-metno
    zenburn-theme

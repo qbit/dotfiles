@@ -1,4 +1,5 @@
 XLock.startCmd: ssh-add -D; sudo -K
+XLock.endCmd: ssh-add
 Xlock.dpmsoff: 15
 Xlock.mode: random
 XLock.mousemotion: on

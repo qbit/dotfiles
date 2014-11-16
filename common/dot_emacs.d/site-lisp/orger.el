@@ -71,9 +71,26 @@
 	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/"
 	 :recursive t
  	 :preparation-function disable-vc
-	 :completion-function: enable-vc
+	 :completion-function enable-vc
   	 :publishing-function org-html-publish-to-html
 	 :auto-preamble t
+	 )
+	("deft"
+	 :base-directory "~/org/websites/deftly/"
+	 :base-extension "org"
+	 :publishing-directory "/ssh:akb.io:/var/www/deftly/"
+	 :recursive t
+	 :preparation-function disable-vc
+	 :completion-function enable-vc
+	 :publishing-function org-html-publish-to-html
+	 :auto-preamble t
+	 )
+	("deft-static"
+	 :base-directory "~/org/websites/deftly/"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|org"
+	 :publishing-directory "/ssh:akb.io:/var/www/deftly/"
+	 :recursive t
+	 :publishing-function org-publish-attachment
 	 )
 	("bd-static-test"
 	 :base-directory "~/org/websites/bolddaemon/"
@@ -94,6 +111,7 @@
 	 )
 	("test-bolddaemon" :components ("bd-test" "bd-static-test"))
 	("bolddaemon" :components ("bd" "bd-static"))
+	("deftly" :components ("deft" "deft-static"))
 	("org" :components ("org-notes" "org-static"))
 	))
 

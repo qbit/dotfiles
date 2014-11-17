@@ -1,4 +1,4 @@
-(global-set-key (kbd "<C-tab>") 'hippie-expand)
+(global-set-key (kbd "<backtab>") 'hippie-expand)
 (global-set-key "\M-g" 'magit-status)
 
 (require 'rect-mark)

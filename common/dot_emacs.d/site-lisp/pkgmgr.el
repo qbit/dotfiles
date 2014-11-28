@@ -29,6 +29,7 @@
    git-gutter
    go-mode
    guru-mode
+   haskell-mode
    js2-mode
    magit
    magit-tramp

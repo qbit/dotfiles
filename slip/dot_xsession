@@ -20,6 +20,8 @@ fi
 
 urxvtd -q -f -o &
 
+emacs --daemon
+
 parcellite &
 
 synclient ClickFinger2=3
@@ -44,9 +46,10 @@ feh --bg-center ~/.background.png &
 
 #exec awesome
 #exec xmonad
+exec ~/.xmonad/xmonad-x86_64-openbsd
 #exec spectrwm
 #exec dwm
 #exec enlightenment_start
 #exec i3
 #exec cwm
-exec stumpwm
+#exec stumpwm

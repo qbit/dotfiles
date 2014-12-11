@@ -37,6 +37,8 @@
    nlinum
    org
    powerline
+   psci
+   purescript
    rainbow-mode
    rect-mark
    ruby-mode

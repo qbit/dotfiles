@@ -58,12 +58,16 @@ if [ -d ~/node_bin/node_modules/.bin ]; then
     PATH=$PATH:~/node_bin/node_modules/.bin
 fi
 
-if [ -e /usr/ports/infrastructure/bin ]; then
+if [ -d /usr/ports/infrastructure/bin ]; then
     PATH=$PATH:/usr/ports/infrastructure/bin
 fi
 
-if [ -e /usr/local/jdk-1.7.0/bin ]; then
+if [ -d /usr/local/jdk-1.7.0/bin ]; then
     PATH=$PATH:/usr/local/jdk-1.7.0/bin
+fi
+
+if [ -d ~/.cabal/bin ]; then
+    PATH=~/.cabal/bin:$PATH
 fi
 
 export PATH HOME TERM GOPATH

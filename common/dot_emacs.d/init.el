@@ -76,7 +76,11 @@
  ;; If there is more than one, they won't work right.
  '(git-gutter:added-sign "++")
  '(git-gutter:deleted-sign "--")
- '(git-gutter:modified-sign "  "))
+ '(git-gutter:modified-sign "  ")
+ '(global-aggressive-indent-mode t)
+ '(purescript-mode-hook
+   (quote
+    (capitalized-words-mode turn-on-purescript-indent turn-on-purescript-unicode-input-method))))
 
 
 (set-face-attribute 'default t :height 100)

@@ -11,7 +11,7 @@ import System.IO
 import qualified XMonad.StackSet as W 
 
 main = do
-        status <- spawnPipe myDzenStatus
+        status <- spawnPipe myXmoStatus
         xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig 
                    {
                    normalBorderColor = "#666666"
@@ -51,6 +51,8 @@ myManageHook = composeAll
     , className =? "Chrome"       --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
     , className =? "Gimp"           --> doF (W.shift (myWorkspaces !! 3)) -- send to ws 4
     ]    
+
+myXmoStatus = "~/.cabal/bin/xmobar"
  
 myDzenStatus = "dzen2 -ta 'l'" ++ myDzenStyle
 myDzenStyle  = " -h '20' -fg '#777777' -bg '#222222'"

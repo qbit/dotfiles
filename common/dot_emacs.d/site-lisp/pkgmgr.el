@@ -38,7 +38,7 @@
    org
    powerline
    psci
-   purescript
+   purescript-mode
    rainbow-mode
    rect-mark
    ruby-mode

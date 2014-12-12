@@ -33,8 +33,8 @@
   (require 'mail))
 
 (file-exists-p "~quicklisp/slime-helper.el")
-	       (load (expand-file-name "~/quicklisp/slime-helper.el")
-	       (setq inferior-lisp-program "sbcl"))
+(load (expand-file-name "~/quicklisp/slime-helper.el")
+      (setq inferior-lisp-program "sbcl"))
 
 (guru-global-mode +1)
 
@@ -45,6 +45,8 @@
 (scroll-bar-mode -1)
 (column-number-mode +1)
 (show-paren-mode +1)
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
 ;(load-theme 'zenburn 1)
 ;(load-theme 'tango-dark 1)
@@ -63,10 +65,10 @@
 
 (autoload 'scpaste "scpaste" "Paste the current buffer." t nil)
 (setq scpaste-http-destination "http://akb.io" scpaste-scp-destination
-"akb.io:/var/www/htdocs")
+      "akb.io:/var/www/htdocs")
 
 (setq scpaste-user-name "Aaron" scpaste-user-address
-   "http://akb.io/")
+      "http://akb.io/")
 
 (global-git-gutter-mode +1)
 (custom-set-variables
@@ -80,7 +82,7 @@
  '(global-aggressive-indent-mode t)
  '(purescript-mode-hook
    (quote
-    (capitalized-words-mode turn-on-purescript-indent turn-on-purescript-unicode-input-method))))
+    (capitalized-words-mode turn-on-purescript-indent))))
 
 
 (set-face-attribute 'default t :height 100)

@@ -46,7 +46,6 @@ myLayoutHook = avoidStruts $ smartBorders ( tiled ||| mtiled ||| full )
 
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
-    , className =? "Vlc"            --> doFloat
     , className =? "XCalc"          --> doFloat
     , className =? "Chrome"       --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
     , className =? "Gimp"           --> doF (W.shift (myWorkspaces !! 3)) -- send to ws 4

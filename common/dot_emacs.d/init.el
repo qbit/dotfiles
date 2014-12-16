@@ -80,9 +80,11 @@
  '(git-gutter:deleted-sign "--")
  '(git-gutter:modified-sign "  ")
  '(global-aggressive-indent-mode t)
- '(purescript-mode-hook
+ '(purescript-mode-hook (quote (capitalized-words-mode turn-on-purescript-indent)))
+ '(safe-local-variable-values
    (quote
-    (capitalized-words-mode turn-on-purescript-indent))))
+    ((haskell-process-use-ghci . t)
+     (haskell-indent-spaces . 4)))))
 
 
 (set-face-attribute 'default t :height 100)

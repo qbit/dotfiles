@@ -50,9 +50,9 @@ myWorkspaces            = clickable . (map xmobarEscape) $ ["1","2","3","4","5",
 myLayoutHook = avoidStruts $ smartBorders ( tiled ||| mtiled ||| full )
   where
     full    = named "X" $ Full
-    mtiled  = spacing 5 $ named "M" $ Mirror tiled
+    mtiled  = spacing 3 $ named "M" $ Mirror tiled
     -- tiled   = spacing 2 $ named "T" $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
-    tiled   = spacing 5 $ named "T" $ Tall 1 (3/100) (1/2)
+    tiled   = spacing 3 $ named "T" $ Tall 1 (3/100) (1/2)
 
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat

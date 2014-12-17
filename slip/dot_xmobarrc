@@ -17,14 +17,15 @@ Config { font = "Terminus"
                                           "--high","red",
                                           "--low","lightblue"] 36000
 					  , Run Battery ["-t","<leftbar>",
-					  "-L", "20", "-H", "60",
+					  "-L", "20", "-H", "80",
 					  "--normal","yellow",
 					  "--high","green",
 					  "--low", "red"] 10
+					  , Run UnsafeStdinReader
 					  , Run Com "uname" ["-n"] "" 36000
     					  , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
 					  ]
 					  , sepChar = "%"
        , alignSep = "}{"
-       , template = "%battery% }{ %date% | %KPUB% | %uname%"
+       , template = "%battery% %UnsafeStdinReader%}{ %date% | %KPUB% | %uname%"
        }

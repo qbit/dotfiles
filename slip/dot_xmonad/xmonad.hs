@@ -40,31 +40,29 @@ xmobarEscape = concatMap doubleLts
 
 myWorkspaces            :: [String]
 myWorkspaces            = clickable . (map xmobarEscape) $ ["1","2","3","4","5","6","7","8","9"]
+--    xmobar compat
     where clickable l = [ "<action=xdotool key alt+" ++ show (n) ++ ">" ++ ws ++ "</action>" |
                           (i,ws) <- zip [1..9] l,                                        
                           let n = i ]
+--    Dzen compat
 --    where clickable l     = [ "^ca(1,xdotool key alt+" ++ show (n) ++ ")" ++ ws ++ "^ca()" |
 --                              (i,ws) <- zip [1..] l,
 --                              let n = i ]
- 
+
 myLayoutHook = avoidStruts $ smartBorders ( tiled ||| mtiled ||| full )
   where
     full    = named "X" $ Full
     mtiled  = spacing 3 $ named "M" $ Mirror tiled
-    -- tiled   = spacing 2 $ named "T" $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
-    tiled   = spacing 3 $ named "T" $ Tall 1 (3/100) (1/2)
+    tiled   = spacing 3 $ named "T" $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
+    --tiled   = spacing 3 $ named "T" $ Tall 1 (3/100) (1/2)
 
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "XCalc"          --> doFloat
     , className =? "Chrome"         --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
-    , className =? "Gimp"           --> doF (W.shift (myWorkspaces !! 3)) -- send to ws 4
     ]    
 
 myXmoStatus = "~/.cabal/bin/xmobar"
- 
---myDzenStatus = "dzen2 -ta 'l'" ++ myDzenStyle
---myDzenStyle  = " -h '20' -fg '#777777' -bg '#222222'"
 
 myXmoPP = xmobarPP
     { ppCurrent = xmobarColor "#3399ff" "" . wrap " " " "
@@ -75,6 +73,9 @@ myXmoPP = xmobarPP
     , ppLayout  = xmobarColor "#aaaaaa" "" . wrap "·" "·"
     , ppTitle   = xmobarColor "#ffffff" "" . shorten 25
     }              
+
+--myDzenStatus = "dzen2 -ta 'l'" ++ myDzenStyle
+--myDzenStyle  = " -h '20' -fg '#777777' -bg '#222222'"
  
 --myDzenPP  = dzenPP
 --            { ppCurrent = dzenColor "#3399ff" "" . wrap " " " "

@@ -1,8 +1,4 @@
 Config { font = "Terminus"
-       , borderColor = "#666666"
---       , border = TopB
-       , bgColor = "black"
-       , fgColor = "grey"
        , position = Top
        , lowerOnStart = True
        , pickBroadest = False

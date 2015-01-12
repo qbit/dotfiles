@@ -18,6 +18,25 @@
 (require 'guru-mode)
 (require 'nlinum)
 
+(require 'openbsd-knf-style)
+(c-add-style "OpenBSD" openbsd-knf-style)
+(setq c-default-style '((c-mode . "OpenBSD")
+			(java-mode . "java")
+			(awk-mode . "awk")
+			(other . "OpenBSD")))
+
+(add-hook 'c-mode-common-hook
+	  (lambda ()
+	    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+	      (which-func-mode 1))))
+
+(setq-default show-trailing-whitespace t)
+(setq whitespace-style '(trailing lines space-before-tab)
+      whitespace-line-column 80)
+
+(global-whitespace-mode 1)
+(global-font-lock-mode 1)
+
 (set-location-by-ip)
 
 (set-face-attribute 'default nil :height 100)

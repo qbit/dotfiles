@@ -33,6 +33,7 @@ myLogHook h = dynamicLogWithPP $ myXmoPP {ppOutput = hPutStrLn h}
 
 myKeys = [
   ("M-d", spawn "dmenu_run")
+  , ("M-r", spawn "xmonad --recompile && xmonad --restart")
   ]
 
 xmobarEscape = concatMap doubleLts
@@ -40,7 +41,7 @@ xmobarEscape = concatMap doubleLts
         doubleLts x   = [x]
 
 myWorkspaces            :: [String]
-myWorkspaces            = clickable . (map xmobarEscape) $ ["1","2","3","4","5","6","7","8","9"]
+myWorkspaces            = clickable . (map xmobarEscape) $ ["emacs","browser","irc","4","5","6","7","8","9"]
 --    xmobar compat
     where clickable l = [ "<action=xdotool key alt+" ++ show (n) ++ ">" ++ ws ++ "</action>" |
                           (i,ws) <- zip [1..9] l,
@@ -50,11 +51,12 @@ myWorkspaces            = clickable . (map xmobarEscape) $ ["1","2","3","4","5",
 --                              (i,ws) <- zip [1..] l,
 --                              let n = i ]
 
-myLayoutHook = avoidStruts $ smartBorders ( tiled ||| mtiled ||| full )
+myLayoutHook = avoidStruts $ smartBorders ( tiled ||| ptiled ||| mtiled ||| full )
   where
     full    = named "X" $ Full
-    mtiled  = spacing 3 $ named "M" $ Mirror tiled
-    tiled   = spacing 3 $ gaps [(U,60), (L,60), (R,60), (D,60)] $ named "T" $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
+    mtiled  = named "M" $ spacing 3 $ Mirror tile
+    tiled   = named "T" $ spacing 3 $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
+    ptiled   = named "pT" $ spacing 3 $ gaps [(U,60), (L,60), (R,60), (D,60)] $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
     --tiled   = spacing 3 $ named "T" $ Tall 1 (3/100) (1/2)
 
 myManageHook = composeAll
@@ -66,12 +68,12 @@ myManageHook = composeAll
 myXmoStatus = "~/.cabal/bin/xmobar"
 
 myXmoPP = xmobarPP
-    { ppCurrent = xmobarColor "#3399ff" "" . wrap " " " "
-    , ppHidden  = xmobarColor "#dddddd" "" . wrap " " " "
+    { ppCurrent = xmobarColor "#443740" "" . wrap " " " "
+    , ppHidden  = xmobarColor "#ffffff" "" . wrap " " " "
     , ppHiddenNoWindows = \x -> "" -- xmobarColor "#777777" "" . wrap " " " "
     , ppUrgent  = xmobarColor "#ff0000" "" . wrap " " " "
     , ppSep     = "     "
-    , ppLayout  = xmobarColor "#aaaaaa" "" . wrap "·" "·"
+    , ppLayout  = xmobarColor "#ffffff" "" . wrap "|" "|"
     , ppTitle   = xmobarColor "#ffffff" "" . shorten 25
     }
 

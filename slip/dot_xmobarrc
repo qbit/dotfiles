@@ -1,5 +1,7 @@
 Config { font = "Terminus"
        , position = Top
+       , bgColor = "#5376b6"
+       , fgColor = "white"
        , lowerOnStart = True
        , pickBroadest = False
        , persistent = False

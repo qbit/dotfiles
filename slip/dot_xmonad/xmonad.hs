@@ -41,7 +41,7 @@ xmobarEscape = concatMap doubleLts
         doubleLts x   = [x]
 
 myWorkspaces            :: [String]
-myWorkspaces            = clickable . (map xmobarEscape) $ ["emacs","browser","irc","4","5","6","7","8","9"]
+myWorkspaces            = clickable . (map xmobarEscape) $ ["emacs","browser","irc","4","5","6","7","8","console"]
 --    xmobar compat
     where clickable l = [ "<action=xdotool key alt+" ++ show (n) ++ ">" ++ ws ++ "</action>" |
                           (i,ws) <- zip [1..9] l,
@@ -50,32 +50,33 @@ myWorkspaces            = clickable . (map xmobarEscape) $ ["emacs","browser","i
 --    where clickable l     = [ "^ca(1,xdotool key alt+" ++ show (n) ++ ")" ++ ws ++ "^ca()" |
 --                              (i,ws) <- zip [1..] l,
 --                              let n = i ]
-
-myLayoutHook = avoidStruts $ smartBorders ( tiled ||| ptiled ||| mtiled ||| full )
+myLayoutHook = avoidStruts $ smartBorders ( tiled ||| ptiled ||| mtiled ||| pmtiled ||| full )
   where
-    full    = named "X" $ Full
-    mtiled  = named "M" $ spacing 3 $ Mirror tile
-    tiled   = named "T" $ spacing 3 $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
+    full     = named "X" $ Full
+    mtiled   = named "M" $ spacing 3 $ Mirror tiled
+    pmtiled   = named "pM" $ spacing 3 $ Mirror ptiled
+    tiled    = named "T" $ spacing 3 $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
     ptiled   = named "pT" $ spacing 3 $ gaps [(U,60), (L,60), (R,60), (D,60)] $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
     --tiled   = spacing 3 $ named "T" $ Tall 1 (3/100) (1/2)
 
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "XCalc"          --> doFloat
-    , className =? "Chrome"         --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
-    ]
+               [ className =? "MPlayer"        --> doFloat
+               , className =? "XCalc"          --> doFloat
+               , className =? "Chrome"         --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
+               , className =? "Console"        --> doF (W.shift (myWorkspaces !! 10))
+               ]
 
 myXmoStatus = "~/.cabal/bin/xmobar"
 
 myXmoPP = xmobarPP
-    { ppCurrent = xmobarColor "#443740" "" . wrap " " " "
-    , ppHidden  = xmobarColor "#ffffff" "" . wrap " " " "
-    , ppHiddenNoWindows = \x -> "" -- xmobarColor "#777777" "" . wrap " " " "
-    , ppUrgent  = xmobarColor "#ff0000" "" . wrap " " " "
-    , ppSep     = "     "
-    , ppLayout  = xmobarColor "#ffffff" "" . wrap "|" "|"
-    , ppTitle   = xmobarColor "#ffffff" "" . shorten 25
-    }
+          { ppCurrent = xmobarColor "#443740" "" . wrap " " " "
+          , ppHidden  = xmobarColor "#ffffff" "" . wrap " " " "
+          , ppHiddenNoWindows = \x -> "" -- xmobarColor "#777777" "" . wrap " " " "
+          , ppUrgent  = xmobarColor "#ff0000" "" . wrap " " " "
+          , ppSep     = "     "
+          , ppLayout  = xmobarColor "#ffffff" "" . wrap "|" "|"
+          , ppTitle   = xmobarColor "#ffffff" "" . shorten 25
+          }
 
 --myDzenStatus = "dzen2 -ta 'l'" ++ myDzenStyle
 --myDzenStyle  = " -h '20' -fg '#777777' -bg '#222222'"

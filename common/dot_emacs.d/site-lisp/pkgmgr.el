@@ -1,4 +1,4 @@
-(defun install-if-missing (lst) 
+(defun install-if-missing (lst)
   "Install missing packages on init"
   (when lst
     (let ((pkg (car lst))
@@ -21,7 +21,7 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-(install-if-missing 
+(install-if-missing
  '(
    aggressive-indent
    emms

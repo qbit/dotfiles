@@ -64,7 +64,10 @@ myManageHook = composeAll
                , className =? "XCalc"          --> doFloat
                , className =? "Chrome"         --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
                , className =? "Console"        --> doF (W.shift (myWorkspaces !! 10))
+               , className =? "Gimp"           --> unfloat
                ]
+               <+> doFloat <+> manageDocks
+    where unfloat = ask >>= doF . W.sink
 
 myXmoStatus = "~/.cabal/bin/xmobar"
 

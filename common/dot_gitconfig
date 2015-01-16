@@ -20,3 +20,5 @@
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [merge]
 	tool = fugitive
+[http]
+	cookiefile = /home/qbit/.gitcookies

@@ -17,13 +17,13 @@ main = do
         xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
                    {
                    normalBorderColor = "#666666"
-                   ,focusedBorderColor = "darkgrey"
-                   ,terminal = "urxvtc"
-                   ,workspaces = myWorkspaces
-                   ,layoutHook = myLayoutHook
-                   ,logHook = myLogHook status
+                   , focusedBorderColor = "darkgrey"
+                   , terminal = "urxvtc"
+                   , workspaces = myWorkspaces
+                   , layoutHook = myLayoutHook
+                   , logHook = myLogHook status
                    , manageHook = manageDocks <+> myManageHook
-                            <+> manageHook defaultConfig
+                                    <+> manageHook defaultConfig
                    }
                    `removeKeysP` ["M-p"] -- don't clober emacs.
                    `additionalKeysP` myKeys
@@ -64,10 +64,7 @@ myManageHook = composeAll
                , className =? "XCalc"          --> doFloat
                , className =? "Chrome"         --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
                , className =? "Console"        --> doF (W.shift (myWorkspaces !! 10))
-               , className =? "Gimp"           --> unfloat
                ]
-               <+> doFloat <+> manageDocks
-    where unfloat = ask >>= doF . W.sink
 
 myXmoStatus = "~/.cabal/bin/xmobar"
 

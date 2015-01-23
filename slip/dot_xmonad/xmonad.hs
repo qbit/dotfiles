@@ -63,7 +63,7 @@ myManageHook = composeAll
                [ className =? "MPlayer"        --> doFloat
                , className =? "XCalc"          --> doFloat
                , className =? "Chrome"         --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
-               , className =? "Console"        --> doF (W.shift (myWorkspaces !! 10))
+               , className =? "XConsole"        --> doF (W.shift (myWorkspaces !! 8))
                ]
 
 myXmoStatus = "~/.cabal/bin/xmobar"

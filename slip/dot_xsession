@@ -30,6 +30,8 @@ synclient ClickFinger3=2
 #synclient TapButton2=2
 synclient HorizTwoFingerScroll=1
 synclient PalmDetect=1
+synclient ClickPad=1
+
 
 xset +fp ~/.fonts
 xset +fp /usr/local/lib/X11/fonts/terminus
@@ -42,7 +44,7 @@ if [ -x /sbin/shutdownd ]; then
 fi
 #~/bin/dwmbar &
 
-feh --bg-center ~/.background.png &
+feh --bg-fill ~/.background.png &
 
 #exec awesome
 #exec xmonad

@@ -27,9 +27,13 @@
    emms
    erlang
    git-gutter
+   golint
    go-mode
    guru-mode
    haskell-mode
+   flymake
+   flymake-go
+   flymake-jshint
    js2-mode
    magit
    magit-tramp

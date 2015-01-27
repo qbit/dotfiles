@@ -26,14 +26,14 @@
    aggressive-indent
    emms
    erlang
-   git-gutter
-   golint
-   go-mode
-   guru-mode
-   haskell-mode
    flymake
    flymake-go
    flymake-jshint
+   git-gutter
+   go-mode
+   golint
+   guru-mode
+   haskell-mode
    js2-mode
    magit
    magit-tramp

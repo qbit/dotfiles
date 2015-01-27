@@ -89,6 +89,9 @@
 (setq scpaste-user-name "Aaron" scpaste-user-address
       "http://akb.io/")
 
+;; Go hooks
+(add-hook 'before-save-hook 'gofmt-before-save)
+
 (global-git-gutter-mode +1)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

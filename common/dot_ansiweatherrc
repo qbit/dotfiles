@@ -1,0 +1,5 @@
+fetch_cmd:ftp -V -o -
+units:metric
+forecast:5
+geo_api_url:geo.qbit.io/json
+geo_api_proto:http

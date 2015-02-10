@@ -23,7 +23,7 @@ if [ -e ~/.git-prompt ]; then
 fi
 
 if [ $OS == "OpenBSD" ]; then
-    function get_pkg_path {   
+    function get_pkg_path {
 	echo $(cat /etc/pkg.conf | grep installpath | awk '{print $3}')
     }
 
@@ -45,11 +45,11 @@ if [ -d /data/user_storage/${USER}/Maildir ]; then
 else
     MAILDIR=~/Maildir
 fi
-	
+
 export MAILDIR
 
-GOPATH=~/go
-PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$GOPATH/bin
+GOPATH=~/.go
+PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$GOPATH/bin:$HOME/go/bin
 
 if [ -d ~/node_bin/node_modules/.bin ]; then
     PATH=$PATH:~/node_bin/node_modules/.bin

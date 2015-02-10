@@ -30,7 +30,7 @@ synclient ClickFinger3=2
 #synclient TapButton2=2
 synclient HorizTwoFingerScroll=1
 synclient PalmDetect=1
-synclient ClickPad=1
+synclient ClickPad=0
 
 
 xset +fp ~/.fonts

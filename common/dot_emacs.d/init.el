@@ -20,7 +20,7 @@
 (require 'location)
 (require 'orger)
 (require 'browse)
-(require 'music)
+;(require 'music)
 
 (require 'guru-mode)
 (require 'nlinum)

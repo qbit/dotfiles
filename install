@@ -34,76 +34,76 @@ git submodule init
 git submodule update
 
 function log {
-	if [ $verbose = true ]; then
-		echo $1
-	fi
+    if [$verbose = true]; then
+	echo $1
+    fi
 }
-			
+
 function lnk {
-	log "$GREEN ln -s $1 $2 $WHITE"
-	ln -s $1 $2
+    log "$GREEN ln -s $1 $2 $WHITE"
+    ln -s $1 $2
 }
 
 function srm {
-	log "$RED rm $1 $WHITE"
-	if [ -L $1 ]; then 
-		if [[ $OS = "OpenBSD" ]]; then
-			rm $1
-		else
-			unlink $1
-		fi
+    log "$RED rm $1 $WHITE"
+    if [-L $1]; then
+	if [[$OS = "OpenBSD"]]; then
+	    rm $1
 	else
-		rm $1
+	    unlink $1
 	fi
+    else
+	rm $1
+    fi
 }
 
 function link_file {
-	if [[ -e $2 ]] || [[ -L $2 ]]; then
-		if [ $setup_flag = true ]; then
-			diff -q $2 $1
-			if [ "$?" -ne "0" ]; then
-				vimdiff $2 $1
-			else
-				echo -n "$2 already in place, but is the same. Remove and crate symlink? ( y/yes ) "
-				read ANS
-				if [[ $ANS = "y" || $ANS = "yes" ]]; then
-					srm $2
-					lnk $1 $2
-				else
-					exit
-				fi
-			fi
-		else 
-			srm $2
-			lnk $1 $2
+    if [[-e $2]] || [[-L $2]]; then
+	if [$setup_flag = true]; then
+	    diff -q $2 $1
+	    if ["$?" -ne "0"]; then
+		vimdiff $2 $1
+	    else
+		echo -n "$2 already in place, but is the same. Remove and crate symlink? (y/yes) "
+		read ANS
+		if [[$ANS = "y" || $ANS = "yes"]]; then
+		    srm $2
+		    lnk $1 $2
+		else
+		    exit
 		fi
+	    fi
 	else
-		lnk $1 $2
+	    srm $2
+	    lnk $1 $2
 	fi
+    else
+	lnk $1 $2
+    fi
 }
 
 function dotify {
-	echo $( echo $1 | sed -e 's/^dot_/\./' );
+    echo $(echo $1 | sed -e 's/^dot_/\./');
 }
 
-if [ -d $HOST ]; then
-	for file in $( ls $HOST ); do 
-		link_file $WD/$HOST/$file ~/$( dotify $file )
-	done
-#else 
-	#for file in $( ls default ); do
-	#	link_file $WD/default/$file ~/$( dotify $file )
-	#done
+if [-d $HOST]; then
+    for file in $(ls $HOST); do
+	link_file $WD/$HOST/$file ~/$(dotify $file)
+    done
+    #else
+    #for file in $(ls default); do
+    #	link_file $WD/default/$file ~/$(dotify $file)
+    #done
 fi
 
-for file in $( ls common ); do
-	link_file $WD/common/$file ~/$( dotify $file ) 
+for file in $(ls common); do
+    link_file $WD/common/$file ~/$(dotify $file)
 done
 
-if [ ! -e ~/bin ]; then
-	mkdir ~/bin
+if [! -e ~/bin]; then
+    mkdir ~/bin
 fi
 
-for file in $( ls bin ); do
-	link_file $WD/bin/$file ~/bin/$file
+for file in $(ls bin); do
+    link_file $WD/bin/$file ~/bin/$file
 done

@@ -1,3 +1,10 @@
+(setenv "PATH"
+	(concat
+	 (getenv "PATH") ";"
+	 "~/go/bin" ";"
+	 "~/.go/bin" ";"
+	 "~/node_bin/node_modules/.bin"))
+
 (let ((default-directory user-emacs-directory))
   (setq load-path
 	(append

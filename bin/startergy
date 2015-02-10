@@ -1,0 +1,13 @@
+#!/bin/ksh
+
+if [ "X$1" == "X" ]; then
+    echo "Please specify a host!"
+    exit 0
+else
+    HOST=$1
+fi
+
+pkill synergys;
+synergys;
+ssh -R24800:localhost:24800 $HOST "pkill synergyc; synergyc -f localhost";
+pkill synergys;

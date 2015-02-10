@@ -74,6 +74,8 @@
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
 ;(load-theme 'zenburn 1)
 ;(load-theme 'tango-dark 1)
 ;(load-theme 'tronesque t)

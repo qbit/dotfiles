@@ -26,10 +26,10 @@
    aggressive-indent
    emms
    erlang
-   flymake
-   flymake-go
-   flymake-jshint
+   flycheck
    git-gutter
+   go-autocomplete
+   go-eldoc
    go-mode
    golint
    guru-mode

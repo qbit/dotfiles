@@ -1,8 +1,8 @@
 #!/bin/ksh
 
-HOST=$( hostname -s )
-OS=$( uname -s )
-WD=$( pwd )
+HOST=$(hostname -s)
+OS=$(uname -s)
+WD=$(pwd)
 
 RED="\033[1;31m"
 GREEN="\033[32m"

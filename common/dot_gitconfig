@@ -1,6 +1,6 @@
 [user]
   name = Aaron Bieber
-  email = deftly@gmail.com
+  email = aaron@bolddaemon.com
 
 [alias]
   rmdel = !git rm `git ls-files --deleted`

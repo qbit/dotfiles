@@ -3,38 +3,34 @@
 var ddg = require( 'ddg-api' );
 var colors = require( 'colors' );
 var client = new ddg.SearchClient({
-	useSSL: true,
-	prettyJson: true,
+    useSSL: true,
+    prettyJson: true,
 });
-
 var string = "";
-
 var i = 2,l = process.argv.length;
 
 for ( ; i < l; i++ ) {
-	string += process.argv[ i ] + ' ';
+    string += process.argv[ i ] + ' ';
 }
 
 client.search( string, function( err, res, data ) {
-	if ( err ) {
-		throw err;
-	}
+    if ( err ) {
+	throw err;
+    }
 
-	var str = "\n"
+    var str = "\n"
+    var di;
 
-	var di;
-
-	for ( di in data ) {
-		if ( data.hasOwnProperty( di ) ) {
-			if ( data[ di ] !== '' && typeof data[ di ] !== 'object' ) {
-				if ( data[ di ].match( 'http' ) ) {
-					str += di.green + ": " + data[ di ].grey + "\n";	
-				} else {
-					str += di.green + ": " + data[ di ] + "\n";	
-				}
-			}
+    for ( di in data ) {
+	if ( data.hasOwnProperty( di ) ) {
+	    if ( data[ di ] !== '' && typeof data[ di ] !== 'object' ) {
+		if ( data[ di ].match( 'http' ) ) {
+		    str += di.green + ": " + data[ di ].grey + "\n";
+		} else {
+		    str += di.green + ": " + data[ di ] + "\n";
 		}
+	    }
 	}
-
-	console.log( str );
+    }
+    console.log( str );
 });

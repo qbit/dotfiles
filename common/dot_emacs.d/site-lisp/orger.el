@@ -33,7 +33,7 @@
 	))
 
 (defun enable-vc ()
-  (setq vc-handled-backends (RCS CVS SVN SCCS Bzr Git Hg Mtn Arch)))
+  (setq vc-handled-backends '(RCS CVS SVN SCCS Bzr Git Hg Mtn Arch)))
 
 (defun disable-vc ()
   (setq vc-handled-backends nil))

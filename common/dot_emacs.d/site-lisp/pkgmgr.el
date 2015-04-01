@@ -27,6 +27,8 @@
    emms
    erlang
    flycheck
+   fsharp-mode
+   geiser
    git-gutter
    go-autocomplete
    go-eldoc

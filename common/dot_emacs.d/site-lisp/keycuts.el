@@ -18,4 +18,7 @@
      (if rm-mark-active
        (rm-exchange-point-and-mark p) (exchange-point-and-mark p))))
 
+(global-set-key (kbd "C-c C-f") 'flop-frame)
+(global-set-key (kbd "C-c C-s") 'flip-frame)
+
 (provide 'keycuts)

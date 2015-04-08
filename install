@@ -34,7 +34,7 @@ git submodule init
 git submodule update
 
 function log {
-    if [$verbose = true]; then
+    if [ $verbose = true ]; then
 	echo $1
     fi
 }
@@ -46,8 +46,8 @@ function lnk {
 
 function srm {
     log "$RED rm $1 $WHITE"
-    if [-L $1]; then
-	if [[$OS = "OpenBSD"]]; then
+    if [ -L $1 ]; then
+	if [[ $OS = "OpenBSD" ]]; then
 	    rm $1
 	else
 	    unlink $1
@@ -58,15 +58,15 @@ function srm {
 }
 
 function link_file {
-    if [[-e $2]] || [[-L $2]]; then
-	if [$setup_flag = true]; then
+    if [[ -e $2 ]] || [[ -L $2 ]]; then
+	if [ $setup_flag = true ]; then
 	    diff -q $2 $1
-	    if ["$?" -ne "0"]; then
+	    if [ "$?" -ne "0" ]; then
 		vimdiff $2 $1
 	    else
 		echo -n "$2 already in place, but is the same. Remove and crate symlink? (y/yes) "
 		read ANS
-		if [[$ANS = "y" || $ANS = "yes"]]; then
+		if [[ $ANS = "y" || $ANS = "yes" ]]; then
 		    srm $2
 		    lnk $1 $2
 		else
@@ -86,7 +86,7 @@ function dotify {
     echo $(echo $1 | sed -e 's/^dot_/\./');
 }
 
-if [-d $HOST]; then
+if [ -d $HOST ]; then
     for file in $(ls $HOST); do
 	link_file $WD/$HOST/$file ~/$(dotify $file)
     done
@@ -100,7 +100,7 @@ for file in $(ls common); do
     link_file $WD/common/$file ~/$(dotify $file)
 done
 
-if [! -e ~/bin]; then
+if [ ! -e ~/bin ]; then
     mkdir ~/bin
 fi
 

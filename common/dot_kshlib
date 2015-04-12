@@ -24,13 +24,22 @@ function lockie {
 	code=$?
 	rm $lock
 	return $code
-    else 
+    else
 	echo "${red}lock exists${white}"
     fi
 }
 
+function reset_port {
+    for f in $(find . -name \*.orig); do
+	BN=$(basename $f .orig)
+	DN=$(dirname $f)
+	cp $f $DN/$BN && rm $f
+    done
+    find . -name \*.rej -exec rm {} \;
+}
+
 function find_mirror {
-    for mirror in ${openbsd_mirrors[@]}; do 
+    for mirror in ${openbsd_mirrors[@]}; do
 	ping -i 1 -q -c 1 $mirror 2>&1 > /dev/null
 	if [ "$?" -eq "0" ]; then
 	    OPENBSD_MIRROR=$mirror
@@ -60,7 +69,7 @@ function set_pkg_path {
 	fi
 	if [ "X$(sysctl kern.version | egrep 'current|beta')" == "X" ]; then
 	    export PKG_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/$( uname -r )/packages/$( arch -s )/"
-	else 
+	else
 	    export PKG_PATH="http://${OPENBSD_MIRROR}/pub/OpenBSD/snapshots/packages/$( arch -s )/"
 	fi
     fi

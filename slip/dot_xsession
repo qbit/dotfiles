@@ -18,9 +18,13 @@ fi
 #  mono ~/.keepass/KeePass.exe &
 #fi
 
+if [ -x /usr/local/bin/trayer ]; then
+   trayer --edge top --align center --width 10 --height 13 --transparent true &
+fi
+
 urxvtd -q -f -o &
 
-emacs --daemon
+#emacs --daemon
 
 parcellite &
 
@@ -31,7 +35,6 @@ synclient ClickFinger3=2
 synclient HorizTwoFingerScroll=1
 synclient PalmDetect=1
 synclient ClickPad=0
-
 
 xset +fp ~/.fonts
 xset +fp /usr/local/lib/X11/fonts/terminus
@@ -55,3 +58,4 @@ exec ~/.xmonad/xmonad-x86_64-openbsd
 #exec i3
 #exec cwm
 #exec stumpwm
+#exec xfce4-session

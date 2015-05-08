@@ -32,8 +32,8 @@ main = do
 myLogHook h = dynamicLogWithPP $ myXmoPP {ppOutput = hPutStrLn h}
 
 myKeys = [
-  ("M-d", spawn "dmenu_run")
-  , ("M-r", spawn "xmonad --recompile && xmonad --restart")
+  ("M-r", spawn "dmenu_run")
+  , ("M-z", spawn "xmonad --recompile && xmonad --restart")
   ]
 
 xmobarEscape = concatMap doubleLts
@@ -50,14 +50,15 @@ myWorkspaces            = clickable . (map xmobarEscape) $ ["emacs","browser","i
 --    where clickable l     = [ "^ca(1,xdotool key alt+" ++ show (n) ++ ")" ++ ws ++ "^ca()" |
 --                              (i,ws) <- zip [1..] l,
 --                              let n = i ]
-myLayoutHook = avoidStruts $ smartBorders ( tiled ||| ptiled ||| mtiled ||| pmtiled ||| full )
+--myLayoutHook = avoidStruts $ smartBorders ( tiled ||| ptiled ||| mtiled ||| pmtiled ||| full )
+myLayoutHook = avoidStruts $ smartBorders ( tiled ||| ptiled |||  full )
   where
     full     = named "X" $ Full
-    mtiled   = named "M" $ spacing 3 $ Mirror tiled
-    pmtiled   = named "pM" $ spacing 3 $ Mirror ptiled
+    --mtiled   = named "M" $ spacing 3 $ Mirror tiled
+    --pmtiled  = named "pM" $ spacing 3 $ Mirror ptiled
     tiled    = named "T" $ spacing 3 $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
     ptiled   = named "pT" $ spacing 3 $ gaps [(U,60), (L,60), (R,60), (D,60)] $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
-    --tiled   = spacing 3 $ named "T" $ Tall 1 (3/100) (1/2)
+    --tiled  = spacing 3 $ named "T" $ Tall 1 (3/100) (1/2)
 
 myManageHook = composeAll
                [ className =? "MPlayer"        --> doFloat

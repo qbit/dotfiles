@@ -4,3 +4,4 @@ MERGE:true
 VER:snapshots
 MIRROR:ftp3.usa.openbsd.org
 INSTBOOT:sd0
+REBOOT:true

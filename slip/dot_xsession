@@ -22,6 +22,10 @@ if [ -x /usr/local/bin/trayer ]; then
    trayer --edge top --align center --width 10 --height 13 --transparent true &
 fi
 
+if [ -x /usr/local/bin/redshift-gtk ]; then
+   redshift-gtk
+fi
+
 urxvtd -q -f -o &
 
 #emacs --daemon

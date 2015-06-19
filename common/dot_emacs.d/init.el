@@ -37,14 +37,18 @@
 	    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
 	      (which-func-mode 1))))
 
-(setq-default show-trailing-whitespace t)
 (setq whitespace-style '(trailing lines space-before-tab)
       whitespace-line-column 80)
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;;(add-hook 'before-save-hook nil)
+
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 (global-whitespace-mode 1)
 (global-font-lock-mode 1)
+
+(nyan-mode 1)
 
 (set-location-by-ip)
 
@@ -78,15 +82,18 @@
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-;(load-theme 'zenburn 1)
-;(load-theme 'tango-dark 1)
-;(load-theme 'tronesque t)
-;(load-theme 'solarized-dark t)
-;(load-theme 'flatland t)
-(require 'moe-theme)
-;(load-theme 'moe-dark t)
+;;(load-theme 'misterioso)
+;;(load-theme 'zenburn 1)
+;;(load-theme 'tango-dark 1)
+;;(load-theme 'tronesque t)
+;;(load-theme 'solarized-dark t)
+;;(load-theme 'flatland t)
+;;(require 'moe-theme)
+;;(load-theme 'moe-dark t)
 (require 'moe-theme-switcher)
 (powerline-moe-theme)
+
+;;(require 'powerline)
 
 (global-aggressive-indent-mode)
 

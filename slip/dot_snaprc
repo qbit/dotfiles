@@ -2,6 +2,4 @@ INTERACTIVE:true
 DST:/tmp/upgrade
 MERGE:true
 VER:snapshots
-MIRROR:ftp3.usa.openbsd.org
-INSTBOOT:sd0
-REBOOT:true
+MIRROR:ftp.openbsd.org

@@ -23,7 +23,7 @@ if [ -x /usr/local/bin/trayer ]; then
 fi
 
 if [ -x /usr/local/bin/redshift-gtk ]; then
-   redshift-gtk
+   redshift-gtk &
 fi
 
 urxvtd -q -f -o &

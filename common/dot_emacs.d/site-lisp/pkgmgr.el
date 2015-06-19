@@ -24,6 +24,7 @@
 (install-if-missing
  '(
    aggressive-indent
+   arduino-mode
    emms
    erlang
    flycheck
@@ -41,6 +42,7 @@
    magit-tramp
    moe-theme
    nlinum
+   nyan-mode
    org
    powerline
    psci

@@ -5,6 +5,7 @@
 (require 'mu4e)
 (setq mu4e-maildir "~/Mail")
 (setq mu4e-get-mail-command "mbsync -q fastmail")
+(setq mu4e-headers-include-related t)
 
 (setq message-send-mail-function 'smtpmail-send-it
       smtpmail-stream-type 'starttls

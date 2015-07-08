@@ -3,3 +3,4 @@ DST:/tmp/upgrade
 MERGE:true
 VER:snapshots
 MIRROR:ftp.openbsd.org
+FTP_OPTS:-C -V

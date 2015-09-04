@@ -20,7 +20,7 @@
 (require 'location)
 (require 'orger)
 (require 'browse)
-;(require 'music)
+(require 'music)
 
 (require 'guru-mode)
 (require 'nlinum)
@@ -91,7 +91,7 @@
 ;;(require 'moe-theme)
 ;;(load-theme 'moe-dark t)
 (require 'moe-theme-switcher)
-(powerline-moe-theme)
+;(powerline-moe-theme)
 
 ;;(require 'powerline)
 

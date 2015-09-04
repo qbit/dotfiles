@@ -1,6 +1,9 @@
 (require 'org)
 (require 'ox-publish)
 (require 'ox-html)
+(require 'ox-reveal)
+
+(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0")
 
 (add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
 (global-set-key "\C-cl" 'org-store-link)
@@ -30,6 +33,10 @@
          "* %?\n %U\n %i\n"
          :empty-lines 1
 	 :prepend 1)
+	("m" "BoldDaemon Maker Slides"
+	 entry (file+headline "~/org/websites/bd_maker/index.org" "Slides")
+	 "* %?"
+	 :empty-lines 1)
 	))
 
 (defun enable-vc ()
@@ -75,22 +82,17 @@
   	 :publishing-function org-html-publish-to-html
 	 :auto-preamble t
 	 )
-	("deft"
-	 :base-directory "~/org/websites/deftly/"
+	("bd-maker"
+	 ;; Path to your org files.
+	 :base-directory "~/org/websites/bd_maker/"
 	 :base-extension "org"
-	 :publishing-directory "/ssh:akb.io:/var/www/deftly/"
+
+	 :publishing-directory "/ssh:akb.io:/var/www/bd_maker/"
 	 :recursive t
-	 :preparation-function disable-vc
-	 :completion-function enable-vc
-	 :publishing-function org-html-publish-to-html
-	 :auto-preamble t
-	 )
-	("deft-static"
-	 :base-directory "~/org/websites/deftly/"
-	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|org"
-	 :publishing-directory "/ssh:akb.io:/var/www/deftly/"
-	 :recursive t
-	 :publishing-function org-publish-attachment
+	 :publishing-function org-reveal-publish-to-reveal
+	 :html-extension "html"
+	 ;; :preparation-function disable-vc
+	 ;; :completion-fucntion enable-vc
 	 )
 	("bd-static-test"
 	 :base-directory "~/org/websites/bolddaemon/"
@@ -111,7 +113,7 @@
 	 )
 	("test-bolddaemon" :components ("bd-test" "bd-static-test"))
 	("bolddaemon" :components ("bd" "bd-static"))
-	("deftly" :components ("deft" "deft-static"))
+	("bd_maker" :components ("bd_maker"))
 	("org" :components ("org-notes" "org-static"))
 	))
 

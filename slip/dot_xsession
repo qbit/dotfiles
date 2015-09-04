@@ -32,17 +32,18 @@ urxvtd -q -f -o &
 
 parcellite &
 
-synclient ClickFinger2=3
-synclient ClickFinger3=2
+#synclient ClickFinger2=3
+#synclient ClickFinger3=2
 #synclient TapButton1=1
 #synclient TapButton2=2
-synclient HorizTwoFingerScroll=1
-synclient PalmDetect=1
-synclient ClickPad=0
+#synclient HorizTwoFingerScroll=1
+#synclient PalmDetect=1
+#synclient ClickPad=0
 
 xset +fp ~/.fonts
-xset +fp /usr/local/lib/X11/fonts/terminus
-xset +fp /usr/local/lib/X11/fonts/anonymous-pro
+xset +fp /usr/local/share/fonts/anonymous-pro
+xset +fp /usr/local/share/fonts/hack
+xset +fp /usr/local/share/fonts/terminus
 
 xset fp rehash
 

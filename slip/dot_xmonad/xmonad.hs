@@ -62,10 +62,11 @@ myLayoutHook = avoidStruts $ smartBorders ( tiled ||| ptiled |||  full )
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
                [
-                className =? "MPlayer"        --> doFloat
-               , className =? "XCalc"          --> doFloat
-               , className =? "Chrome"         --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
-               , className =? "XConsole"        --> doF (W.shift (myWorkspaces !! 8))
+                className =? "MPlayer"   --> doFloat
+               , className =? "XCalc"    --> doFloat
+               , className =? "Chrome"   --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
+               , className =? "Firefox"  --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
+               , className =? "XConsole" --> doF (W.shift (myWorkspaces !! 8))
                ]
 
 myXmoStatus :: String

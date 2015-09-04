@@ -20,7 +20,7 @@ main = do
                    {
                      normalBorderColor = "#666666"
                    , focusedBorderColor = "darkgrey"
-                   , terminal = "uxterm"
+                   , terminal = "urxvtc"
                    , workspaces = myWorkspaces
                    , layoutHook = myLayoutHook
                    , logHook = myLogHook status
@@ -70,7 +70,7 @@ myManageHook = composeAll
                ]
 
 myXmoStatus :: String
-myXmoStatus = "~/.cabal/bin/xmobar"
+myXmoStatus = "xmobar"
 
 myXmoPP :: PP
 myXmoPP = xmobarPP

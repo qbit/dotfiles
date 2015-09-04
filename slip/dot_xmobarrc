@@ -1,12 +1,15 @@
-Config { font = "Terminus"
+Config { font = "xft:Anonymous PRO:regular:pixelsize=12"
        , position = Top
-       , bgColor = "#5376b6"
+       , alpha = 80
+       , additionalFonts = []
        , fgColor = "white"
        , lowerOnStart = True
        , pickBroadest = False
        , persistent = False
        , hideOnStart = False
        , iconRoot = "."
+       , textOffset = -1
+       , iconOffset = -1
        , allDesktops = True
        , overrideRedirect = True
        , commands = [ Run Weather "KPUB" ["-t","<station>: <tempC>C",
@@ -21,7 +24,7 @@ Config { font = "Terminus"
 					  "--low", "red"] 10
 					  , Run UnsafeStdinReader
 					  , Run Com "uname" ["-n"] "" 36000
-    					  , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+    					  , Run Date "%a %b %_d %Y (%H)%l:%M:%S %p" "date" 10
 					  ]
 					  , sepChar = "%"
        , alignSep = "}{"

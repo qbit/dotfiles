@@ -75,6 +75,11 @@ function vdiff {
     emacsclient -c $1
 }
 
+function pclean {
+	find . -name \*.orig -exec rm {} \;
+	find . -size 0 -exec rm {} \;
+}
+
 function git_branch_name {
     branch=$(__git_ps1 %s)
     if [ "${branch}" != "" ]; then

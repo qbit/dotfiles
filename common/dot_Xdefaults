@@ -34,9 +34,11 @@ URxvt*color14: #54FFFF
 URxvt*color15: #FFFFFF
 URxvt*saveLines: 4096
 URxvt*letterSpace: 1
+!URxvt*font: Hack:regular
+!URxvt*font: Hack:regular:pixelsize=12
 URxvt*font: xft:Anonymous PRO:regular:pixelsize=12
 !URxvt*font: xft:GohuFont:regular:pixelsize=12
-! URxvt*font: xft:hermit:regular:pixelsize=12
+!URxvt*font: xft:hermit:regular:pixelsize=12
 URxvt*cursorBlink: false
 URxvt.underlineURLs: true
 URxvt.perl-lib: /home/qbit/.urxvt/
@@ -80,6 +82,7 @@ UXTerm.underlineURLs: true
 UXTerm.urlLauncher: firefox
 UXTerm*matcher.button:   1
 UXTerm*inheritPixmap: true
+UXTerm*urgentOnBell: true
 
 XTerm*cursorColor: green
 XTerm*scrollBar: False

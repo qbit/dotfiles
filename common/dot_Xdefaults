@@ -43,7 +43,8 @@ URxvt*cursorBlink: false
 URxvt.underlineURLs: true
 URxvt.perl-lib: /home/qbit/.urxvt/
 URxvt.perl-ext: selection,yank-clicked-urls
-URxvt.urlLauncher: firefox
+URxvt.urlLauncher: chrome
+!URxvt.urlLauncher: firefox
 URxvt*matcher.button:   1
 URxvt*inheritPixmap: true
 URxvt*urgentOnBell: true
@@ -79,7 +80,8 @@ UXTerm*loginShell: true
 UXTerm.underlineURLs: true
 ! UXTerm.perl-lib: /home/qbit/.urxvt/
 ! UXTerm.perl-ext: selection,yank-clicked-urls
-UXTerm.urlLauncher: firefox
+UXTerm.urlLauncher: chrome
+!UXTerm.urlLauncher: firefox
 UXTerm*matcher.button:   1
 UXTerm*inheritPixmap: true
 UXTerm*urgentOnBell: true
@@ -113,7 +115,8 @@ XTerm*loginShell: true
 XTerm.underlineURLs: true
 ! XTerm.perl-lib: /home/qbit/.urxvt/
 ! XTerm.perl-ext: selection,yank-clicked-urls
-XTerm.urlLauncher: firefox
+XTerm.urlLauncher: chrome
+!XTerm.urlLauncher: firefox
 XTerm.matcher.button:   1
 XTerm*inheritPixmap: true
 

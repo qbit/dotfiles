@@ -88,10 +88,10 @@
 ;;(load-theme 'tronesque t)
 ;;(load-theme 'solarized-dark t)
 ;;(load-theme 'flatland t)
-;;(require 'moe-theme)
+(require 'moe-theme)
 ;;(load-theme 'moe-dark t)
 (require 'moe-theme-switcher)
-;(powerline-moe-theme)
+;;(powerline-moe-theme)
 
 ;;(require 'powerline)
 
@@ -143,6 +143,9 @@ With negative prefix, apply to -N lines above."
 (require 'haskell-interactive-mode)
 (require 'haskell-process)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+
+(custom-set-variables
+ '(haskell-process-type 'ghci))
 
 (custom-set-variables
  '(haskell-process-suggest-remove-import-lines t)

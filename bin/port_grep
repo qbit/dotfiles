@@ -1,0 +1,3 @@
+#!/bin/sh
+
+find /usr/ports -name pathc\* -exec grep -H $@ {} \;

@@ -1,0 +1,26 @@
+#!/bin/ksh
+
+ARCH=$(arch -s)
+NAME="GENERIC.MP"
+
+session='release'
+tmux -2 new-session -d -s $session
+tmux select-pane -t 0
+
+if [ ! -e ~/.release ]; then
+	# Build a new kernel
+	tmux send-keys "cd /usr/src/sys/arch/${ARCH}/conf; sleep 3" C-m
+	tmux send-keys "config ${NAME}; sleep 3" C-m
+	tmux send-keys "cd ../compile/${NAME}; sleep 3" C-m
+	tmux send-keys "make clean && make; sleep 3" C-m
+	tmux send-keys "doas make install" C-m
+	touch ~/.release
+else
+	cd /usr/obj && mkdir -p .old && doas mv * .old && doas rm -rf .old 
+	cd /usr/src && make obj
+	cd /usr/src/etc && doas env DESTDIR=/ make distrib-dirs
+	cd /usr/src && make SUDO=sudo build
+	rm ~/.release
+fi
+
+tmux -2 attach-session -t $session

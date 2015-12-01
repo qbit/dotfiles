@@ -1,4 +1,4 @@
-XLock.startCmd: ssh-add -D; sudo -K
+XLock.startCmd: ssh-add -D; sudo -K; lpass logout
 XLock.endCmd: ssh-add
 Xlock.dpmsoff: 15
 Xlock.mode: random

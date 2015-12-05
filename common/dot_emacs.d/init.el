@@ -44,6 +44,7 @@
 ;;(add-hook 'before-save-hook nil)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
+(setq magit-push-always-verify nil)
 
 (global-whitespace-mode 1)
 (global-font-lock-mode 1)
@@ -55,6 +56,7 @@
 (set-face-attribute 'default nil :height 100)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/eink-emacs")
 
 (setq backup-directory-alist '(("." . "~/.esaves")))
 (setq inhibit-startup-screen t)

@@ -3,11 +3,11 @@
 ARCH=$(arch -s)
 NAME="GENERIC.MP"
 
-session='release'
-tmux -2 new-session -d -s $session
-tmux select-pane -t 0
 
 if [ ! -e ~/.release ]; then
+	session='release'
+	tmux -2 new-session -d -s $session
+	tmux select-pane -t 0
 	# Build a new kernel
 	tmux send-keys "cd /usr/src/sys/arch/${ARCH}/conf; sleep 3" C-m
 	tmux send-keys "config ${NAME}; sleep 3" C-m
@@ -15,6 +15,7 @@ if [ ! -e ~/.release ]; then
 	tmux send-keys "make clean && make; sleep 3" C-m
 	tmux send-keys "doas make install" C-m
 	touch ~/.release
+	tmux -2 attach-session -t $session
 else
 	cd /usr/obj && mkdir -p .old && doas mv * .old && doas rm -rf .old 
 	cd /usr/src && make obj
@@ -23,4 +24,3 @@ else
 	rm ~/.release
 fi
 
-tmux -2 attach-session -t $session

@@ -25,8 +25,15 @@ Config { font = "xft:Anonymous PRO:regular:pixelsize=12"
 					  , Run UnsafeStdinReader
 					  , Run Com "uname" ["-n"] "" 36000
     					  , Run Date "%a %b %_d %Y (%H)%l:%M:%S %p" "date" 10
+ 					  , Run Mail [("i:", "~/Mail/Inbox"),
+           					("h:", "~/Mail/Hackers"),
+           					("p:", "~/Mail/Ports"),
+           					("t:", "~/Mail/Tech"),
+           					("m:", "~/Mail/Misc"),
+						("s:", "~/Mail/src-changes")]
+          					"mail"
 					  ]
 					  , sepChar = "%"
        , alignSep = "}{"
-       , template = "%battery% %UnsafeStdinReader%}{ %date% | %KPUB% | %uname%"
+       , template = " 🐡 | %battery% | %mail% | %UnsafeStdinReader%}{ %date% | %KPUB% | %uname%"
        }

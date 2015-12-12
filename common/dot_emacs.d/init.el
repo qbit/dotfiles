@@ -72,8 +72,6 @@
 
 (guru-global-mode +1)
 
-(powerline-default-theme)
-
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -90,12 +88,22 @@
 ;;(load-theme 'tronesque t)
 ;;(load-theme 'solarized-dark t)
 ;;(load-theme 'flatland t)
-(require 'moe-theme)
+;;(require 'moe-theme)
 ;;(load-theme 'moe-dark t)
 (require 'moe-theme-switcher)
 ;;(powerline-moe-theme)
+;;(load-theme 'eink-light t)
 
-;;(require 'powerline)
+(require 'powerline)
+(powerline-default-theme)
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(mode-line ((t (:foreground "#ffffff" :background "#bdbdbd" :box nil))))
+ '(mode-line-inactive ((t (:foreground "#ffffff" :background "#666666" :box nil)))))
 
 (global-aggressive-indent-mode)
 
@@ -132,10 +140,17 @@ With negative prefix, apply to -N lines above."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
+ '(custom-safe-themes
+   (quote
+    ("092351ddcd5b95345bbea075361b28cf8a8567d95dc24448589c3a3692bf7d40" "0b591fefbcbb4ddeffc570233c3cd378a47c2535bf289b5a4533f64f22da2f87" default)))
  '(git-gutter:added-sign "++")
  '(git-gutter:deleted-sign "--")
  '(git-gutter:modified-sign "  ")
  '(global-aggressive-indent-mode t)
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type (quote ghci))
  '(purescript-mode-hook (quote (capitalized-words-mode turn-on-purescript-indent)))
  '(safe-local-variable-values
    (quote
@@ -145,14 +160,6 @@ With negative prefix, apply to -N lines above."
 (require 'haskell-interactive-mode)
 (require 'haskell-process)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-
-(custom-set-variables
- '(haskell-process-type 'ghci))
-
-(custom-set-variables
- '(haskell-process-suggest-remove-import-lines t)
- '(haskell-process-auto-import-loaded-modules t)
- '(haskell-process-log t))
 
 (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
 (define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
@@ -165,9 +172,4 @@ With negative prefix, apply to -N lines above."
 
 (set-face-attribute 'default t :height 100)
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+

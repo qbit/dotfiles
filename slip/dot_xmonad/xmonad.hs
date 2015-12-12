@@ -1,3 +1,6 @@
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TemplateHaskell #-}
+
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -10,25 +13,32 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Run(spawnPipe)
 import System.IO
 import Data.Monoid
-
 import qualified XMonad.StackSet as W
+
+--import qualified Language.C.Inline as C
+--C.include "<unistd.h>"
+--C.include "<stdio.h>"
 
 main :: IO()
 main = do
-        status <- spawnPipe myXmoStatus
-        xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
-                   {
-                     normalBorderColor = "#666666"
-                   , focusedBorderColor = "darkgrey"
-                   , terminal = "urxvtc"
-                   , workspaces = myWorkspaces
-                   , layoutHook = myLayoutHook
-                   , logHook = myLogHook status
-                   , manageHook = manageDocks <+> myManageHook
-                                  <+> manageHook defaultConfig
-                   }
-                   `removeKeysP` ["M-p"] -- don't clober emacs.
-                   `additionalKeysP` myKeys
+ -- _ <- [C.block| int {
+ --                  int i = pledge("stdio", NULL);
+ --                  return i;
+ --                } |]
+  status <- spawnPipe myXmoStatus
+  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
+             {
+               normalBorderColor = "#666666"
+             , focusedBorderColor = "darkgrey"
+             , terminal = "urxvtc"
+             , workspaces = myWorkspaces
+             , layoutHook = myLayoutHook
+             , logHook = myLogHook status
+             , manageHook = manageDocks <+> myManageHook
+                            <+> manageHook defaultConfig
+             }
+             `removeKeysP` ["M-p"] -- don't clober emacs.
+             `additionalKeysP` myKeys
 
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ myXmoPP {ppOutput = hPutStrLn h}

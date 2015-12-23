@@ -1,6 +1,8 @@
 (global-set-key (kbd "<backtab>") 'hippie-expand)
 (global-set-key "\M-g" 'magit-status)
 
+(global-set-key (kbd "M-x") 'helm-M-x)
+
 (require 'rect-mark)
 ; add some smarts to the normal kill / paste stuff
 ; this way it knows when we are in rectangle mode!

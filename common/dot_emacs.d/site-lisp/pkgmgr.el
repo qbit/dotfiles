@@ -27,6 +27,7 @@
    arduino-mode
    emms
    erlang
+   fireplace
    flycheck
    fsharp-mode
    geiser
@@ -37,6 +38,8 @@
    golint
    guru-mode
    haskell-mode
+   helm
+   helm-lobsters
    js2-mode
    magit
    magit-tramp

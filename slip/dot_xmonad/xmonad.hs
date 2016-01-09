@@ -46,7 +46,7 @@ myLogHook h = dynamicLogWithPP $ myXmoPP {ppOutput = hPutStrLn h}
 myKeys :: [([Char], X ())]
 myKeys =
     [
-     ("M-r", spawn "dmenu_run")
+     ("M-r", spawn "rofi -show run")
     , ("M-z", spawn "xmonad --recompile && xmonad --restart")
     , ("M-i", spawn "~/.screenlayout/internal.sh")
     , ("M-e", spawn "~/.screenlayout/external.sh")
@@ -72,11 +72,11 @@ myLayoutHook = avoidStruts $ smartBorders ( tiled ||| ptiled |||  full )
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
                [
-                className =? "MPlayer"   --> doFloat
-               , className =? "XCalc"    --> doFloat
-               , className =? "Chrome"   --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
-               , className =? "Firefox"  --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
-               , className =? "XConsole" --> doF (W.shift (myWorkspaces !! 8))
+                className =? "MPlayer"            --> doFloat
+               , className =? "XCalc"             --> doFloat
+               , className =? "chromium-browser"  --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
+               , className =? "Firefox"           --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
+               , className =? "XConsole"          --> doF (W.shift (myWorkspaces !! 8))
                ]
 
 myXmoStatus :: String

@@ -29,7 +29,7 @@ if [ $OS == "OpenBSD" ]; then
     }
 
     if [ ! -f ~/.cvsrc ]; then
-	export CVSROOT="anoncvs@anoncvs1.usa.openbsd.org:/cvs"
+	export CVSROOT="anoncvs@anoncvs3.usa.openbsd.org:/cvs"
     fi
 fi
 
@@ -50,7 +50,7 @@ fi
 export MAILDIR
 
 GOPATH=~/
-GOROOT=~/src/go
+#GOROOT=~/src/go
 PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$GOROOT/bin:$GOPATH/bin
 
 if [ -d ~/node_bin/node_modules/.bin ]; then
@@ -72,7 +72,8 @@ if [ -d ~/.cabal/bin ]; then
     PATH=~/.cabal/bin:$PATH
 fi
 
-export PATH HOME TERM GOPATH GOROOT
+#export PATH HOME TERM GOPATH GOROOT
+export PATH HOME TERM GOPATH
 
 function vdiff {
     cp -p $1 $1.orig
@@ -84,7 +85,17 @@ function pclean {
 	find . -size 0 -exec rm {} \;
 }
 
+set -A big_gits /usr/ports /usr/src
+
 function git_branch_name {
+    # __git_ps1 causes some slowness on large repos, don't run this there.
+    for d in "${big_gits[@]}"; do
+        echo "${PWD}" | grep -q "${d}"
+        if [ $? == 0 ]; then
+	    echo "[${bold}BIG${white}]"
+            return
+        fi
+    done
     branch=$(__git_ps1 %s)
     if [ "${branch}" != "" ]; then
 	if [ "${branch}" = "(no branch)" ]; then

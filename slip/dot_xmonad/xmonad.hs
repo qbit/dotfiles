@@ -1,5 +1,4 @@
 {-# LANGUAGE QuasiQuotes #-}
-{-# LANGUAGE TemplateHaskell #-}
 
 import XMonad
 import XMonad.Hooks.DynamicLog
@@ -15,16 +14,29 @@ import System.IO
 import Data.Monoid
 import qualified XMonad.StackSet as W
 
---import qualified Language.C.Inline as C
---C.include "<unistd.h>"
---C.include "<stdio.h>"
+-- until the pledge interface is in ghc
+import Foreign
+import Foreign.C
+import System.Posix.Process.Internals
+import System.Posix.Internals ( withFilePath )
+
+pledge :: String -> [FilePath] -> IO ()
+pledge promises paths =
+  withCString promises $ \cproms ->
+  withMany withFilePath paths $ \cstrs ->
+  withArray0 nullPtr cstrs $ \paths_arr ->
+  -- not yet:
+  -- throwErrnoIfMinus1_ "pledge" (c_pledge cproms paths_arr)
+  throwErrnoIfMinus1_ "pledge" (c_pledge cproms nullPtr)
+
+foreign import ccall unsafe "pledge"
+  c_pledge :: CString -> Ptr CString -> IO CInt
+-- pledge              
 
 main :: IO()
 main = do
- -- _ <- [C.block| int {
- --                  int i = pledge("stdio", NULL);
- --                  return i;
- --                } |]
+  -- need to look to see what is actually used here :P
+  _ <- pledge "stdio rpath wpath cpath proc exec unix" []
   status <- spawnPipe myXmoStatus
   xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
              {

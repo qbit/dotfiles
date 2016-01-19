@@ -1,0 +1,7 @@
+rofi.background: #3a3a3a
+rofi.bordercolor: #b2b2b2
+rofi.borderwidth: 1
+rofi.foreground: #ccc
+rofi.highlightfg: #ffb964
+rofi.lines: 10
+rofi.padding: 1

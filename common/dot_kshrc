@@ -61,6 +61,10 @@ if [ -d /usr/ports/infrastructure/bin ]; then
     PATH=$PATH:/usr/ports/infrastructure/bin
 fi
 
+if [ -d ~/Development/depot_tools ]; then
+    PATH=$PATH:~/Development/depot_tools
+fi
+
 if [ -d /usr/local/jdk-1.7.0/bin ]; then
     PATH=$PATH:/usr/local/jdk-1.7.0/bin
 fi

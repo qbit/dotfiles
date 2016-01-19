@@ -1,0 +1,9 @@
+#!/bin/sh
+
+(
+	cd ~/node_bin && ./update.sh
+	cd ~/Development/node-pledge && \
+		rm -rf build && \
+		node-gyp configure && \
+		node-gyp build
+)

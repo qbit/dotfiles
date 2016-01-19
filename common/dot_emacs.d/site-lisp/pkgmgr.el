@@ -25,8 +25,8 @@
  '(
    aggressive-indent
    arduino-mode
-   emms
    erlang
+   emms
    fireplace
    flycheck
    fsharp-mode
@@ -42,20 +42,18 @@
    helm-lobsters
    js2-mode
    magit
-   magit-tramp
    moe-theme
    nlinum
    nyan-mode
    org
+   ox-reveal
    powerline
    psci
    purescript-mode
    rainbow-mode
-   rect-mark
    ruby-mode
    rust-mode
    scpaste
-   soundklaus
    tronesque-theme
    weather-metno
    zenburn-theme

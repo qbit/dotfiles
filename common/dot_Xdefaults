@@ -43,10 +43,11 @@ URxvt*color15: #FFFFFF
 URxvt*saveLines: 4096
 URxvt*letterSpace: 1
 !URxvt*font: Hack:regular
-!URxvt*font: Hack:regular:pixelsize=12
+!URxvt*font: Hermit:regular:pixelsize=12
+!URxvt.font:                 xft:Hack:style=regular:pixelsize=11
+!URxvt.letterSpace:          -3
 URxvt*font: xft:Anonymous PRO:regular:pixelsize=12
 !URxvt*font: xft:GohuFont:regular:pixelsize=12
-!URxvt*font: xft:hermit:regular:pixelsize=12
 URxvt*cursorBlink: false
 URxvt.underlineURLs: true
 URxvt.perl-lib: /home/qbit/.urxvt/
@@ -128,9 +129,9 @@ XTerm.urlLauncher: chrome
 XTerm.matcher.button:   1
 XTerm*inheritPixmap: true
 
-! Xft.dpi:       100
-! Xft.antialias:        false
-Xft.dpi:        96
+Xft.dpi:       100
+Xft.antialias:        false
+!Xft.dpi:        96
 Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true

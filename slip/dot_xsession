@@ -54,6 +54,8 @@ fi
 
 feh --bg-fill ~/.background.png &
 
+xdb -load ~/.Xresources &
+
 #exec awesome
 #exec xmonad
 exec ~/.xmonad/xmonad-x86_64-openbsd

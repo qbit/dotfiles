@@ -122,10 +122,17 @@ function hg_q_name {
     fi
 }
 
+function ltodo {
+    if [ -f .todo ]; then
+	items=$(todo | wc -l | awk '{print $1}')
+        echo "\n↪[${bold}TODO: ${items}${white}]"
+    fi
+}
+
 if [ "$(id -u)" -eq 0 ] ; then
-    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]# '
+    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(ltodo)# '
 else
-    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)λ '
+    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)$(ltodo)λ '
 fi
 
 #KEY_CHAIN=$(which keychain);

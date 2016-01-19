@@ -10,6 +10,8 @@
 (emms-mode-line 1)
 (emms-playing-time 1)
 
+(setq emms-source-file-default-directory "~/Music/")
+
 (setq emms-player-mpd-server-name "localhost")
 (setq emms-player-mpd-server-port "6600")
 

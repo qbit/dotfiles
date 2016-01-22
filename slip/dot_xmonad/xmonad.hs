@@ -5,11 +5,12 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.Named
+import XMonad.Util.NamedWindows
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
 import XMonad.Util.EZConfig
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.Run
 import System.IO
 import Data.Monoid
 import qualified XMonad.StackSet as W
@@ -33,12 +34,20 @@ foreign import ccall unsafe "pledge"
   c_pledge :: CString -> Ptr CString -> IO CInt
 -- pledge              
 
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+
+instance UrgencyHook LibNotifyUrgencyHook where
+    urgencyHook LibNotifyUrgencyHook w = do
+      name     <- getName w
+      Just idx <- fmap (W.findTag w) $ gets windowset
+      safeSpawn "notify-send" [show name, "workspace " ++ idx]
+
 main :: IO()
 main = do
-  -- need to look to see what is actually used here :P
   _ <- pledge "stdio rpath wpath cpath proc exec unix" []
   status <- spawnPipe myXmoStatus
-  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig
+  xmonad $ withUrgencyHook LibNotifyUrgencyHook
+             $ defaultConfig
              {
                normalBorderColor = "#666666"
              , focusedBorderColor = "darkgrey"

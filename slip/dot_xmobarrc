@@ -35,5 +35,5 @@ Config { font = "xft:Anonymous PRO:regular:pixelsize=12"
 					  ]
 					  , sepChar = "%"
        , alignSep = "}{"
-       , template = " %battery% | %mail% | %UnsafeStdinReader% }{ %date% | %KPUB% | %uname%"
+       , template = " %battery% | %mail% | %UnsafeStdinReader% }{ %date% | %KPUB% | %uname% "
        }

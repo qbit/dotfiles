@@ -5,6 +5,10 @@ mkfifo /tmp/pianobar
 xset -b &
 xidle -delay 5 -sw -program "/usr/X11R6/bin/xlock" -timeout 300 &
 
+if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+        eval `dbus-launch --sh-syntax --exit-with-session`
+fi
+
 if [ -f ~/.Xmodmap ]; then
    xmodmap ~/.Xmodmap &
 fi
@@ -54,7 +58,7 @@ fi
 
 feh --bg-fill ~/.background.png &
 
-xdb -load ~/.Xresources &
+xrdb -merge -load ~/.Xresources &
 
 #exec awesome
 #exec xmonad

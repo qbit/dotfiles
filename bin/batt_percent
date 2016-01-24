@@ -1,0 +1,86 @@
+#!/bin/sh
+
+U=$(uname -s)
+
+HAS_BATT=true
+TMUX_OUT=false
+USE_COLOR=true
+
+GREEN="\033[01;32m"
+YELLOW="\033[01;33m"
+RED="\033[01;31m"
+DEFAULT="\033[0m"
+
+T_GREEN="#[fg=green]"
+T_YELLOW="#[fg=yellow]"
+T_RED="#[fg=red]"
+T_DEFAULT="#[fg=default]"
+
+while getopts "tn" arg; do
+	case "$arg" in
+		t)
+			TMUX_OUT=true
+			;;
+		n)
+			USE_COLOR=false
+	esac
+done
+
+
+case "$U" in
+	OpenBSD)
+		CHRGING=$(apm -a)
+		if [ $CHRGING != 255 ]; then
+			BATT=$(apm -l)
+			if [ $CHRGING == 1 ]; then
+				CHRGING="+"
+			else
+				CHRGING="-"
+			fi
+		else
+			HAS_BATT=false
+		fi
+		;;
+	*)
+		HAS_BATT=false
+esac
+
+if [ $TMUX_OUT == true ]; then
+	DEFAULT=$T_DEFAULT
+fi
+
+if [ $BATT -gt 49 ]; then
+	if [ $TMUX_OUT == true ]; then
+		COLOR=$T_GREEN
+	else
+		COLOR=$GREEN
+	fi
+fi
+
+if [ $BATT -lt 50 ] && [ $BATT -gt 20 ]; then
+	if [ $TMUX_OUT == true ]; then
+		COLOR=$T_YELLOW
+	else 
+		COLOR=$YELLOW
+	fi
+fi
+
+if [ $BATT -lt 20 ]; then
+	if [ $TMUX_OUT == true ]; then
+		COLOR=$T_RED
+	else
+		COLOR=$RED
+	fi
+fi
+
+if [ $HAS_BATT == true ]; then
+	if [ $USE_COLOR == true ]; then
+		if [ $TMUX_OUT == true ]; then
+			echo " ${COLOR}${CHRGING}${BATT}%${DEFAULT}"
+		else
+			echo "${COLOR}${CHRGING}${BATT}%${DEFAULT}"
+		fi
+	else
+		echo "${CHRGING}${BATT}%"
+	fi
+fi

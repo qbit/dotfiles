@@ -57,7 +57,7 @@ if [ $BATT -gt 49 ]; then
 	fi
 fi
 
-if [ $BATT -lt 50 ] && [ $BATT -gt 20 ]; then
+if [ $BATT -lt 50 ] && [ $BATT -gt 21 ]; then
 	if [ $TMUX_OUT == true ]; then
 		COLOR=$T_YELLOW
 	else 
@@ -65,7 +65,7 @@ if [ $BATT -lt 50 ] && [ $BATT -gt 20 ]; then
 	fi
 fi
 
-if [ $BATT -lt 20 ]; then
+if [ $BATT -lt 21 ]; then
 	if [ $TMUX_OUT == true ]; then
 		COLOR=$T_RED
 	else

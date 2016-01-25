@@ -14,16 +14,28 @@ rofi.highlightfg:	#ffb964
 rofi.lines:		10
 rofi.padding:		1
 
-ssh-askpass*font:			-*-dina-bold-r-*-*-18-*-*-*-*-*-*-*
-ssh-askpass*background:			#3a3a3a
-ssh-askpass*foreground:			#ffb964
-ssh-askpass.button*background:		#3a3a3a
-ssh-askpass.indicator*foreground:	#ff9900
-ssh-askpass.indicator*background:	#090909
-ssh-askpass.shadowThickness:		1
-ssh-askpass*topShadowColor:		#b2b2b2
-ssh-askpass*bottomShadowColor:		#b9b9b9
-ssh-askpass.*borderWidth:		1
+!ssh-askpass*font:			-*-dina-bold-r-*-*-18-*-*-*-*-*-*-*
+!ssh-askpass*background:			#3a3a3a
+!ssh-askpass*foreground:			#ffb964
+!ssh-askpass.button*background:		#3a3a3a
+!ssh-askpass.indicator*foreground:	#ff9900
+!ssh-askpass.indicator*background:	#090909
+!ssh-askpass.shadowThickness:		1
+!!ssh-askpass*topShadowColor:		#b2b2b2
+!ssh-askpass*bottomShadowColor:		#b9b9b9
+!ssh-askpass.*borderWidth:		1
+
+ssh-askpass*font:			-adobe-helvetica-medium-r-normal--18-180-75-75-p-98-iso8859-1
+ssh-askpass*foreground:			#eeeeff
+ssh-askpass*background:			#798a99
+ssh-askpass.*.borderWidth:		1
+ssh-askpass.*.borderColor:		#fffa06
+ssh-askpass.*.shadowThickness:		0
+ssh-askpass.*Button.borderWidth:	0
+ssh-askpass.*Button.background:		#99aab9
+ssh-askpass.indicator.borderWidth:	0
+ssh-askpass.indicator.background:	#99aab9
+ssh-askpass.indicator.foreground:	#fffa06
 
 XLock.startCmd:		ssh-add -D; sudo -K; lpass logout
 XLock.endCmd:		ssh-add

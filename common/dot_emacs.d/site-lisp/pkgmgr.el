@@ -8,14 +8,27 @@
       (install-if-missing rest))))
 
 (require 'package)
+(let ((trustfile
+       (replace-regexp-in-string
+        "\\\\" "/"
+        (replace-regexp-in-string
+         "\n" ""
+         (shell-command-to-string "python -m certifi")))))
+  (setq tls-program
+        (list
+         (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
+                 (if (eq window-system 'w32) ".exe" "") trustfile)))
+  (setq gnutls-verify-error t)
+  (setq gnutls-trustfiles (list trustfile)))
+
 (setq package-archives '(("melpa" .
-			  "http://melpa.org/packages/")
+			  "https://melpa.org/packages/")
 			 ("gnu" .
-			  "http://elpa.gnu.org/packages/")
+			  "https://elpa.gnu.org/packages/")
 			 ("marmalade" .
-			  "http://marmalade-repo.org/packages/")
+			  "https://marmalade-repo.org/packages/")
 			 ("org" .
-			  "http://orgmode.org/elpa/")))
+			  "https://orgmode.org/elpa/")))
 
 (package-initialize)
 (unless package-archive-contents

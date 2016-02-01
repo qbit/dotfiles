@@ -29,7 +29,7 @@ ssh-askpass*font:			-adobe-helvetica-medium-r-normal--18-180-75-75-p-98-iso8859-
 ssh-askpass*foreground:			#eeeeff
 ssh-askpass*background:			#798a99
 ssh-askpass.*.borderWidth:		1
-ssh-askpass.*.borderColor:		#fffa06
+ssh-askpass.*.borderColor:		black
 ssh-askpass.*.shadowThickness:		0
 ssh-askpass.*Button.borderWidth:	0
 ssh-askpass.*Button.background:		#99aab9

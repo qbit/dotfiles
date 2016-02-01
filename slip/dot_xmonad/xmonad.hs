@@ -14,25 +14,7 @@ import XMonad.Util.Run
 import System.IO
 import Data.Monoid
 import qualified XMonad.StackSet as W
-
--- until the pledge interface is in ghc
-import Foreign
-import Foreign.C
-import System.Posix.Process.Internals
-import System.Posix.Internals ( withFilePath )
-
-pledge :: String -> [FilePath] -> IO ()
-pledge promises paths =
-  withCString promises $ \cproms ->
-  withMany withFilePath paths $ \cstrs ->
-  withArray0 nullPtr cstrs $ \paths_arr ->
-  -- not yet:
-  -- throwErrnoIfMinus1_ "pledge" (c_pledge cproms paths_arr)
-  throwErrnoIfMinus1_ "pledge" (c_pledge cproms nullPtr)
-
-foreign import ccall unsafe "pledge"
-  c_pledge :: CString -> Ptr CString -> IO CInt
--- pledge              
+import System.OpenBSD.Process ( pledge )    
 
 data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
 
@@ -44,7 +26,7 @@ instance UrgencyHook LibNotifyUrgencyHook where
 
 main :: IO()
 main = do
-  _ <- pledge "stdio rpath wpath cpath proc exec unix" []
+  _ <- pledge "stdio rpath wpath cpath proc exec unix" Nothing
   status <- spawnPipe myXmoStatus
   xmonad $ withUrgencyHook LibNotifyUrgencyHook
              $ defaultConfig

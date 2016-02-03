@@ -37,7 +37,7 @@ ssh-askpass.indicator.borderWidth:	0
 ssh-askpass.indicator.background:	#99aab9
 ssh-askpass.indicator.foreground:	#fffa06
 
-XLock.startCmd:		ssh-add -D; sudo -K; lpass logout
+XLock.startCmd:		ssh-add -D; sudo -K
 XLock.endCmd:		ssh-add
 XLock.dpmsoff:		15
 XLock.mode:		random

@@ -125,7 +125,9 @@ function hg_q_name {
 function ltodo {
     if [ -f .todo ]; then
 	items=$(todo | wc -l | awk '{print $1}')
-        echo "\n↪[${bold}TODO: ${items}${white}]"
+        if [ "${items}" != "0" ]; then
+            echo "\n↪[${bold}TODO: ${items}${white}]"
+        fi
     fi
 }
 

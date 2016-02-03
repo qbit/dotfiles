@@ -12,6 +12,7 @@
   graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
   sshow = "!f() { git stash show stash^{/$*} -p; }; f"
   sapply = "!f() { git stash apply stash^{/$*}; }; f"
+  s2b = "!f() { git stash branch $1 stash@{0}; }; f"
 
 [push]
 	default = simple

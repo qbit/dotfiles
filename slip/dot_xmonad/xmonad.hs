@@ -66,10 +66,11 @@ myWorkspaces = clickable . (map xmobarEscape) $ ["emacs","browser","irc","mail",
                           (i,ws) <- zip [1..9] l,
                           let n = i ]
 
-myLayoutHook = avoidStruts $ smartBorders ( tiled ||| ptiled |||  full )
+myLayoutHook = avoidStruts $ smartBorders ( tiled ||| ptiled ||| mtiled ||| full )
     where
       full     = named "X" $ Full
       tiled    = named "T" $ spacing 3 $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
+      mtiled  = named "M" $ spacing 3 $ Mirror tiled
       ptiled   = named "pT" $ spacing 3 $ gaps [(U,60), (L,60), (R,60), (D,60)] $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
 
 myManageHook :: Query (Data.Monoid.Endo WindowSet)

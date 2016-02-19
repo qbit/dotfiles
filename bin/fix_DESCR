@@ -1,0 +1,6 @@
+#!/bin/sh
+
+TMP=$(mktemp)
+
+fold -sw 80 pkg/DESCR > $TMP && sed -i 's/\s+$//g' $TMP
+mv $TMP pkg/DESCR

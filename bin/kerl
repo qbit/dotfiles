@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/sh -x
 
 # Copyright (c) 2011, 2012 Spawngrid, Inc
 # Copyright (c) 2011 Evax Software <contact(at)evax(dot)org>
@@ -46,7 +46,7 @@ fi
 if [ -n "$KERL_DEPLOY_RSYNC_OPTIONS" ]; then
     _KDRSYNC="$KERL_DEPLOY_RSYNC_OPTIONS"
 fi
-if [ -n "KERL_INSTALL_MANPAGES" ]; then
+if [ -n "$KERL_INSTALL_MANPAGES" ]; then
     _KIM="$KERL_INSTALL_MANPAGES"
 fi
 KERL_CONFIGURE_OPTIONS=
@@ -126,15 +126,16 @@ if [ $# -eq 0 ]; then usage; fi
 
 get_releases()
 {
-    curl -s $ERLANG_DOWNLOAD_URL/ | \
-        sed $SED_OPT -e 's/^.*<[aA] [hH][rR][eE][fF]=\"\/download\/otp_src_([-0-9A-Za-z_.]+)\.tar\.gz\">.*$/\1/' \
-                     -e '/^R1|^[0-9]/!d'
+    curl -L -s $ERLANG_DOWNLOAD_URL/ | \
+        sed $SED_OPT -e 's/^.*<[aA] [hH][rR][eE][fF]=\"\otp_src_([-0-9A-Za-z_.]+)\.tar\.gz\">.*$/\1/' \
+                     -e '/^R1|^[0-9]/!d' | \
+        sed -e "s/^R\(.*\)/\1:R\1/" | sed -e "s/^\([^\:]*\)$/\1-z:\1/" | sort | cut -d':' -f2
 }
 
 update_checksum_file()
 {
     echo "Getting the checksum file from erlang.org..."
-    curl $ERLANG_DOWNLOAD_URL/MD5 > "$KERL_DOWNLOAD_DIR/MD5" || exit 1
+    curl -L $ERLANG_DOWNLOAD_URL/MD5 > "$KERL_DOWNLOAD_DIR/MD5" || exit 1
 }
 
 ensure_checksum_file()
@@ -289,6 +290,7 @@ do_git_build()
     fi
     LOGFILE="$KERL_BUILD_DIR/$3/otp_build.log"
     echo "Building Erlang/OTP $3 from git, please wait..."
+    echo "./otp_build autoconf $KERL_CONFIGURE_OPTIONS $LOGFILE ./otp_build configure $KERL_CONFIGURE_OPTIONS $LOGFILE"
     ./otp_build autoconf $KERL_CONFIGURE_OPTIONS > "$LOGFILE" 2>&1 && \
         ./otp_build configure $KERL_CONFIGURE_OPTIONS > "$LOGFILE" 2>&1
     if [ $? -ne 0 ]; then
@@ -331,7 +333,7 @@ do_build()
 {
     case "$KERL_SYSTEM" in
         Darwin)
-            if [ `gcc --version | grep llvm | wc -l` = "1" ]; then
+            if [ `gcc --version 2>/dev/null | grep -i llvm | wc -l` = "1" ]; then
                 if lion_support $1; then
                     KERL_CONFIGURE_OPTIONS="CFLAGS=-O0 $KERL_CONFIGURE_OPTIONS"
                 else
@@ -366,9 +368,11 @@ do_build()
     cd "$ERL_TOP"
     LOGFILE="$KERL_BUILD_DIR/$2/otp_build_$1.log"
     if [ -n "$KERL_USE_AUTOCONF" ]; then
+        echo "./otp_build autoconf $KERL_CONFIGURE_OPTIONS $LOGFILE ./otp_build configure $KERL_CONFIGURE_OPTIONS"
         ./otp_build autoconf $KERL_CONFIGURE_OPTIONS > "$LOGFILE" 2>&1 && \
             ./otp_build configure $KERL_CONFIGURE_OPTIONS > "$LOGFILE" 2>&1
     else
+        echo "./otp_build configure $KERL_CONFIGURE_OPTIONS $LOGFILE"
         ./otp_build configure $KERL_CONFIGURE_OPTIONS > "$LOGFILE" 2>&1
 
     fi
@@ -455,7 +459,7 @@ kerl_deactivate()
     fi
     if [ -n "\$_KERL_ACTIVE_DIR" ]; then
         unset _KERL_ACTIVE_DIR
-    fi 
+    fi
     if [ -n "\$_KERL_SAVED_PS1" ]; then
         PS1="\$_KERL_SAVED_PS1"
         export PS1
@@ -651,7 +655,7 @@ cleanup_usage()
 
 update_usage()
 {
-    echo "usage: $0 $1 <releases>"
+    echo "usage: $0 update releases"
 }
 
 get_active_path()
@@ -688,7 +692,7 @@ download()
     if [ ! -f "$KERL_DOWNLOAD_DIR/$1" ]; then
         echo "Downloading $1 to $KERL_DOWNLOAD_DIR"
         mkdir -p "$KERL_DOWNLOAD_DIR"
-        curl "$ERLANG_DOWNLOAD_URL/$1" > "$KERL_DOWNLOAD_DIR/$1"
+        curl -L "$ERLANG_DOWNLOAD_URL/$1" > "$KERL_DOWNLOAD_DIR/$1"
         update_checksum_file
     fi
     ensure_checksum_file
@@ -724,12 +728,22 @@ case "$1" in
             exit 1
         fi
         if [ $# -eq 3 ]; then
-            do_install $2 "$3"
+            if [ "$3" = "$HOME" ]; then
+                echo "Refusing to install in $HOME, this is a bad idea."
+                exit 1
+            else
+                do_install $2 "$3"
+            fi
         else
             if [ -z "$KERL_DEFAULT_INSTALL_DIR" ]; then
-              do_install $2 .
+                if [ "$PWD" = "$HOME" ]; then
+                    echo "Refusing to install in $HOME, this is a bad idea."
+                    exit 1
+                else
+                    do_install $2 .
+                fi
             else
-              do_install $2 "$KERL_DEFAULT_INSTALL_DIR/$2"
+                do_install $2 "$KERL_DEFAULT_INSTALL_DIR/$2"
             fi
         fi
         ;;
@@ -800,12 +814,14 @@ case "$1" in
                 rel=`get_release_from_name $3`
                 if [ -d "$KERL_BUILD_DIR/$3" ]; then
                     rm -Rf "$KERL_BUILD_DIR/$3"
-                    list_remove $2s "$rel,$3"
-                    echo "The $3 build has been deleted"
                 else
-                    echo "No build named $3"
-                    exit 1
+                    if [ -z "$rel" ]; then
+                      echo "No build named $3"
+                      exit 1
+                    fi
                 fi
+                list_remove $2s "$rel,$3"
+                echo "The $3 build has been deleted"
                 ;;
             installation)
                 assert_valid_installation "$3"

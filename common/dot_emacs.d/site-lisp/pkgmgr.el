@@ -15,9 +15,9 @@
          "\n" ""
          (shell-command-to-string "python -m certifi")))))
   (setq tls-program
-        (list
-         (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
-                 (if (eq window-system 'w32) ".exe" "") trustfile)))
+	(list
+	 (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
+		 (if (eq window-system 'w32) ".exe" "") trustfile)))
   (setq gnutls-verify-error t)
   (setq gnutls-trustfiles (list trustfile)))
 

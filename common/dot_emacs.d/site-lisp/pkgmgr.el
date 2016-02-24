@@ -23,12 +23,12 @@
 
 (setq package-archives '(("melpa" .
 			  "https://melpa.org/packages/")
+			 ("org" .
+			  "http://orgmode.org/elpa/") ;; Get you some https guys!
 			 ("gnu" .
 			  "https://elpa.gnu.org/packages/")
 			 ("marmalade" .
-			  "https://marmalade-repo.org/packages/")
-			 ("org" .
-			  "https://orgmode.org/elpa/")))
+			  "https://marmalade-repo.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -58,7 +58,7 @@
    moe-theme
    nlinum
    nyan-mode
-   org
+   org-plus-contrib
    ox-reveal
    powerline
    psci

@@ -2,5 +2,6 @@ INTERACTIVE:true
 DST:/tmp/upgrade
 MERGE:true
 VER:snapshots
-MIRROR:ftp3.usa.openbsd.org
+#MIRROR:ftp3.usa.openbsd.org
+MIRROR:block
 FTP_OPTS:-C -V

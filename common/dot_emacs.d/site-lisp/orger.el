@@ -14,6 +14,13 @@
 (setq org-html-doctype "html5")
 (setq org-html-html5-fancy t)
 
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-log-states)   ; turn off logging
+    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
 (setq org-todo-keywords
       '((sequence "TODO(t)" "|" "DONE(d)")
 	(sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
@@ -44,6 +51,13 @@
 
 (defun disable-vc ()
   (setq vc-handled-backends nil))
+
+(add-to-list 'org-capture-templates
+             '("c" "Contacts" entry (file "~/org/contacts.org")
+               "* %(org-contacts-template-name)
+:PROPERTIES:
+:EMAIL: %(org-contacts-template-email)
+:END:"))
 
 (setq org-publish-project-alist
       '(

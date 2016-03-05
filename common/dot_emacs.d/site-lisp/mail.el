@@ -4,6 +4,13 @@
 
 (require 'mu4e)
 (require 'mu4e-contrib)
+(require 'org-contacts)
+
+(setq mu4e-org-contacts-file  (expand-file-name "~/org/contacts.org"))
+(add-to-list 'mu4e-headers-actions
+	     '("org-contact-add" . mu4e-action-add-org-contact) t)
+(add-to-list 'mu4e-view-actions
+	     '("org-contact-add" . mu4e-action-add-org-contact) t)
 
 (setq mu4e-html2text-command 'mu4e-shr2text)
 (setq mu4e-maildir "~/Mail")

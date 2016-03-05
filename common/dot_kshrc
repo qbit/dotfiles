@@ -25,7 +25,9 @@ fi
 
 if [ $OS == "OpenBSD" ]; then
     function get_pkg_path {
-	echo $(cat /etc/pkg.conf | grep installpath | awk '{print $3}')
+	ARCH=$(arch -s)
+	LINE=$(cat /etc/pkg.conf | grep installpath | awk '{print $NF}' | sed 's/%a/%s/')
+	printf $LINE $ARCH	
     }
 
     if [ ! -f ~/.cvsrc ]; then
@@ -33,8 +35,8 @@ if [ $OS == "OpenBSD" ]; then
     fi
 fi
 
-if [ -d /data/user_storage/${USER} ]; then
-    DATADIR=/data/user_storage/${USER}
+if [ -d ~/openbsd ]; then
+    DATADIR=~/openbsd
 else
     DATADIR=/usr
 fi
@@ -50,7 +52,6 @@ fi
 export MAILDIR
 
 GOPATH=~/
-#GOROOT=~/src/go
 PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$GOROOT/bin:$GOPATH/bin
 
 if [ -d ~/node_bin/node_modules/.bin ]; then
@@ -136,20 +137,3 @@ if [ "$(id -u)" -eq 0 ] ; then
 else
     PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)$(ltodo)λ '
 fi
-
-#KEY_CHAIN=$(which keychain);
-#if [ $? -eq 0 ]; then
-#    if [ -x $KEY_CHAIN ]; then
-#	MISSING=false
-#	pgrep -q gpg-agent && pgrep -q ssh-agent || MISSING=true
-#	if [ $MISSING == true ]; then
-#	    if [ -f ~/.gnupg/gpg.conf ]; then
-#		$KEY_CHAIN -q ~/.ssh/id_rsa $(awk '/default-key/ {print $2}' ~/.gnupg/gpg.conf)
-#	    else
-#		$KEY_CHAIN -q ~/.ssh/id_rsa
-#	    fi
-#	fi
-#	. ~/.keychain/$(hostname)-sh
-#	. ~/.keychain/$(hostname)-sh-gpg
-#   fi
-#fi

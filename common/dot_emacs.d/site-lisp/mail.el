@@ -16,6 +16,7 @@
 (setq mu4e-maildir "~/Mail")
 (setq mu4e-get-mail-command "mbsync -q fastmail")
 (setq mu4e-headers-include-related t)
+(setq mu4e-headers-skip-duplicates t)
 (setq mu4e-use-fancy-chars t)
 (setq mu4e-compose-signature-auto-include nil)
 

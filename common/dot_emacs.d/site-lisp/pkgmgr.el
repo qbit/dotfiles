@@ -38,8 +38,8 @@
  '(
    aggressive-indent
    arduino-mode
-   erlang
    emms
+   erlang
    fireplace
    flycheck
    fsharp-mode
@@ -63,12 +63,12 @@
    powerline
    psci
    purescript-mode
+   racket-mode
    rainbow-mode
    ruby-mode
    rust-mode
    scpaste
    tronesque-theme
-   weather-metno
    zenburn-theme
    ))
 

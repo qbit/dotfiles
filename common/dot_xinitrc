@@ -1,5 +1,3 @@
-urxvtd -q -o -f &
-
 xset +fp /usr/local/lib/X11/fonts/terminus
 xset +fp /usr/local/lib/X11/fonts/anonymous-pro
 

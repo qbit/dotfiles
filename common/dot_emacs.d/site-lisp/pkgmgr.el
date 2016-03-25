@@ -49,10 +49,10 @@
    go-eldoc
    go-mode
    golint
-   guru-mode
    haskell-mode
    helm
    helm-lobsters
+   jinja2-mode
    js2-mode
    magit
    moe-theme
@@ -60,15 +60,17 @@
    nyan-mode
    org-plus-contrib
    ox-reveal
+   php-mode
    powerline
    psci
    purescript-mode
    racket-mode
    rainbow-mode
-   ruby-mode
    rust-mode
+   scad-mode
    scpaste
    tronesque-theme
+   web-mode
    zenburn-theme
    ))
 

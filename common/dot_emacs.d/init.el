@@ -22,7 +22,6 @@
 (require 'browse)
 (require 'music)
 
-(require 'guru-mode)
 (require 'nlinum)
 
 (require 'openbsd-knf-style)
@@ -69,8 +68,6 @@
 (file-exists-p "~quicklisp/slime-helper.el")
 (load (expand-file-name "~/quicklisp/slime-helper.el")
       (setq inferior-lisp-program "sbcl"))
-
-(guru-global-mode +1)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)

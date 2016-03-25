@@ -4,12 +4,12 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
+import XMonad.Layout.Gaps
 import XMonad.Layout.Named
-import XMonad.Util.NamedWindows
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
-import XMonad.Layout.Gaps
 import XMonad.Util.EZConfig
+import XMonad.Util.NamedWindows
 import XMonad.Util.Run
 import System.IO
 import Data.Monoid
@@ -26,7 +26,7 @@ instance UrgencyHook LibNotifyUrgencyHook where
 
 main :: IO()
 main = do
-  _ <- pledge "stdio rpath wpath cpath proc exec unix" Nothing
+  _ <- pledge (Just "stdio rpath wpath cpath proc exec unix") Nothing
   status <- spawnPipe myXmoStatus
   xmonad $ withUrgencyHook LibNotifyUrgencyHook
              $ defaultConfig

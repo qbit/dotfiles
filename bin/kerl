@@ -1,4 +1,4 @@
-#! /bin/sh -x
+#! /bin/sh
 
 # Copyright (c) 2011, 2012 Spawngrid, Inc
 # Copyright (c) 2011 Evax Software <contact(at)evax(dot)org>
@@ -290,7 +290,6 @@ do_git_build()
     fi
     LOGFILE="$KERL_BUILD_DIR/$3/otp_build.log"
     echo "Building Erlang/OTP $3 from git, please wait..."
-    echo "./otp_build autoconf $KERL_CONFIGURE_OPTIONS $LOGFILE ./otp_build configure $KERL_CONFIGURE_OPTIONS $LOGFILE"
     ./otp_build autoconf $KERL_CONFIGURE_OPTIONS > "$LOGFILE" 2>&1 && \
         ./otp_build configure $KERL_CONFIGURE_OPTIONS > "$LOGFILE" 2>&1
     if [ $? -ne 0 ]; then
@@ -368,11 +367,9 @@ do_build()
     cd "$ERL_TOP"
     LOGFILE="$KERL_BUILD_DIR/$2/otp_build_$1.log"
     if [ -n "$KERL_USE_AUTOCONF" ]; then
-        echo "./otp_build autoconf $KERL_CONFIGURE_OPTIONS $LOGFILE ./otp_build configure $KERL_CONFIGURE_OPTIONS"
         ./otp_build autoconf $KERL_CONFIGURE_OPTIONS > "$LOGFILE" 2>&1 && \
             ./otp_build configure $KERL_CONFIGURE_OPTIONS > "$LOGFILE" 2>&1
     else
-        echo "./otp_build configure $KERL_CONFIGURE_OPTIONS $LOGFILE"
         ./otp_build configure $KERL_CONFIGURE_OPTIONS > "$LOGFILE" 2>&1
 
     fi

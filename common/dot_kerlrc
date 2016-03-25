@@ -8,8 +8,8 @@ export MACHINE_ARCH=amd64
 KERL_CONFIGURE_DISABLE_APPLICATIONS="odbc"
 KERL_CONFIGURE_OPTIONS=" --without-jinterface   \
                 --without-odbc          	\
+                --without-javac			\
                 --enable-threads        	\
                 --enable-kernel-poll    	\
                 --disable-hipe          	\
-                --enable-smp-support"		\
-		--build=x86_64-unknown-openbsd5.9
+                --enable-smp-support"

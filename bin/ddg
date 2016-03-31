@@ -1,36 +1,32 @@
 #!/usr/bin/env node
 
-var ddg = require( 'ddg-api' );
-var colors = require( 'colors' );
-var client = new ddg.SearchClient({
-    useSSL: true,
-    prettyJson: true,
-});
-var string = "";
-var i = 2,l = process.argv.length;
+var https = require('https'),
+    url = require('url'),
+    qs = require('querystring'),
+    pledge = require('node-pledge'),
+    ddg_url = 'https://api.duckduckgo.com/?format=json';
 
-for ( ; i < l; i++ ) {
-    string += process.argv[ i ] + ' ';
+pledge.init('stdio rpath wpath cpath inet dns ioctl');
+
+var i = 2, l = process.argv.length, q = '';
+for (; i < l; i++) {
+    q += process.argv[i];
+    q += ' ';
 }
 
-client.search( string, function( err, res, data ) {
-    if ( err ) {
-	throw err;
-    }
-
-    var str = "\n"
-    var di;
-
-    for ( di in data ) {
-	if ( data.hasOwnProperty( di ) ) {
-	    if ( data[ di ] !== '' && typeof data[ di ] !== 'object' ) {
-		if ( data[ di ].match( 'http' ) ) {
-		    str += di.green + ": " + data[ di ].grey + "\n";
-		} else {
-		    str += di.green + ": " + data[ di ] + "\n";
-		}
-	    }
+var req = https.get(ddg_url + '&q=' + q, function(res) {
+    var data = '';
+    res.on('data', function(chunk) {
+	data += chunk;
+    });
+    
+    res.on('end', function() {
+	pledge.init('stdio');
+	d = JSON.parse(data);
+	if (d.Answer !== "" && typeof(d.Answer === "string")) {
+	    console.log(d.Answer);
+	} else {
+	    console.log(d);
 	}
-    }
-    console.log( str );
+    });
 });

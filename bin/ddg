@@ -14,6 +14,20 @@ for (; i < l; i++) {
     q += ' ';
 }
 
+function parse(d) {
+    if (d.name == 'conversions') {
+        var a = [];
+        a.push(d.data.raw_input);
+        a.push(d.data.left_unit);
+        a.push('->');
+        a.push(d.data.raw_answer);
+        a.push(d.data.right_unit);
+        return a.join(' ');
+    } else {
+        return d;
+    }
+}
+
 var req = https.get(ddg_url + '&q=' + q, function(res) {
     var data = '';
     res.on('data', function(chunk) {
@@ -24,9 +38,9 @@ var req = https.get(ddg_url + '&q=' + q, function(res) {
 	pledge.init('stdio');
 	d = JSON.parse(data);
 	if (d.Answer !== "" && typeof(d.Answer === "string")) {
-	    console.log(d.Answer);
+	    console.log(parse(d.Answer));
 	} else {
-	    console.log(d);
+	    console.log(parse(d));
 	}
     });
 });

@@ -51,8 +51,14 @@ fi
 
 export MAILDIR
 
-GOPATH=~/
-PATH=$HOME/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games:$HOME/bin:$GOROOT/bin:$GOPATH/bin
+GOPATH=~
+
+if [ -d ~/dev/go ]; then
+    export GOROOT=~/dev/go/
+    PATH=$PATH:${GOROOT}/bin
+fi
+
+PATH=$HOME/bin:$GOROOT/bin:$GOPATH/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games
 
 if [ -d ~/node_bin/node_modules/.bin ]; then
     PATH=$PATH:~/node_bin/node_modules/.bin
@@ -77,7 +83,10 @@ if [ -d ~/.cabal/bin ]; then
     PATH=~/.cabal/bin:$PATH
 fi
 
-#export PATH HOME TERM GOPATH GOROOT
+if [ -d ~/.cargo/bin ]; then
+    PATH=~/.cargo/bin:$PATH
+fi
+
 export PATH HOME TERM GOPATH
 
 function vdiff {
@@ -137,3 +146,4 @@ if [ "$(id -u)" -eq 0 ] ; then
 else
     PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)$(ltodo)λ '
 fi
+

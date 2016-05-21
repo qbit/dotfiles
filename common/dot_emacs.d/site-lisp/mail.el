@@ -21,6 +21,12 @@
 (setq mu4e-compose-signature-auto-include nil)
 
 (add-hook 'message-mode-hook 'turn-on-flyspell 'append)
+(add-hook 'mu4e-view-mode-hook
+	  (lambda()
+	    (mu4e-view-toggle-hide-cited)
+	    ;; try to emulate some of the eww key-bindings
+	    (local-set-key (kbd "<tab>") 'shr-next-link)
+	    (local-set-key (kbd "<backtab>") 'shr-previous-link)))
 
 (setq message-send-mail-function 'smtpmail-send-it
       smtpmail-stream-type 'starttls

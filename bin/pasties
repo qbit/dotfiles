@@ -1,4 +1,5 @@
 #!/bin/sh
 
 # script to "paste" a file to sprunge.us
-cat $1 | curl -F 'sprunge=<-' http://sprunge.us
+#cat $1 | curl -F 'sprunge=<-' http://sprunge.us
+cat $1 | curl -F 'f:1=<-' ix.io

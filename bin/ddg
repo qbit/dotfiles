@@ -15,7 +15,7 @@ for (; i < l; i++) {
 }
 
 function parse(d) {
-    if (d.name == 'conversions') {
+    if (d.name && d.name.match(/conversions/i)) {
         var a = [];
         a.push(d.data.raw_input);
         a.push(d.data.left_unit);

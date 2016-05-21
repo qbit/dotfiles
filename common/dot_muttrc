@@ -28,30 +28,27 @@ set sidebar_width=30
 macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
 macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
 
-bind index \Ck sidebar-prev
-bind index \Cj sidebar-next
-bind index \CO sidebar-open
-bind pager \Ck sidebar-prev
-bind pager \Cj sidebar-next
-bind pager \CO sidebar-open
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CJ sidebar-open
 
-macro index t "<pipe-message>mutt2task<enter> <save-message>+TODO<enter>"
+#macro index t "<pipe-message>mutt2task<enter> <save-message>+TODO<enter>"
 
-macro index \cb "|urlview\n" 
-macro pager \cb "|urlview\n" 
+#macro index \cb "|urlview\n"
+#macro pager \cb "|urlview\n"
 
 #mailboxes "=INBOX"
 set imap_check_subscribed
 set query_command="goobook query '%s'"
 bind editor <Tab> complete-query
 
-color     attachment  color235 color232
-color     quoted      color240 color232
-color     quoted1     color235 color232
-color     quoted2     color240 color232
-color	  tree 	      color240 color232
-color 	  status      color240 color232
-color	  indicator   color255 color240
+#color     attachment  color235 color232
+#color     quoted      color240 color232
+#color     quoted1     color235 color232
+#color     quoted2     color240 color232
+#color	  tree 	      color240 color232
+#color 	  status      color240 color232
+#color	  indicator   color255 color240
 
 # color   attachment  color61 color232
 # color   header      color10 color232 "^(From|Subject|cc|date|To|X-Spam-Level|User-Agent|X-Mailer):"

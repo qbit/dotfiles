@@ -94,5 +94,5 @@ myXmoPP = xmobarPP
           , ppUrgent  = xmobarColor "#ff0000" "" . wrap " " " "
           , ppSep     = "     "
           , ppLayout  = xmobarColor "#ffffff" "" . wrap "|" "|"
-          , ppTitle   = xmobarColor "#ffffff" "" . shorten 25
+          , ppTitle   = xmobarColor "#ffffff" "" . shorten 20
           }

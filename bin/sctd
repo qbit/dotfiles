@@ -1,0 +1,42 @@
+#!/bin/sh
+
+SCT=/usr/local/bin/sct
+
+if [ ! -e "$SCT" ]; then
+    echo "Please install sct!"
+    exit 1;
+fi
+
+while true; do
+    H=$(date "+%H")
+    echo "Currently ${H}"
+    case $H in
+	01) $SCT 4500;;
+	02) $SCT 4500;;
+	03) $SCT 4500;;
+	04) $SCT 4500;;
+	05) $SCT 4500;;
+	06) $SCT 4700;;
+	07) $SCT 4800;;
+	08) $SCT 4900;;
+	09) $SCT 5000;;
+	10) $SCT 5100;;
+	11) $SCT 5200;;
+	12) $SCT 5300;;
+	13) $SCT 5200;;
+	14) $SCT 5100;;
+	15) $SCT 5000;;
+	16) $SCT 4900;;
+	17) $SCT 4800;;
+	18) $SCT 4700;;
+	19) $SCT 4600;;
+	20) $SCT 4500;;
+	21) $SCT 4500;;
+	22) $SCT 4500;;
+	23) $SCT 4500;;
+	*)
+	    $SCT;;
+    esac
+    sleep 1800
+done
+

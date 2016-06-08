@@ -19,11 +19,8 @@ while true; do
 	06) $SCT 4500;;
 	07) $SCT 5500;;
 	15) $SCT 5000;;
-	16) $SCT 4500;;
 	17) $SCT 4000;;
 	18) $SCT 3700;;
-	*)
-	    $SCT;;
     esac
     sleep 1800
 done

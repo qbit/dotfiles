@@ -53,6 +53,8 @@ myKeys =
     , ("M-z", spawn "xmonad --recompile && xmonad --restart")
     , ("M-i", spawn "~/.screenlayout/internal.sh")
     , ("M-e", spawn "~/.screenlayout/external.sh")
+    , ("M-p", spawn "mpc prev")
+    , ("M-n", spawn "mpc next")
     ]
 
 xmobarEscape :: [Char] -> [Char]

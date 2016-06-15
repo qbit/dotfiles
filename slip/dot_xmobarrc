@@ -12,28 +12,34 @@ Config { font = "xft:Anonymous PRO:regular:pixelsize=12"
        , iconOffset = -1
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [ Run Weather "KPUB" ["-t","<station>: <tempC>C",
-                                          "-L","18","-H","25",
-                                          "--normal","green",
-                                          "--high","red",
-                                          "--low","lightblue"] 36000
-					  , Run Battery ["-t","<leftbar>",
-					  "-L", "20", "-H", "50",
-					  "--normal","yellow",
-					  "--high","green",
-					  "--low", "red"] 10
-					  , Run UnsafeStdinReader
-					  , Run Com "uname" ["-n"] "" 36000
-    					  , Run Date "%a %b %_d %Y (%H)%l:%M:%S %p" "date" 10
- 					  , Run Mail [("i:", "~/Mail/Inbox"),
-           					("h:", "~/Mail/Hackers"),
-           					("p:", "~/Mail/Ports"),
-           					("t:", "~/Mail/Tech"),
-           					("m:", "~/Mail/Misc"),
-						("s:", "~/Mail/src-changes")]
-          					"mail"
-					  ]
-					  , sepChar = "%"
-       , alignSep = "}{"
-       , template = " %battery% | %mail% | %UnsafeStdinReader% }{ %date% | %KPUB% | %uname% "
+       , commands = [
+       	 	  Run Weather "KPUB" [
+		      "-t","<station>: <tempC>C"
+                      , "-L","18","-H","25"
+                      , "--normal","green"
+                      , "--high","red"
+                      , "--low","lightblue"
+		  ] 36000
+		  , Run Battery [
+		      "-t","<leftbar>"
+		      , "-L", "20", "-H", "50"
+		      , "--normal","yellow"
+                      , "--high","green"
+		      , "--low", "red"
+		   ] 10
+		  , Run UnsafeStdinReader
+		  , Run Com "uname" ["-n"] "" 36000
+    		  , Run Date "%a %b %_d %Y (%H)%l:%M:%S %p" "date" 10
+		  , Run MPD ["-t", "<artist> - <album> - <track>"] 10
+ 		  , Run Mail [("i:", "~/Mail/Inbox"),
+           		("h:", "~/Mail/Hackers"),
+           		("p:", "~/Mail/Ports"),
+           		("t:", "~/Mail/Tech"),
+           		("m:", "~/Mail/Misc"),
+			("s:", "~/Mail/src-changes")
+		   ] "mail"
+	  ]
+	  , sepChar = "%"
+	  , alignSep = "}{"
+	  , template = " %battery% | %mail% | %UnsafeStdinReader% }{ %date% | %KPUB% | %mpd% | %uname% "
        }

@@ -31,15 +31,8 @@ Config { font = "xft:Anonymous PRO:regular:pixelsize=12"
 		  , Run Com "uname" ["-n"] "" 36000
     		  , Run Date "%a %b %_d %Y (%H)%l:%M:%S %p" "date" 10
 		  , Run MPD ["-t", "<artist> - <album> - <track>"] 10
- 		  , Run Mail [("i:", "~/Mail/Inbox"),
-           		("h:", "~/Mail/Hackers"),
-           		("p:", "~/Mail/Ports"),
-           		("t:", "~/Mail/Tech"),
-           		("m:", "~/Mail/Misc"),
-			("s:", "~/Mail/src-changes")
-		   ] "mail"
 	  ]
 	  , sepChar = "%"
 	  , alignSep = "}{"
-	  , template = " %battery% | %mail% | %UnsafeStdinReader% }{ %date% | %KPUB% | %mpd% | %uname% "
+	  , template = " %battery% | %UnsafeStdinReader% }{ %date% | %KPUB% | %mpd% | %uname% "
        }

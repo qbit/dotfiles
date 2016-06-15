@@ -1,6 +1,6 @@
 source ~/.mutt.creds
 
-set editor = vim
+set editor = mg
 
 set header_cache =  ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
@@ -25,6 +25,8 @@ set mailcap_path="~/.mailcap"
 set sidebar_visible=yes
 set sidebar_width=30
 
+set pager_index_lines=10
+
 macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
 macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
 
@@ -42,126 +44,4 @@ set imap_check_subscribed
 set query_command="goobook query '%s'"
 bind editor <Tab> complete-query
 
-#color     attachment  color235 color232
-#color     quoted      color240 color232
-#color     quoted1     color235 color232
-#color     quoted2     color240 color232
-#color	  tree 	      color240 color232
-#color 	  status      color240 color232
-#color	  indicator   color255 color240
-
-# color   attachment  color61 color232
-# color   header      color10 color232 "^(From|Subject|cc|date|To|X-Spam-Level|User-Agent|X-Mailer):"
-# color   signature   color63 color232
-# color   tree        color63 color232
-# color   message     color37 color232
-# color   status      color247 color235
-# color   normal      color229 color232
-# color   error       color231 color196
-# color   indicator   color232 color215
-# color   markers     color37 color232
-# color   index       color196 color232 ~D
-# color   index       color196 color232 ~F
-# color   index       color49 color232 ~T
-# color   tilde       color63 color232
-# color   body        color10 color232 "(http|https|ftp|news|telnet|finger|irc)://[^ \">\t\r\n]*"
-# color   body        color10 color232 "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
-# color   body        color37 color232 "[;:=][-][)/(|]"
-# color   quoted      color130 color232
-# color   quoted1     color25 color232
-# color   quoted2     color207 color232
-
-## Colours for items in the index     
-#color index brightcyan black ~N
-#color index brightred black ~O
-#color index brightyellow black ~F
-#color index black green ~T
-#color index brightred black ~D
-
-# color index color76 color232 "~h 'X-Loop: tech@openbsd.org'"
-# color index color220 color232 "~h 'X-Loop: misc@openbsd.org'"
-# color index color164 color232 "~h 'X-Loop: ports@openbsd.org'"
-# color index color196 color232 "~h 'X-Loop: arm@openbsd.org'"
-# color index color208 color232 "~h 'X-Loop: hackers@openbsd.org'"
-# color index color19 color232 "~h 'X-Loop: source-changes@openbsd.org'"
-# 
-# mono index bold ~N
-# mono index bold ~F
-# mono index bold ~T
-# mono index bold ~D
-# 
-# ## Highlights inside the body of a message.
-# 
-# ## URLs
-# color body brightgreen black "(http|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
-# color body brightgreen black "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
-# mono body bold "(http|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
-# mono body bold "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
-# 
-# ## Email addresses.
-# color body brightgreen black "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
-# 
-# ## Header         
-# color header green black "^from:"
-# color header green black "^to:"
-# color header green black "^cc:"
-# color header green black "^date:"
-# color header yellow black "^newsgroups:"
-# color header yellow black "^reply-to:"
-# color header brightcyan black "^subject:"
-# color header red black "^x-spam-rule:"
-# color header green black "^x-mailer:"
-# color header yellow black "^message-id:"
-# color header yellow black "^Organization:"
-# color header yellow black "^Organisation:"
-# color header yellow black "^User-Agent:"
-# color header yellow black "^message-id: .*pine"
-# color header yellow black "^X-Fnord:"
-# color header yellow black "^X-WebTV-Stationery:"
-# 
-# color header red black "^x-spam-rule:"
-# color header green black "^x-mailer:"
-# color header yellow black "^message-id:"
-# color header yellow black "^Organization:"
-# color header yellow black "^Organisation:"
-# color header yellow black "^User-Agent:"
-# color header yellow black "^message-id: .*pine"
-# color header yellow black "^X-Fnord:"
-# color header yellow black "^X-WebTV-Stationery:"
-# color header yellow black "^X-Message-Flag:"
-# color header yellow black "^X-Spam-Status:"
-# color header yellow black "^X-SpamProbe:"
-# color header red black "^X-SpamProbe: SPAM"
-# 
-# ## Coloring quoted text - coloring the first 7 levels:
-# #color quoted cyan black
-# #color quoted1 yellow black
-# #color quoted2 red black
-# #color quoted3 green black
-# #color quoted4 cyan black
-# #color quoted5 yellow black
-# #color quoted6 red black
-# #color quoted7 green black
-# 
-# ## Default color definitions
-# #color hdrdefault white green
-# color signature brightmagenta black
-# #color indicator black cyan
-# #color   indicator   black green
-# color attachment black green
-# color error red black
-# color message white black
-# color search brightwhite magenta
-# #color status brightyellow blue
-# color   status      color247 color235
-# color tree brightblue black
-# color normal white black
-# color tilde green black
-# color bold brightyellow black
-# #color underline magenta black
-# color markers brightcyan black
-# 
-# ## Colour definitions when on a mono screen
-# mono bold bold
-# mono underline underline
-# mono indicator reverse
+source ~/.mutt.theme

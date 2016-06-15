@@ -3,6 +3,6 @@ DST:/tmp/upgrade
 MERGE:true
 VER:snapshots
 AFTER:/etc/after_snap
-#MIRROR:ftp3.usa.openbsd.org
-MIRROR:block
+MIRROR:ftp3.usa.openbsd.org
+#MIRROR:block
 FTP_OPTS:-C -V

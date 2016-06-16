@@ -14,7 +14,7 @@ Config { font = "xft:Anonymous PRO:regular:pixelsize=12"
        , overrideRedirect = True
        , commands = [
        	 	  Run Weather "KPUB" [
-		      "-t","<station>: <tempC>C"
+		      "-t","<tempC>C"
                       , "-L","18","-H","25"
                       , "--normal","green"
                       , "--high","red"
@@ -29,10 +29,10 @@ Config { font = "xft:Anonymous PRO:regular:pixelsize=12"
 		   ] 10
 		  , Run UnsafeStdinReader
 		  , Run Com "uname" ["-n"] "" 36000
-    		  , Run Date "%a %b %_d %Y (%H)%l:%M:%S %p" "date" 10
+		  , Run Date "%a %b %_d (%H)%l:%M%p" "date" 10
 		  , Run MPD ["-t", "<artist> - <album> - <track>"] 10
 	  ]
 	  , sepChar = "%"
 	  , alignSep = "}{"
-	  , template = " %battery% | %UnsafeStdinReader% }{ %date% | %KPUB% | %mpd% | %uname% "
+	  , template = " %battery% | %UnsafeStdinReader% }{ %mpd% | %KPUB% | %date% | %uname% "
        }

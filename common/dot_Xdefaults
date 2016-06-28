@@ -6,13 +6,6 @@ rofi.foreground:	#ccc
 rofi.highlightfg:	#ffb964
 rofi.lines:		10
 rofi.padding:		1
-rofi.background:	#3a3a3a
-rofi.bordercolor:	#b2b2b2
-rofi.borderwidth:	1
-rofi.foreground:	#ccc
-rofi.highlightfg:	#ffb964
-rofi.lines:		10
-rofi.padding:		1
 
 !ssh-askpass*font:			-*-dina-bold-r-*-*-18-*-*-*-*-*-*-*
 !ssh-askpass*background:			#3a3a3a
@@ -205,7 +198,6 @@ XTerm.matcher.button:	1
 XTerm*inheritPixmap:	true
 
 Xft.dpi:		100
-Xft.antialias:		false
 !Xft.dpi:		96
 Xft.antialias:		true
 Xft.rgba:		rgb

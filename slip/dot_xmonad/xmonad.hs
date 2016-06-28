@@ -53,6 +53,7 @@ myKeys =
     , ("M-z", spawn "xmonad --recompile && xmonad --restart")
     , ("M-i", spawn "~/.screenlayout/internal.sh")
     , ("M-e", spawn "~/.screenlayout/external.sh")
+    , ("M-S-p", spawn "mpc toggle")
     , ("M-p", spawn "mpc prev")
     , ("M-n", spawn "mpc next")
     ]

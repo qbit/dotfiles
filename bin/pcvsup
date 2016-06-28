@@ -4,9 +4,9 @@ session='pcvsup'
 counter=0
 
 set -A mirrors \
-	anoncvs@anoncvs3.usa.openbsd.org:/cvs \
 	anoncvs@anoncvs1.usa.openbsd.org:/cvs \
-	anoncvs@anoncvs1.ca.openbsd.org:/cvs
+	anoncvs@anoncvs2.usa.openbsd.org:/cvs \
+	anoncvs@anoncvs3.usa.openbsd.org:/cvs
 
 set -A dirs \
 	/${DATADIR}/ports \

@@ -1,11 +1,11 @@
-rofi.background:	#3a3a3a
-rofi.bgalt:		#4a4a4a
-rofi.bordercolor:	#b2b2b2
-rofi.borderwidth:	1
-rofi.foreground:	#ccc
-rofi.highlightfg:	#ffb964
-rofi.lines:		10
-rofi.padding:		1
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+rofi.color-enabled: true
+rofi.color-window: #393939, #cccccc, #666666
+rofi.color-normal: #393939, #ffffff, #393939, #ffb964, #000000
+rofi.color-active: #393939, #268bd2, #393939, #268bd2, #205171
+rofi.color-urgent: #393939, #f3843d, #393939, #268bd2, #ffc39c
 
 !ssh-askpass*font:			-*-dina-bold-r-*-*-18-*-*-*-*-*-*-*
 !ssh-askpass*background:			#3a3a3a

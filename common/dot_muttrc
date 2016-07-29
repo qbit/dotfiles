@@ -9,11 +9,12 @@ set certificate_file = ~/.mutt/certificates
 set mail_check = 120
 set timeout = 300
 set imap_keepalive = 300
-#set postponed = "+[Gmail]/Drafts"
-#set record = "+[Gmail]/Sent Mail"
+set imap_passive
+set imap_check_subscribed = yes
+set ispell = "aspell --mode=email --add-email-quote=%,#,:,} --check"
+set message_cache_clean = yes
 
 set move = no
-set imap_keepalive = 900
 
 set askcc
 
@@ -27,21 +28,50 @@ set sidebar_width=30
 
 set pager_index_lines=10
 
+set spoolfile = "="
+set record="=INBOX.Sent Items"
+set postponed="=INBOX.Drafts"
+set trash = "=INBOX.Trash"
+
+set query_command= "abook --mutt-query '%s'"
+macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+bind editor        <Tab> complete-query
+
 macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
 macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
 
-bind index,pager \CP sidebar-prev
-bind index,pager \CN sidebar-next
-bind index,pager \CJ sidebar-open
+bind index,pager \CK sidebar-prev
+bind index,pager \CJ sidebar-next
+bind index,pager \CO sidebar-open
+
+folder-hook . set from="aaron@bolddaemon.com"
+
+reply-hook '~t .@openbsd\.org' 'set from="abieber@openbsd.org"'
+send-hook '~t .*@openbsd\.org' 'set from="abieber@openbsd.org"'
 
 #macro index t "<pipe-message>mutt2task<enter> <save-message>+TODO<enter>"
 
 #macro index \cb "|urlview\n"
 #macro pager \cb "|urlview\n"
 
-#mailboxes "=INBOX"
-set imap_check_subscribed
-set query_command="goobook query '%s'"
+#unmailboxes *
+
+mailboxes = "=INBOX"
+mailboxes = "=INBOX.OpenBSD.Hackers"
+mailboxes = "=INBOX.OpenBSD.Bugs"
+mailboxes = "=INBOX.OpenBSD.Tech"
+mailboxes = "=INBOX.OpenBSD.Ports"
+mailboxes = "=INBOX.OpenBSD.Misc"
+mailboxes = "=INBOX.OpenBSD.src-changes"
+
+#subscribe "hackers@openbsd\\.org"
+#subscribe "bugs@openbsd\\.org"
+#subscribe "tech@openbsd\\.org"
+#subscribe "ports@openbsd\\.org"
+#subscribe "misc@openbsd\\.org"
+#subscribe "src-changes@openbsd\\.org"
+
 bind editor <Tab> complete-query
 
 source ~/.mutt.theme
+

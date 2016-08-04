@@ -141,9 +141,5 @@ function ltodo {
     fi
 }
 
-if [ "$(id -u)" -eq 0 ] ; then
-    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(ltodo)# '
-else
-    PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)$(ltodo)λ '
-fi
-
+PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)$(ltodo)λ '
+export PS1

@@ -35,11 +35,11 @@ if [ $OS == "OpenBSD" ]; then
     fi
 fi
 
-if [ -d ~/openbsd ]; then
-    DATADIR=~/openbsd
-else
+#if [ -d ~/openbsd ]; then
+#    DATADIR=~/openbsd
+#else
     DATADIR=/usr
-fi
+#fi
 
 export DATADIR
 

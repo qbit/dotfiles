@@ -1,6 +1,7 @@
 {-# LANGUAGE QuasiQuotes #-}
 
 import XMonad
+import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
@@ -9,12 +10,18 @@ import XMonad.Layout.Gaps
 import XMonad.Layout.Named
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
+import XMonad.Layout.Accordion
+import XMonad.Layout.Magnifier
+import XMonad.Layout.ResizableTile
 import XMonad.Util.EZConfig
 import XMonad.Util.NamedWindows
 import XMonad.Util.Run
+import XMonad.Util.SpawnOnce
+import XMonad.Util.XSelection
 import System.IO
 import Data.Monoid
 import qualified XMonad.StackSet as W
+import qualified Data.Map as M
 import System.OpenBSD.Process ( pledge )    
 
 data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
@@ -36,27 +43,30 @@ main = do
              , focusedBorderColor = "darkgrey"
              , terminal = "urxvtc"
              , workspaces = myWorkspaces
+	     , startupHook = myStartupHook
              , layoutHook = myLayoutHook
              , logHook = myLogHook status
+             , keys = \c -> myKeys c `M.union` XMonad.keys defaultConfig c
              , manageHook = manageDocks <+> myManageHook
                             <+> manageHook defaultConfig
              }
              `removeKeysP` ["M-p"] -- don't clober emacs.
-             `additionalKeysP` myKeys
 
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ myXmoPP {ppOutput = hPutStrLn h}
 
-myKeys :: [([Char], X ())]
-myKeys =
-    [
-     ("M-r", spawn "rofi -show run")
-    , ("M-z", spawn "xmonad --recompile && xmonad --restart")
-    , ("M-i", spawn "~/.screenlayout/internal.sh")
-    , ("M-e", spawn "~/.screenlayout/external.sh")
-    , ("M-S-p", spawn "mpc toggle")
-    , ("M-p", spawn "mpc prev")
-    , ("M-n", spawn "mpc next")
+myKeys :: XConfig t -> M.Map (KeyMask, KeySym) (X ())
+myKeys (XConfig {XMonad.modMask = modMask, XMonad.terminal = term}) = M.fromList [
+	((modMask                 , xK_Right ), nextWS)
+	,((modMask                , xK_Left  ), prevWS)
+	,((modMask .|. shiftMask  , xK_Right ), shiftToNext)
+	,((modMask .|. shiftMask  , xK_Left  ), shiftToPrev)
+	,((modMask, xK_r)         , spawn "rofi -show run")
+	,((modMask, xK_i)         , spawn "~/.screenlayout/internal.sh")
+	,((modMask, xK_e)         , spawn "~/.screenlayout/external.sh")
+	,((modMask .|. shiftMask  , xK_p), spawn "mpc toggle")
+	,((modMask, xK_p)         , spawn "mpc prev")
+	,((modMask, xK_n)         , spawn "mpc next")
     ]
 
 xmobarEscape :: [Char] -> [Char]
@@ -70,12 +80,23 @@ myWorkspaces = clickable . (map xmobarEscape) $ ["emacs","browser","irc","mail",
                           (i,ws) <- zip [1..9] l,
                           let n = i ]
 
-myLayoutHook = avoidStruts $ smartBorders ( tiled ||| ptiled ||| mtiled ||| full )
+myLayoutHook = avoidStruts $ smartBorders ( tiled ||| mtiled ||| mtl ||| mwl ||| accordion )
     where
-      full     = named "X" $ Full
+      full     = named "X" $ spacing 3 $ Full
       tiled    = named "T" $ spacing 3 $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
       mtiled  = named "M" $ spacing 3 $ Mirror tiled
-      ptiled   = named "pT" $ spacing 3 $ gaps [(U,60), (L,60), (R,60), (D,60)] $ Tall 1 (5/100) (2/(1+(toRational(sqrt(5)::Double))))
+      accordion = named "A" $ spacing 3 $ Accordion
+      tallLayout = named "Tall" $ spacing 3 $ ResizableTall nmaster delta ratio slaves
+      	where nmaster = 1
+              delta = 3/100
+              ratio = 1/2
+              slaves = []
+      wideLayout = named "Wide" $ spacing 3 $ Mirror $ tallLayout
+      mtl = named "MT" $ magnifiercz' magnifyRatio $ tallLayout
+      	where magnifyRatio = 1.5
+      mwl = named "MW Wide" $ spacing 3 $ magnifiercz' magnifyRatio $ wideLayout
+      	where magnifyRatio = 1.5
+
 
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
@@ -84,8 +105,13 @@ myManageHook = composeAll
                , className =? "XCalc"             --> doFloat
                , className =? "chromium-browser"  --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
                , className =? "Firefox"           --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
+               , title =? "Mail"              --> doF (W.shift (myWorkspaces !! 3))
                , className =? "XConsole"          --> doF (W.shift (myWorkspaces !! 8))
                ]
+
+myStartupHook :: X ()
+myStartupHook = do
+	spawnOnce "urxvtc -name Mail"
 
 myXmoStatus :: String
 myXmoStatus = "xmobar"

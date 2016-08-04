@@ -10,7 +10,7 @@ alias tmux="tmux -2"
 alias irc="export TERM=xterm; tmux at -t irc"
 alias build="dpb -c -h /home/buildie/hosts -P"
 alias cdw='cd $(make show=WRKSRC)'
-alias pup='doas /usr/sbin/pkg_add -u'
+alias pup='doas -n /usr/sbin/pkg_add -u'
 
 if [ -e ~/.kshlib ]; then
     . ~/.kshlib

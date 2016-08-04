@@ -86,8 +86,8 @@
 ;;(load-theme 'solarized-dark t)
 ;;(load-theme 'flatland t)
 (require 'moe-theme)
-(load-theme 'moe-dark t)
-;;(require 'moe-theme-switcher)
+;;(load-theme 'moe-dark t)
+(require 'moe-theme-switcher)
 ;;(powerline-moe-theme)
 ;;(load-theme 'eink-light t)
 

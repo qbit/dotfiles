@@ -17,6 +17,11 @@ if [ -e /usr/local/bin/tpb ]; then
    /usr/local/bin/tpb -d
 fi
 
+if [ -x /usr/local/bin/scmpc ]; then
+   /usr/local/bin/scmpc &
+fi
+
+
 #keepassx &
 #if [ -x /usr/local/bin/mono ]; then
 #  mono ~/.keepass/KeePass.exe &
@@ -29,6 +34,10 @@ fi
 #if [ -x /usr/local/bin/redshift-gtk ]; then
 #   redshift-gtk &
 #fi
+
+if [ -x ~/bin/sctd ]; then
+    ~/bin/sctd &
+fi
 
 urxvtd -q -f -o &
 
@@ -60,6 +69,7 @@ feh --bg-fill ~/.background.png &
 
 xrdb -merge -load ~/.Xresources &
 
+#exec fvwm
 #exec awesome
 #exec xmonad
 exec ~/.xmonad/xmonad-x86_64-openbsd

@@ -30,7 +30,7 @@ Config { font = "xft:Anonymous PRO:regular:pixelsize=12"
 		  , Run UnsafeStdinReader
 		  , Run Com "uname" ["-n"] "" 36000
 		  , Run Date "%a %b %_d (%H)%l:%M%p" "date" 10
-		  , Run MPD ["-t", "<artist> - <album> - <track>"] 10
+		  , Run MPD ["-t", "<artist> - <album> - <track> <statei> [<flags>]", "--", "-P", ">>", "-Z", "|", "-S", "><"] 100
 	  ]
 	  , sepChar = "%"
 	  , alignSep = "}{"

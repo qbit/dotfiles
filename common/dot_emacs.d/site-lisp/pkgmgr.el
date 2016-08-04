@@ -13,7 +13,7 @@
         "\\\\" "/"
         (replace-regexp-in-string
          "\n" ""
-         (shell-command-to-string "python -m certifi")))))
+         (shell-command-to-string "python2.7 -m certifi")))))
   (setq tls-program
 	(list
 	 (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
@@ -27,8 +27,8 @@
 			  "http://orgmode.org/elpa/") ;; Get you some https guys!
 			 ("gnu" .
 			  "https://elpa.gnu.org/packages/")))
-;;      ("marmalade" .
-;;"https://marmalade-repo.org/packages/")))
+			 ;;			 ("marmalade" .
+;;			 "https://marmalade-repo.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents

@@ -58,11 +58,14 @@ send-hook '~t .*@openbsd\.org' 'set from="abieber@openbsd.org"'
 
 mailboxes = "=INBOX"
 mailboxes = "=INBOX.OpenBSD.Hackers"
-mailboxes = "=INBOX.OpenBSD.Bugs"
-mailboxes = "=INBOX.OpenBSD.Tech"
 mailboxes = "=INBOX.OpenBSD.Ports"
+mailboxes = "=INBOX.OpenBSD.Tech"
 mailboxes = "=INBOX.OpenBSD.Misc"
+mailboxes = "=INBOX.OpenBSD.Arm"
+mailboxes = "=INBOX.OpenBSD.Bugs"
 mailboxes = "=INBOX.OpenBSD.src-changes"
+mailboxes = "=INBOX.Root Mail"
+mailboxes = "=INBOX.Speed Tests"
 
 #subscribe "hackers@openbsd\\.org"
 #subscribe "bugs@openbsd\\.org"

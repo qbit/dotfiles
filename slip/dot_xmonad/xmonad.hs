@@ -4,6 +4,7 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
 import XMonad.Layout.NoBorders
@@ -28,7 +29,7 @@ main :: IO()
 main = do
   _ <- pledge (Just "stdio rpath wpath cpath proc exec unix") Nothing
   status <- spawnPipe myXmoStatus
-  xmonad $ withUrgencyHook LibNotifyUrgencyHook
+  xmonad $ ewmh $ withUrgencyHook LibNotifyUrgencyHook
              $ defaultConfig
              {
                normalBorderColor = "#666666"

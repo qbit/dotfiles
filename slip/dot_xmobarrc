@@ -1,38 +1,42 @@
 Config { font = "xft:Anonymous PRO:regular:pixelsize=12"
-       , position = Top
-       , alpha = 80
-       , additionalFonts = []
-       , fgColor = "white"
-       , lowerOnStart = True
-       , pickBroadest = False
-       , persistent = False
-       , hideOnStart = False
-       , iconRoot = "."
-       , textOffset = -1
-       , iconOffset = -1
-       , allDesktops = True
-       , overrideRedirect = True
-       , commands = [
-       	 	  Run Weather "KPUB" [
-		      "-t","<tempC>C"
-                      , "-L","18","-H","25"
-                      , "--normal","green"
-                      , "--high","red"
-                      , "--low","lightblue"
-		  ] 36000
-		  , Run Battery [
-		      "-t","<leftbar>"
-		      , "-L", "20", "-H", "50"
-		      , "--normal","yellow"
-                      , "--high","green"
-		      , "--low", "red"
-		   ] 10
-		  , Run UnsafeStdinReader
-		  , Run Com "uname" ["-n"] "" 36000
-		  , Run Date "%a %b %_d (%H)%l:%M%p" "date" 10
-		  , Run MPD ["-t", "<artist> - <album> - <track> <statei> [<flags>]", "--", "-P", ">>", "-Z", "|", "-S", "><"] 100
-	  ]
-	  , sepChar = "%"
-	  , alignSep = "}{"
-	  , template = " %battery% | %UnsafeStdinReader% }{ %mpd% | %KPUB% | %date% | %uname% "
-       }
+	, position = Top
+	, alpha = 80
+	, additionalFonts = []
+	, fgColor = "white"
+	, lowerOnStart = True
+	, pickBroadest = False
+	, persistent = False
+	, hideOnStart = False
+	, iconRoot = "."
+	, textOffset = -1
+	, iconOffset = -1
+	, allDesktops = True
+	, overrideRedirect = True
+	, commands = [
+		Run Weather "KPUB" [
+			"-t","<tempC>C"
+			, "-L","18","-H","25"
+			, "--normal","green"
+			, "--high","red"
+			, "--low","lightblue"
+		] 36000
+		, Run Battery [
+			"-t","<leftbar>"
+			, "-L", "20", "-H", "50"
+			, "--normal","yellow"
+			, "--high","green"
+			, "--low", "red"
+		] 10
+		, Run Com "uname" ["-n"] "" 36000
+		, Run Date "%a %b %_d (%H)%l:%M%p" "date" 10
+		, Run MPD [
+			"-t"
+			, "<name><artist> - <title>"
+			, "-M 20"
+		] 100
+		, Run UnsafeStdinReader
+	]
+	, sepChar = "%"
+	, alignSep = "}{"
+	, template = " %battery% | %UnsafeStdinReader% }{ %mpd% | %KPUB% | %date% | %uname% "
+}

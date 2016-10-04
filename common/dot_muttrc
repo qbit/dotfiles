@@ -7,6 +7,7 @@ set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
 
 set mail_check = 120
+set mail_check_stats = yes
 set timeout = 300
 set imap_keepalive = 300
 set imap_passive
@@ -23,8 +24,10 @@ set sort_aux = 'last-date-received'
 
 set mailcap_path="~/.mailcap"
 
-set sidebar_visible=yes
-set sidebar_width=30
+set sidebar_visible = yes
+set sidebar_width = 30
+#set sidebar_format = "%B%* (%N)%S"
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
 
 set pager_index_lines=10
 
@@ -40,9 +43,9 @@ bind editor        <Tab> complete-query
 macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
 macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
 
+bind index,pager \CO sidebar-open
 bind index,pager \CK sidebar-prev
 bind index,pager \CJ sidebar-next
-bind index,pager \CO sidebar-open
 
 folder-hook . set from="aaron@bolddaemon.com"
 
@@ -64,6 +67,7 @@ mailboxes = "=INBOX.OpenBSD.Misc"
 mailboxes = "=INBOX.OpenBSD.Arm"
 mailboxes = "=INBOX.OpenBSD.Bugs"
 mailboxes = "=INBOX.OpenBSD.src-changes"
+mailboxes = "=INBOX.OpenBSD.ports-changes"
 mailboxes = "=INBOX.Root Mail"
 mailboxes = "=INBOX.Speed Tests"
 
@@ -73,8 +77,6 @@ mailboxes = "=INBOX.Speed Tests"
 #subscribe "ports@openbsd\\.org"
 #subscribe "misc@openbsd\\.org"
 #subscribe "src-changes@openbsd\\.org"
-
-bind editor <Tab> complete-query
 
 source ~/.mutt.theme
 

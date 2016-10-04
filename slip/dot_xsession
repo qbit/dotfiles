@@ -28,7 +28,7 @@ fi
 #fi
 
 if [ -x /usr/local/bin/trayer ]; then
-   trayer --edge top --align center --width 10 --height 12 --alpha 180 --tint 0 --transparent true  &
+   trayer --edge top --align right --width 9 --height 12 --alpha 180 --tint 0 --transparent true --SetDockType true --SetPartialStrut true --expand true --widthtype percent  &
 fi
 
 #if [ -x /usr/local/bin/redshift-gtk ]; then
@@ -54,10 +54,9 @@ parcellite &
 #synclient ClickPad=0
 
 xset +fp ~/.fonts
-xset +fp /usr/local/share/fonts/anonymous-pro
-xset +fp /usr/local/share/fonts/Hack
-xset +fp /usr/local/share/fonts/comic-neue
-
+for font in $(ls /usr/local/share/fonts/); do
+	xset +fp /usr/local/share/fonts/${font}
+done
 xset fp rehash
 
 if [ -x /sbin/shutdownd ]; then

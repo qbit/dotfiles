@@ -6,6 +6,8 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.Minimize
+import XMonad.Layout.Minimize
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
 import XMonad.Layout.NoBorders
@@ -98,7 +100,6 @@ myLayoutHook = avoidStruts $ smartBorders ( tiled ||| mtiled ||| mtl ||| mwl |||
     mwl = named "MW Wide" $ spacing 3 $ magnifiercz' magnifyRatio $ wideLayout
       where magnifyRatio = 1.5
 
-
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
   [
@@ -113,7 +114,7 @@ myManageHook = composeAll
 myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "urxvtc -name Mail"
-  spawnOnce "/home/qbit/bin/browser"
+  --spawnOnce "/home/qbit/bin/browser"
 
 myXmoStatus :: String
 myXmoStatus = "xmobar"

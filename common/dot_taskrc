@@ -13,22 +13,23 @@
 # Files
 data.location=~/.task
 
-editor=vim
+editor=mg
 
 # Color theme (uncomment one to use)
+include /usr/local/share/taskwarrior/rc/dark-16.theme
+#include /usr/local/share/taskwarrior/rc/dark-256.theme
+#include /usr/local/share/taskwarrior/rc/dark-blue-256.theme
+#include /usr/local/share/taskwarrior/rc/dark-gray-256.theme
+#include /usr/local/share/taskwarrior/rc/dark-gray-blue-256.theme
+#include /usr/local/share/taskwarrior/rc/dark-green-256.theme
+#include /usr/local/share/taskwarrior/rc/dark-red-256.theme
+#include /usr/local/share/taskwarrior/rc/dark-violets-256.theme
+#include /usr/local/share/taskwarrior/rc/dark-yellow-green.theme
 #include /usr/local/share/taskwarrior/rc/light-16.theme
 #include /usr/local/share/taskwarrior/rc/light-256.theme
-#include /usr/local/share/taskwarrior/rc/dark-16.theme
-#include /usr/local/share/taskwarrior/rc/dark-256.theme
-#include /usr/local/share/taskwarrior/rc/dark-red-256.theme
-
-# usable themes
-include ~/.task/dark-green-256.theme
-#include /usr/local/share/taskwarrior/rc/dark-blue-256.theme
-#include /usr/local/share/taskwarrior/rc/dark-yellow-green.theme
-
-#include /usr/local/share/taskwarrior/rc/dark-violets-256.theme
-#include /usr/local/share/taskwarrior/rc/dark-gray-256.theme
+#include /usr/local/share/taskwarrior/rc/no-color.theme
+#include /usr/local/share/taskwarrior/rc/solarized-dark-256.theme
+#include /usr/local/share/taskwarrior/rc/solarized-light-256.theme
 
 push.default.uri=qbit@qbit.io:~/.task/
 merge.default.uri=qbit@qbit.io:~/.task/

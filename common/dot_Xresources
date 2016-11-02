@@ -172,8 +172,12 @@ UXTerm*matcher.button:	1
 UXTerm*inheritPixmap:	true
 UXTerm*urgentOnBell:	true
 
+XTerm*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 XTerm*cursorColor:	green
-XTerm*scrollBar: 	False
+XTerm*scrollBar: 	false
+XTerm*locale:		true
+XTerm*metaSendsEscape:	true
+XTerm*eightBitInput:	false
 XTerm*foreground:	#ffffff
 XTerm*background:	#000000
 XTerm*color0:		#000000

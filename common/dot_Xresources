@@ -39,7 +39,7 @@ ssh-askpass.indicator.borderWidth:	0
 ssh-askpass.indicator.background:	#99aab9
 ssh-askpass.indicator.foreground:	#fffa06
 
-XLock.startCmd:		ssh-add -D; sudo -K
+XLock.startCmd:		ssh-add -D; sudo -K; keychain --clear
 XLock.endCmd:		ssh-add
 XLock.dpmsoff:		15
 XLock.mode:		random
@@ -173,6 +173,7 @@ UXTerm*inheritPixmap:	true
 UXTerm*urgentOnBell:	true
 
 XTerm*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+XTerm*bellIsUrgent:	true
 XTerm*cursorColor:	green
 XTerm*scrollBar: 	false
 XTerm*locale:		true

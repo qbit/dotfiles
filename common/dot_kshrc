@@ -11,6 +11,7 @@ alias irc="export TERM=xterm; tmux at -t irc"
 alias build="dpb -c -h /home/buildie/hosts -P"
 alias cdw='cd $(make show=WRKSRC)'
 alias pup='doas -n /usr/sbin/pkg_add -u'
+alias mutt='stty discard undef; mutt'
 
 if [ -e ~/.kshlib ]; then
     . ~/.kshlib
@@ -68,8 +69,8 @@ if [ -d /usr/ports/infrastructure/bin ]; then
     PATH=$PATH:/usr/ports/infrastructure/bin
 fi
 
-if [ -d ~/Development/depot_tools ]; then
-    PATH=$PATH:~/Development/depot_tools
+if [ -d ~/dev/depot_tools ]; then
+    PATH=$PATH:~/dev/depot_tools
 fi
 
 if [ -d /usr/local/jdk-1.7.0/bin ]; then
@@ -87,7 +88,22 @@ if [ -d ~/.cargo/bin ]; then
     PATH=~/.cargo/bin:$PATH
 fi
 
-export PATH HOME TERM GOPATH
+if [ -d ~/Elm-Platform/0.17 ]; then
+    PATH=$PATH:~/Elm-Platform/0.17/.cabal-sandbox/bin
+fi
+
+
+GPG_TTY=$(tty)
+
+if [ -e /usr/local/bin/keychain ]; then
+    /usr/local/bin/keychain --agents ssh,gpg -q
+    keychain_conf="$HOME/.keychain/$(uname -n)-sh"
+
+    [ -e "$keychain_conf" ]       && . $keychain_conf
+    [ -e "${keychain_conf}-gpg" ] && . ${keychain_conf}-gpg
+fi
+
+export PATH HOME TERM GOPATH GPG_TTY
 
 function vdiff {
     cp -p $1 $1.orig

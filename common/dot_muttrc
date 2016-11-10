@@ -43,9 +43,9 @@ bind editor        <Tab> complete-query
 macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
 macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
 
-bind index,pager \CO sidebar-open
-bind index,pager \CK sidebar-prev
-bind index,pager \CJ sidebar-next
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cj sidebar-next
+bind index,pager \Co sidebar-open
 
 folder-hook . set from="aaron@bolddaemon.com"
 

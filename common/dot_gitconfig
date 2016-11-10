@@ -1,18 +1,19 @@
 [user]
-  name = Aaron Bieber
-  email = aaron@bolddaemon.com
+	name = Aaron Bieber
+	email = aaron@bolddaemon.com
+	signingkey = 0x410F6B59DE979731
 
 [alias]
-  rmdel = !git rm `git ls-files --deleted`
-  upsync = !cvs up && gitsync && git commit -m 'sync'
-  mpush = !git remote | xargs -J % -L 1 git push % master
-  mpull = !git remote | xargs -J % -L 1 git pull % master
-  mup = !git remote update
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-  graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
-  sshow = "!f() { git stash show stash^{/$*} -p; }; f"
-  sapply = "!f() { git stash apply stash^{/$*}; }; f"
-  s2b = "!f() { git stash branch $1 stash@{0}; }; f"
+	rmdel = !git rm `git ls-files --deleted`
+	upsync = !cvs up && gitsync && git commit -m 'sync'
+	mpush = !git remote | xargs -J % -L 1 git push % master
+	mpull = !git remote | xargs -J % -L 1 git pull % master
+	mup = !git remote update
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+	sshow = "!f() { git stash show stash^{/$*} -p; }; f"
+	sapply = "!f() { git stash apply stash^{/$*}; }; f"
+	s2b = "!f() { git stash branch $1 stash@{0}; }; f"
 
 [push]
 	default = simple
@@ -20,9 +21,5 @@
 	ui = auto
 [core]
 	deltaBaseCacheLimit = 1G
-[mergetool "fugitive"]
-	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
-[merge]
-	tool = fugitive
 [http]
 	cookiefile = /home/qbit/.gitcookies

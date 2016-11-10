@@ -44,7 +44,8 @@ main = do
       normalBorderColor = "#666666"
     , focusedBorderColor = "darkgrey"
     , focusFollowsMouse  = False
-    , terminal = "urxvtc"
+    --, terminal = "urxvtc"
+    , terminal = "xterm"
     , workspaces = myWorkspaces
     , startupHook = myStartupHook
     , layoutHook = myLayoutHook
@@ -60,9 +61,7 @@ myLogHook h = dynamicLogWithPP $ myXmoPP {ppOutput = hPutStrLn h}
 
 myKeys :: XConfig t -> M.Map (KeyMask, KeySym) (X ())
 myKeys (XConfig {XMonad.modMask = modMask, XMonad.terminal = term}) = M.fromList [
-  ((modMask                 , xK_Right ), nextWS)
-  ,((modMask                , xK_Left  ), prevWS)
-  ,((modMask .|. shiftMask  , xK_Right ), shiftToNext)
+  ((modMask .|. shiftMask  , xK_Right ), shiftToNext)
   ,((modMask .|. shiftMask  , xK_Left  ), shiftToPrev)
   ,((modMask, xK_r)         , spawn "rofi -show run")
   ,((modMask, xK_i)         , spawn "~/.screenlayout/internal.sh")
@@ -103,17 +102,20 @@ myLayoutHook = avoidStruts $ smartBorders ( tiled ||| mtiled ||| mtl ||| mwl |||
 myManageHook :: Query (Data.Monoid.Endo WindowSet)
 myManageHook = composeAll
   [
-    className =? "MPlayer"            --> doFloat
+    className =? "MPlayer"           --> doFloat
+  , className =? "VLC"               --> doFloat
+  , className =? "Pinentry-gtk-2"    --> doFloat
   , className =? "XCalc"             --> doFloat
   , className =? "chromium-browser"  --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
   , className =? "Firefox"           --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
-  , title =? "Mail"              --> doF (W.shift (myWorkspaces !! 3))
+  , title =? "Mail"                  --> doF (W.shift (myWorkspaces !! 3))
   , className =? "XConsole"          --> doF (W.shift (myWorkspaces !! 8))
   ]
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawnOnce "urxvtc -name Mail"
+  --spawnOnce "urxvtc -name Mail"
+  spawnOnce "xterm -name Mail"
   --spawnOnce "/home/qbit/bin/browser"
 
 myXmoStatus :: String

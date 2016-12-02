@@ -1,6 +1,6 @@
 #!/bin/ksh
 
-HOST=$(hostname -s)
+HOST=$(hostname -s || hostname)
 OS=$(uname -s)
 WD=$(pwd)
 

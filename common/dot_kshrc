@@ -24,6 +24,8 @@ if [ -e ~/.git-prompt ]; then
    export GIT_PS1_SHOWCOLORHINTS=true
 fi
 
+LPREFIX=/usr/local
+
 if [ $OS == "OpenBSD" ]; then
     function get_pkg_path {
 	ARCH=$(arch -s)
@@ -34,6 +36,8 @@ if [ $OS == "OpenBSD" ]; then
     if [ ! -f ~/.cvsrc ]; then
 	export CVSROOT="anoncvs@anoncvs3.usa.openbsd.org:/cvs"
     fi
+else
+	LPREFIX=/usr
 fi
 
 #if [ -d ~/openbsd ]; then
@@ -55,6 +59,7 @@ export MAILDIR
 GOPATH=~
 
 if [ -d ~/dev/go ]; then
+    export GOROOT_BOOTSTRAP=/usr/local/go/bootstrap
     export GOROOT=~/dev/go/
     PATH=$PATH:${GOROOT}/bin
 fi
@@ -63,6 +68,11 @@ PATH=$HOME/bin:$GOROOT/bin:$GOPATH/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/
 
 if [ -d ~/node_bin/node_modules/.bin ]; then
     PATH=$PATH:~/node_bin/node_modules/.bin
+fi
+
+if [ -d ~/ruby_bin/bin ]; then
+    export GEM_HOME=~/ruby_bin
+    PATH=$PATH:~/ruby_bin/bin
 fi
 
 if [ -d /usr/ports/infrastructure/bin ]; then
@@ -95,8 +105,8 @@ fi
 
 GPG_TTY=$(tty)
 
-if [ -e /usr/local/bin/keychain ]; then
-    /usr/local/bin/keychain --agents ssh,gpg -q
+if [ -e ${LPREFIX}/bin/keychain ]; then
+    ${LPREFIX}/bin/keychain --agents ssh,gpg -q
     keychain_conf="$HOME/.keychain/$(uname -n)-sh"
 
     [ -e "$keychain_conf" ]       && . $keychain_conf

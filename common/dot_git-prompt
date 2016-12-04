@@ -108,8 +108,14 @@ __git_ps1_show_upstream ()
 
 	set -A svn_remote
 	# get some config options from git-config
-	set -A output "$(git config -z --get-regexp '^(svn-remote\..*\.url|bash\.showupstream)$' 2>/dev/null | tr '\0\n' '\n ')"
-	while read -r key value; do
+	set -A output $(git config -z --get-regexp '^(svn-remote\..*\.url|bash\.showupstream)$' 2>/dev/null | tr '\0\n' '\n ')
+	count=0
+	for idx in ${output[@]}; do
+		if [ $((count % 2)) == 0 ]; then
+			key=${output[$count]}
+			value=${output[$((count+1))]}
+		fi
+
 		case "$key" in
 		bash.showupstream)
 			GIT_PS1_SHOWUPSTREAM="$value"
@@ -124,7 +130,8 @@ __git_ps1_show_upstream ()
 			upstream=svn+git # default upstream is SVN if available, else git
 			;;
 		esac
-	done < "$output"
+		((count=count+1))
+	done
 
 	# parse configuration values
 	for option in ${GIT_PS1_SHOWUPSTREAM}; do
@@ -224,7 +231,7 @@ echo n_stop;
 			if [ $pcmode = yes ] && [ $ps1_expanded = yes ]; then
 				p="$p \${__git_ps1_upstream_name}"
 			else
-				p="$p ${__git_ps1_upstream_name}"
+				p=$(echo "$p ${__git_ps1_upstream_name}" | sed 's/\n//g')
 				# not needed anymore; keep user's
 				# environment clean
 				unset __git_ps1_upstream_name

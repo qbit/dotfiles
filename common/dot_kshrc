@@ -136,7 +136,7 @@ function git_branch_name {
             return
         fi
     done
-    branch=$(__git_ps1 %s)
+    branch=$(__git_ps1 "%s")
     if [ "${branch}" != "" ]; then
 	if [ "${branch}" = "(no branch)" ]; then
 	    # probably have a tag

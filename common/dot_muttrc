@@ -7,7 +7,7 @@ set pgp_timeout = 3600
 set crypt_autosign = yes
 set crypt_replyencrypt = yes
 
-set editor = mg
+set editor = "emacsclient -ct"
 
 set header_cache =  ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies

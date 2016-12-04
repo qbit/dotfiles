@@ -1,3 +1,10 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setenv "PATH"
 	(concat
 	 (getenv "PATH") ";"
@@ -74,8 +81,9 @@
 (scroll-bar-mode -1)
 (column-number-mode +1)
 (show-paren-mode +1)
+(ac-config-default)
 
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
@@ -93,6 +101,9 @@
 
 (require 'powerline)
 (powerline-default-theme)
+
+;;(require 'golden-ratio)
+;;(golden-ratio-mode 1)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -118,7 +129,7 @@ With negative prefix, apply to -N lines above."
 (global-set-key (kbd "C-;") #'comment-line)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
-(global-set-key (kbd "<C-tab>") 'hippie-expand)
+;;(global-set-key (kbd "<C-tab>") 'hippie-expand)
 
 (autoload 'scpaste "scpaste" "Paste the current buffer." t nil)
 (setq scpaste-http-destination "http://akb.io" scpaste-scp-destination
@@ -148,6 +159,9 @@ With negative prefix, apply to -N lines above."
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
  '(haskell-process-type (quote ghci))
+ '(package-selected-packages
+   (quote
+    (magithub elm-mode zenburn-theme zeal-at-point weechat web-mode tronesque-theme scpaste scad-mode rustfmt rainbow-mode racket-mode psci powerline php-mode ox-reveal org-wunderlist org-plus-contrib nyan-mode nlinum moe-theme magit js2-mode jinja2-mode helm-lobsters helm-dash haskell-mode golint golden-ratio go-eldoc go-autocomplete git-gutter geiser fsharp-mode fireplace erlang emms cargo arduino-mode aggressive-indent)))
  '(purescript-mode-hook (quote (capitalized-words-mode turn-on-purescript-indent)))
  '(safe-local-variable-values
    (quote
@@ -165,7 +179,7 @@ With negative prefix, apply to -N lines above."
 (define-key haskell-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
 (define-key haskell-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
 (define-key haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
-(define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)
+;;(define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)
 
 (set-face-attribute 'default t :height 100)
 

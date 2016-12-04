@@ -23,3 +23,7 @@
 	deltaBaseCacheLimit = 1G
 [http]
 	cookiefile = /home/qbit/.gitcookies
+[transfer]
+	fsckobjects = true
+[fetch]
+	fsckobjects = true

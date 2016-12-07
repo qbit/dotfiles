@@ -1,57 +1,59 @@
 export LC_CTYPE="en_US.UTF-8"
+OS=$(uname)
+LPREFIX=/usr/local
+
+if [ $OS != "OpenBSD" ]; then
+	LPREFIX=/usr
+fi
+	
 
 mkfifo /tmp/pianobar
 
 xset -b &
 xidle -delay 5 -sw -program "/usr/X11R6/bin/xlock" -timeout 300 &
 
-if [ -x /usr/local/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
+if [ -x ${LPREFIX}/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
         eval `dbus-launch --sh-syntax --exit-with-session`
 fi
 
 if [ -f ~/.Xmodmap ]; then
-   xmodmap ~/.Xmodmap &
+	xmodmap ~/.Xmodmap &
 fi
 
-if [ -e /usr/local/bin/tpb ]; then
-   /usr/local/bin/tpb -d
+if [ -e ${LPREFIX}/bin/tpb ]; then
+	${LPREFIX}/bin/tpb -d
 fi
 
-if [ -x /usr/local/bin/scmpc ]; then
-   /usr/local/bin/scmpc &
+if [ -x ${LPREFIX}/bin/scmpc ]; then
+	${LPREFIX}/bin/scmpc &
 fi
 
-
-#keepassx &
-#if [ -x /usr/local/bin/mono ]; then
-#  mono ~/.keepass/KeePass.exe &
-#fi
-
-if [ -x /usr/local/bin/trayer ]; then
-   trayer --edge top --align right --width 9 --height 12 --alpha 180 --tint 0 --transparent true --SetDockType true --SetPartialStrut true --expand true --widthtype percent  &
+if [ -x ${LPREFIX}/bin/trayer ]; then
+	trayer \
+		--edge top \
+		--align right \
+		--width 9 \
+		--height 12 \
+		--alpha 180 \
+		--tint 0 \
+		--transparent true \
+		--SetDockType true \
+		--SetPartialStrut true \
+		--expand true \
+		--widthtype percent  &
 fi
 
-#if [ -x /usr/local/bin/redshift-gtk ]; then
-#   redshift-gtk &
+#if [ -x ${LPREFIX}/bin/redshift-gtk ]; then
+#	redshift-gtk &
 #fi
 
 if [ -x ~/bin/sctd ]; then
-    ~/bin/sctd &
+	~/bin/sctd &
 fi
 
-urxvtd -q -f -o &
-
-#emacs --daemon
-
-parcellite &
-
-#synclient ClickFinger2=3
-#synclient ClickFinger3=2
-#synclient TapButton1=1
-#synclient TapButton2=2
-#synclient HorizTwoFingerScroll=1
-#synclient PalmDetect=1
-#synclient ClickPad=0
+if [ -x ${LPREFIX}/bin/parcellite ]; then
+	parcellite &
+fi
 
 xset +fp ~/.fonts
 for font in $(ls /usr/local/share/fonts/); do
@@ -59,23 +61,9 @@ for font in $(ls /usr/local/share/fonts/); do
 done
 xset fp rehash
 
-if [ -x /sbin/shutdownd ]; then
-	/sbin/shutdownd -s 20 -w 40 -W "i3-nagbar -m 'Current battery is at \$battery_minutes. Shutdown is in \$shutdown_minutes.' -b 'shutdown now' 'sudo halt -p'"
-fi
-#~/bin/dwmbar &
-
 feh --bg-fill ~/.background.png &
 
 xrdb -merge -load ~/.Xresources &
 
-#exec fvwm
-#exec awesome
-#exec xmonad
 exec ~/.xmonad/xmonad-x86_64-openbsd
-#exec spectrwm
-#exec dwm
-#exec enlightenment_start
-#exec i3
-#exec cwm
-#exec stumpwm
-#exec xfce4-session
+

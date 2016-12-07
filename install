@@ -86,6 +86,10 @@ function dotify {
     echo $(echo $1 | sed -e 's/^dot_/\./');
 }
 
+for file in $(ls common); do
+    link_file $WD/common/$file ~/$(dotify $file)
+done
+
 if [ -d $HOST ]; then
     for file in $(ls $HOST); do
 	link_file $WD/$HOST/$file ~/$(dotify $file)
@@ -95,10 +99,6 @@ if [ -d $HOST ]; then
     #	link_file $WD/default/$file ~/$(dotify $file)
     #done
 fi
-
-for file in $(ls common); do
-    link_file $WD/common/$file ~/$(dotify $file)
-done
 
 if [ ! -e ~/bin ]; then
     mkdir ~/bin

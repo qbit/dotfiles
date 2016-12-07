@@ -26,9 +26,9 @@
 			 ("org" .
 			  "http://orgmode.org/elpa/") ;; Get you some https guys!
 			 ("gnu" .
-			  "https://elpa.gnu.org/packages/")))
-			 ;;			 ("marmalade" .
-;;			 "https://marmalade-repo.org/packages/")))
+			  "https://elpa.gnu.org/packages/")
+			 ("marmalade" .
+			  "https://marmalade-repo.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents

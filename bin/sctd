@@ -1,5 +1,7 @@
 #!/bin/sh
 
+S=3500
+INC=2
 SCT=/usr/local/bin/sct
 
 if [ ! -e "$SCT" ]; then
@@ -7,33 +9,33 @@ if [ ! -e "$SCT" ]; then
     exit 1;
 fi
 
+H=$(date +"%H" | sed -e 's/^0//')
+M=$(date +"%M" | sed -e 's/^0//')
+HM=$((${H}*60 + ${M}))
+
+if [ $HM -gt 720 ]; then
+    for i in $(jot $((1440 - $HM)));  do
+        S=$((${S}+${INC}))
+    done
+else
+    for i in $(jot $HM); do
+        S=$((${S}+${INC}))
+    done
+fi
+
 while true; do
-    H=$(date "+%H")
-    echo "Currently ${H}"
-    case $H in
-	01) $SCT 4000;;
-	02) $SCT 4100;;
-	03) $SCT 4200;;
-	04) $SCT 4300;;
-	05) $SCT 4400;;
-	06) $SCT 4500;;
-	07) $SCT 4900;;
-	08) $SCT 5000;;
-	09) $SCT 5500;;
-	10) $SCT 5500;;
-	11) $SCT 5500;;
-	12) $SCT 5500;;
-	13) $SCT 5500;;
-	14) $SCT 5500;;
-	15) $SCT 5300;;
-	17) $SCT 5000;;
-	18) $SCT 4700;;
-	19) $SCT 4300;;
-	20) $SCT 4000;;
-	21) $SCT 3700;;
-	22) $SCT 3700;;
-	23) $SCT 3700;;
-    esac
-    sleep 1800
+    H=$(date +"%H" | sed -e 's/^0//')
+    M=$(date +"%M" | sed -e 's/^0//')
+    HM=$((${H}*60 + ${M}))
+
+    if [ $HM -gt 720 ]; then
+        S=$((${S}-${INC}))
+    else
+        S=$((${S}+${INC}))
+    fi
+
+    $SCT $S        
+
+    sleep 60
 done
 

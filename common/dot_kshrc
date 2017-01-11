@@ -114,6 +114,10 @@ if [ -e ${LPREFIX}/bin/keychain ]; then
     [ -e "${keychain_conf}-gpg" ] && . ${keychain_conf}-gpg
 fi
 
+if [ -d /usr/pkg ]; then
+    PATH=/usr/pkg/sbin:/usr/pkg/bin:$PATH
+fi
+
 export PATH HOME TERM GOPATH GPG_TTY
 
 function vdiff {

@@ -1,7 +1,7 @@
 [user]
 	name = Aaron Bieber
 	email = aaron@bolddaemon.com
-	signingkey = 0x410F6B59DE979731
+	signingkey = 0x279160AB1BE1236B
 
 [alias]
 	rmdel = !git rm `git ls-files --deleted`
@@ -27,3 +27,5 @@
 	fsckobjects = true
 [fetch]
 	fsckobjects = true
+[gpg]
+	program = gpg2

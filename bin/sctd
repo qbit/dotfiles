@@ -1,17 +1,29 @@
 #!/bin/sh
 
-S=3500
+S=4500
 INC=2
 SCT=/usr/local/bin/sct
+DEBUG=false
 
 if [ ! -e "$SCT" ]; then
     echo "Please install sct!"
     exit 1;
 fi
 
-H=$(date +"%H" | sed -e 's/^0//')
-M=$(date +"%M" | sed -e 's/^0//')
-HM=$((${H}*60 + ${M}))
+function dbg {
+    if [ $DEBUG ]; then
+        echo $1
+    fi
+}
+
+function setHM {
+    H=$(date +"%H" | sed -e 's/^0//')
+    M=$(date +"%M" | sed -e 's/^0//')
+    HM=$((${H}*60 + ${M}))
+    dbg "Current minute: ${HM}"
+}
+
+setHM
 
 if [ $HM -gt 720 ]; then
     for i in $(jot $((1440 - $HM)));  do
@@ -24,14 +36,14 @@ else
 fi
 
 while true; do
-    H=$(date +"%H" | sed -e 's/^0//')
-    M=$(date +"%M" | sed -e 's/^0//')
-    HM=$((${H}*60 + ${M}))
+    setHM
 
     if [ $HM -gt 720 ]; then
         S=$((${S}-${INC}))
+        dbg "Decrementing S: ${S}"
     else
         S=$((${S}+${INC}))
+        dbg "Incrementing S: ${S}"
     fi
 
     $SCT $S        

@@ -65,5 +65,5 @@ feh --bg-fill ~/.background.png &
 
 xrdb -merge -load ~/.Xresources &
 
-exec ~/.xmonad/xmonad-x86_64-openbsd
+exec xmonad-x86_64-openbsd
 

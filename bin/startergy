@@ -9,5 +9,5 @@ fi
 
 pkill synergys;
 synergys;
-ssh -R24800:localhost:24800 $HOST "pkill synergyc; synergyc -f localhost";
+ssh -R24800:localhost:24800 $HOST "pkill /usr/pkg/bin/synergyc; /usr/pkg/bin/synergyc -f localhost";
 pkill synergys;

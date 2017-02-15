@@ -1,10 +1,5 @@
----------------------------
--- Default awesome theme --
----------------------------
-
 local theme = {}
 
---theme.font          = "Anonymous Pro 9"
 theme.font          = "Terminus 9"
 
 theme.bg_normal     = "#222222"
@@ -18,39 +13,17 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.batt_high     = "#20db4f"
+theme.batt_high     = "#66d93c"
 theme.batt_medium   = "#edf940"
 theme.batt_low      = "#db2a20"
 theme.batt_bg       = theme.bg_normal
 theme.batt_border   = theme.fg_normal
 
-theme.useless_gap   = 0
+theme.useless_gap   = 2
 theme.border_width  = 1
 theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
-
--- There are other variable sets
--- overriding the default one when
--- defined, the sets are:
--- taglist_[bg|fg]_[focus|urgent|occupied|empty]
--- tasklist_[bg|fg]_[focus|urgent]
--- titlebar_[bg|fg]_[normal|focus]
--- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
--- mouse_finder_[color|timeout|animate_timeout|radius|factor]
--- Example:
---theme.taglist_bg_focus = "#ff0000"
-
--- Display the taglist squares
-theme.taglist_squares_sel   = "/usr/local/share/awesome/themes/default/taglist/squarefw.png"
-theme.taglist_squares_unsel = "/usr/local/share/awesome/themes/default/taglist/squarew.png"
-
--- Variables set for theming the menu:
--- menu_[bg|fg]_[normal|focus]
--- menu_[border_color|border_width]
-theme.menu_submenu_icon = "/usr/local/share/awesome/themes/default/submenu.png"
-theme.menu_height = 15
-theme.menu_width  = 100
 
 -- You can add as many variables as
 -- you wish and access them by using

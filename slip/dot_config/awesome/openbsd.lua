@@ -1,12 +1,27 @@
 local openbsd = {}
 
+local read_data = function(cmd, amount)
+	local a = io.popen(cmd)
+	local info
+	if (amount == nil) then
+		info = a:read()
+	else
+		info = a:read(amount)
+	end
+
+	a:close()
+
+	return info
+end
+
 function openbsd.batt_percent()
-   return tonumber(io.popen('apm -l'):read())
+   local info = read_data('apm -l')
+   return tonumber(info)
 end
 
 function openbsd.charging()
-   local apm = io.popen('apm -a'):read()
-   if (apm == "0") then
+   local info = read_data('apm -a')
+   if (info == "0") then
       return false
    else
       return true

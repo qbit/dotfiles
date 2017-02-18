@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ "$#" -ne 1 ]; then
+	echo "Usage: $0 PGPID" >&2
+	exit 1
+fi
+
+S="OPENPGP4FPR:"
+FP=$(gpg2 --list-keys "$1" | grep "Key fingerprint" | awk -F\= '{print $2}' | sed -e 's/ //g')
+
+echo "${S}${FP}" | intoq -file "/tmp/${FP}.png"
+
+feh "/tmp/${FP}.png"

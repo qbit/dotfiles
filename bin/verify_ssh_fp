@@ -20,8 +20,9 @@ EOF
 );
 
 echo "$CONF" > "${TFILE}"
+IP=$(tor-resolve "${HOST}")
 for i in 1 2 3 4 5; do 
-	ssh "$HOST" & sleep 3; kill $! 
+	ssh "${IP}" & sleep 3; kill $!
 done
 
 echo "" > "${TFILE}"

@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# To make use of this, you need:
+# - Tor installed / running
+# - socat installed
+# - Line 1 of your ~/.ssh/config should have: 'Include ~/.ssh/torify'
+
+if [ $# -lt 1 ];then
+	echo "Please specify hostname to check!"
+	exit 1;
+fi
+
+TFILE=~/.ssh/torify
+HOST=$1
+
+CONF=$(cat <<'EOF'
+Host *
+	ProxyCommand socat STDIO SOCKS4A:localhost:%h:%p,socksport=9050
+EOF
+);
+
+echo "$CONF" > "${TFILE}"
+for i in 1 2 3 4 5; do 
+	ssh "$HOST" & sleep 3; kill $! 
+done
+
+echo "" > "${TFILE}"
+ssh "$HOST" & sleep 3; kill $!

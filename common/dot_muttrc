@@ -2,10 +2,11 @@ source ~/.mutt.creds
 source ~/.mutt.gpg
 
 set pgp_use_gpg_agent = yes
-set pgp_sign_as = 0x410F6B59DE979731
+set pgp_sign_as = 0x279160AB1BE1236B
 set pgp_timeout = 3600
-set crypt_autosign = yes
+set crypt_autosign = no
 set crypt_replyencrypt = yes
+set crypt_verify_sig = yes
 
 set editor = "emacsclient -ct"
 
@@ -21,6 +22,7 @@ set imap_passive
 set imap_check_subscribed = yes
 set ispell = "aspell --mode=email --add-email-quote=%,#,:,} --check"
 set message_cache_clean = yes
+set user_agent = no
 
 set move = no
 

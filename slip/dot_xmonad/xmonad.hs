@@ -105,6 +105,7 @@ myManageHook = composeAll
     className =? "MPlayer"           --> doFloat
   , className =? "VLC"               --> doFloat
   , className =? "Pinentry-gtk-2"    --> doFloat
+  , className =? "Pinentry-gnome3"    --> doFloat
   , className =? "XCalc"             --> doFloat
   , className =? "chromium-browser"  --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2
   , className =? "Firefox"           --> doF (W.shift (myWorkspaces !! 1)) -- send to ws 2

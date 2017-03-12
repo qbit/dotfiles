@@ -1,4 +1,5 @@
 local openbsd = require('openbsd')
+local keys = require('keys')
 local gears = require("gears")
 local awful = require("awful")
 local xrandr = require("xrandr")
@@ -7,7 +8,7 @@ require("awful.autofocus")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
-local hotkeys_popup = require("awful.hotkeys_popup").widget
+--local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 local mpc = require("mpc")
 local textbox = require("wibox.widget.textbox")
@@ -21,6 +22,10 @@ beautiful.init("~/.config/awesome/themes/bold/theme.lua")
 mpd_widget.font = beautiful.font
 sep.font = beautiful.font
 
+local function shrink(str, len)
+   return string.sub(tostring(str), 1, len)
+end
+
 local mpd_not = function()
    local apm = io.popen('mpc')
    local info = apm:read('*all')
@@ -32,7 +37,7 @@ local mpd_not = function()
    })
 end
 
-mpd_widget:buttons(awful.util.table.join(awful.button({ }, 1, mpd_not))) 
+mpd_widget:buttons(awful.util.table.join(awful.button({ }, 1, mpd_not)))
 
 sep.text = " | "
 
@@ -164,19 +169,12 @@ awful.layout.layouts = {
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
     awful.layout.suit.corner.nw,
+    awful.layout.suit,
 }
 
 -- {{{ Helper functions
-local function shrink(str, len)
-   return string.sub(tostring(str), 1, len)
-end
-
 local function client_menu_toggle_fn()
     local instance = nil
 
@@ -205,7 +203,7 @@ local clock_not = function()
 	})
 end
 
-mytextclock:buttons(awful.util.table.join(awful.button({ }, 1, clock_not))) 
+mytextclock:buttons(awful.util.table.join(awful.button({ }, 1, clock_not)))
 
 local taglist_buttons = awful.util.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -249,24 +247,39 @@ local tasklist_buttons = awful.util.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-local function set_wallpaper(s)
-    -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
-        end
-        gears.wallpaper.maximized(wallpaper, s, true)
-    end
-end
+tag.connect_signal("property::screen", function(t)
+	t.preferred_screen_name = t.preferred_screen_name or (t.screen.outputs and t.screen.outputs.name or nil)
+end)
 
-screen.connect_signal("property::geometry", set_wallpaper)
+--tag.connect_signal("request::screen", function(t)
+--    clients = t:clients()
+--    for s in screen do
+--        if s ~= t.screen and clients and next(clients) then
+--            t.screen = s
+--            t.original_tag_name = t.original_tag_name or t.name
+--            t.name = t.name .. "'"
+--            t.volatile = true
+--            return
+--        end
+--    end
+--end)
+
+screen.connect_signal("added", function(s)
+    for k,t in pairs(root.tags()) do
+        if t.original_tag_name then
+          -- find the new tag on the new screen
+            new_tag = awful.tag.find_by_name(s, t.original_tag_name)
+            if new_tag then
+                t.name = t.original_tag_name
+                t.original_tag_name = nil
+                new_tag:swap(t)
+                new_tag:delete(t, true)
+            end
+        end
+    end
+end)
 
 awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
-    set_wallpaper(s)
-
     awful.tag.add("emacs", {
         layout             = awful.layout.suit.tile,
         --master_fill_policy = "master_width_factor",
@@ -330,7 +343,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons, {tasklist_disable_icon = true})
 
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = 16 })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = 18 })
 
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
@@ -354,14 +367,9 @@ awful.screen.connect_for_each_screen(function(s)
     }
 end)
 
-root.buttons(awful.util.table.join(
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
-
 globalkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
+    --awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+     --         {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
@@ -455,12 +463,6 @@ globalkeys = awful.util.table.join(
 )
 
 clientkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "f",
-        function (c)
-            c.fullscreen = not c.fullscreen
-            c:raise()
-        end,
-        {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
@@ -555,21 +557,17 @@ awful.rules.rules = {
           "copyq",  -- Includes session name in class.
         },
         class = {
-          "Arandr",
           "MPlayer",
           "XCalc",
-          "Gpick",
-          "Kruler",
-          "Sxiv",
           "pinentry",
-          "veromix",
-          "xtightvncviewer"},
-
+          "Pinentry-gtk-2",
+          "Pinentry-gnome3"},
         name = {
           "Event Tester",  -- xev.
         },
       }, properties = { floating = true }},
-
+   -- { rule_any = { type = "dialog", },
+    --  properties = { placement = awful.placement.centered } },
     { rule = { class = "Chromium-browser" },
       properties = { screen = 1, tag = "browser" } },
     { rule = { class = "Firefox" },
@@ -596,3 +594,5 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+keys.ssh_notify()

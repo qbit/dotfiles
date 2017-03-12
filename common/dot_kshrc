@@ -2,6 +2,8 @@
 
 export LC_CTYPE="en_US.UTF-8"
 
+export KEYID=0x1F81112D62A9ADCE
+
 OS=$(uname)
 
 alias sbcl="rlwrap sbcl"

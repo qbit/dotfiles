@@ -46,12 +46,6 @@
 	 :empty-lines 1)
 	))
 
-(defun enable-vc ()
-  (setq vc-handled-backends '(RCS CVS SVN SCCS Bzr Git Hg Mtn Arch)))
-
-(defun disable-vc ()
-  (setq vc-handled-backends nil))
-
 (add-to-list 'org-capture-templates
              '("c" "Contacts" entry (file "~/org/contacts.org")
                "* %(org-contacts-template-name)
@@ -66,8 +60,6 @@
 	 :base-extension "org"
 	 :publishing-directory orger-pub-to
 	 :recursive t
-	 :preparation-function disable-vc
-	 :completion-function: enable-vc
 	 :publishing-function org-html-publish-to-html
 	 :headline-levels 4             ; Just the default for this project.
 	 :auto-preamble t
@@ -91,8 +83,6 @@
 	 :base-extension "org"
 	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/"
 	 :recursive t
- 	 :preparation-function disable-vc
-	 :completion-function enable-vc
   	 :publishing-function org-html-publish-to-html
 	 :auto-preamble t
 	 )
@@ -105,8 +95,6 @@
 	 :recursive t
 	 :publishing-function org-reveal-publish-to-reveal
 	 :html-extension "html"
-	 ;; :preparation-function disable-vc
-	 ;; :completion-fucntion enable-vc
 	 )
 	("bd-static-test"
 	 :base-directory "~/org/websites/bolddaemon/"
@@ -120,8 +108,6 @@
 	 :base-extension "org"
 	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/test/"
 	 :recursive t
-	 :preparation-function disable-vc
-	 :completion-function: enable-vc
  	 :publishing-function org-html-publish-to-html
 	 :auto-preamble t
 	 )

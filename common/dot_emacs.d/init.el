@@ -27,7 +27,6 @@
 (require 'location)
 (require 'orger)
 (require 'browse)
-(require 'music)
 
 (require 'nlinum)
 

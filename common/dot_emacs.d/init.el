@@ -165,7 +165,7 @@ With negative prefix, apply to -N lines above."
  '(haskell-process-type (quote ghci))
  '(package-selected-packages
    (quote
-    (magithub elm-mode zenburn-theme zeal-at-point weechat web-mode tronesque-theme scpaste scad-mode rustfmt rainbow-mode racket-mode psci powerline php-mode ox-reveal org-wunderlist org-plus-contrib nyan-mode nlinum moe-theme magit js2-mode jinja2-mode helm-lobsters helm-dash haskell-mode golint golden-ratio go-eldoc go-autocomplete git-gutter geiser fsharp-mode fireplace erlang emms cargo arduino-mode aggressive-indent)))
+    (web-mode scpaste scad-mode rust-mode racket-mode psci powerline php-mode ox-reveal org-plus-contrib nyan-mode nlinum moe-theme magit lua-mode js2-mode jinja2-mode helm haskell-mode golint go-eldoc go-autocomplete git-gutter geiser flycheck arduino-mode)))
  '(purescript-mode-hook (quote (capitalized-words-mode turn-on-purescript-indent)))
  '(safe-local-variable-values
    (quote

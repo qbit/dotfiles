@@ -5,12 +5,10 @@ LPREFIX=/usr/local
 if [ $OS != "OpenBSD" ]; then
 	LPREFIX=/usr
 fi
-	
 
 mkfifo /tmp/pianobar
 
 xset -b &
-xidle -delay 5 -sw -program "/usr/X11R6/bin/xlock" -timeout 300 &
 
 if [ -x ${LPREFIX}/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
         eval `dbus-launch --sh-syntax --exit-with-session`
@@ -51,8 +49,8 @@ if [ -x ~/bin/sctd ]; then
 	~/bin/sctd &
 fi
 
-if [ -x ${LPREFIX}/bin/parcellite ]; then
-	parcellite &
+if [ -x ${LPREFIX}/bin/xfce4-clipman ]; then
+	xfce4-clipman &
 fi
 
 xset +fp ~/.fonts
@@ -65,6 +63,8 @@ feh --bg-fill ~/.background.png &
 
 xrdb -merge -load ~/.Xresources &
 
+xidle -delay 5 -sw -program "/usr/X11R6/bin/xlock" -timeout 300 &
+
 #exec xmonad-x86_64-openbsd
 exec awesome
-
+#exec cwm

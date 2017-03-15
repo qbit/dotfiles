@@ -1,0 +1,16 @@
+bind C4-t       vtile
+bind C4-r       htile
+command		irssi	"xterm -class irssi -e \"ssh qbit.io irc\""
+command		xterm	"xterm"
+command		next	"mpc next"
+command		pause	"mpc toggle"
+
+bind CM-Return	"xterm"
+
+bind 4-p	"mpc toggle"
+bind 4-n	"mpc next"
+
+autogroup 2	"chrome,Chrome"
+autogroup 3	"Mail"
+
+sticky yes

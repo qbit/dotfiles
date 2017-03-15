@@ -92,7 +92,13 @@ done
 
 if [ -d $HOST ]; then
     for file in $(ls $HOST); do
-	link_file $WD/$HOST/$file ~/$(dotify $file)
+        if [ "$file" == "config" ]; then
+            for cfile in $(ls $HOST/$file); do
+	        link_file $WD/$HOST/$file/$cfile ~/.config/$file/$cfile
+            done
+        else
+	    link_file $WD/$HOST/$file ~/$(dotify $file)
+        fi
     done
     #else
     #for file in $(ls default); do

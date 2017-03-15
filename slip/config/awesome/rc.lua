@@ -190,7 +190,7 @@ end
 -- }}}
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock("%a %b %_d (%H)%l:%M%p")
 
 local clock_not = function()
 	local apm = io.popen('cal')

@@ -36,13 +36,8 @@
 
 (install-if-missing
  '(
-   aggressive-indent
    arduino-mode
-   emms
-   erlang
-   fireplace
    flycheck
-   fsharp-mode
    geiser
    git-gutter
    go-autocomplete
@@ -51,7 +46,6 @@
    golint
    haskell-mode
    helm
-   helm-lobsters
    jinja2-mode
    js2-mode
    magit
@@ -63,15 +57,11 @@
    php-mode
    powerline
    psci
-   purescript-mode
    racket-mode
-   rainbow-mode
    rust-mode
    scad-mode
    scpaste
-   tronesque-theme
    web-mode
-   zenburn-theme
    ))
 
 (provide 'pkgmgr)

@@ -119,8 +119,6 @@
  '(mode-line ((t (:foreground "#ffffff" :background "#bdbdbd" :box nil))))
  '(mode-line-inactive ((t (:foreground "#ffffff" :background "#666666" :box nil)))))
 
-(global-aggressive-indent-mode)
-
 (defun comment-line (n)
   "Comment or uncomment current line and leave point after it.
 With positive prefix, apply to N lines including current one.

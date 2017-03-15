@@ -42,6 +42,13 @@
 	    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
 	      (which-func-mode 1))))
 
+(add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
+(add-hook 'mail-mode-hook
+          (lambda ()
+            (turn-on-flyspell)
+	    (auto-fill-mode 1)
+	    ))
+
 (setq whitespace-style '(trailing lines space-before-tab)
       whitespace-line-column 80)
 

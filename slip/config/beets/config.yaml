@@ -1,0 +1,203 @@
+# Beets configuration --------------------------------------------------------
+
+directory: ~/Music
+
+import:
+  # shove metadata into files
+  write: yes
+  
+  # copy music files in
+  copy: yes
+
+  # use auto-tagging where possible
+  # do not require confirmation on strong matches
+  autotag: yes
+  timid: no
+
+  resume: ask
+  incremental: no
+  none_rec_action: ask
+  log:
+
+  quiet: no  # enable with command line option
+  quiet_fallback: skip
+  default_action: apply
+
+  singletons: no
+  languages: []
+  detail: no
+  flat: no
+
+# use the release-date of the original (first) release of an album?
+original_date: yes
+
+# on multi-disk releases, assign track numbers for the whole album.
+# If "per disk", make sure tracknames do not collide ("paths" setting).
+per_disc_numbering: no
+
+# files matching these patterns are deleted from source after import
+clutter: ["Thumbs.DB", ".DS_Store", "*.m3u", ".pls", "*.jpg"]
+
+# files/directories matching one of these patterns are ignored during import
+ignore: [".*", "*~", "System Volume Information"]
+
+
+# General --------------------------------------------------------------------
+
+# use mutliple threads during import
+threaded: yes
+timeout: 5.0
+verbose: no
+
+# User Interface -------------------------------------------------------------
+
+color: yes
+list_format_item: %upper{$artist} - $album - $track. $title
+list_format_album: %upper{$albumartist} - $album
+time_format: '%Y-%m-%d %H:%M:%S'
+terminal_encoding: utf8
+
+ui:
+    terminal_width: 80
+    length_diff_thresh: 10.0
+
+# Auto Tagger ----------------------------------------------------------------
+
+match:
+    strong_rec_thresh: 0.1      # match 90% or better for auto import
+    medium_rec_thresh: 0.25
+    rec_gap_thresh: 0.25
+    max_rec:
+        missing_tracks: medium
+        unmatched_tracks: medium
+    distance_weights:
+        source: 2.0
+        artist: 3.0
+        album: 3.0
+        media: 1.0
+        mediums: 1.0
+        year: 1.0
+        country: 0.5
+        label: 0.5
+        catalognum: 0.5
+        albumdisambig: 0.5
+        album_id: 5.0
+        tracks: 2.0
+        missing_tracks: 0.9
+        unmatched_tracks: 0.6
+        track_title: 3.0
+        track_artist: 2.0
+        track_index: 1.0
+        track_length: 2.0
+        track_id: 5.0
+    preferred:
+        countries: []
+        media: []
+        original_year: no
+    ignored: []
+    track_length_grace: 10
+    track_length_max: 30
+
+# Plugins --------------------------------------------------------------------
+
+plugins: [
+    chroma,
+    discogs,
+    duplicates,
+    embedart,
+    fetchart,
+    lastgenre,
+    lyrics,
+    mbsync,
+    missing,
+    mpdstats,
+    scrub,
+    smartplaylist,
+    mpdupdate,
+    web
+]
+
+
+lyrics:
+    auto: yes
+    fallback: ''
+
+fetchart:
+    auto: yes
+    maxwidth: 300
+    cautious: true
+    cover_names: cover folder
+
+embedart:
+    auto: yes
+    maxwidth: 300
+
+replaygain:
+    auto: yes
+    overwrite: yes
+    albumgain: yes
+
+scrub:
+    auto: yes
+
+lastgenre:
+    whitelist: ~/.config/beets/genres.txt
+    canonical: ~/.config/beets/genres-tree.yaml
+
+mpd:
+  host: localhost
+  port: 6600
+
+smartplaylist:
+  relative_to: ~/Music
+  playlist_dir: /var/spool/mpd/playlists/
+  #playlist_dir: /home/qbit/playlists/
+  playlists:
+    - name: all.m3u
+      query: ''
+
+    - name: hiphop.m3u
+      query: 'genre:hip hop'
+
+    - name: tool.m3u
+      query: 'artist:Tool year+'
+
+    - name: metal.m3u
+      query: 'genre:metal'
+
+    - name: blues.m3u
+      query: 'genre:blues'
+
+    - name: bluegrass.m3u
+      query: 'genre:bluegrass'
+
+    - name: tcm.m3u
+      query: 'artist:The Crystal Method year+'
+
+    - name: ctd.m3u
+      query: 'artist:Crash Test Dummies year+'
+
+    - name: jonhopkins.m3u
+      query: 'artist:Jon Hopkins year+'
+
+    - query: ['genre+']
+      name: '$genre.m3u'
+
+    - query: ['artist+']
+      name: '$artist.m3u'
+
+mpdstats:
+    rating: False
+    # two ratings are calculated:
+    # "rolling" based on recent development
+    # "stable" based on all-time development
+    # rating mix 0.0 is all "rolling", 1.0 is all "stable"
+    rating_mix: 0.75
+
+missing:
+    format: $albumartist - $album - $track - $title
+    count: no
+    total: no
+
+library: ~/.musiclibrary.blb
+

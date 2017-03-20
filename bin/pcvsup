@@ -18,7 +18,7 @@ tmux -2 new-session -d -s $session
 for mirror in ${mirrors[@]}; do
 	if [ -d ${dirs[${counter}]} ]; then
 		if [ counter -eq 0 ]; then
-			tmux split-window -v -p 70
+			tmux split-window -h -p 70
 		fi
 
 		tmux select-pane -t ${counter}
@@ -26,7 +26,7 @@ for mirror in ${mirrors[@]}; do
 		tmux send-keys "cvs -d${mirror} up" C-m
 
 		if [ counter -eq 1 ]; then
-			tmux split-window -v -p 50
+			tmux split-window -h -p 50
 		fi
 
 		((counter=counter+1))

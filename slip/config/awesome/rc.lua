@@ -251,18 +251,18 @@ tag.connect_signal("property::screen", function(t)
 	t.preferred_screen_name = t.preferred_screen_name or (t.screen.outputs and t.screen.outputs.name or nil)
 end)
 
---tag.connect_signal("request::screen", function(t)
---    clients = t:clients()
---    for s in screen do
---        if s ~= t.screen and clients and next(clients) then
---            t.screen = s
---            t.original_tag_name = t.original_tag_name or t.name
---            t.name = t.name .. "'"
---            t.volatile = true
---            return
---        end
---    end
---end)
+tag.connect_signal("request::screen", function(t)
+    clients = t:clients()
+    for s in screen do
+        if s ~= t.screen and clients and next(clients) then
+            t.screen = s
+            t.original_tag_name = t.original_tag_name or t.name
+            --t.name = t.name .. "'"
+            t.volatile = true
+            return
+        end
+    end
+end)
 
 screen.connect_signal("added", function(s)
     for k,t in pairs(root.tags()) do
@@ -282,38 +282,26 @@ end)
 awful.screen.connect_for_each_screen(function(s)
     awful.tag.add("emacs", {
         layout             = awful.layout.suit.tile,
-        --master_fill_policy = "master_width_factor",
-        --gap_single_client  = true,
-        --gap                = 1,
         screen             = s,
         selected           = true,
     })
 
     awful.tag.add("browser", {
         layout             = awful.layout.suit.max,
-        --master_fill_policy = "master_width_factor",
         screen             = s,
         selected           = false,
-	--gap_single_client  = true,
-        --gap                = 1,
     })
 
     awful.tag.add("irc", {
         layout             = awful.layout.suit.tile,
-        --master_fill_policy = "master_width_factor",
         screen             = s,
         selected           = false,
-	--gap_single_client  = true,
-        --gap                = 1,
     })
 
     awful.tag.add("mail", {
         layout             = awful.layout.suit.tile,
-        --master_fill_policy = "master_width_factor",
         screen             = s,
         selected           = false,
-	--gap_single_client  = true,
-        --gap                = 1,
     })
 
     awful.tag.add("5", {screen=s, selected = false, layout = awful.layout.layouts[1] })
@@ -323,7 +311,6 @@ awful.screen.connect_for_each_screen(function(s)
 
     awful.tag.add("console", {
         layout             = awful.layout.suit.tile,
-        --master_fill_policy = "master_width_factor",
         screen             = s,
         selected           = false,
     })
@@ -368,8 +355,6 @@ awful.screen.connect_for_each_screen(function(s)
 end)
 
 globalkeys = awful.util.table.join(
-    --awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-     --         {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
@@ -418,21 +403,16 @@ globalkeys = awful.util.table.join(
               {description = "restart awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-
     awful.key({ modkey,           }, "n", function () awful.spawn("mpc next") end,
               {description = "launch rofi", group = "mpc"}),
     awful.key({ modkey,           }, "p", function () awful.spawn("mpc prev") end,
               {description = "launch rofi", group = "mpc"}),
     awful.key({ modkey, "Shift"   }, "p", function () awful.spawn("mpc toggle") end,
               {description = "launch rofi", group = "mpc"}),
-
-    --awful.key({ modkey, "Shift"   }, "e", function () awful.spawn("~/.screenlayout/external.sh") end,
-    --         {description = "use external screen", group = "screen"}),
-    --awful.key({ modkey, "Shift"   }, "i", function () awful.spawn("~/.screenlayout/internal.sh") end,
-    --          {description = "use internal screen", group = "screen"}),
-    awful.key({ modkey, "Shift"   }, "e", function () xrandr.xrandr() end,
-              {description = "xrandr", group = "screen"}),
-
+    awful.key({ modkey,           }, "e", function () awful.spawn("~/.screenlayout/external.sh") end,
+             {description = "use external screen", group = "screen"}),
+    awful.key({ modkey,           }, "i", function () awful.spawn("~/.screenlayout/internal.sh") end,
+              {description = "use internal screen", group = "screen"}),
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
@@ -533,9 +513,7 @@ clientbuttons = awful.util.table.join(
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
 
--- Set keys
 root.keys(globalkeys)
--- }}}
 
 awful.rules.rules = {
     { rule = { },
@@ -553,8 +531,8 @@ awful.rules.rules = {
 
     { rule_any = {
         instance = {
-          "DTA",  -- Firefox addon DownThemAll.
-          "copyq",  -- Includes session name in class.
+          "DTA",
+          "copyq",
         },
         class = {
           "MPlayer",
@@ -566,8 +544,6 @@ awful.rules.rules = {
           "Event Tester",  -- xev.
         },
       }, properties = { floating = true }},
-   -- { rule_any = { type = "dialog", },
-    --  properties = { placement = awful.placement.centered } },
     { rule = { class = "Chromium-browser" },
       properties = { screen = 1, tag = "browser" } },
     { rule = { class = "Firefox" },
@@ -595,4 +571,3 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
-keys.ssh_notify()

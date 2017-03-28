@@ -19,6 +19,9 @@ theme.batt_low      = "#db2a20"
 theme.batt_bg       = theme.bg_normal
 theme.batt_border   = theme.fg_normal
 
+theme.snap_old      = "#cccccc"
+theme.snap_new      = "#66d93c"
+
 theme.useless_gap   = 2
 theme.border_width  = 1
 theme.border_normal = "#000000"

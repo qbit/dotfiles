@@ -5,6 +5,10 @@ local awful = require("awful")
 local xrandr = require("xrandr")
 
 require("awful.autofocus")
+require("socket")
+
+local https = require("ssl.https")
+local ltn12 = require("ltn12")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
@@ -15,6 +19,7 @@ local textbox = require("wibox.widget.textbox")
 local mpd_widget = textbox()
 local sep = textbox()
 local batt_timer = gears.timer({ timeout = 1.5 })
+local snap_timer = gears.timer({ timeout = 1.5 })
 local state, title, artist, name, file = "stop", "", "", "", ""
 
 beautiful.init("~/.config/awesome/themes/bold/theme.lua")
@@ -78,6 +83,15 @@ do
    end)
 end
 
+local snap_check = wibox.widget {
+    checked       = false,
+    color         = beautiful.snap_new,
+    border_color  = beautiful.snap_old,
+    paddings      = 3,
+    shape         = gears.shape.circle,
+    widget        = wibox.widget.checkbox
+}
+
 local batt_bar = wibox.widget {
 	{
 		background_color = beautiful.batt_bg,
@@ -105,6 +119,47 @@ local batt_bar = wibox.widget {
 	},
 	layout = wibox.layout.stack,
 }
+
+function split(s, delimiter)
+   result = {};
+   for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+      table.insert(result, match);
+   end
+   return result;
+end
+
+function set_snap()
+   local t = {}
+   local file = io.open("/home/qbit/.last_snap", "rb")
+
+   local content = file:read "*a"
+   file:close()
+
+   local body, code, headers, status  = https.request{
+      url = "https://ftp3.usa.openbsd.org/pub/OpenBSD/snapshots/amd64/BUILDINFO",
+      sink = ltn12.sink.table(t),
+   }
+
+   nt = split(t[1], "-")
+
+   a, _ = content:gsub("^%s*(.-)%s*$", "%1")
+   b, _ = nt[2]:gsub("^%s*(.-)%s*$", "%1")
+
+   if (a == b) then
+      snap_check.checked = false
+      print("no new snapshots")
+   else
+      snap_check.checked = true
+      print("new snapshots!")
+      naughty.notify({
+            preset = naughty.config.presets.normal,
+            title = "New OpenBSD snapshot!",
+            text = tostring(a),
+      })
+   end
+
+   return true
+end
 
 function set_batt()
    local p = openbsd.batt_percent()
@@ -153,7 +208,10 @@ end
 batt_bar:buttons(awful.util.table.join(awful.button({ }, 1, batt_not)))
 
 set_batt()
+set_snap()
+
 batt_timer.start_new(60, set_batt)
+snap_timer.start_new(3600, set_snap)
 
 terminal = "xterm"
 rofi = "rofi -show run"
@@ -251,18 +309,18 @@ tag.connect_signal("property::screen", function(t)
 	t.preferred_screen_name = t.preferred_screen_name or (t.screen.outputs and t.screen.outputs.name or nil)
 end)
 
-tag.connect_signal("request::screen", function(t)
-    clients = t:clients()
-    for s in screen do
-        if s ~= t.screen and clients and next(clients) then
-            t.screen = s
-            t.original_tag_name = t.original_tag_name or t.name
-            --t.name = t.name .. "'"
-            t.volatile = true
-            return
-        end
-    end
-end)
+--tag.connect_signal("request::screen", function(t)
+--    clients = t:clients()
+--    for s in screen do
+--        if s ~= t.screen and clients and next(clients) then
+--            t.screen = s
+--            t.original_tag_name = t.original_tag_name or t.name
+--            t.name = t.name .. "'"
+--            t.volatile = true
+--            return
+--        end
+--    end
+--end)
 
 screen.connect_signal("added", function(s)
     for k,t in pairs(root.tags()) do
@@ -333,24 +391,26 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({ position = "top", screen = s, height = 18 })
 
     s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-	    batt_bar,
-	    sep,
-            s.mytaglist,
-	    sep,
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-	    sep,
-	    mpd_widget,
-	    sep,
-            mytextclock,
-            wibox.widget.systray(),
-            s.mylayoutbox,
-        },
+       layout = wibox.layout.align.horizontal,
+       { -- Left widgets
+	  layout = wibox.layout.fixed.horizontal,
+	  batt_bar,
+	  sep,
+	  s.mytaglist,
+	  sep,
+       },
+       s.mytasklist, -- Middle widget
+       { -- Right widgets
+	  layout = wibox.layout.fixed.horizontal,
+	  sep,
+	  mpd_widget,
+	  sep,
+	  mytextclock,
+	  sep,
+	  snap_check,
+	  wibox.widget.systray(),
+	  s.mylayoutbox,
+       },
     }
 end)
 
@@ -570,4 +630,3 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
-

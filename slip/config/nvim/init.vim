@@ -7,10 +7,9 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-nmap <Leader>bi :BundleInstall<CR>
-nmap <Leader>bi! :BundleInstall!<CR>
-nmap <Leader>bu :BundleInstall!<CR>
-nmap <Leader>bc :BundleClean<CR>
+nmap <Leader>bi :PluginInstall<CR>
+nmap <Leader>bu :PluginInstall!<CR>
+nmap <Leader>bc :PluginClean<CR>
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'

@@ -49,6 +49,9 @@ set query_command= "abook --mutt-query '%s'"
 macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
 bind editor        <Tab> complete-query
 
+auto_view text/html                                      # view html automatically
+alternative_order text/plain text/enriched text/html     # save html for last
+
 macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
 macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
 

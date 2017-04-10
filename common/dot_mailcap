@@ -1,2 +1,4 @@
-text/html;                      links %s; nametemplate=%s.html
+#text/html;                      links %s; nametemplate=%s.html
 #text/html;                      links -dump %s; nametemplate=%s.html; copiousoutput
+image/*;	feh '%s'; test=test -n "$DISPLAY"
+text/html;	w3m -I %{charset} -T text/html; copiousoutput;

@@ -1,4 +1,4 @@
-local openbsd = {}
+local obsd = {}
 
 local read_data = function(cmd, amount)
 	local a = io.popen(cmd)
@@ -14,12 +14,12 @@ local read_data = function(cmd, amount)
 	return info
 end
 
-function openbsd.batt_percent()
+function obsd.batt_percent()
    local info = read_data('apm -l')
    return tonumber(info)
 end
 
-function openbsd.charging()
+function obsd.charging()
    local info = read_data('apm -a')
    if (info == "0") then
       return false
@@ -28,11 +28,11 @@ function openbsd.charging()
    end
 end
 
-print(openbsd.batt_percent())
-if (openbsd.charging()) then
+print(obsd.batt_percent())
+if (obsd.charging()) then
    print("⚡")
 else
    print(".")
 end
 
-return openbsd
+return obsd

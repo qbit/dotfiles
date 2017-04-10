@@ -1,3 +1,4 @@
+local obsd = require('obsd')
 local openbsd = require('openbsd')
 local keys = require('keys')
 local gears = require("gears")
@@ -26,6 +27,7 @@ beautiful.init("~/.config/awesome/themes/bold/theme.lua")
 
 mpd_widget.font = beautiful.font
 sep.font = beautiful.font
+
 
 local function shrink(str, len)
    return string.sub(tostring(str), 1, len)
@@ -103,7 +105,7 @@ local batt_bar = wibox.widget {
 		max_value        = 1,
 		shape            = gears.shape.octogon,
 		step             = 1,
-		value            = openbsd.batt_percent() / 100,
+		value            = obsd.batt_percent() / 100,
 		widget           = wibox.widget.progressbar,
 		margins = {
 			top    = 2,
@@ -161,8 +163,10 @@ function set_snap()
    return true
 end
 
+snap_check:buttons(awful.util.table.join(awful.button({ }, 1, set_snap)))
+
 function set_batt()
-   local p = openbsd.batt_percent()
+   local p = obsd.batt_percent()
    if (p > 50) then
       batt_bar.batt_pct.color = beautiful.batt_high
    end
@@ -175,7 +179,7 @@ function set_batt()
 
    batt_bar.batt_pct.value = p / 100
 
-   if (openbsd.charging()) then
+   if (obsd.charging()) then
       --batt_bar.batt_ac.text = "⚡"
       batt_bar.batt_ac:set_markup('<span color="#000">⚡</span>')
       if (p < 49) then
@@ -229,6 +233,7 @@ awful.layout.layouts = {
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.max,
     awful.layout.suit.corner.nw,
+    awful.layout.suit.floating,
     awful.layout.suit,
 }
 
@@ -407,8 +412,8 @@ awful.screen.connect_for_each_screen(function(s)
 	  sep,
 	  mytextclock,
 	  sep,
-	  snap_check,
 	  wibox.widget.systray(),
+	  snap_check,
 	  s.mylayoutbox,
        },
     }
@@ -596,6 +601,7 @@ awful.rules.rules = {
         },
         class = {
           "MPlayer",
+          "mpv",
           "XCalc",
           "pinentry",
           "Pinentry-gtk-2",
@@ -630,3 +636,10 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+local ret, error_string = openbsd.pledge('stdio rpath wpath cpath proc exec unix prot_exec inet dns')
+if ret == -1 then
+    naughty.notify({ preset = naughty.config.presets.critical,
+                     title = "Pledge errors!",
+                     text = error_string })
+end

@@ -24,7 +24,7 @@
 (require 'pkgmgr)
 ;;(require 'externals)
 (require 'keycuts)
-(require 'location)
+;;(require 'location)
 (require 'orger)
 (require 'browse)
 
@@ -63,7 +63,7 @@
 
 (nyan-mode 1)
 
-(set-location-by-ip)
+;;(set-location-by-ip)
 
 (set-face-attribute 'default nil :height 100)
 

@@ -99,86 +99,6 @@ xcalc.ti.button39.background:		#555595
 XCalc*Cursor:				hand2
 XCalc*ShapeStyle:			rectangle
 
-URxvt*loginShell:	true
-URxvt*cursorColor:	green
-URxvt*scrollBar:	False
-URxvt*foreground:	#ffffff
-URxvt*background:	#000000
-URxvt*tint:		black
-URxvt*shading:		10
-URxvt*color0:		#000000
-URxvt*color1:		#B21818
-URxvt*color2:		#18B218
-URxvt*color3:		#B26818
-URxvt*color4:		#1818B2
-URxvt*color5:		#B218B2
-URxvt*color6:		#18B2B2
-URxvt*color7:		#B2B2B2
-URxvt*colorBD:		#FFFFFF
-URxvt*color8:		#686868
-URxvt*color9:		#FF5454
-URxvt*color10:		#54FF54
-URxvt*color11:		#FFFF54
-URxvt*color12:		#5454FF
-URxvt*color13:		#FF54FF
-URxvt*color14:		#54FFFF
-URxvt*color15:		#FFFFFF
-URxvt*saveLines:	4096
-URxvt*letterSpace:	1
-!URxvt*font:		Hack:regular
-!URxvt*font:		Hermit:regular:pixelsize=12
-!URxvt.font:		xft:Hack:style=regular:pixelsize=11
-!URxvt.letterSpace:	-3
-URxvt*font:		xft:Anonymous PRO:regular:pixelsize=12
-!URxvt*font:		xft:GohuFont:regular:pixelsize=12
-URxvt*cursorBlink:	false
-URxvt.underlineURLs:	true
-URxvt.perl-lib:		/home/qbit/.urxvt/
-URxvt.perl-ext:		selection,yank-clicked-urls
-URxvt.urlLauncher:	/home/qbit/bin/browser
-!URxvt.urlLauncher:	firefox
-URxvt*matcher.button:	1
-URxvt*inheritPixmap:	true
-URxvt*urgentOnBell:	true
-URxvt*visualBell:	false
-
-UXTerm*cursorColor:	green
-UXTerm*scrollBar:	False
-UXTerm*foreground:	#ffffff
-UXTerm*background:	#000000
-UXTerm*tint:		black
-UXTerm*shading:		10
-UXTerm*color0:		#000000
-UXTerm*color1:		#B21818
-UXTerm*color2:		#18B218
-UXTerm*color3:		#B26818
-UXTerm*color4:		#1818B2
-UXTerm*color5:		#B218B2
-UXTerm*color6:		#18B2B2
-UXTerm*color7:		#B2B2B2
-UXTerm*colorBD:		#FFFFFF
-UXTerm*color8:		#686868
-UXTerm*color9:		#FF5454
-UXTerm*color10:		#54FF54
-UXTerm*color11:		#FFFF54
-UXTerm*color12:		#5454FF
-UXTerm*color13:		#FF54FF
-UXTerm*color14:		#54FFFF
-UXTerm*color15:		#FFFFFF
-UXTerm*saveLines:	4096
-UXTerm*letterSpace:	1
-UXTerm*faceName:	Anonymous PRO:pixelsize=12
-UXTerm*cursorBlink:	false
-UXTerm*loginShell:	true
-UXTerm.underlineURLs:	true
-! UXTerm.perl-lib:	/home/qbit/.urxvt/
-! UXTerm.perl-ext:	selection,yank-clicked-urls
-UXTerm.urlLauncher:	/home/qbit/bin/browser
-!UXTerm.urlLauncher:	firefox
-UXTerm*matcher.button:	1
-UXTerm*inheritPixmap:	true
-UXTerm*urgentOnBell:	true
-
 XTerm*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 XTerm*bellIsUrgent:	true
 XTerm*cursorColor:	green
@@ -186,41 +106,14 @@ XTerm*scrollBar: 	false
 XTerm*locale:		true
 XTerm*metaSendsEscape:	true
 XTerm*eightBitInput:	false
-!XTerm*foreground:	#ffffff
-!XTerm*background:	#000000
-!XTerm*color0:		#000000
-!XTerm*color1:		#B21818
-!XTerm*color2:		#18B218
-!XTerm*color3:		#B26818
-!XTerm*color4:		#1818B2
-!XTerm*color5:		#B218B2
-!XTerm*color6:		#18B2B2
-!XTerm*color7:		#B2B2B2
-!XTerm*colorBD:		#FFFFFF
-!XTerm*color8:		#686868
-!XTerm*color9:		#FF5454
-!XTerm*color10:		#54FF54
-!XTerm*color11:		#FFFF54
-!XTerm*color12:		#5454FF
-!XTerm*color13:		#FF54FF
-!XTerm*color14:		#54FFFF
-!XTerm*color15:		#FFFFFF
 XTerm*saveLines:	4096
 XTerm*letterSpace:	1
 XTerm*faceName:		Anonymous PRO:pixelsize=12
-!XTerm*faceName: Anonymous PRO
-!XTerm*faceName: Go Mono
-!XTerm*faceSize: 8
 XTerm*cursorBlink:	false
 XTerm*loginShell:	true
 XTerm.underlineURLs:	true
-! XTerm.perl-lib:	/home/qbit/.urxvt/
-! XTerm.perl-ext:	selection,yank-clicked-urls
-XTerm.urlLauncher:	/home/qbit/bin/browser
-!XTerm.urlLauncher:	firefox
 XTerm.matcher.button:	1
 XTerm*inheritPixmap:	true
-!XTerm*background:	#06252d
 XTerm*background:	#0e3250
 XTerm*foreground:	#d9e3f2
 XTerm*color0:		#1f2c36

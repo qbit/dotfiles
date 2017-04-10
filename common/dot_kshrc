@@ -8,6 +8,8 @@ OS=$(uname)
 
 alias sbcl="rlwrap sbcl"
 
+alias vi=nvim
+
 alias tmux="tmux -2"
 alias irc="export TERM=xterm; tmux at -t irc"
 alias build="dpb -c -h /home/buildie/hosts -P"
@@ -174,5 +176,5 @@ function ltodo {
     fi
 }
 
-PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\w\]$(git_branch_name)$(ltodo)λ '
+PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\W\]$(git_branch_name)$(ltodo)λ '
 export PS1

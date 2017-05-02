@@ -13,8 +13,8 @@ function reload_completions {
 
 set -A complete_kill_1 -- -9 -HUP -INFO -KILL -TERM
 
-set -A complete_vmctl -- console load reload start stop create log reset status
-set -A complete_vmctl_2 -- $(vmctl status | grep -v NAME | awk '{print $NF}')
+set -A complete_vmctl -- console load reload start stop reset status
+set -A complete_vmctl_2 -- $(vmctl status | awk '!/NAME/{print $NF}')
 
 set -A complete_mpc -- ls play pause toggle prev random shuffle stop update
 set -A complete_mpc_2 -- $(mpc lsplaylists)

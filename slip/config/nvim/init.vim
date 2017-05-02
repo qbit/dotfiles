@@ -65,3 +65,10 @@ au BufNewFile,BufRead /private/var/*/mutt* setlocal spell spelllang=en_us
 " git commits
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG set noai noshowmatch
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us
+
+autocmd BufWritePre * %s/\s\+$//e
+
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif

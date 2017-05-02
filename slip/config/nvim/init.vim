@@ -1,21 +1,33 @@
-set nocompatible
-filetype off
-
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-nmap <Leader>bi :PluginInstall<CR>
-nmap <Leader>bu :PluginInstall!<CR>
-nmap <Leader>bc :PluginClean<CR>
-
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'fatih/vim-go'
-Plugin 'vim-syntastic/syntastic'
+"Plugin 'VundleVim/Vundle.vim'
+"Plugin 'airblade/vim-gitgutter'
+"Plugin 'fatih/vim-go'
+"Plugin 'vim-syntastic/syntastic'
+"Plugin 'chriskempson/base16-vim'
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'fatih/vim-go'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-syntastic/syntastic'
+Plug 'chriskempson/base16-vim'
+
+call plug#end()
+
+nmap <Leader>bi :PlugInstall<CR>
+nmap <Leader>bu :PlugUpdate<CR>
+nmap <Leader>bc :PlugClean<CR>
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+syntax enable
+colorscheme base16-default-dark
+set background=dark
 
 set dir=~/.vim/swaps
 set nolist

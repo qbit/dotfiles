@@ -1,5 +1,7 @@
 #-*-Shell-script-*-
 
+HISTFILE=~/.ksh_history
+
 export LC_CTYPE="en_US.UTF-8"
 
 export KEYID=0x1F81112D62A9ADCE
@@ -21,6 +23,10 @@ if [ -e ~/.kshlib ]; then
     . ~/.kshlib
 fi
 
+if [ -e ~/.ksh_completions ]; then
+    . ~/.ksh_completions
+fi
+
 if [ -e ~/.git-prompt ]; then
    . ~/.git-prompt
    export GIT_PS1_SHOWDIRTYSTATE=true
@@ -35,7 +41,7 @@ if [ $OS == "OpenBSD" ]; then
     function get_pkg_path {
 	ARCH=$(arch -s)
 	LINE=$(cat /etc/pkg.conf | grep installpath | awk '{print $NF}' | sed 's/%a/%s/')
-	printf $LINE $ARCH	
+	printf $LINE $ARCH
     }
 
     if [ ! -f ~/.cvsrc ]; then

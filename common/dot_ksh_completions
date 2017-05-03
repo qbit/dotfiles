@@ -17,7 +17,7 @@ set -A complete_vmctl -- console load reload start stop reset status
 set -A complete_vmctl_2 -- $(vmctl status | awk '!/NAME/{print $NF}')
 
 set -A complete_mpc -- ls play pause toggle prev random shuffle stop update
-set -A complete_mpc_2 -- $(mpc lsplaylists)
+set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
 
 set -A complete_pkg_delete -- $PKG_LIST
 set -A complete_pkg_info -- $PKG_LIST
@@ -31,7 +31,7 @@ set -A complete_signify_1 -- -C -G -S -V
 set -A complete_signify_2 -- -q -p -x -c -m -t -z
 set -A complete_signify_3 -- -p -x -c -m -t -z
 
-set -A complete_make_1 -- install clean clean repackage reinstall
+set -A complete_make_1 -- install clean repackage reinstall
 
 set -A complete_emacs -- --daemon --debug-init
 set -A complete_emacsclient -- -c -t
@@ -40,3 +40,5 @@ set -A complete_gpg2 -- --refresh --receive-keys --armor --clearsign --sign --li
 
 set -A complete_pass -- $PASS_LIST -c generate edit insert git
 set -A complete_pass_2 -- $PASS_LIST push
+
+set -A complete_git -- pull push mpull mpush clone checkout

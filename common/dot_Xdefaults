@@ -108,30 +108,31 @@ XTerm*metaSendsEscape:	true
 XTerm*eightBitInput:	false
 XTerm*saveLines:	4096
 XTerm*letterSpace:	1
-XTerm*faceName:		Anonymous PRO:pixelsize=12
+XTerm*faceName:		Go Mono:pixelsize=13
+!XTerm*faceName:		Anonymous PRO:pixelsize=12
 XTerm*cursorBlink:	false
 XTerm*loginShell:	true
 XTerm.underlineURLs:	true
 XTerm.matcher.button:	1
 XTerm*inheritPixmap:	true
-XTerm*background:	#0e3250
-XTerm*foreground:	#d9e3f2
-XTerm*color0:		#1f2c36
-XTerm*color1:		#d93c66
-XTerm*color2:		#66d93c
-XTerm*color3:		#d9af3c
-XTerm*color4:		#3c66d9
-XTerm*color5:		#af3cd9
-XTerm*color6:		#3cd9af
-XTerm*color7:		#c1ced8
-XTerm*color8:		#36434d
-XTerm*color9:		#e887a1
-XTerm*color10:		#a1e887
-XTerm*color11:		#e8ce87
-XTerm*color12:		#87a1e8
-XTerm*color13:		#ce87e8
-XTerm*color14:		#87e8ce
-XTerm*color15:		#dae7f1
+!XTerm*background:	#0e3250
+!XTerm*foreground:	#d9e3f2
+!XTerm*color0:		#1f2c36
+!XTerm*color1:		#d93c66
+!XTerm*color2:		#66d93c
+!XTerm*color3:		#d9af3c
+!XTerm*color4:		#3c66d9
+!XTerm*color5:		#af3cd9
+!XTerm*color6:		#3cd9af
+!XTerm*color7:		#c1ced8
+!XTerm*color8:		#36434d
+!XTerm*color9:		#e887a1
+!XTerm*color10:		#a1e887
+!XTerm*color11:		#e8ce87
+!XTerm*color12:		#87a1e8
+!XTerm*color13:		#ce87e8
+!XTerm*color14:		#87e8ce
+!XTerm*color15:		#dae7f1
 
 Xft.dpi:		100
 !Xft.dpi:		96
@@ -149,58 +150,61 @@ Xft.hintstyle:		hintslight
 
 ! --- special colors ---
 
-XTerm*background: #06252d
-XTerm*foreground: #d9e3f2
-
-! --- standard colors ---
-
-! black
-XTerm*color0: #1f2c36
-
-! bright_black
-XTerm*color8: #36434d
-
-! red
-XTerm*color1: #d93c66
-
-! bright_red
-XTerm*color9: #e887a1
-
-! green
-XTerm*color2: #66d93c
-
-! bright_green
-XTerm*color10: #a1e887
-
-! yellow
-XTerm*color3: #d9af3c
-
-! bright_yellow
-XTerm*color11: #e8ce87
-
-! blue
-XTerm*color4: #3c66d9
-
-! bright_blue
-XTerm*color12: #87a1e8
-
-! magenta
-XTerm*color5: #af3cd9
-
-! bright_magenta
-XTerm*color13: #ce87e8
-
-! cyan
-XTerm*color6: #3cd9af
-
-! bright_cyan
-XTerm*color14: #87e8ce
-
-! white
-XTerm*color7: #c1ced8
-
-! bright_white
-XTerm*color15: #dae7f1
+!XTerm*background: #06252d
+!XTerm*foreground: #d9e3f2
+!
+!! --- standard colors ---
+!
+!! black
+!XTerm*color0: #1f2c36
+!
+!! bright_black
+!XTerm*color8: #36434d
+!
+!! red
+!XTerm*color1: #d93c66
+!
+!! bright_red
+!XTerm*color9: #e887a1
+!
+!! green
+!XTerm*color2: #66d93c
+!
+!! bright_green
+!XTerm*color10: #a1e887
+!
+!! yellow
+!XTerm*color3: #d9af3c
+!
+!! bright_yellow
+!XTerm*color11: #e8ce87
+!
+!! blue
+!XTerm*color4: #3c66d9
+!
+!! bright_blue
+!XTerm*color12: #87a1e8
+!
+!! magenta
+!XTerm*color5: #af3cd9
+!
+!! bright_magenta
+!XTerm*color13: #ce87e8
+!
+!! cyan
+!XTerm*color6: #3cd9af
+!
+!! bright_cyan
+!XTerm*color14: #87e8ce
+!
+!! white
+!XTerm*color7: #c1ced8
+!
+!! bright_white
+!XTerm*color15: #dae7f1
+!
+XTerm*background: white
+XTerm*foreground: black!
 
 
 ! ------------------------------------------------------------------------------

@@ -13,7 +13,7 @@ local ltn12 = require("ltn12")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
---local hotkeys_popup = require("awful.hotkeys_popup").widget
+local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 local mpc = require("mpc")
 local textbox = require("wibox.widget.textbox")
@@ -130,7 +130,13 @@ function split(s, delimiter)
    return result;
 end
 
+local snap_found = false
+local snap_ver = ""
 function set_snap()
+   if snap_found then
+      return
+   end
+
    local t = {}
    local file = io.open("/home/qbit/.last_snap", "rb")
 
@@ -149,10 +155,13 @@ function set_snap()
 
    if (a == b) then
       snap_check.checked = false
+      snap_ver = tostring(b)
       print("no new snapshots")
    else
       snap_check.checked = true
       print("new snapshots!")
+      snap_found = true
+      snap_ver = tostring(a)
       naughty.notify({
             preset = naughty.config.presets.normal,
             title = "New OpenBSD snapshot!",
@@ -163,7 +172,13 @@ function set_snap()
    return true
 end
 
-snap_check:buttons(awful.util.table.join(awful.button({ }, 1, set_snap)))
+snap_check:buttons(awful.util.table.join(awful.button({ }, 1, function()
+	naughty.notify({
+	    preset = naughty.config.presets.normal,
+	    title = "Current Snap Date",
+	    text = snap_ver,
+	})
+end)))
 
 function set_batt()
    local p = obsd.batt_percent()
@@ -466,14 +481,16 @@ globalkeys = awful.util.table.join(
               {description = "launch rofi", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "r", awesome.restart,
               {description = "restart awesome", group = "awesome"}),
+    awful.key({ modkey,           }, "s", hotkeys_popup.show_help,
+              {description = "show help", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
     awful.key({ modkey,           }, "n", function () awful.spawn("mpc next") end,
-              {description = "launch rofi", group = "mpc"}),
+              {description = "next song", group = "mpc"}),
     awful.key({ modkey,           }, "p", function () awful.spawn("mpc prev") end,
-              {description = "launch rofi", group = "mpc"}),
+              {description = "previous song", group = "mpc"}),
     awful.key({ modkey, "Shift"   }, "p", function () awful.spawn("mpc toggle") end,
-              {description = "launch rofi", group = "mpc"}),
+              {description = "toggle music", group = "mpc"}),
     awful.key({ modkey,           }, "e", function () awful.spawn("~/.screenlayout/external.sh") end,
              {description = "use external screen", group = "screen"}),
     awful.key({ modkey,           }, "i", function () awful.spawn("~/.screenlayout/internal.sh") end,

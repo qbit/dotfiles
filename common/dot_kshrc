@@ -10,8 +10,6 @@ OS=$(uname)
 
 alias sbcl="rlwrap sbcl"
 
-alias vi=nvim
-
 alias tmux="tmux -2"
 alias irc="export TERM=xterm; tmux at -t irc"
 alias build="dpb -c -h /home/buildie/hosts -P"
@@ -115,6 +113,10 @@ fi
 
 
 GPG_TTY=$(tty)
+
+if [ -e ${LPREFIX}/bin/nvim ]; then
+    alias vi="nvim"
+fi
 
 if [ -e ${LPREFIX}/bin/keychain ]; then
     ${LPREFIX}/bin/keychain --agents ssh,gpg -q

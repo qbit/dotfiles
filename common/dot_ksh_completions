@@ -1,8 +1,4 @@
 PKG_LIST=$(pkg_info -q)
-PASS_LIST=$(
-	cd ~/.password-store
-	find . -type f -name \*.gpg | sed 's/^\.\///' | sed 's/\.gpg$//g'
-)
 
 function reload_completions {
 	if [ -e ~/.ksh_completions ]; then
@@ -13,11 +9,28 @@ function reload_completions {
 
 set -A complete_kill_1 -- -9 -HUP -INFO -KILL -TERM
 
-set -A complete_vmctl -- console load reload start stop reset status
-set -A complete_vmctl_2 -- $(vmctl status | awk '!/NAME/{print $NF}')
+pgrep -q vmd
+if [ $? = 0 ]; then
+	set -A complete_vmctl -- console load reload start stop reset status
+	set -A complete_vmctl_2 -- $(vmctl status | awk '!/NAME/{print $NF}')
+fi
 
-set -A complete_mpc -- ls play pause toggle prev random shuffle stop update
-set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
+pgrep -q mpd
+if [ $? = 0 ]; then
+	set -A complete_mpc -- ls play pause toggle prev random shuffle stop update
+	set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
+fi
+
+if [ -d ~/.password-store ]; then
+	PASS_LIST=$(
+		cd ~/.password-store
+		find . -type f -name \*.gpg | sed 's/^\.\///' | sed 's/\.gpg$//g'
+	)
+
+	set -A complete_pass -- $PASS_LIST -c generate edit insert git
+	set -A complete_pass_2 -- $PASS_LIST push
+
+fi
 
 set -A complete_pkg_delete -- $PKG_LIST
 set -A complete_pkg_info -- $PKG_LIST
@@ -38,7 +51,4 @@ set -A complete_emacsclient -- -c -t
 
 set -A complete_gpg2 -- --refresh --receive-keys --armor --clearsign --sign --list-key --decrypt --verify --detach-sig
 
-set -A complete_pass -- $PASS_LIST -c generate edit insert git
-set -A complete_pass_2 -- $PASS_LIST push
-
-set -A complete_git -- pull push mpull mpush clone checkout
+set -A complete_git -- pull push mpull mpush clone checkout status

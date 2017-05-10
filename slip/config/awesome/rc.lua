@@ -1,15 +1,12 @@
 local obsd = require('obsd')
 local openbsd = require('openbsd')
+--local sharedtags = require("sharedtags")
 local keys = require('keys')
 local gears = require("gears")
 local awful = require("awful")
-local xrandr = require("xrandr")
 
 require("awful.autofocus")
-require("socket")
 
-local https = require("ssl.https")
-local ltn12 = require("ltn12")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
@@ -19,15 +16,14 @@ local mpc = require("mpc")
 local textbox = require("wibox.widget.textbox")
 local mpd_widget = textbox()
 local sep = textbox()
-local batt_timer = gears.timer({ timeout = 1.5 })
-local snap_timer = gears.timer({ timeout = 1.5 })
 local state, title, artist, name, file = "stop", "", "", "", ""
 
-beautiful.init("~/.config/awesome/themes/bold/theme.lua")
+obsd.enable_debug = false
+
+beautiful.init("~/.config/awesome/themes/bold_white/theme.lua")
 
 mpd_widget.font = beautiful.font
 sep.font = beautiful.font
-
 
 local function shrink(str, len)
    return string.sub(tostring(str), 1, len)
@@ -53,11 +49,11 @@ local function update_mpd_widget()
     mpd_widget.text = text
 end
 
-local function error_handler(err)
+local function mpc_error_handler(err)
     mpd_widget:set_text("Error: " .. tostring(err))
 end
 
-local connection = mpc.new("localhost", 6600, "", error_handler,
+local connection = mpc.new("localhost", 6600, "", mpc_error_handler,
     "status", function(_, result)
         state = result.state
     end,
@@ -84,153 +80,6 @@ do
 			     in_error = false
    end)
 end
-
-local snap_check = wibox.widget {
-    checked       = false,
-    color         = beautiful.snap_new,
-    border_color  = beautiful.snap_old,
-    paddings      = 3,
-    shape         = gears.shape.circle,
-    widget        = wibox.widget.checkbox
-}
-
-local batt_bar = wibox.widget {
-	{
-		background_color = beautiful.batt_bg,
-		border_color     = beautiful.batt_border,
-		border_width     = 1,
-		forced_height    = 3,
-		forced_width     = 80,
-		id               = "batt_pct",
-		max_value        = 1,
-		shape            = gears.shape.octogon,
-		step             = 1,
-		value            = obsd.batt_percent() / 100,
-		widget           = wibox.widget.progressbar,
-		margins = {
-			top    = 2,
-			left   = 4,
-			bottom = 2,
-		},
-	},
-	{
-		align  = 'center',
-		id     = "batt_ac",
-		text   = '',
-		widget = wibox.widget.textbox,
-	},
-	layout = wibox.layout.stack,
-}
-
-function split(s, delimiter)
-   result = {};
-   for match in (s..delimiter):gmatch("(.-)"..delimiter) do
-      table.insert(result, match);
-   end
-   return result;
-end
-
-local snap_found = false
-local snap_ver = ""
-function set_snap()
-   if snap_found then
-      return
-   end
-
-   local t = {}
-   local file = io.open("/home/qbit/.last_snap", "rb")
-
-   local content = file:read "*a"
-   file:close()
-
-   local body, code, headers, status  = https.request{
-      url = "https://ftp3.usa.openbsd.org/pub/OpenBSD/snapshots/amd64/BUILDINFO",
-      sink = ltn12.sink.table(t),
-   }
-
-   nt = split(t[1], "-")
-
-   a, _ = content:gsub("^%s*(.-)%s*$", "%1")
-   b, _ = nt[2]:gsub("^%s*(.-)%s*$", "%1")
-
-   if (a == b) then
-      snap_check.checked = false
-      snap_ver = tostring(b)
-      print("no new snapshots")
-   else
-      snap_check.checked = true
-      print("new snapshots!")
-      snap_found = true
-      snap_ver = tostring(a)
-      naughty.notify({
-            preset = naughty.config.presets.normal,
-            title = "New OpenBSD snapshot!",
-            text = tostring(a),
-      })
-   end
-
-   return true
-end
-
-snap_check:buttons(awful.util.table.join(awful.button({ }, 1, function()
-	naughty.notify({
-	    preset = naughty.config.presets.normal,
-	    title = "Current Snap Date",
-	    text = snap_ver,
-	})
-end)))
-
-function set_batt()
-   local p = obsd.batt_percent()
-   if (p > 50) then
-      batt_bar.batt_pct.color = beautiful.batt_high
-   end
-   if (p < 50 and p > 20) then
-      batt_bar.batt_pct.color = beautiful.batt_medium
-   end
-   if (p < 20) then
-      batt_bar.batt_pct.color = beautiful.batt_low
-   end
-
-   batt_bar.batt_pct.value = p / 100
-
-   if (obsd.charging()) then
-      --batt_bar.batt_ac.text = "⚡"
-      batt_bar.batt_ac:set_markup('<span color="#000">⚡</span>')
-      if (p < 49) then
-	 batt_bar.batt_ac:set_markup('<span color="#fff">⚡</span>')
-      end
-   else
-      --batt_bar.batt_ac.text = ""
-      if (p < 10) then
-	 batt_bar.batt_ac:set_markup('<span color="#fff">🔌</span>')
-      else
-	 batt_bar.batt_ac:set_markup('<span color="#000"></span>')
-      end
-   end
-
-   return true
-end
-
-local batt_not = function()
-   local apm = io.popen('apm')
-   local info = apm:read('*all')
-   apm:close()
-   set_batt()
-   naughty.notify({
-	 preset = naughty.config.presets.normal,
-	 title = "Power Status",
-	 text = tostring(info),
-   })
-end
-
-batt_bar:buttons(awful.util.table.join(awful.button({ }, 1, batt_not)))
-
-set_batt()
-set_snap()
-
-batt_timer.start_new(60, set_batt)
-snap_timer.start_new(3600, set_snap)
 
 terminal = "xterm"
 rofi = "rofi -show run"
@@ -284,6 +133,7 @@ end
 mytextclock:buttons(awful.util.table.join(awful.button({ }, 1, clock_not)))
 
 local taglist_buttons = awful.util.table.join(
+--local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
                     awful.button({ modkey }, 1, function(t)
                                               if client.focus then
@@ -325,9 +175,19 @@ local tasklist_buttons = awful.util.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-tag.connect_signal("property::screen", function(t)
-	t.preferred_screen_name = t.preferred_screen_name or (t.screen.outputs and t.screen.outputs.name or nil)
-end)
+local function set_wallpaper(s)
+	if beautiful.wallpaper then
+		local wallpaper = beautiful.wallpaper
+		if type(wallpaper) == "function" then
+			wallpaper = wallpaper(s)
+		end
+		gears.wallpaper.maximized(wallpaper, s, true)
+	end
+end
+--
+--tag.connect_signal("property::screen", function(t)
+--	t.preferred_screen_name = t.preferred_screen_name or (t.screen.outputs and t.screen.outputs.name or nil)
+--end)
 
 --tag.connect_signal("request::screen", function(t)
 --    clients = t:clients()
@@ -342,22 +202,58 @@ end)
 --    end
 --end)
 
-screen.connect_signal("added", function(s)
-    for k,t in pairs(root.tags()) do
-        if t.original_tag_name then
-          -- find the new tag on the new screen
-            new_tag = awful.tag.find_by_name(s, t.original_tag_name)
-            if new_tag then
-                t.name = t.original_tag_name
-                t.original_tag_name = nil
-                new_tag:swap(t)
-                new_tag:delete(t, true)
-            end
-        end
-    end
-end)
+--screen.connect_signal("added", function(s)
+--    for k,t in pairs(root.tags()) do
+--        if t.original_tag_name then
+--          -- find the new tag on the new screen
+--            new_tag = awful.tag.find_by_name(s, t.original_tag_name)
+--            if new_tag then
+--                t.name = t.original_tag_name
+--                t.original_tag_name = nil
+--                new_tag:swap(t)
+--                new_tag:delete(t, true)
+--            end
+--        end
+--    end
+--end)
+
+
+--local tags = sharedtags({
+--    { name = "emacs", screen = s, layout = awful.layout.suit.tile },
+--    { name = "browser", screen = s, layout = awful.layout.suit.max },
+--    { name = "irc", screen = s, layout = awful.layout.suit.tile },
+--    { name = "mail", screen = s, layout = awful.layout.suit.tile },
+--    { name = "5", screen = s, layout = awful.layout.layouts[1] },
+--    { name = "6", screen = s, layout = awful.layout.layouts[1] },
+--    { name = "7", screen = s, layout = awful.layout.layouts[1] },
+--    { name = "8", screen = s, layout = awful.layout.layouts[1] },
+--    { name = "console", screen = 2, layout = awful.layout.suit.tile }
+--})
+
+--for i = 1, 9 do
+--    globalkeys = awful.util.table.join(globalkeys,
+--        -- View tag only.
+--        awful.key({ modkey }, "#" .. i + 9,
+--            function ()
+--                local screen = awful.screen.focused()
+--                local tag = tags[i]
+--                if tag then
+--                    sharedtags.viewonly(tag, screen)
+--                end
+--            end),
+--        -- Toggle tag.
+--        awful.key({ modkey, "Control" }, "#" .. i + 9,
+--            function ()
+--                local screen = awful.screen.focused()
+--                local tag = tags[i]
+--                if tag then
+--                    sharedtags.viewtoggle(tag, screen)
+--                end
+--            end))
+--end
 
 awful.screen.connect_for_each_screen(function(s)
+    set_wallpaper(s)
     awful.tag.add("emacs", {
         layout             = awful.layout.suit.tile,
         screen             = s,
@@ -404,7 +300,7 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
 
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.noempty, taglist_buttons, {taglist_disable_icon = true, squares_sel = "", squares_unsel = ""})
+    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.noempty, taglist_buttons)
 
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons, {tasklist_disable_icon = true})
 
@@ -414,7 +310,7 @@ awful.screen.connect_for_each_screen(function(s)
        layout = wibox.layout.align.horizontal,
        { -- Left widgets
 	  layout = wibox.layout.fixed.horizontal,
-	  batt_bar,
+	  obsd.battery_bar,
 	  sep,
 	  s.mytaglist,
 	  sep,
@@ -428,7 +324,8 @@ awful.screen.connect_for_each_screen(function(s)
 	  mytextclock,
 	  sep,
 	  wibox.widget.systray(),
-	  snap_check,
+	  obsd.volume_slider,
+	  obsd.snap_checkbox,
 	  s.mylayoutbox,
        },
     }
@@ -628,10 +525,13 @@ awful.rules.rules = {
         },
       }, properties = { floating = true }},
     { rule = { class = "Chromium-browser" },
+      --properties = { screen = 1, tag = tags["browser"] } },
       properties = { screen = 1, tag = "browser" } },
     { rule = { class = "Firefox" },
+      --properties = { screen = 1, tag = tags["browser"] } },
       properties = { screen = 1, tag = "browser" } },
     { rule = { class = "XConsole" },
+      --properties = { screen = 1, tag = tags["console"] } },
       properties = { screen = 1, tag = "console" } },
     { rule = { class = "SshAskpass" },
       properties = { raise = true, focus = awful.client.focus.filter } },

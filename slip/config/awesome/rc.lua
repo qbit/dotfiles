@@ -1,4 +1,3 @@
-local obsd = require('obsd')
 local openbsd = require('openbsd')
 --local sharedtags = require("sharedtags")
 local keys = require('keys')
@@ -18,9 +17,10 @@ local mpd_widget = textbox()
 local sep = textbox()
 local state, title, artist, name, file = "stop", "", "", "", ""
 
-obsd.enable_debug = false
-
 beautiful.init("~/.config/awesome/themes/bold_white/theme.lua")
+
+local obsd = require('obsd')
+obsd.enable_debug = false
 
 mpd_widget.font = beautiful.font
 sep.font = beautiful.font

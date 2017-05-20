@@ -13,74 +13,9 @@ local vol_timer = gears.timer({ timeout = 1.5 })
 local obsd = {}
 
 obsd.enable_debug = false
-obsd.current_volume = 0
+obsd.current_volume = 255
 obsd.battery_percent = 100
 obsd.battery_charging = false
-
-function obsd.debug(msg)
-    if (obsd.debug) then
-        print("obsd: " .. msg)
-    end
-end
-
---- Updates obsd.current_volume to the output of 'mixerctl outputs.master'.
-function obsd.update_volume()
-    awful.spawn.easy_async([[sh -c 'mixerctl outputs.master | cut -d, -f2']], function(stdout, stderr, reason, exit_code)
-        stdout = stdout:gsub("%s+", "")
-        obsd.current_volume = tonumber(stdout)
-        print("slider value", obsd.volume_slider.value)
-        obsd.volume_slider.value = obsd.current_volume
-        print("current value", obsd.current_volume)
-        obsd.debug("current_volume is: " .. tostring(obsd.current_volume))
-    end)
-    return true
-end
-
---- Increments outputs.master by -30
-function obsd.vol_down()
-    awful.util.spawn([[sh -c 'mixerctl outputs.master=$(($(mixerctl outputs.master | cut -d, -f2)-30))']])
-    obsd.debug("volume decreased")
-end
-
---- Increments outputs.master by 30
-function obsd.vol_up()
-    awful.util.spawn([[ sh -c 'mixerctl outputs.master=$(($(mixerctl outputs.master | cut -d, -f2)+30))']])
-    obsd.debug("volume increased")
-end
-
---- Sets outputs.master.mute to on
-function obsd.mute()
-    awful.util.spawn('mixerctl outputs.master.mute on')
-    obsd.debug("mute enabled")
-end
-
---- Sets outputs.master.mute to off
-function obsd.unmute()
-    awful.util.spawn('mixerctl outputs.master.mute off')
-    obsd.debug("mute disabled")
-end
-
---- Sets 'obsd.battery_percent' to the value of `apm -l`
--- @see obsd.battery_percent
-obsd.update_batt_percent = function()
-    awful.spawn.easy_async('apm -l', function(stdout, stderr, reason, exit_code)
-        stdout = stdout:gsub("%s+", "")
-        obsd.battery_percent = tonumber(stdout)
-        obsd.debug("battery_percent set to " .. stdout)
-    end)
-end
-
-obsd.update_batt_charge = function()
-    awful.spawn.easy_async('apm -a', function(stdout, stderr, reason, exit_code)
-        stdout = stdout:gsub("%s+", "")
-        obsd.debug("battery_charge set to " .. stdout)
-        if (stdout == "0") then
-            obsd.battery_charging = false
-        else
-            obsd.battery_charging = true
-       end
-    end)
-end
 
 obsd.volume_slider = wibox.widget {
     bar_shape           = gears.shape.rounded_rect,
@@ -91,9 +26,9 @@ obsd.volume_slider = wibox.widget {
     handle_shape        = gears.shape.circle,
     handle_border_color = beautiful.border_color,
     handle_border_width = 1,
-    value               = obsd.current_volume,
     minimum             = 0,
     maximum             = 255,
+    value               = obsd.current_volume,
     widget              = wibox.widget.slider,
 }
 
@@ -136,6 +71,106 @@ obsd.snap_checkbox = wibox.widget {
     shape         = gears.shape.circle,
     widget        = wibox.widget.checkbox
 }
+
+
+function obsd.debug(msg)
+    if (obsd.enable_debug) then
+        print("obsd: " .. msg)
+    end
+end
+
+function obsd.set_volume(vol)
+    obsd.current_volume = vol
+    obsd.debug("setting volume to: " .. vol)
+    awful.spawn('mixerctl outputs.master=' .. tostring(vol))
+    return true
+end
+
+function obsd.run_once(prog)
+    if not prog then
+        do return nil end
+    end
+
+    local cmd = 'sh -c "pgrep -q -f -u $USER -x "\' .. prog ..  \'" || \' .. prog'
+
+    awful.spawn.easy_async(cmd, function(stdout, stderr, reason, exit_code)
+        if exit_code == 0 then
+            naughty.notify({
+                preset = naughty.config.presets.normal,
+                title = "Started app!",
+                text = tostring(cmd),
+            })
+        else
+            naughty.notify({
+                preset = naughty.config.presets.critical,
+                title = "Command startup failed!",
+                text = tostring(cmd),
+            })
+        end
+    end)
+end
+
+--- Updates obsd.current_volume to the output of 'mixerctl outputs.master'.
+--function obsd.update_volume()
+--    awful.spawn.easy_async([[sh -c 'mixerctl outputs.master | cut -d, -f2']], function(stdout, stderr, reason, exit_code)
+--        stdout = stdout:gsub("%s+$", "")
+--        local volume = tonumber(stdout)
+--        --obsd.debug("current_volume is: " .. tostring(volume))
+--        --obsd.debug("obsd.current_volume is: " .. tostring(obsd.current_volume))
+--        if (volume == obsd.volume_slider.value) then
+--            obsd.debug("not updating volume")
+--        else
+--            obsd.set_volume(obsd.volume_slider.value)
+--        end
+--    end)
+--    return true
+--end
+
+--- Increments outputs.master by -30
+function obsd.vol_down()
+    awful.spawn([[sh -c 'mixerctl outputs.master=$(($(mixerctl outputs.master | cut -d, -f2)-30))']])
+    obsd.debug("volume decreased")
+end
+
+--- Increments outputs.master by 30
+function obsd.vol_up()
+    awful.spawn([[ sh -c 'mixerctl outputs.master=$(($(mixerctl outputs.master | cut -d, -f2)+30))']])
+    obsd.debug("volume increased")
+end
+
+--- Sets outputs.master.mute to on
+function obsd.mute()
+    awful.spawn('mixerctl outputs.master.mute on')
+    obsd.debug("mute enabled")
+end
+
+--- Sets outputs.master.mute to off
+function obsd.unmute()
+    awful.spawn('mixerctl outputs.master.mute off')
+    obsd.debug("mute disabled")
+end
+
+--- Sets 'obsd.battery_percent' to the value of `apm -l`
+-- @see obsd.battery_percent
+obsd.update_batt_percent = function()
+    awful.spawn.easy_async('apm -l', function(stdout, stderr, reason, exit_code)
+        stdout = stdout:gsub("%s+", "")
+        obsd.battery_percent = tonumber(stdout)
+        obsd.debug("battery_percent set to " .. stdout)
+    end)
+end
+
+obsd.update_batt_charge = function()
+    awful.spawn.easy_async('apm -a', function(stdout, stderr, reason, exit_code)
+        stdout = stdout:gsub("%s+", "")
+        obsd.debug("battery_charge set to " .. stdout)
+        if (stdout == "0") then
+            obsd.battery_charging = false
+        else
+            obsd.battery_charging = true
+       end
+    end)
+end
 
 function split(s, delimiter)
    result = {};
@@ -241,10 +276,21 @@ end)))
 
 obsd.update_battery()
 obsd.update_snap()
-obsd.update_volume()
+--obsd.update_volume()
+
+obsd.volume_slider:connect_signal("button::release", function()
+    print("released!")
+    obsd.set_volume(obsd.volume_slider.value)
+end)
+obsd.volume_slider:connect_signal("mouse::enter", function()
+    print("entered!")
+end)
+obsd.volume_slider:connect_signal("mouse::leave", function()
+    print("leave!")
+end)
 
 snap_timer.start_new(3600, obsd.update_snap)
-vol_timer.start_new(5, obsd.update_volume)
+--vol_timer.start_new(1, obsd.update_volume)
 batt_timer.start_new(5, obsd.update_battery)
 
 return obsd

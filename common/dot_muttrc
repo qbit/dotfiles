@@ -2,7 +2,7 @@ source ~/.mutt.creds
 source ~/.mutt.gpg
 
 set pgp_use_gpg_agent = yes
-set pgp_sign_as = 0x279160AB1BE1236B
+set pgp_sign_as = 0x1F81112D62A9ADCE
 set pgp_timeout = 3600
 set crypt_autosign = no
 set crypt_replyencrypt = yes
@@ -23,6 +23,7 @@ set imap_check_subscribed = yes
 set ispell = "aspell --mode=email --add-email-quote=%,#,:,} --check"
 set message_cache_clean = yes
 set user_agent = no
+set smart_wrap = yes
 
 set move = no
 

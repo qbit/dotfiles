@@ -99,11 +99,12 @@
 ;;(load-theme 'tronesque t)
 ;;(load-theme 'solarized-dark t)
 ;;(load-theme 'flatland t)
-(require 'moe-theme)
+;;(require 'moe-theme)
 ;;(load-theme 'moe-dark t)
-(require 'moe-theme-switcher)
-;;(powerline-moe-theme)
+;; (require 'moe-theme-switcher)
+;;;(powerline-moe-theme)
 ;;(load-theme 'eink-light t)
+(load-theme 'base16-default-light 1)
 
 (require 'powerline)
 (powerline-default-theme)
@@ -154,7 +155,7 @@ With negative prefix, apply to -N lines above."
  '(auth-source-save-behavior nil)
  '(custom-safe-themes
    (quote
-    ("092351ddcd5b95345bbea075361b28cf8a8567d95dc24448589c3a3692bf7d40" "0b591fefbcbb4ddeffc570233c3cd378a47c2535bf289b5a4533f64f22da2f87" default)))
+    ("2a998a3b66a0a6068bcb8b53cd3b519d230dd1527b07232e54c8b9d84061d48d" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "092351ddcd5b95345bbea075361b28cf8a8567d95dc24448589c3a3692bf7d40" "0b591fefbcbb4ddeffc570233c3cd378a47c2535bf289b5a4533f64f22da2f87" default)))
  '(git-gutter:added-sign "++")
  '(git-gutter:deleted-sign "--")
  '(git-gutter:modified-sign "  ")
@@ -165,7 +166,7 @@ With negative prefix, apply to -N lines above."
  '(haskell-process-type (quote ghci))
  '(package-selected-packages
    (quote
-    (web-mode scpaste scad-mode rust-mode racket-mode psci powerline php-mode ox-reveal org-plus-contrib nyan-mode nlinum moe-theme magit lua-mode js2-mode jinja2-mode helm haskell-mode golint go-eldoc go-autocomplete git-gutter geiser flycheck arduino-mode)))
+    (base16-theme color-theme-sanityinc-tomorrow web-mode scpaste scad-mode rust-mode racket-mode psci powerline php-mode ox-reveal org-plus-contrib nyan-mode nlinum moe-theme magit lua-mode js2-mode jinja2-mode helm haskell-mode golint go-eldoc go-autocomplete git-gutter geiser flycheck arduino-mode)))
  '(purescript-mode-hook (quote (capitalized-words-mode turn-on-purescript-indent)))
  '(safe-local-variable-values
    (quote

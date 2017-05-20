@@ -8,18 +8,12 @@
       (install-if-missing rest))))
 
 (require 'package)
-(let ((trustfile
-       (replace-regexp-in-string
-        "\\\\" "/"
-        (replace-regexp-in-string
-         "\n" ""
-         (shell-command-to-string "python2.7 -m certifi")))))
-  (setq tls-program
-	(list
-	 (format "gnutls-cli%s --x509cafile %s -p %%p %%h"
-		 (if (eq window-system 'w32) ".exe" "") trustfile)))
-  (setq gnutls-verify-error t)
-  (setq gnutls-trustfiles (list trustfile)))
+
+(setq tls-checktrust t)
+(setq tls-program (list "nc -v -c -e %h %h %p"))
+(setq tls-success "TLS handshake negotiated")
+(setq gnutls-trustfiles (list "/etc/ssl/cert.pem"))
+(setq gnutls-verify-error t)
 
 (setq package-archives '(("melpa" .
 			  "https://melpa.org/packages/")
@@ -37,6 +31,7 @@
 (install-if-missing
  '(
    arduino-mode
+   base16-theme
    flycheck
    geiser
    git-gutter
@@ -47,7 +42,6 @@
    haskell-mode
    helm
    jinja2-mode
-   js2-mode
    magit
    moe-theme
    nlinum

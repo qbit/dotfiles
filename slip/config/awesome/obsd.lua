@@ -111,20 +111,20 @@ function obsd.run_once(prog)
 end
 
 --- Updates obsd.current_volume to the output of 'mixerctl outputs.master'.
---function obsd.update_volume()
---    awful.spawn.easy_async([[sh -c 'mixerctl outputs.master | cut -d, -f2']], function(stdout, stderr, reason, exit_code)
---        stdout = stdout:gsub("%s+$", "")
---        local volume = tonumber(stdout)
---        --obsd.debug("current_volume is: " .. tostring(volume))
---        --obsd.debug("obsd.current_volume is: " .. tostring(obsd.current_volume))
---        if (volume == obsd.volume_slider.value) then
---            obsd.debug("not updating volume")
---        else
---            obsd.set_volume(obsd.volume_slider.value)
---        end
---    end)
---    return true
---end
+function obsd.update_volume()
+    awful.spawn.easy_async([[sh -c 'mixerctl outputs.master | cut -d, -f2']], function(stdout, stderr, reason, exit_code)
+        stdout = stdout:gsub("%s+$", "")
+        local volume = tonumber(stdout)
+        --obsd.debug("current_volume is: " .. tostring(volume))
+        --obsd.debug("obsd.current_volume is: " .. tostring(obsd.current_volume))
+        if (volume == obsd.volume_slider.value) then
+            obsd.debug("not updating volume")
+        else
+            obsd.set_volume(obsd.volume_slider.value)
+        end
+    end)
+    return true
+end
 
 --- Increments outputs.master by -30
 function obsd.vol_down()
@@ -276,21 +276,21 @@ end)))
 
 obsd.update_battery()
 obsd.update_snap()
---obsd.update_volume()
+obsd.update_volume()
 
-obsd.volume_slider:connect_signal("button::release", function()
-    print("released!")
-    obsd.set_volume(obsd.volume_slider.value)
-end)
-obsd.volume_slider:connect_signal("mouse::enter", function()
-    print("entered!")
-end)
-obsd.volume_slider:connect_signal("mouse::leave", function()
-    print("leave!")
-end)
+--obsd.volume_slider:connect_signal("button::release", function()
+--    print("released!")
+--    obsd.set_volume(obsd.volume_slider.value)
+--end)
+--obsd.volume_slider:connect_signal("mouse::enter", function()
+--    print("entered!")
+--end)
+--obsd.volume_slider:connect_signal("mouse::leave", function()
+--    print("leave!")
+--end)
 
 snap_timer.start_new(3600, obsd.update_snap)
---vol_timer.start_new(1, obsd.update_volume)
+vol_timer.start_new(1, obsd.update_volume)
 batt_timer.start_new(5, obsd.update_battery)
 
 return obsd

@@ -17,7 +17,7 @@ fi
 
 pgrep -q mpd
 if [ $? = 0 ]; then
-	set -A complete_mpc -- ls play pause toggle prev random shuffle stop update
+	set -A complete_mpc_1 -- lsplaylists ls play pause toggle prev random shuffle stop update
 	set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
 fi
 
@@ -35,8 +35,8 @@ fi
 set -A complete_pkg_delete -- $PKG_LIST
 set -A complete_pkg_info -- $PKG_LIST
 
-set -A complete_ssh_1 -- $(awk '{split($1,a,","); print a[1]}' ~/.ssh/known_hosts)
-set -A complete_mosh_1 -- $(awk '{split($1,a,","); print a[1]}' ~/.ssh/known_hosts)
+set -A complete_ssh -- $(awk '{split($1,a,","); print a[1]}' ~/.ssh/known_hosts)
+set -A complete_mosh -- $(awk '{split($1,a,","); print a[1]}' ~/.ssh/known_hosts)
 
 set -A complete_rcctl_1 -- disable enable get ls order set
 set -A complete_rcctl_2 -- $(ls /etc/rc.d)
@@ -52,4 +52,4 @@ set -A complete_emacsclient -- -c -t
 
 set -A complete_gpg2 -- --refresh --receive-keys --armor --clearsign --sign --list-key --decrypt --verify --detach-sig
 
-set -A complete_git -- pull push mpull mpush clone checkout status
+set -A complete_git_1 -- pull push mpull mpush clone checkout status commit

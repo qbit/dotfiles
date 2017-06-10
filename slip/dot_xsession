@@ -1,3 +1,5 @@
+#!/bin/sh
+
 export LC_CTYPE="en_US.UTF-8"
 OS=$(uname)
 LPREFIX=/usr/local
@@ -45,8 +47,9 @@ fi
 #	redshift-gtk &
 #fi
 
-if [ -x ~/bin/sctd ]; then
-	~/bin/sctd &
+#if [ -x ~/bin/sctd ]; then
+if [ -x ${LPREFIX}/bin/sctd ]; then
+	${LPREFIX}/bin/sctd &
 fi
 
 if [ -x ${LPREFIX}/bin/xfce4-clipman ]; then
@@ -58,8 +61,6 @@ for font in $(ls /usr/local/share/fonts/); do
 	xset +fp /usr/local/share/fonts/${font}
 done
 xset fp rehash
-
-feh --bg-fill ~/.background.png &
 
 xrdb -merge -load ~/.Xresources &
 

@@ -1,6 +1,6 @@
-INTERACTIVE:true
+INTERACTIVE:false
 MERGE:true
 AFTER:/etc/after_snap
-MIRROR:ftp3.usa.openbsd.org
+#MIRROR:ftp3.usa.openbsd.org
 FTP_OPTS:-C -V
 VER:snapshots

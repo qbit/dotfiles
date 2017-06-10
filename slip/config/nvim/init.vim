@@ -17,6 +17,7 @@ Plug 'fatih/vim-go'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-syntastic/syntastic'
 Plug 'chriskempson/base16-vim'
+Plug 'https://bitbucket.org/kisom/eink.vim.git'
 
 call plug#end()
 
@@ -25,9 +26,10 @@ nmap <Leader>bu :PlugUpdate<CR>
 nmap <Leader>bc :PlugClean<CR>
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-syntax enable
-colorscheme base16-default-dark
-set background=dark
+"colorscheme base16-default-light
+set encoding=utf8
+set t_Co=256 "Explicitly tell vim that the terminal supports 256 colors"
+colorscheme eink
 
 set dir=~/.vim/swaps
 set nolist

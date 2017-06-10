@@ -108,8 +108,9 @@ XTerm*metaSendsEscape:	true
 XTerm*eightBitInput:	false
 XTerm*saveLines:	4096
 XTerm*letterSpace:	1
-XTerm*faceName:		Go Mono:pixelsize=13
+!XTerm*faceName:		Go Mono:pixelsize=13
 !XTerm*faceName:		Anonymous PRO:pixelsize=12
+XTerm*faceName:		Ubuntu Mono:pixelsize=14
 XTerm*cursorBlink:	false
 XTerm*loginShell:	true
 XTerm.underlineURLs:	true
@@ -204,7 +205,7 @@ Xft.hintstyle:		hintslight
 !XTerm*color15: #dae7f1
 !
 XTerm*background: white
-XTerm*foreground: black!
+XTerm*foreground: black
 
 
 ! ------------------------------------------------------------------------------

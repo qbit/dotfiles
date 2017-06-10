@@ -74,14 +74,14 @@
 	("bd-static"
 	 :base-directory "~/org/websites/bolddaemon/"
 	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|org"
-	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/"
+	 :publishing-directory "/ssh:web.akb.io:/var/www/bolddaemon/"
 	 :recursive t
 	 :publishing-function org-publish-attachment
 	 )
 	("bd"
 	 :base-directory "~/org/websites/bolddaemon/"
 	 :base-extension "org"
-	 :publishing-directory "/ssh:akb.io:/var/www/bolddaemon/"
+	 :publishing-directory "/ssh:web.akb.io:/var/www/bolddaemon/"
 	 :recursive t
   	 :publishing-function org-html-publish-to-html
 	 :auto-preamble t

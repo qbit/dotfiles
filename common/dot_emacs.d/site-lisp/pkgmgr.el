@@ -30,16 +30,13 @@
 
 (install-if-missing
  '(
-   arduino-mode
    base16-theme
    flycheck
-   geiser
    git-gutter
    go-autocomplete
    go-eldoc
    go-mode
    golint
-   haskell-mode
    helm
    jinja2-mode
    magit
@@ -47,12 +44,11 @@
    nlinum
    nyan-mode
    org-plus-contrib
-   ox-reveal
    php-mode
    powerline
    psci
-   racket-mode
    rust-mode
+   sr-speedbar
    scad-mode
    scpaste
    web-mode

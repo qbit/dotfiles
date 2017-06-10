@@ -41,6 +41,7 @@
    jinja2-mode
    magit
    moe-theme
+   neotree
    nlinum
    nyan-mode
    org-plus-contrib
@@ -48,7 +49,6 @@
    powerline
    psci
    rust-mode
-   sr-speedbar
    scad-mode
    scpaste
    web-mode

@@ -30,6 +30,7 @@
 
 (install-if-missing
  '(
+   all-the-icons
    base16-theme
    flycheck
    git-gutter

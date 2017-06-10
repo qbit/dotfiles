@@ -30,6 +30,11 @@
 
 (require 'nlinum)
 
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+(setq neo-smart-open t)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
 (require 'openbsd-knf-style)
 (c-add-style "OpenBSD" openbsd-knf-style)
 (setq c-default-style '((c-mode . "OpenBSD")
@@ -60,6 +65,36 @@
 
 (global-whitespace-mode 1)
 (global-font-lock-mode 1)
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(auth-source-save-behavior nil)
+ '(custom-safe-themes
+   (quote
+    ("2a998a3b66a0a6068bcb8b53cd3b519d230dd1527b07232e54c8b9d84061d48d" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "092351ddcd5b95345bbea075361b28cf8a8567d95dc24448589c3a3692bf7d40" "0b591fefbcbb4ddeffc570233c3cd378a47c2535bf289b5a4533f64f22da2f87" default)))
+ '(git-gutter:added-sign "++")
+ '(git-gutter:deleted-sign "--")
+ '(git-gutter:modified-sign "  ")
+ '(global-aggressive-indent-mode t)
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type (quote ghci))
+ '(package-selected-packages
+   (quote
+    (spaceline all-the-icons neotree sr-speedbar base16-theme color-theme-sanityinc-tomorrow web-mode scpaste scad-mode rust-mode racket-mode psci php-mode ox-reveal org-plus-contrib nyan-mode nlinum moe-theme magit lua-mode js2-mode jinja2-mode helm haskell-mode golint go-eldoc go-autocomplete git-gutter geiser flycheck arduino-mode)))
+ '(purescript-mode-hook (quote (capitalized-words-mode turn-on-purescript-indent)))
+ '(safe-local-variable-values
+   (quote
+    ((haskell-process-use-ghci . t)
+     (haskell-indent-spaces . 4))))
+ '(speedbar-show-unknown-files t))
+;;(setq speedbar-use-images nil)
+;;(sr-speedbar-open)
 
 (nyan-mode 1)
 
@@ -100,14 +135,21 @@
 ;;(load-theme 'solarized-dark t)
 ;;(load-theme 'flatland t)
 ;;(require 'moe-theme)
-;;(load-theme 'moe-dark t)
+;;(load-theme 'moe-light t)
 ;; (require 'moe-theme-switcher)
-;;;(powerline-moe-theme)
+;;(powerline-moe-theme)
 ;;(load-theme 'eink-light t)
 (load-theme 'base16-default-light 1)
 
-(require 'powerline)
-(powerline-default-theme)
+;;(require 'powerline)
+;;(powerline-default-theme)
+
+(require 'spaceline-config)
+;;(spaceline-spacemacs-theme)
+(spaceline-emacs-theme)
+
+;;(require 'spaceline-config)
+;;(spaceline-spacemacs-theme)
 
 ;;(require 'golden-ratio)
 ;;(golden-ratio-mode 1)
@@ -147,31 +189,7 @@ With negative prefix, apply to -N lines above."
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 (global-git-gutter-mode +1)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(auth-source-save-behavior nil)
- '(custom-safe-themes
-   (quote
-    ("2a998a3b66a0a6068bcb8b53cd3b519d230dd1527b07232e54c8b9d84061d48d" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "092351ddcd5b95345bbea075361b28cf8a8567d95dc24448589c3a3692bf7d40" "0b591fefbcbb4ddeffc570233c3cd378a47c2535bf289b5a4533f64f22da2f87" default)))
- '(git-gutter:added-sign "++")
- '(git-gutter:deleted-sign "--")
- '(git-gutter:modified-sign "  ")
- '(global-aggressive-indent-mode t)
- '(haskell-process-auto-import-loaded-modules t)
- '(haskell-process-log t)
- '(haskell-process-suggest-remove-import-lines t)
- '(haskell-process-type (quote ghci))
- '(package-selected-packages
-   (quote
-    (base16-theme color-theme-sanityinc-tomorrow web-mode scpaste scad-mode rust-mode racket-mode psci powerline php-mode ox-reveal org-plus-contrib nyan-mode nlinum moe-theme magit lua-mode js2-mode jinja2-mode helm haskell-mode golint go-eldoc go-autocomplete git-gutter geiser flycheck arduino-mode)))
- '(purescript-mode-hook (quote (capitalized-words-mode turn-on-purescript-indent)))
- '(safe-local-variable-values
-   (quote
-    ((haskell-process-use-ghci . t)
-     (haskell-indent-spaces . 4)))))
+
 
 (require 'haskell-interactive-mode)
 (require 'haskell-process)

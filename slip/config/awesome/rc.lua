@@ -1,5 +1,4 @@
 local openbsd = require('openbsd')
---local sharedtags = require("sharedtags")
 local keys = require('keys')
 local gears = require("gears")
 local awful = require("awful")
@@ -98,7 +97,6 @@ awful.layout.layouts = {
     awful.layout.suit.max,
     awful.layout.suit.corner.nw,
     awful.layout.suit.floating,
-    awful.layout.suit,
 }
 
 -- {{{ Helper functions
@@ -184,73 +182,6 @@ local function set_wallpaper(s)
 		gears.wallpaper.maximized(wallpaper, s, true)
 	end
 end
---
---tag.connect_signal("property::screen", function(t)
---	t.preferred_screen_name = t.preferred_screen_name or (t.screen.outputs and t.screen.outputs.name or nil)
---end)
-
---tag.connect_signal("request::screen", function(t)
---    clients = t:clients()
---    for s in screen do
---        if s ~= t.screen and clients and next(clients) then
---            t.screen = s
---            t.original_tag_name = t.original_tag_name or t.name
---            t.name = t.name .. "'"
---            t.volatile = true
---            return
---        end
---    end
---end)
-
---screen.connect_signal("added", function(s)
---    for k,t in pairs(root.tags()) do
---        if t.original_tag_name then
---          -- find the new tag on the new screen
---            new_tag = awful.tag.find_by_name(s, t.original_tag_name)
---            if new_tag then
---                t.name = t.original_tag_name
---                t.original_tag_name = nil
---                new_tag:swap(t)
---                new_tag:delete(t, true)
---            end
---        end
---    end
---end)
-
-
---local tags = sharedtags({
---    { name = "emacs", screen = s, layout = awful.layout.suit.tile },
---    { name = "browser", screen = s, layout = awful.layout.suit.max },
---    { name = "irc", screen = s, layout = awful.layout.suit.tile },
---    { name = "mail", screen = s, layout = awful.layout.suit.tile },
---    { name = "5", screen = s, layout = awful.layout.layouts[1] },
---    { name = "6", screen = s, layout = awful.layout.layouts[1] },
---    { name = "7", screen = s, layout = awful.layout.layouts[1] },
---    { name = "8", screen = s, layout = awful.layout.layouts[1] },
---    { name = "console", screen = 2, layout = awful.layout.suit.tile }
---})
-
---for i = 1, 9 do
---    globalkeys = awful.util.table.join(globalkeys,
---        -- View tag only.
---        awful.key({ modkey }, "#" .. i + 9,
---            function ()
---                local screen = awful.screen.focused()
---                local tag = tags[i]
---                if tag then
---                    sharedtags.viewonly(tag, screen)
---                end
---            end),
---        -- Toggle tag.
---        awful.key({ modkey, "Control" }, "#" .. i + 9,
---            function ()
---                local screen = awful.screen.focused()
---                local tag = tags[i]
---                if tag then
---                    sharedtags.viewtoggle(tag, screen)
---                end
---            end))
---end
 
 awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
@@ -525,13 +456,10 @@ awful.rules.rules = {
         },
       }, properties = { floating = true }},
     { rule = { class = "Chromium-browser" },
-      --properties = { screen = 1, tag = tags["browser"] } },
       properties = { screen = 1, tag = "browser" } },
     { rule = { class = "Firefox" },
-      --properties = { screen = 1, tag = tags["browser"] } },
       properties = { screen = 1, tag = "browser" } },
     { rule = { class = "XConsole" },
-      --properties = { screen = 1, tag = tags["console"] } },
       properties = { screen = 1, tag = "console" } },
     { rule = { class = "SshAskpass" },
       properties = { raise = true, focus = awful.client.focus.filter } },

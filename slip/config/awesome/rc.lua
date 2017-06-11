@@ -241,7 +241,7 @@ awful.screen.connect_for_each_screen(function(s)
        layout = wibox.layout.align.horizontal,
        { -- Left widgets
 	  layout = wibox.layout.fixed.horizontal,
-	  obsd.battery_bar,
+	  obsd.enable_battery(),
 	  sep,
 	  s.mytaglist,
 	  sep,
@@ -255,8 +255,8 @@ awful.screen.connect_for_each_screen(function(s)
 	  mytextclock,
 	  sep,
 	  wibox.widget.systray(),
-	  obsd.volume_slider,
-	  obsd.snap_checkbox,
+	  obsd.enable_volume(),
+	  obsd.enable_snap(),
 	  s.mylayoutbox,
        },
     }

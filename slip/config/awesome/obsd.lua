@@ -10,11 +10,11 @@ local ltn12 = require("ltn12")
 local obsd = {}
 
 obsd.enable_debug = false
-function obsd.enable_volume()
+function obsd.enable_volume(widget)
     local vol_timer = gears.timer({ timeout = 1.5 })
     obsd.current_volume = 255
 
-    obsd.volume_slider = wibox.widget {
+    obsd.volume_slider = widget or wibox.widget {
         bar_shape           = gears.shape.rounded_rect,
         bar_height          = 3,
         bar_color           = beautiful.fg_color,
@@ -59,12 +59,12 @@ function obsd.enable_volume()
     return obsd.volume_slider
 end
 
-function obsd.enable_snap()
+function obsd.enable_snap(widget)
     local snap_timer = gears.timer({ timeout = 1.5 })
     obsd.snap_found = false
     obsd.snap_version = ""
 
-    obsd.snap_checkbox = wibox.widget {
+    obsd.snap_checkbox = widget or wibox.widget {
         checked       = false,
         color         = beautiful.snap_new,
         border_color  = beautiful.snap_border,
@@ -129,12 +129,12 @@ function obsd.enable_snap()
     return obsd.snap_checkbox
 end
 
-function obsd.enable_battery()
+function obsd.enable_battery(widget)
     local batt_timer = gears.timer({ timeout = 1.5 })
     obsd.battery_percent = 100
     obsd.battery_charging = false
 
-    obsd.battery_bar = wibox.widget {
+    obsd.battery_bar = widget or wibox.widget {
         {
             background_color = beautiful.battery_bg,
             border_color     = beautiful.battery_border,

@@ -1,16 +1,20 @@
-bind C4-t       vtile
-bind C4-r       htile
-command		irssi	"xterm -class irssi -e \"ssh qbit.io irc\""
+fontname "terminus:pixelsize=14:bold"
+
+sticky yes
+
+command		chrome	"chrome"
+command		irc	"xterm -class irc"
 command		xterm	"xterm"
+command		Mail	"xterm -class Mail -e \"mutt\""
 command		next	"mpc next"
 command		pause	"mpc toggle"
 
-bind CM-Return	"xterm"
+bind-key	MS-s	window-htile
+bind-key	MS-v	window-vtile
 
-bind 4-p	"mpc toggle"
-bind 4-n	"mpc next"
+autogroup 1	"emacs,Emacs"
+autogroup 2	"chromium-browser,Chromium-browser"
+autogroup 3	"irc"
+autogroup 4	"Mail"
+autogroup 9	"xconsole,XConsole"
 
-autogroup 2	"chrome,Chrome"
-autogroup 3	"Mail"
-
-sticky yes

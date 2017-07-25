@@ -1,0 +1,55 @@
+mpd_host		127.0.0.1
+mpd_port		6600
+background              no
+#border_width		235
+#border_height		150
+maximum_width 		235
+use_xft                 yes
+xftfont                 aqua:size=9
+double_buffer           yes
+update_interval         2
+alignment               top_left
+gap_x                   10
+gap_y                   20
+no_buffers              yes
+pad_percents            1
+draw_shades		yes
+
+TEXT
+${color #ffcb48}CPU:$color $cpu%
+
+${color #78af78}$cpubar
+${color #78af78}${cpugraph 78af78 a3a3a3}
+${color #98c2c7}NAME${goto 80}PID${goto 120}  CPU%${goto 190}MEM%
+${color #e5e5e5}${top name 1}${goto 80}${top pid 1}${goto 120}${top cpu 1}${goto 190}${top mem 1}
+${color #c4c4c4}${top name 2}${goto 80}${top pid 2}${goto 120}${top cpu 2}${goto 190}${top mem 2}
+${color #a3a3a3}${top name 3}${goto 80}${top pid 3}${goto 120}${top cpu 3}${goto 190}${top mem 3}
+${color #828282}${top name 4}${goto 80}${top pid 4}${goto 120}${top cpu 4}${goto 190}${top mem 4}
+
+${color #ffcb48}MEMORY:$color
+
+${color #98c2c7}RAM:$color     $memperc%         ${color #78af78}${membar 6}${color}
+${color #98c2c7}Swap:$color     $swapperc%         ${color #78af78}${swapbar 6}$color
+
+${color #ffcb48}NET:$color iwm0
+${color #98c2c7}DOWN:	${color #ffffff}${downspeed iwm0}				${color #98c2c7}UP:	${color #ffffff}${upspeed iwm0}
+${color #98c2c7}${downspeedgraph iwm0 25,100 78af78 a3a3a3}				${color #98c2c7}${upspeedgraph iwm0 25,100 78af78 a3a3a3}
+${color #98c2c7}TOTAL: ${color #ffffff}${totaldown iwm0}				${color #98c2c7}TOTAL: ${color #ffffff}${totalup iwm0}
+
+${color #ffcb48}DISK:$color
+
+${color #e5e5e5}/home$color${goto 80}${fs_used_perc /home}%${goto 120}${color #78af78}${fs_bar 6 /home}$color
+${color #e5e5e5}/usr/ports$color${goto 80}${fs_used_perc /usr/ports}%${goto 120}${color #78af78}${fs_bar 6 /usr/ports}$color
+${color #e5e5e5}/usr/obj$color${goto 80}${fs_used_perc /usr/obj}%${goto 120}${color #78af78}${fs_bar 6 /usr/obj}$color
+
+${color #ffcb48}BATTERY:$color ${execi 200 battery}%
+
+${color #78af78}${execibar 200 battery}
+${if_mpd_playing}
+${color #ffcb48}MUSIC:${color}
+
+${color #e5e5e5}${mpd_smart}
+${color #78af78}${mpd_bar}$color
+${color #828282}Random:${goto 80}${mpd_random}
+Repeat:${goto 80}${mpd_repeat}
+${endif}

@@ -18,8 +18,8 @@ draw_shades		yes
 TEXT
 ${color #ffcb48}CPU:$color $cpu%
 
-${color #78af78}$cpubar
-${color #78af78}${cpugraph 78af78 a3a3a3}
+# cpugraph (cpuN) (height),(width) (gradient colour 1) (gradient colour 2) (scale) (-t) (-l)
+${color #78af78}${cpugraph 78af78 a3a3a3 -t}
 ${color #98c2c7}NAME${goto 80}PID${goto 120}  CPU%${goto 190}MEM%
 ${color #e5e5e5}${top name 1}${goto 80}${top pid 1}${goto 120}${top cpu 1}${goto 190}${top mem 1}
 ${color #c4c4c4}${top name 2}${goto 80}${top pid 2}${goto 120}${top cpu 2}${goto 190}${top mem 2}

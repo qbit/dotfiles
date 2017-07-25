@@ -47,6 +47,8 @@ set -A complete_signify_3 -- -p -x -c -m -t -z
 
 set -A complete_make_1 -- install clean repackage reinstall
 
+set -A complete_beet_1 -- clearart config duplicates embedart extractart fetchart fields fingerprint help import lastgenre list lyrics mbsync missing modify move mpdstats remove scrub splupdate as stats submit update version web write
+
 set -A complete_emacs -- --daemon --debug-init
 set -A complete_emacsclient -- -c -t
 

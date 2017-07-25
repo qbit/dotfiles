@@ -256,7 +256,7 @@ awful.screen.connect_for_each_screen(function(s)
 	  sep,
 	  wibox.widget.systray(),
 	  obsd.enable_volume(),
-	  obsd.enable_snap(),
+	  --obsd.enable_snap(),
 	  s.mylayoutbox,
        },
     }

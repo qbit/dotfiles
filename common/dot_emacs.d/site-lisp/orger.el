@@ -1,7 +1,6 @@
 (require 'org)
 (require 'ox-publish)
 (require 'ox-html)
-(require 'ox-reveal)
 
 (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0")
 

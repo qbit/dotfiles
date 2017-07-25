@@ -41,6 +41,14 @@ case "$U" in
 			HAS_BATT=false
 		fi
 		;;
+	Linux)
+		if [ -f /sys/class/power_supply/BAT0/capacity ]; then
+			BATT=$(cat /sys/class/power_supply/BAT0/capacity)
+			CHRGING="?"
+		else
+			HAS_BATT=false
+		fi
+		;;
 	*)
 		HAS_BATT=false
 esac
@@ -60,7 +68,7 @@ fi
 if [ $BATT -lt 50 ] && [ $BATT -gt 21 ]; then
 	if [ $TMUX_OUT == true ]; then
 		COLOR=$T_YELLOW
-	else 
+	else
 		COLOR=$YELLOW
 	fi
 fi

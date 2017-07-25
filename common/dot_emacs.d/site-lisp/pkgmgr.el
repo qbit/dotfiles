@@ -28,6 +28,16 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
+(when (boundp 'package-pinned-packages)
+  (setq package-pinned-packages
+        '((org-plus-contrib                  . "org")
+	  (org                               . "org")
+	  (helm                              . "melpa-stable")
+	  (magit                             . "melpa-stable")
+	  (flycheck                          . "melpa-stable")
+	  (flycheck                          . "melpa-stable")
+	  )))
+
 (install-if-missing
  '(
    all-the-icons
@@ -41,17 +51,16 @@
    helm
    jinja2-mode
    magit
-   moe-theme
    neotree
    nlinum
    nyan-mode
+   org
    org-plus-contrib
    php-mode
-   powerline
-   psci
    rust-mode
    scad-mode
    scpaste
+   spaceline
    web-mode
    ))
 

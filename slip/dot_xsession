@@ -28,19 +28,8 @@ if [ -x ${LPREFIX}/bin/scmpc ]; then
 	${LPREFIX}/bin/scmpc &
 fi
 
-if [ -x ${LPREFIX}/bin/trayer ]; then
-	#trayer \
-		--edge top \
-		--align right \
-		--width 9 \
-		--height 12 \
-		--alpha 180 \
-		--tint 0 \
-		--transparent true \
-		--SetDockType true \
-		--SetPartialStrut true \
-		--expand true \
-		--widthtype percent  &
+if [ -x ${LPREFIX}/bin/scmpc ]; then
+	${LPREFIX}/bin/scmpc &
 fi
 
 #if [ -x ${LPREFIX}/bin/redshift-gtk ]; then

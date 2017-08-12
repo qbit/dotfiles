@@ -1,21 +1,13 @@
-" set the runtime path to include Vundle and initialize
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-"Plugin 'VundleVim/Vundle.vim'
-"Plugin 'airblade/vim-gitgutter'
-"Plugin 'fatih/vim-go'
-"Plugin 'vim-syntastic/syntastic'
-"Plugin 'chriskempson/base16-vim'
+if isdirectory('/usr/src/sys')
+	set path+=/usr/src/sys/
+	" let g:syntastic_c_include_dirs = ['/usr/src/sys/']
+endif
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'fatih/vim-go'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
 Plug 'chriskempson/base16-vim'
 Plug 'https://bitbucket.org/kisom/eink.vim.git'
 
@@ -70,7 +62,11 @@ au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us
 
 autocmd BufWritePre * %s/\s\+$//e
 
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
 endif
+

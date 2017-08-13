@@ -17,6 +17,7 @@ alias cdw='cd $(make show=WRKSRC)'
 alias pup='doas -n /usr/sbin/pkg_add -u'
 alias mutt='stty discard undef; mutt'
 alias mkae='make'
+alias cabal='env TMPDIR=/usr/local/build/ cabal'
 
 if [ -e ~/.kshlib ]; then
     . ~/.kshlib

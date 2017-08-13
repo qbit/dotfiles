@@ -1,0 +1,7 @@
+#!/bin/sh
+
+name=$(make show=DISTNAME)
+fname="/tmp/${name}.diff"
+
+cvs diff . > "$fname"
+echo "Created: $fname"

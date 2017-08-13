@@ -325,7 +325,7 @@ globalkeys = awful.util.table.join(
               {description = "use internal screen", group = "screen"}),
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ modkey,  "Shift"  }, "l",     function () awful.spawn("xlock")                end,
+    awful.key({ modkey,  "Control"}, "l",     function () awful.spawn("xlock")                end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),

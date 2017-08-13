@@ -1,8 +1,3 @@
-if isdirectory('/usr/src/sys')
-	set path+=/usr/src/sys/
-	" let g:syntastic_c_include_dirs = ['/usr/src/sys/']
-endif
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'fatih/vim-go'

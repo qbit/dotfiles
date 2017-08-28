@@ -48,9 +48,9 @@
    go-eldoc
    go-mode
    golint
-   helm
    jinja2-mode
    magit
+   moe-theme
    neotree
    nlinum
    nyan-mode

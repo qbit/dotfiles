@@ -2,8 +2,6 @@
 (require 'ox-publish)
 (require 'ox-html)
 
-(setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0")
-
 (add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -27,7 +25,7 @@
 
 (setq org-agenda-files (directory-files "~/org/agenda" t "\\.org$"))
 
-(setq orger-pub-to "/ssh:akb.io:/var/www/htdocs/org/")
+;;(setq orger-pub-to "/ssh:web.akb.io:/var/www/htdocs/org/")
 
 (setq org-capture-templates
       '(
@@ -39,10 +37,6 @@
          "* %?\n %U\n %i\n"
          :empty-lines 1
 	 :prepend 1)
-	("m" "BoldDaemon Maker Slides"
-	 entry (file+headline "~/org/websites/bd_maker/index.org" "Slides")
-	 "* %?"
-	 :empty-lines 1)
 	))
 
 (add-to-list 'org-capture-templates
@@ -84,16 +78,6 @@
 	 :recursive t
   	 :publishing-function org-html-publish-to-html
 	 :auto-preamble t
-	 )
-	("bd-maker"
-	 ;; Path to your org files.
-	 :base-directory "~/org/websites/bd_maker/"
-	 :base-extension "org"
-
-	 :publishing-directory "/ssh:akb.io:/var/www/bd_maker/"
-	 :recursive t
-	 :publishing-function org-reveal-publish-to-reveal
-	 :html-extension "html"
 	 )
 	("bd-static-test"
 	 :base-directory "~/org/websites/bolddaemon/"

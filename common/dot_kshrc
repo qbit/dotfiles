@@ -8,16 +8,16 @@ export KEYID=0x1F81112D62A9ADCE
 
 OS=$(uname)
 
-alias sbcl="rlwrap sbcl"
-
-alias tmux="tmux -2"
-alias irc="export TERM=xterm; tmux at -t irc"
+alias ag='ag --no'
 alias build="dpb -c -h /home/buildie/hosts -P"
-alias cdw='cd $(make show=WRKSRC)'
-alias pup='doas -n /usr/sbin/pkg_add -u'
-alias mutt='stty discard undef; mutt'
-alias mkae='make'
 alias cabal='env TMPDIR=/usr/local/build/ cabal'
+alias cdw='cd $(make show=WRKSRC)'
+alias irc="export TERM=xterm; tmux at -t irc"
+alias mkae='make'
+alias mutt='stty discard undef; mutt'
+alias pup='doas -n /usr/sbin/pkg_add -u'
+alias sbcl="rlwrap sbcl"
+alias tmux="tmux -2"
 
 if [ -e ~/.kshlib ]; then
     . ~/.kshlib

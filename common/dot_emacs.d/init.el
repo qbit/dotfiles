@@ -78,7 +78,7 @@
  '(auth-source-save-behavior nil)
  '(custom-safe-themes
    (quote
-    ("2a998a3b66a0a6068bcb8b53cd3b519d230dd1527b07232e54c8b9d84061d48d" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "092351ddcd5b95345bbea075361b28cf8a8567d95dc24448589c3a3692bf7d40" "0b591fefbcbb4ddeffc570233c3cd378a47c2535bf289b5a4533f64f22da2f87" default)))
+    ("d7ec3478124ebebf75ab78dc532569c80ddf9417e14d0a30825b3b050dd5de4c" "2a998a3b66a0a6068bcb8b53cd3b519d230dd1527b07232e54c8b9d84061d48d" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "092351ddcd5b95345bbea075361b28cf8a8567d95dc24448589c3a3692bf7d40" "0b591fefbcbb4ddeffc570233c3cd378a47c2535bf289b5a4533f64f22da2f87" default)))
  '(git-gutter:added-sign "++")
  '(git-gutter:deleted-sign "--")
  '(git-gutter:modified-sign "  ")
@@ -89,7 +89,7 @@
  '(haskell-process-type (quote ghci))
  '(package-selected-packages
    (quote
-    (spaceline all-the-icons neotree sr-speedbar base16-theme color-theme-sanityinc-tomorrow web-mode scpaste scad-mode rust-mode racket-mode psci php-mode ox-reveal org-plus-contrib nyan-mode nlinum moe-theme magit lua-mode js2-mode jinja2-mode helm haskell-mode golint go-eldoc go-autocomplete git-gutter geiser flycheck arduino-mode)))
+    (counsel swiper load-relative helm ivy spaceline all-the-icons neotree sr-speedbar base16-theme color-theme-sanityinc-tomorrow web-mode scpaste scad-mode rust-mode racket-mode psci php-mode ox-reveal org-plus-contrib nyan-mode nlinum moe-theme magit lua-mode js2-mode jinja2-mode haskell-mode golint go-eldoc go-autocomplete git-gutter geiser flycheck arduino-mode)))
  '(purescript-mode-hook (quote (capitalized-words-mode turn-on-purescript-indent)))
  '(safe-local-variable-values
    (quote
@@ -105,8 +105,8 @@
 
 (set-face-attribute 'default nil :height 100)
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/eink-emacs")
+;;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/eink-emacs")
 
 (setq backup-directory-alist '(("." . "~/.esaves")))
 (setq inhibit-startup-screen t)

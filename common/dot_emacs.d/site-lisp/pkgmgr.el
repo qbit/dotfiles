@@ -10,19 +10,27 @@
 (require 'package)
 
 (setq tls-checktrust t)
-(setq tls-program (list "nc -v -c -e %h %h %p"))
+(setq tls-program (list "nc -z -v -c -e %h %h %p"))
 (setq tls-success "TLS handshake negotiated")
 (setq gnutls-trustfiles (list "/etc/ssl/cert.pem"))
 (setq gnutls-verify-error t)
 
-(setq package-archives '(("melpa" .
+;; (setq package-archives '(("melpa" .
+			  ;; "https://melpa.org/packages/")
+			 ;; ("org" .
+			  ;; "http://orgmode.org/elpa/") ;; Get you some https guys!
+			 ;; ("gnu" .
+			  ;; "https://elpa.gnu.org/packages/")
+			 ;; ("marmalade" .
+			  ;; "https://marmalade-repo.org/packages/")))
+
+
+(setq package-archives '(("org" .
+			  "http://orgmode.org/elpa/")
+			 ("melpa" .
 			  "https://melpa.org/packages/")
-			 ("org" .
-			  "http://orgmode.org/elpa/") ;; Get you some https guys!
 			 ("gnu" .
-			  "https://elpa.gnu.org/packages/")
-			 ("marmalade" .
-			  "https://marmalade-repo.org/packages/")))
+			  "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -32,7 +40,6 @@
   (setq package-pinned-packages
         '((org-plus-contrib                  . "org")
 	  (org                               . "org")
-	  (helm                              . "melpa-stable")
 	  (magit                             . "melpa-stable")
 	  (flycheck                          . "melpa-stable")
 	  (flycheck                          . "melpa-stable")
@@ -50,6 +57,9 @@
    golint
    jinja2-mode
    magit
+   ivy
+   counsel
+   swiper
    moe-theme
    neotree
    nlinum

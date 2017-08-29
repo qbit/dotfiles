@@ -66,6 +66,6 @@ color index brightdefault default '~U'
 color index red default '~z 500000-'
 
 # make diffs pop
-color body	brightblack	default '^(Index: |\+\+\+ |--- |diff ).*$'
-color body	red		default '^-.*$'
-color body	green		default '^\+.*$'
+#color body	brightblack	default '^(Index: |\+\+\+ |--- |diff ).*$'
+#color body	red		default '^-.*$'
+#color body	green		default '^\+.*$'

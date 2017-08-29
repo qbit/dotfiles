@@ -2,6 +2,7 @@
 #cvs -q -danoncvs@anoncvs1.usa.openbsd.org:/cvs
 #cvs -q -dabieber@cvs.openbsd.org:/cvs
 cvs -q -danoncvs@anoncvs3.usa.openbsd.org:/cvs
+#cvs -q -danoncvs@obsdacvs.cs.toronto.edu:/cvs
 diff -upN
 update -Pd
 checkout -P

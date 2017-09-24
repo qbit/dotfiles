@@ -2,6 +2,7 @@
 
 session='pcvsup'
 counter=0
+width=$(stty -e | awk  '$0 ~ "columns" {print $6}')
 
 set -A mirrors \
 	anoncvs@anoncvs1.usa.openbsd.org:/cvs \
@@ -18,7 +19,11 @@ tmux -2 new-session -d -s $session
 for mirror in ${mirrors[@]}; do
 	if [ -d ${dirs[${counter}]} ]; then
 		if [ counter -eq 0 ]; then
-			tmux split-window -h -p 70
+			if [ $width -gt 95 ]; then
+				tmux split-window -h -p 70
+			else
+				tmux split-window -p 70
+			fi
 		fi
 
 		tmux select-pane -t ${counter}
@@ -26,7 +31,11 @@ for mirror in ${mirrors[@]}; do
 		tmux send-keys "cvs -d${mirror} up" C-m
 
 		if [ counter -eq 1 ]; then
-			tmux split-window -h -p 50
+			if [ $width -gt 95 ]; then
+				tmux split-window -h -p 50
+			else
+				tmux split-window -p 50
+			fi
 		fi
 
 		((counter=counter+1))

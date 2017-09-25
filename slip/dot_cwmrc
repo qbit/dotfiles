@@ -18,3 +18,4 @@ autogroup 3	"irc"
 autogroup 4	"Mail"
 autogroup 9	"xconsole,XConsole"
 
+color urgencyborder red

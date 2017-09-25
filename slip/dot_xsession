@@ -51,6 +51,7 @@ xrdb -merge -load ~/.Xresources &
 xidle -delay 5 -program "/usr/X11R6/bin/xlock" -timeout 300 &
 
 #exec xmonad-x86_64-openbsd
-exec awesome
-#exec cwm
+#exec awesome
+exec cwm
 #exec fvwm
+#exec wmaker

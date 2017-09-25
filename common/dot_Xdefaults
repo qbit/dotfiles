@@ -52,7 +52,7 @@ XLock.dpmsoff:		15
 XLock.mode:		random
 XLock.mousemotion:	on
 XLock.program:		/usr/games/fortune -a
-!XLock.random.modelist:	pacman space tetris xcl
+XLock.random.modelist:	flag
 
 XIdle.timeout:		300
 
@@ -135,6 +135,22 @@ XTerm*inheritPixmap:	true
 !XTerm*color13:		#ce87e8
 !XTerm*color14:		#87e8ce
 !XTerm*color15:		#dae7f1
+
+irc*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+irc*bellIsUrgent:	true
+irc*cursorColor:	green
+irc*scrollBar: 	false
+irc*locale:		true
+irc*metaSendsEscape:	true
+irc*eightBitInput:	false
+irc*saveLines:	4096
+irc*letterSpace:	1
+irc*faceName:         Ubuntu Mono:pixelsize=14
+irc*cursorBlink:	false
+irc*loginShell:	true
+irc.underlineURLs:	true
+irc.matcher.button:	1
+irc*inheritPixmap:	true
 
 Xft.dpi:		100
 !Xft.dpi:		96

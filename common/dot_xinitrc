@@ -6,4 +6,5 @@ xset fp rehash
 feh --bg-center /home/qbit/.background.png &
 
 #exec stumpwm
-exec awesome
+#exec awesome
+exec fvwm

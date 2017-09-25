@@ -1,6 +1,6 @@
 #-*-Shell-script-*-
 
-#HISTFILE=~/.ksh_history
+HISTFILE=~/.ksh_history
 
 export LC_CTYPE="en_US.UTF-8"
 

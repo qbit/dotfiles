@@ -16,6 +16,9 @@ pad_percents            1
 draw_shades		yes
 
 TEXT
+${color #ffcb48}BATTERY:$color ${execi 200 ~/bin/battery}%
+${color #78af78}${execibar 200 ~/bin/battery}
+
 ${color #ffcb48}CPU:$color $cpu%
 
 # cpugraph (cpuN) (height),(width) (gradient colour 1) (gradient colour 2) (scale) (-t) (-l)
@@ -42,9 +45,6 @@ ${color #e5e5e5}/home$color${goto 80}${fs_used_perc /home}%${goto 120}${color #7
 ${color #e5e5e5}/usr/ports$color${goto 80}${fs_used_perc /usr/ports}%${goto 120}${color #78af78}${fs_bar 6 /usr/ports}$color
 ${color #e5e5e5}/usr/obj$color${goto 80}${fs_used_perc /usr/obj}%${goto 120}${color #78af78}${fs_bar 6 /usr/obj}$color
 
-${color #ffcb48}BATTERY:$color ${execi 200 ~/bin/battery}%
-
-${color #78af78}${execibar 200 ~/bin/battery}
 ${if_mpd_playing}
 ${color #ffcb48}MUSIC:${color}
 

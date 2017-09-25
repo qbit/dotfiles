@@ -1,7 +1,8 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
+;;; init: --- it inits
+;;; Commentary:
+;;; It inits.
+;;; Code:
+
 (package-initialize)
 
 ;;;(setq initial-scratch-message ";; ╔═╗┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬\n;; ╚═╗│  ├┬┘├─┤ │ │  ├─┤\n;; ╚═╝└─┘┴└─┴ ┴ ┴ └─┘┴ ┴\n\n")
@@ -14,6 +15,7 @@
 	 (getenv "PATH") ";"
 	 "~/go/bin" ";"
 	 "~/.go/bin" ";"
+	 "~/.cabal/bin" ";"
 	 "~/node_bin/node_modules/.bin"))
 
 (let ((default-directory user-emacs-directory))
@@ -193,4 +195,5 @@ With negative prefix, apply to -N lines above."
 
 (set-face-attribute 'default t :height 100)
 
-
+(provide 'init)
+;;; init.el ends here

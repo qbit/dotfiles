@@ -4,7 +4,10 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(setq initial-scratch-message ";; ╔═╗┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬\n;; ╚═╗│  ├┬┘├─┤ │ │  ├─┤\n;; ╚═╝└─┘┴└─┴ ┴ ┴ └─┘┴ ┴\n\n")
+;;;(setq initial-scratch-message ";; ╔═╗┌─┐┬─┐┌─┐┌┬┐┌─┐┬ ┬\n;; ╚═╗│  ├┬┘├─┤ │ │  ├─┤\n;; ╚═╝└─┘┴└─┴ ┴ ┴ └─┘┴ ┴\n\n")
+(setq initial-scratch-message (concat
+				(shell-command-to-string "fortune -o | sed -e 's/^/;; /g'")
+				"\n\n"))
 
 (setenv "PATH"
 	(concat
@@ -22,16 +25,14 @@
 	    (normal-top-level-add-subdirs-to-load-path)))
 	 load-path)))
 
+(require 'fortune)
 (require 'pkgmgr)
-;;(require 'externals)
 (require 'keycuts)
-;;(require 'location)
 (require 'orger)
 (require 'browse)
-
 (require 'nlinum)
-
 (require 'neotree)
+
 (global-set-key [f8] 'neotree-toggle)
 (setq neo-smart-open t)
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
@@ -60,15 +61,16 @@
 (setq whitespace-style '(trailing lines space-before-tab)
       whitespace-line-column 80)
 
-;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
-;;(add-hook 'before-save-hook nil)
+(add-hook 'before-save-hook (lambda ()
+			      (delete-trailing-whitespace)
+			      ))
+(add-hook 'before-save-hook nil)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
 (setq magit-push-always-verify nil)
 
 (global-whitespace-mode 1)
 (global-font-lock-mode 1)
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -111,10 +113,6 @@
 (setq backup-directory-alist '(("." . "~/.esaves")))
 (setq inhibit-startup-screen t)
 (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>λ\n]*#?[]#$%>λ].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
-
-(when (file-exists-p "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
-  (add-to-list 'load-path "/usr/localshare/emacs/site-lisp/mu4e/")
-  (require 'mail))
 
 (file-exists-p "~quicklisp/slime-helper.el")
 (load (expand-file-name "~/quicklisp/slime-helper.el")

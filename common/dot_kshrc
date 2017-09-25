@@ -8,9 +8,9 @@ export KEYID=0x1F81112D62A9ADCE
 
 OS=$(uname)
 
-alias ag='ag --no'
+alias ag='ag --nocolor'
 alias build="dpb -c -h /home/buildie/hosts -P"
-alias cabal='env TMPDIR=/usr/local/build/ cabal'
+alias cabal='env TMPDIR=/usr/local/cabal/build/ cabal'
 alias cdw='cd $(make show=WRKSRC)'
 alias irc="export TERM=xterm; tmux at -t irc"
 alias mkae='make'

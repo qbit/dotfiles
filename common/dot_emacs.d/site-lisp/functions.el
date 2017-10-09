@@ -6,8 +6,6 @@
 
 ;;; Code:
 
-
-
 (package-initialize)
 
 (defun install-if-missing (lst)

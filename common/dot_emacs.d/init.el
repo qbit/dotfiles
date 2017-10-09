@@ -1,5 +1,7 @@
 (package-initialize)
 
+(setq custom-file "~/.emacs.d/site-lisp/custom.el")
+
 (let ((default-directory user-emacs-directory))
   (setq load-path
 	(append

@@ -1,6 +1,15 @@
-fontname "terminus:pixelsize=14:bold"
-
 sticky yes
+gap 18 0 0 0
+
+fontname "Ubuntu Mono:pixelsize=14"
+
+borderwidth	2
+color activeborder	"#99aab9"
+color font		"#eeeeff"
+color inactiveborder	"#eeeeee"
+color menubg		"#798a99"
+color menufg		"#eeeeff"
+color urgencyborder	"red"
 
 command		chrome	"chrome"
 command		irc	"xterm -class irc"
@@ -9,13 +18,14 @@ command		Mail	"xterm -class Mail -e \"mutt\""
 command		next	"mpc next"
 command		pause	"mpc toggle"
 
-bind-key	MS-s	window-htile
-bind-key	MS-v	window-vtile
+bind-key	MS-h	"window-htile"
+bind-key	MS-v	"window-vtile"
+bind-key	M-r	"rofi -show run"
+bind-key	M-n	"mpc next"
+bind-key	MS-p	"mpc toggle"
 
 autogroup 1	"emacs,Emacs"
 autogroup 2	"chromium-browser,Chromium-browser"
 autogroup 3	"irc"
 autogroup 4	"Mail"
 autogroup 9	"xconsole,XConsole"
-
-color urgencyborder red

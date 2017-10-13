@@ -1,5 +1,8 @@
 (package-initialize)
 
+;;(toggle-debug-on-quit)
+;;(toggle-debug-on-error)
+
 (setq custom-file "~/.emacs.d/site-lisp/custom.el")
 
 (let ((default-directory user-emacs-directory))

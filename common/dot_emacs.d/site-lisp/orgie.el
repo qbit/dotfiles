@@ -12,8 +12,8 @@
 
 (setq org-capture-templates
       `(("t" "Todo"
-	 entry (file+headline "~/new_org/gtd.org" "Tasks")
-	 "* TODO %?\n  %i\n  %a")
+	 entry (file+headline "~/new_org/gtd.org" "TODOs")
+	 "* TODO %?\n  :PROPERTIES:\n  :LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)\n  :END:\n")
         ("j" "Journal"
 	 entry (file+olp+datetree "~/new_org/journal-%Y-%m.org")
 	 "* %?\nEntered on %U\n  %i\n  %a")))

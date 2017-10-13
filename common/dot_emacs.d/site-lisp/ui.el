@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
+;;(set-default-font "Ubuntu Mono:pixelsize=15")
 (setq inhibit-startup-screen t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)

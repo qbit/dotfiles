@@ -9,6 +9,9 @@
       kept-old-versions 2
       version-control t)
 
+(setq inferior-lisp-program "sbcl")
+(setq slime-contribs '(slime-fancy))
+
 (provide 'config)
 
 ;;; config.el ends here

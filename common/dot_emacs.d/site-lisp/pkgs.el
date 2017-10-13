@@ -40,6 +40,7 @@
 	(org-plus-contrib . "org")
 	(scad-mode        . "melpa-stable")
 	(scpaste          . "melpa-stable")
+	(slime            . "melpa-stable")
 	(spaceline        . "melpa-stable")
 	(swiper           . "melpa-stable")
 	(web-mode         . "melpa-stable")

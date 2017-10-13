@@ -4,6 +4,13 @@ export LC_CTYPE="en_US.UTF-8"
 OS=$(uname)
 LPREFIX=/usr/local
 
+#wmanager="cwm"
+wmanager="awesome"
+#wmanager="xmonad-x86_64-openbsd"
+#wmanager="fvwm"
+
+grep PATH ~/.kshrc
+
 if [ $OS != "OpenBSD" ]; then
 	LPREFIX=/usr
 fi
@@ -15,6 +22,32 @@ xset -b &
 if [ -x ${LPREFIX}/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
         eval `dbus-launch --sh-syntax --exit-with-session`
 fi
+
+case "$wmanager" in
+	cwm)
+		trayer				\
+			--edge top		\
+			--align center		\
+			--width 5		\
+			--height 12		\
+			--alpha 180		\
+			--tint 0		\
+			--transparent true	\
+			--SetDockType true	\
+			--SetPartialStrut true	\
+			--expand true		\
+			--widthtype percent &
+		feh --bg-center ~/.background.png &
+		;;
+	awesome)
+		;;
+	xmonad-x86_64-openbsd)
+		feh --bg-center ~/.background.png &
+		;;
+	fvwm)
+		;;
+esac
+
 
 if [ -f ~/.Xmodmap ]; then
 	xmodmap ~/.Xmodmap &
@@ -50,8 +83,4 @@ xrdb -merge -load ~/.Xresources &
 
 xidle -delay 5 -program "/usr/X11R6/bin/xlock" -timeout 300 &
 
-#exec xmonad-x86_64-openbsd
-#exec awesome
-exec cwm
-#exec fvwm
-#exec wmaker
+exec $wmanager

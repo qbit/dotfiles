@@ -1,11 +1,22 @@
+#!/bin/ksh
 #-*-Shell-script-*-
 
+. /etc/ksh.kshrc
+
+#grey="\033[01;30m"
+#red="\033[01;31m"
+#green="\033[01;32m"
+#yellow="\033[01;33m"
+#blue="\033[01;34m"
+#magenta="\033[01;35m"
+#cyan="\033[01;35m"
+bold="\033[01;39m"
+white="\033[0m"
+
 HISTFILE=~/.ksh_history
-
-export LC_CTYPE="en_US.UTF-8"
-
-export KEYID=0x1F81112D62A9ADCE
-
+LC_CTYPE="en_US.UTF-8"
+KEYID=0x1F81112D62A9ADCE
+GPG_TTY=$(tty)
 OS=$(uname)
 
 alias ag='ag --nocolor'
@@ -15,19 +26,18 @@ alias cdw='cd $(make show=WRKSRC)'
 alias irc="export TERM=xterm; tmux at -t irc"
 alias mkae='make'
 alias mutt='stty discard undef; mutt'
+alias mkdiff='cvs diff > ~/patches/$(make show=DISTNAME).diff'
 alias pup='doas -n /usr/sbin/pkg_add -u'
 alias sbcl="rlwrap sbcl"
 alias tmux="tmux -2"
 
-if [ -e ~/.kshlib ]; then
-    . ~/.kshlib
-fi
-
 if [ -e ~/.ksh_completions ]; then
+    # shellcheck source=/home/qbit/.ksh_completions
     . ~/.ksh_completions
 fi
 
 if [ -e ~/.git-prompt ]; then
+    # shellcheck source=/home/qbit/.git-prompt
    . ~/.git-prompt
    export GIT_PS1_SHOWDIRTYSTATE=true
    export GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -37,84 +47,43 @@ fi
 
 LPREFIX=/usr/local
 
-if [ $OS == "OpenBSD" ]; then
-    function get_pkg_path {
-	ARCH=$(arch -s)
-	LINE=$(cat /etc/pkg.conf | grep installpath | awk '{print $NF}' | sed 's/%a/%s/')
-	printf $LINE $ARCH
-    }
-
+if [ "$OS" == "OpenBSD" ]; then
     if [ ! -f ~/.cvsrc ]; then
 	export CVSROOT="anoncvs@anoncvs3.usa.openbsd.org:/cvs"
     fi
 else
-	LPREFIX=/usr
+    LPREFIX=/usr
 fi
 
-#if [ -d ~/openbsd ]; then
-#    DATADIR=~/openbsd
-#else
-    DATADIR=/usr
-#fi
-
+DATADIR=/usr
 export DATADIR
 
-if [ -d /data/user_storage/${USER}/Maildir ]; then
-    MAILDIR=/data/user_storage/${USER}/Maildir
-else
-    MAILDIR=~/Maildir
-fi
+#PATH=$HOME/bin:$GOROOT/bin:$GOPATH/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games
 
-export MAILDIR
+set -A paths /usr/games \
+    /usr/ports/infrastructure/bin \
+    /usr/local/jdk-1.8.0/bin \
+    /usr/pkg/bin \
+    /usr/pkg/sbin \
+    ~/bin \
+    ~/.bin \
+    ~/node_bin/node_modules/.bin \
+    ~/ruby_bin/bin \
+    ~/dev/depot_tools \
+    ~/.cabal/bin \
+    ~/.cargo/bin
+
+for d in "${paths[@]}"; do
+    [[ -d "$d" ]] && add_path "$d"
+done
 
 GOPATH=~
-
 if [ -d ~/dev/go ]; then
     export GOROOT_BOOTSTRAP=/usr/local/go/bootstrap
     export GOROOT=~/dev/go/
-    PATH=$PATH:${GOROOT}/bin
+    #PATH=$PATH:${GOROOT}/bin
+    add_path ${GOROOT}/bin
 fi
-
-PATH=$HOME/bin:$GOROOT/bin:$GOPATH/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/bin:/usr/local/sbin:/usr/games
-
-if [ -d ~/node_bin/node_modules/.bin ]; then
-    PATH=$PATH:~/node_bin/node_modules/.bin
-fi
-
-if [ -d ~/ruby_bin/bin ]; then
-    export GEM_HOME=~/ruby_bin
-    PATH=$PATH:~/ruby_bin/bin
-fi
-
-if [ -d /usr/ports/infrastructure/bin ]; then
-    PATH=$PATH:/usr/ports/infrastructure/bin
-fi
-
-if [ -d ~/dev/depot_tools ]; then
-    PATH=$PATH:~/dev/depot_tools
-fi
-
-if [ -d /usr/local/jdk-1.7.0/bin ]; then
-    PATH=$PATH:/usr/local/jdk-1.7.0/bin
-fi
-#if [ -d /usr/local/jdk-1.8.0/bin ]; then
-#    PATH=$PATH:/usr/local/jdk-1.8.0/bin
-#fi
-
-if [ -d ~/.cabal/bin ]; then
-    PATH=~/.cabal/bin:$PATH
-fi
-
-if [ -d ~/.cargo/bin ]; then
-    PATH=~/.cargo/bin:$PATH
-fi
-
-if [ -d ~/Elm-Platform/0.17 ]; then
-    PATH=$PATH:~/Elm-Platform/0.17/.cabal-sandbox/bin
-fi
-
-
-GPG_TTY=$(tty)
 
 if [ -e ${LPREFIX}/bin/nvim ]; then
     alias vi="nvim"
@@ -132,11 +101,9 @@ if [ -d /usr/pkg ]; then
     PATH=/usr/pkg/sbin:/usr/pkg/bin:$PATH
 fi
 
-export PATH HOME TERM GOPATH GPG_TTY
-
 function vdiff {
-    cp -p $1 $1.orig
-    emacsclient -c $1
+    cp -p "$1" "$1.orig"
+    emacsclient -c "$1"
 }
 
 function pclean {
@@ -149,8 +116,7 @@ set -A big_gits /sys /home/qbit/openbsd/ports /home/qbit/openbsd/src /home/qbit/
 function git_branch_name {
     # __git_ps1 causes some slowness on large repos, don't run this there.
     for d in "${big_gits[@]}"; do
-        echo "${PWD}" | grep -q "${d}"
-        if [ $? == 0 ]; then
+        if echo "${PWD}" | grep -q "${d}"; then
 	    echo "[${bold}BIG${white}]"
             return
         fi
@@ -169,7 +135,7 @@ function git_branch_name {
 function hg_q_name {
     if [ -d .hg ]; then
 	if [ -f .hg/patches/status ]; then
-	    branch=$(cat .hg/patches/status | awk -F: '{print $NF}')
+	    branch=$(awk -F: '{print $NF}' .hg/patches/status)
 	    if [ "${branch}" != "" ]; then
 		echo "[${bold}${branch}${white}]"
 	    fi
@@ -181,14 +147,15 @@ function ltodo {
     if [ -f .todo ]; then
 	items=$(todo | wc -l | awk '{print $1}')
         if [ "${items}" != "0" ]; then
-            echo "\n↪[${bold}TODO: ${items}${white}]"
+            printf "\n↪[${bold}TODO: %s%s]" "${items}" "${white}"
         fi
     fi
 }
 
-if [ -z $DISPLAY ]; then
-	PS1='\u@\h($(battery -ln)%)[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\W\]$(git_branch_name)$(ltodo)$ '
+if [ -z "$DISPLAY" ]; then
+	PS1='\u@\h($(battery -ln)%)[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\W\]$(git_branch_name)$(hg_q_name)$(ltodo)$ '
 else
-	PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\W\]$(git_branch_name)$(ltodo)λ '
+	PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\W\]$(git_branch_name)$(hg_q_name)$(ltodo)λ '
 fi
-export PS1
+
+export PATH HOME TERM GOPATH GPG_TTY PS1 LC_CTYPE KEYID

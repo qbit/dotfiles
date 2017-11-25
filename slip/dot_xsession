@@ -6,6 +6,7 @@ LPREFIX=/usr/local
 
 #wmanager="cwm"
 wmanager="awesome"
+#wmanager="stumpwm"
 #wmanager="xmonad-x86_64-openbsd"
 #wmanager="fvwm"
 

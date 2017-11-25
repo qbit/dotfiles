@@ -8,7 +8,8 @@ set crypt_autosign = no
 set crypt_replyencrypt = yes
 set crypt_verify_sig = yes
 
-set editor = "emacsclient -ct"
+#set editor = "emacsclient -ct"
+set editor = "nvim"
 
 set header_cache =  ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies

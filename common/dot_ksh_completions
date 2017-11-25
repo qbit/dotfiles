@@ -30,6 +30,9 @@ if [ -d ~/.password-store ]; then
 	set -A complete_pass -- $PASS_LIST -c generate edit insert git
 	set -A complete_pass_2 -- $PASS_LIST push
 
+	set -A complete_gopass -- $PASS_LIST audit binary clone config copy create find fsck generate totp grep insert recipients sync version help
+	set -A complete_gopass_2 -- $PASS_LIST -c generate edit insert git
+
 fi
 
 set -A complete_pkg_delete -- $PKG_LIST

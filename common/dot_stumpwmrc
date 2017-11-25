@@ -2,8 +2,8 @@
 
 ;; Load swank.
 ;; *prefix-key* ; swank will kick this off
-(ql:quickload :swank)
-(ql:quickload :manifest)
+;;(ql:quickload :swank)
+;;(ql:quickload :manifest)
 (let ((server-running nil))
   (defcommand swank () ()
     "Toggle the swank server on/off"

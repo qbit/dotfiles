@@ -4,6 +4,8 @@
 
 (setq backup-directory-alist '(("." . "~/.emacs-saves")))
 
+(setq x-select-enable-clipboard-manager nil)
+
 (setq delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2

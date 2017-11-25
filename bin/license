@@ -1,0 +1,9 @@
+#!/bin/sh
+
+Y=$(date +'%Y')
+ME="Aaron Bieber <aaron@bolddaemon.com>"
+
+tail -n15 /usr/share/misc/license.template | \
+	sed -e "s/YYYY/$Y/g" |
+	sed -e "s/YOUR NAME HERE <user@your.dom.ain>/$ME/g"
+

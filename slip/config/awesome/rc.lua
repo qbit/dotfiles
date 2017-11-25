@@ -29,14 +29,13 @@ local function shrink(str, len)
 end
 
 local mpd_not = function()
-   local apm = io.popen('mpc')
-   local info = apm:read('*all')
-   apm:close()
-   naughty.notify({
-	 preset = naughty.config.presets.normal,
-	 title = "MPD Status",
-	 text = tostring(info),
-   })
+   aweful.span.easy_async('mpc', function(stdout,stderr, reason, exit_code)
+       naughty.notify({
+             preset = naughty.config.presets.normal,
+             title = "MPD Status",
+             text = tostring(stdout),
+       })
+   end)
 end
 
 mpd_widget:buttons(awful.util.table.join(awful.button({ }, 1, mpd_not)))
@@ -118,14 +117,13 @@ end
 mytextclock = wibox.widget.textclock("%a %b %_d (%H)%l:%M%p")
 
 local clock_not = function()
-	local apm = io.popen('cal')
-	local info = apm:read('*all')
-	apm:close()
+    awful.span.easy_async('cal', function(stdout, stderr, reason, exit_code)
 	naughty.notify({
 		preset = naughty.config.presets.normal,
 		title = "Calendar",
-		text = tostring(info),
+		text = tostring(stdout),
 	})
+    end)
 end
 
 mytextclock:buttons(awful.util.table.join(awful.button({ }, 1, clock_not)))

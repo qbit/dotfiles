@@ -3,9 +3,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files
+ '(package-selected-packages
    (quote
-    ("~/new_org/gtd.org" "~/new_org/journal_2017-10.org"))))
+    (cider web-mode spaceline slime scpaste scad-mode org-plus-contrib nyan-mode neotree magit golint go-eldoc git-gutter flycheck counsel base16-theme all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

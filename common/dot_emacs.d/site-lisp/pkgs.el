@@ -27,6 +27,7 @@
 	(all-the-icons    . "melpa-stable")
 	(base16-theme     . "melpa-stable")
 	(counsel          . "melpa-stable")
+	(cider            . "melpa-stable")
 	(flycheck         . "melpa-stable")
 	(git-gutter       . "melpa-stable")
 	(go-eldoc         . "melpa-stable")

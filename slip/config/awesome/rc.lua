@@ -190,7 +190,7 @@ awful.screen.connect_for_each_screen(function(s)
     })
 
     awful.tag.add("browser", {
-        layout             = awful.layout.suit.max,
+        layout             = awful.layout.suit.tile,
         screen             = s,
         selected           = false,
     })

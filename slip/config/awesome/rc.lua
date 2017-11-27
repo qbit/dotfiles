@@ -13,6 +13,18 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local mpc = require("mpc")
 local textbox = require("wibox.widget.textbox")
 local mpd_widget = textbox()
+local mpd_view = wibox.widget {
+   layout = wibox.container.scroll.horizontal,
+   max_size = 100,
+   step_function = wibox.container.scroll.step_functions
+                   .linear_increase,
+                   --.waiting_nonlinear_back_and_forth,
+   speed = 10,
+   {
+       widget = mpd_widget,
+       text = " - ",
+   },
+}
 local sep = textbox()
 local state, title, artist, name, file = "stop", "", "", "", ""
 
@@ -28,23 +40,12 @@ local function shrink(str, len)
    return string.sub(tostring(str), 1, len)
 end
 
-local mpd_not = function()
-   aweful.span.easy_async('mpc', function(stdout,stderr, reason, exit_code)
-       naughty.notify({
-             preset = naughty.config.presets.normal,
-             title = "MPD Status",
-             text = tostring(stdout),
-       })
-   end)
-end
-
-mpd_widget:buttons(awful.util.table.join(awful.button({ }, 1, mpd_not)))
-
 sep.text = " | "
 
 local function update_mpd_widget()
-    local text = shrink(artist or name or "", 20) .. " - " .. shrink(title or "", 20)
-    mpd_widget.text = text
+    mpd_widget.text = tostring(artist or name or "") .. " - " .. tostring(title or "")
+    -- Not sure if this is needed
+    awesome.emit_signal("widget::redraw_needed")
 end
 
 local function mpc_error_handler(err)
@@ -248,7 +249,7 @@ awful.screen.connect_for_each_screen(function(s)
        { -- Right widgets
 	  layout = wibox.layout.fixed.horizontal,
 	  sep,
-	  mpd_widget,
+	  mpd_view,
 	  sep,
 	  mytextclock,
 	  sep,

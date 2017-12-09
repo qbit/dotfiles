@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cat /dev/null > ~/.xsession-errors
+
 export LC_CTYPE="en_US.UTF-8"
 OS=$(uname)
 LPREFIX=/usr/local

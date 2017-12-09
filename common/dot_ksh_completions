@@ -11,7 +11,7 @@ set -A complete_kill_1 -- -9 -HUP -INFO -KILL -TERM
 
 pgrep -q vmd
 if [ $? = 0 ]; then
-	set -A complete_vmctl -- console load reload start stop reset status
+	set -A complete_vmctl -- console load reload start stop reset status send receive
 	set -A complete_vmctl_2 -- $(vmctl status | awk '!/NAME/{print $NF}')
 fi
 

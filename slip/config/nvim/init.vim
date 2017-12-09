@@ -1,7 +1,8 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'fatih/vim-go'
 Plug 'airblade/vim-gitgutter'
+Plug 'chriskempson/base16-vim'
+Plug 'fatih/vim-go'
 Plug 'https://bitbucket.org/kisom/eink.vim.git'
 
 call plug#end()

@@ -1,15 +1,3 @@
-#color	index		red 		default		~P
-#color	attachment	color235	color232
-#color	quoted		color240	color232
-#color	quoted1		color235	color232
-#color	quoted2		color240	color232
-#color	tree		color240	color232
-#color	status		color240	color232
-#color	indicator	color255	color240
-#
-#color	header		color240	color232	"^(From|Subject|cc|date|To|X-Spam-Level|User-Agent|X-Mailer):"
-
-# bold/underline-only styling, for old non-color xterm (now xterm-r6 $TERM)
 mono attachment bold
 mono body underline "(https?|t?ftp|mailto|gopher|ssh|telnet|finger)://[^ ]+"
 mono body underline "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"      # email addresses
@@ -25,16 +13,15 @@ mono header bold "^Priority: Urgent"
 mono header bold "^Importance: high"
 mono index bold '~U'
 mono index bold '~F'
-mono indicator reverse
+#mono indicator reverse
 mono signature bold
-mono sidebar_new bold
+#mono sidebar_new bold
 mono tilde bold
 mono tree bold
 mono quoted bold
 
-# since i now have to use an xterm-color $TERM, init color versions of the
-# same using brightcolor16 as a bright black
-color normal default default                              # init to black-on-white
+color normal default default
+color status default color252
 color attachment brightdefault default
 color body brightdefault default "(http|https|ftp|mailto|gopher|telnet|finger)://[^ ]+"
 color body brightdefault default "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"
@@ -51,21 +38,18 @@ color header brightdefault default "^Importance: high"
 color header brightdefault default '~U'
 color header brightdefault default '~F'
 color signature brightdefault default
-color sidebar_new brightdefault default
+color sidebar_highlight color247 default
 color tilde brightblack default
-#color tree color242 default
+color indicator default color252
+color sidebar_indicator default color252
 color quoted brightblack default
 
-# color flagged a dark red
 color index red default '~F'
-# color to-be-deleted as grayed out
 color index brightblack default '~D'
-# bold new email in the index
-color index brightdefault default '~U'
-# make huge messages stand out so i can avoid downloading them
+color index default default '~U'
 color index red default '~z 500000-'
 
 # make diffs pop
-#color body	brightblack	default '^(Index: |\+\+\+ |--- |diff ).*$'
-#color body	red		default '^-.*$'
-#color body	green		default '^\+.*$'
+color body	brightblack	default '^(Index: |\+\+\+ |--- |diff ).*$'
+color body	red		default '^-.*$'
+color body	green		default '^\+.*$'

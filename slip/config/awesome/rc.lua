@@ -2,6 +2,7 @@ local openbsd = require('openbsd')
 local keys = require('keys')
 local gears = require("gears")
 local awful = require("awful")
+local awesompd = require('awesompd/awesompd')
 
 require("awful.autofocus")
 
@@ -10,21 +11,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
-local mpc = require("mpc")
 local textbox = require("wibox.widget.textbox")
-local mpd_widget = textbox()
-local mpd_view = wibox.widget {
-   layout = wibox.container.scroll.horizontal,
-   max_size = 100,
-   step_function = wibox.container.scroll.step_functions
-                   .linear_increase,
-                   --.waiting_nonlinear_back_and_forth,
-   speed = 10,
-   {
-       widget = mpd_widget,
-       text = " - ",
-   },
-}
 local sep = textbox()
 local state, title, artist, name, file = "stop", "", "", "", ""
 
@@ -33,33 +20,35 @@ beautiful.init("~/.config/awesome/themes/bold_white/theme.lua")
 local obsd = require('obsd')
 obsd.enable_debug = false
 
-mpd_widget.font = beautiful.font
 sep.font = beautiful.font
+
+musicwidget = awesompd:create() -- Create awesompd widget
+musicwidget.font = beautiful.font
+musicwidget.font_color = beautiful.fg_normal
+musicwidget.background = beautiful.bg_normal
+musicwidget.scrolling = true
+musicwidget.output_size = 50
+musicwidget.update_interval = 1 -- Set the update interval in seconds
+musicwidget.jamendo_format = awesompd.FORMAT_MP3
+musicwidget.browser = "browser"
+-- musicwidget.show_album_cover = true
+-- musicwidget.album_cover_size = 50
+musicwidget.mpd_config = "/etc/mpd.conf"
+
+musicwidget.ldecorator = " "
+musicwidget.rdecorator = " "
+
+musicwidget.servers = {
+   { server = "localhost", port = 6600 }
+}
+
+musicwidget:run()
 
 local function shrink(str, len)
    return string.sub(tostring(str), 1, len)
 end
 
 sep.text = " | "
-
-local function update_mpd_widget()
-    mpd_widget.text = tostring(artist or name or "") .. " - " .. tostring(title or "")
-    -- Not sure if this is needed
-    awesome.emit_signal("widget::redraw_needed")
-end
-
-local function mpc_error_handler(err)
-    mpd_widget:set_text("Error: " .. tostring(err))
-end
-
-local connection = mpc.new("localhost", 6600, "", mpc_error_handler,
-    "status", function(_, result)
-        state = result.state
-    end,
-    "currentsong", function(_, result)
-        title, artist, file, name = result.title, result.artist, result.file, result.name
-        pcall(update_mpd_widget)
-    end)
 
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
@@ -80,7 +69,7 @@ do
    end)
 end
 
-terminal = "xterm"
+terminal = "st -e ksh -l"
 rofi = "rofi -show run"
 editor = os.getenv("EDITOR") or "emacsclient -ct"
 editor_cmd = terminal .. " -e " .. editor
@@ -249,7 +238,7 @@ awful.screen.connect_for_each_screen(function(s)
        { -- Right widgets
 	  layout = wibox.layout.fixed.horizontal,
 	  sep,
-	  mpd_view,
+	  musicwidget.widget,
 	  sep,
 	  mytextclock,
 	  sep,

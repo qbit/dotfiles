@@ -27,11 +27,11 @@ alias cdw='cd $(make show=WRKSRC)'
 alias irc="export TERM=xterm; tmux at -t irc"
 alias mkae='make'
 alias mutt='stty discard undef; neomutt'
-alias mkdiff='cvs diff > ~/patches/$(make show=DISTNAME).diff'
+alias pass="gopass"
 alias pup='doas -n /usr/sbin/pkg_add -u'
+alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"
 alias tmux="tmux -2"
-alias pass="gopass"
 
 if [ -e ~/.ksh_completions ]; then
     # shellcheck source=/home/qbit/.ksh_completions

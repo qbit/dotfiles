@@ -1,3 +1,6 @@
+ignore *
+unignore from: subject to cc date x-mailer x-url user-agent
+
 source ~/.mutt.creds
 source ~/.mutt.gpg
 

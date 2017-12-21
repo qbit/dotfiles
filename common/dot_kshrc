@@ -107,7 +107,13 @@ function pclean {
 	find . -size 0 -exec rm {} \;
 }
 
-set -A big_gits /sys /home/qbit/openbsd/ports /home/qbit/openbsd/src /home/qbit/dev/mono
+set -A big_gits \
+	/sys \
+	/home/qbit/openbsd/ports	\
+	/home/qbit/openbsd/src		\
+	/home/qbit/dev/mono		\
+	/home/qbit/dev/dotnet/coreclr	\
+	/home/qbit/dev/dotnet/corefx
 
 function git_branch_name {
     # __git_ps1 causes some slowness on large repos, don't run this there.

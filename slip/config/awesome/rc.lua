@@ -472,7 +472,7 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
-local ret, error_string = openbsd.pledge('stdio rpath wpath cpath proc exec unix prot_exec inet dns')
+local ret, error_string = openbsd.pledge('stdio tty rpath wpath cpath proc exec unix prot_exec')
 if ret == -1 then
     naughty.notify({ preset = naughty.config.presets.critical,
                      title = "Pledge errors!",

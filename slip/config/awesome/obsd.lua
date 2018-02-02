@@ -3,8 +3,8 @@ local beautiful = require("beautiful")
 local gears = require("gears")
 local naughty = require("naughty")
 local wibox = require("wibox")
-local https = require("ssl.https")
-local ltn12 = require("ltn12")
+--local https = require("ssl.https")
+--local ltn12 = require("ltn12")
 
 
 local obsd = {}
@@ -59,75 +59,75 @@ function obsd.enable_volume(widget)
     return obsd.volume_slider
 end
 
-function obsd.enable_snap(widget)
-    local snap_timer = gears.timer({ timeout = 1.5 })
-    obsd.snap_found = false
-    obsd.snap_version = ""
-
-    obsd.snap_checkbox = widget or wibox.widget {
-        checked       = false,
-        color         = beautiful.snap_new,
-        border_color  = beautiful.snap_border,
-        paddings      = 3,
-        shape         = gears.shape.circle,
-        widget        = wibox.widget.checkbox
-    }
-
-    obsd.update_snap = function()
-        if obsd.snap_found then
-            obsd.debug("snap already found, skipping")
-            return true
-        end
-
-        local file = os.getenv("HOME") .. '/.last_snap'
-
-        awful.spawn.easy_async('cat ' .. file, function(stdout, stderr, reason, exit_code)
-            local t = {}
-            local body, code, headers, status  = https.request{
-                url = "https://ftp3.usa.openbsd.org/pub/OpenBSD/snapshots/amd64/BUILDINFO",
-                sink = ltn12.sink.table(t),
-            }
-
-            nt = split(t[1], "-")
-
-            stdout = stdout:gsub("%s+$", "")
-            a, _ = stdout:gsub("^%s*(.-)%s*$", "%1")
-            b, _ = nt[2]:gsub("^%s*(.-)%s*$", "%1")
-
-            if (a == b) then
-                obsd.snap_checkbox.checked = false
-                obsd.snap_version = tostring(b)
-                obsd.debug("no new snapshots")
-            else
-                obsd.snap_checkbox.checked = true
-                obsd.debug("new snapshots!")
-                obsd.snap_found = true
-                obsd.snap_version = tostring(a)
-                naughty.notify({
-                    preset = naughty.config.presets.normal,
-                    title = "New OpenBSD snapshot!",
-                    text = tostring(a),
-                })
-            end
-        end)
-        return true
-    end
-
-    obsd.snap_checkbox:buttons(awful.util.table.join(awful.button({ }, 1, function()
-        obsd.update_snap()
-        naughty.notify({
-            preset = naughty.config.presets.normal,
-            title = "Current Snap Date",
-            text = obsd.snap_version,
-        })
-    end)))
-
-    obsd.update_snap()
-
-    snap_timer.start_new(3600, obsd.update_snap)
-
-    return obsd.snap_checkbox
-end
+--function obsd.enable_snap(widget)
+--    local snap_timer = gears.timer({ timeout = 1.5 })
+--    obsd.snap_found = false
+--    obsd.snap_version = ""
+--
+--    obsd.snap_checkbox = widget or wibox.widget {
+--        checked       = false,
+--        color         = beautiful.snap_new,
+--        border_color  = beautiful.snap_border,
+--        paddings      = 3,
+--        shape         = gears.shape.circle,
+--        widget        = wibox.widget.checkbox
+--    }
+--
+--    obsd.update_snap = function()
+--        if obsd.snap_found then
+--            obsd.debug("snap already found, skipping")
+--            return true
+--        end
+--
+--        local file = os.getenv("HOME") .. '/.last_snap'
+--
+--        awful.spawn.easy_async('cat ' .. file, function(stdout, stderr, reason, exit_code)
+--            local t = {}
+--            local body, code, headers, status  = https.request{
+--                url = "https://ftp3.usa.openbsd.org/pub/OpenBSD/snapshots/amd64/BUILDINFO",
+--                sink = ltn12.sink.table(t),
+--            }
+--
+--            nt = split(t[1], "-")
+--
+--            stdout = stdout:gsub("%s+$", "")
+--            a, _ = stdout:gsub("^%s*(.-)%s*$", "%1")
+--            b, _ = nt[2]:gsub("^%s*(.-)%s*$", "%1")
+--
+--            if (a == b) then
+--                obsd.snap_checkbox.checked = false
+--                obsd.snap_version = tostring(b)
+--                obsd.debug("no new snapshots")
+--            else
+--                obsd.snap_checkbox.checked = true
+--                obsd.debug("new snapshots!")
+--                obsd.snap_found = true
+--                obsd.snap_version = tostring(a)
+--                naughty.notify({
+--                    preset = naughty.config.presets.normal,
+--                    title = "New OpenBSD snapshot!",
+--                    text = tostring(a),
+--                })
+--            end
+--        end)
+--        return true
+--    end
+--
+--    obsd.snap_checkbox:buttons(awful.util.table.join(awful.button({ }, 1, function()
+--        obsd.update_snap()
+--        naughty.notify({
+--            preset = naughty.config.presets.normal,
+--            title = "Current Snap Date",
+--            text = obsd.snap_version,
+--        })
+--    end)))
+--
+--    obsd.update_snap()
+--
+--    snap_timer.start_new(3600, obsd.update_snap)
+--
+--    return obsd.snap_checkbox
+--end
 
 function obsd.enable_battery(widget)
     local batt_timer = gears.timer({ timeout = 1.5 })

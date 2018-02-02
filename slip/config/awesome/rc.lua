@@ -2,7 +2,6 @@ local openbsd = require('openbsd')
 local keys = require('keys')
 local gears = require("gears")
 local awful = require("awful")
-local awesompd = require('awesompd/awesompd')
 
 require("awful.autofocus")
 
@@ -21,28 +20,6 @@ local obsd = require('obsd')
 obsd.enable_debug = false
 
 sep.font = beautiful.font
-
-musicwidget = awesompd:create() -- Create awesompd widget
-musicwidget.font = beautiful.font
-musicwidget.font_color = beautiful.fg_normal
-musicwidget.background = beautiful.bg_normal
-musicwidget.scrolling = true
-musicwidget.output_size = 50
-musicwidget.update_interval = 1 -- Set the update interval in seconds
-musicwidget.jamendo_format = awesompd.FORMAT_MP3
-musicwidget.browser = "browser"
--- musicwidget.show_album_cover = true
--- musicwidget.album_cover_size = 50
-musicwidget.mpd_config = "/etc/mpd.conf"
-
-musicwidget.ldecorator = " "
-musicwidget.rdecorator = " "
-
-musicwidget.servers = {
-   { server = "localhost", port = 6600 }
-}
-
-musicwidget:run()
 
 local function shrink(str, len)
    return string.sub(tostring(str), 1, len)
@@ -69,7 +46,7 @@ do
    end)
 end
 
-terminal = "st -e ksh -l"
+terminal = "xterm"
 rofi = "rofi -show run"
 editor = os.getenv("EDITOR") or "emacsclient -ct"
 editor_cmd = terminal .. " -e " .. editor
@@ -238,8 +215,6 @@ awful.screen.connect_for_each_screen(function(s)
        { -- Right widgets
 	  layout = wibox.layout.fixed.horizontal,
 	  sep,
-	  musicwidget.widget,
-	  sep,
 	  mytextclock,
 	  sep,
 	  wibox.widget.systray(),
@@ -295,17 +270,19 @@ globalkeys = awful.util.table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey,           }, "r", function () awful.spawn(rofi) end,
               {description = "launch rofi", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "r", awesome.restart,
+    awful.key({ modkey, "Shift", "Control" }, "r", awesome.restart,
               {description = "restart awesome", group = "awesome"}),
+    awful.key({ modkey, "Shift"}, "r", function () awful.spawn("rofi-pass") end,
+              {description = "run rofi-pass", group = "launcher"}),
     awful.key({ modkey,           }, "s", hotkeys_popup.show_help,
               {description = "show help", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
-    awful.key({ modkey,           }, "n", function () awful.spawn("mpc next") end,
+    awful.key({ modkey,           }, "n", function () awful.spawn("/home/qbit/bin/mpcc next") end,
               {description = "next song", group = "mpc"}),
-    awful.key({ modkey,           }, "p", function () awful.spawn("mpc prev") end,
+    awful.key({ modkey,           }, "p", function () awful.spawn("/home/qbit/bin/mpcc prev") end,
               {description = "previous song", group = "mpc"}),
-    awful.key({ modkey, "Shift"   }, "p", function () awful.spawn("mpc toggle") end,
+    awful.key({ modkey, "Shift"   }, "p", function () awful.spawn("/home/qbit/bin/mpcc toggle") end,
               {description = "toggle music", group = "mpc"}),
     awful.key({ modkey,           }, "e", function () awful.spawn("~/.screenlayout/external.sh") end,
              {description = "use external screen", group = "screen"}),
@@ -472,7 +449,7 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
-local ret, error_string = openbsd.pledge('stdio tty rpath wpath cpath proc exec unix prot_exec')
+local ret, error_string = openbsd.pledge('stdio tty rpath wpath cpath proc exec prot_exec unix')
 if ret == -1 then
     naughty.notify({ preset = naughty.config.presets.critical,
                      title = "Pledge errors!",

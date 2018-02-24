@@ -1,0 +1,17 @@
+#!/bin/ksh
+
+OIFS=$IFS
+
+(
+	cd /usr/share/man;
+	IFS="
+	"
+	for i in $(find . -type f -exec grep -H "${1}" {} \; | grep -v mandoc.db); do
+		# ./man7/ports.7:.Ev SUBDIRLIST
+		SEC=$(echo $i | awk -F/ '{ print $2 }' | sed 's/man//')
+		PAGE=$(echo $i | awk -F/ '{ print $3 }' | sed 's/\.[1-9]:.*$//')
+		printf "%s %s\n" $SEC $PAGE
+	done | sort | uniq
+)
+
+IFS=$OIFS

@@ -7,3 +7,6 @@ cvs diff . > "$fname"
 echo "Created: $fname"
 echo "Syncing..."
 rsync -a ${HOME}/patches/ web.akb.io:/var/www/deftly/patches/
+URL="https://deftly.net/patches/${name}.diff"
+echo "${URL}" | xclip
+echo "Copied '${URL}' to clipboard.."

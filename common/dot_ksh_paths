@@ -1,0 +1,27 @@
+#!/bin/ksh
+
+set -A paths /usr/games \
+    /usr/ports/infrastructure/bin \
+    /usr/local/jdk-1.8.0/bin \
+    /usr/pkg/bin \
+    /usr/pkg/sbin \
+    ~/bin \
+    ~/.bin \
+    ~/.dynamic-colors/bin \
+    ~/node_bin/node_modules/.bin \
+    ~/ruby_bin/bin \
+    ~/dev/depot_tools \
+    ~/.cabal/bin \
+    ~/.cargo/bin
+
+for d in "${paths[@]}"; do
+    [[ -d "$d" ]] && PATH="${PATH}:$d"
+done
+
+GOPATH=~
+if [ -d ~/dev/go ]; then
+    export GOROOT_BOOTSTRAP=/usr/local/go/bootstrap
+    export GOROOT=~/dev/go/
+    #PATH=$PATH:${GOROOT}/bin
+    PATH="${PATH}:${GOROOT}/bin"
+fi

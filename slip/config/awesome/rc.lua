@@ -410,12 +410,15 @@ awful.rules.rules = {
         instance = {
           "DTA",
           "copyq",
+          "pinentry",
         },
         class = {
           "MPlayer",
           "mpv",
           "XCalc",
           "pinentry",
+          "gcr-prompter",
+          "Gcr-prompter",
           "Pinentry-gtk-2",
           "Pinentry-gnome3"},
         name = {
@@ -430,36 +433,23 @@ awful.rules.rules = {
       properties = { screen = 1, tag = "console" } },
     { rule = { class = "SshAskpass" },
       properties = { raise = true, focus = awful.client.focus.filter } },
+    { rule = { class = "Gcr-prompter" },
+      properties = { raise = true, focus = awful.client.focus.filter },
+      callback = function (c) awful.placement.centered(c,nil) end,
+    }
 }
 -- }}}
 
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
-    if not awesome.startup then
-      awful.client.setslave(c)
-      --local screen = awful.screen.focused()
-      --local clients = screen:get_clients()
-      --local master = awful.client.getmaster()
-
-      --awful.client.focus.history.previous()
-      --for k,v in pairs(clients) do
-      --  if client.focus == master then
-      --    print(clients[k].name, 'is focused', clients[k].pid)
-      --    print('replacing master')
-      --    awful.client.setmaster(c)
-      --  else
-      --    print('adding slave')
-      --    awful.client.setslave(c)
-      --  end
-      --end
-    end
-
     if awesome.startup and
       not c.size_hints.user_position
       and not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
+    else
+      awful.client.setslave(c)
     end
 end)
 

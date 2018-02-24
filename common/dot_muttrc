@@ -66,13 +66,13 @@ bind index,pager \Co sidebar-open
 
 folder-hook . set from="aaron@bolddaemon.com"
 
-reply-hook '~t .@openbsd\.org' 'set from="abieber@openbsd.org"'
-send-hook '~t .*@openbsd\.org' 'set from="abieber@openbsd.org"'
+#reply-hook '~t .@openbsd\.org' 'set from="abieber@openbsd.org"'
+#send-hook '~t .*@openbsd\.org' 'set from="abieber@openbsd.org"'
 
 #macro index t "<pipe-message>mutt2task<enter> <save-message>+TODO<enter>"
 
-#macro index \cb "|urlview\n"
-#macro pager \cb "|urlview\n"
+macro index \cb "|urlview\n"
+macro pager \cb "|urlview\n"
 
 #unmailboxes *
 

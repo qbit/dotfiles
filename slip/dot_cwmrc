@@ -1,5 +1,10 @@
 sticky yes
-gap 18 0 0 0
+gap 0 0 0 0
+snapdist 10
+
+ignore dock
+ignore menu
+ignore panel
 
 fontname "Ubuntu Mono:pixelsize=14"
 
@@ -11,21 +16,23 @@ color menubg		"#798a99"
 color menufg		"#eeeeff"
 color urgencyborder	"red"
 
-command		chrome	"chrome"
+command		browser	"browser"
 command		irc	"xterm -class irc"
-command		xterm	"xterm"
-command		Mail	"xterm -class Mail -e \"mutt\""
-command		next	"mpc next"
-command		pause	"mpc toggle"
+command		term	"xterm"
+command		Mail	"xterm -class Mail"
+command		next	"mpcc next"
+command		pause	"mpcc toggle"
 
 bind-key	MS-h	"window-htile"
 bind-key	MS-v	"window-vtile"
 bind-key	M-r	"rofi -show run"
-bind-key	M-n	"mpc next"
-bind-key	MS-p	"mpc toggle"
+bind-key	M-n	"mpcc next"
+bind-key	MS-p	"mpcc toggle"
 
 autogroup 1	"emacs,Emacs"
 autogroup 2	"chromium-browser,Chromium-browser"
+autogroup 2	"Navigator,Firefox"
+
 autogroup 3	"irc"
 autogroup 4	"Mail"
 autogroup 9	"xconsole,XConsole"

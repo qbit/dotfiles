@@ -1,5 +1,4 @@
 local openbsd = require('openbsd')
-local keys = require('keys')
 local gears = require("gears")
 local awful = require("awful")
 
@@ -12,7 +11,6 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 local textbox = require("wibox.widget.textbox")
 local sep = textbox()
-local state, title, artist, name, file = "stop", "", "", "", ""
 
 beautiful.init("~/.config/awesome/themes/bold_white/theme.lua")
 
@@ -20,10 +18,6 @@ local obsd = require('obsd')
 obsd.enable_debug = false
 
 sep.font = beautiful.font
-
-local function shrink(str, len)
-   return string.sub(tostring(str), 1, len)
-end
 
 sep.text = " | "
 
@@ -46,12 +40,10 @@ do
    end)
 end
 
-terminal = "xterm"
-rofi = "rofi -show run"
-editor = os.getenv("EDITOR") or "emacsclient -ct"
-editor_cmd = terminal .. " -e " .. editor
+local terminal = "xterm"
+local rofi = "rofi -show run"
 
-modkey = "Mod1"
+local modkey = "Mod1"
 
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -81,7 +73,7 @@ end
 -- }}}
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%a %b %_d (%H)%l:%M%p")
+local mytextclock = wibox.widget.textclock("%a %b %_d (%H)%l:%M%p")
 
 local clock_not = function()
     awful.span.easy_async('cal', function(stdout, stderr, reason, exit_code)
@@ -198,7 +190,12 @@ awful.screen.connect_for_each_screen(function(s)
 
     s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.noempty, taglist_buttons)
 
-    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons, {tasklist_disable_icon = true})
+    s.mytasklist = awful.widget.tasklist(
+      s,
+      awful.widget.tasklist.filter.currenttags,
+      tasklist_buttons,
+      {tasklist_disable_icon = true}
+    )
 
     s.mywibox = awful.wibar({ position = "top", screen = s, height = 18 })
 
@@ -225,7 +222,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 end)
 
-globalkeys = awful.util.table.join(
+local globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
@@ -319,7 +316,7 @@ globalkeys = awful.util.table.join(
               {description = "restore minimized", group = "client"})
 )
 
-clientkeys = awful.util.table.join(
+local clientkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
@@ -385,7 +382,7 @@ for i = 1, 9 do
     )
 end
 
-clientbuttons = awful.util.table.join(
+local clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
     awful.button({ modkey }, 1, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))

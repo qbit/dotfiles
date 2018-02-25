@@ -38,16 +38,18 @@ function obsd.enable_volume(widget)
 
     --- Updates obsd.current_volume to the output of 'mixerctl outputs.master'.
     function obsd.update_volume()
-        awful.spawn.easy_async([[sh -c 'mixerctl outputs.master | cut -d, -f2']], function(stdout, stderr, reason, exit_code)
-            stdout = stdout:gsub("%s+$", "")
-            local volume = tonumber(stdout)
-            obsd.debug("current_volume is: " .. tostring(volume))
-            obsd.debug("obsd.current_volume is: " .. tostring(obsd.current_volume))
-            if (volume == tonumber(obsd.volume_slider.value)) then
-                obsd.debug("not updating volume")
-            else
-                obsd.set_volume(obsd.volume_slider.value)
-            end
+        awful.spawn.easy_async(
+            [[sh -c 'mixerctl outputs.master | cut -d, -f2']],
+            function(stdout, _, _, _)
+                stdout = stdout:gsub("%s+$", "")
+                local volume = tonumber(stdout)
+                obsd.debug("current_volume is: " .. tostring(volume))
+                obsd.debug("obsd.current_volume is: " .. tostring(obsd.current_volume))
+                if (volume == tonumber(obsd.volume_slider.value)) then
+                    obsd.debug("not updating volume")
+                else
+                    obsd.set_volume(obsd.volume_slider.value)
+                end
         end)
 
         return true
@@ -197,21 +199,25 @@ function obsd.enable_battery(widget)
 
     obsd.battery_notification = function()
         obsd.update_battery()
-        awful.spawn.easy_async('apm', function(stdout, stderr, reason, exit_code)
-            naughty.notify({
-                preset = naughty.config.presets.normal,
-                title = "Power Status",
-                text = tostring(stdout),
-            })
+        awful.spawn.easy_async('apm',
+            function(stdout, _, _, _)
+                naughty.notify({
+                    preset = naughty.config.presets.normal,
+                    title = "Power Status",
+                    text = tostring(stdout),
+                })
         end)
     end
 
-    obsd.battery_bar:buttons(awful.util.table.join(awful.button({ }, 1, obsd.battery_notification)))
+    obsd.battery_bar:buttons(
+        awful.util.table.join(
+            awful.button({ }, 1, obsd.battery_notification)
+        ))
 
     --- Sets 'obsd.battery_percent' to the value of `apm -l`
     -- @see obsd.battery_percent
     obsd.update_batt_percent = function()
-        awful.spawn.easy_async('apm -l', function(stdout, stderr, reason, exit_code)
+        awful.spawn.easy_async('apm -l', function(stdout, _, _, _)
             stdout = stdout:gsub("%s+", "")
             obsd.battery_percent = tonumber(stdout)
             obsd.debug("battery_percent set to " .. stdout)
@@ -219,7 +225,7 @@ function obsd.enable_battery(widget)
     end
 
     obsd.update_batt_charge = function()
-        awful.spawn.easy_async('apm -a', function(stdout, stderr, reason, exit_code)
+        awful.spawn.easy_async('apm -a', function(stdout, _, _, _)
             stdout = stdout:gsub("%s+", "")
             obsd.debug("battery_charge set to " .. stdout)
             if (stdout == "0") then
@@ -249,7 +255,7 @@ function obsd.run_once(prog)
 
     local cmd = 'sh -c "pgrep -q -f -u $USER -x "\' .. prog ..  \'" || \' .. prog'
 
-    awful.spawn.easy_async(cmd, function(stdout, stderr, reason, exit_code)
+    awful.spawn.easy_async(cmd, function(_, _, _, exit_code)
         if exit_code == 0 then
             naughty.notify({
                 preset = naughty.config.presets.normal,
@@ -290,8 +296,8 @@ function obsd.unmute()
     obsd.debug("mute disabled")
 end
 
-function split(s, delimiter)
-   result = {};
+function obsd.split(s, delimiter)
+  local  result = {};
    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
       table.insert(result, match);
    end

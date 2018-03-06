@@ -79,7 +79,7 @@ end
 local mytextclock = wibox.widget.textclock("%a %b %_d (%H)%l:%M%p")
 
 local clock_not = function()
-    awful.span.easy_async('cal', function(stdout, stderr, reason, exit_code)
+    awful.spawn.easy_async('cal', function(stdout, stderr, reason, exit_code)
 	naughty.notify({
 		preset = naughty.config.presets.normal,
 		title = "Calendar",
@@ -91,7 +91,6 @@ end
 mytextclock:buttons(awful.util.table.join(awful.button({ }, 1, clock_not)))
 
 local taglist_buttons = awful.util.table.join(
---local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
                     awful.button({ modkey }, 1, function(t)
                                               if client.focus then

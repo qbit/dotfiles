@@ -17,6 +17,9 @@ beautiful.init("~/.config/awesome/themes/bold_white/theme.lua")
 local obsd = require('obsd')
 obsd.enable_debug = false
 
+-- Pledge early
+local _, _ = openbsd.pledge('stdio tty rpath wpath cpath proc exec prot_exec unix')
+
 sep.font = beautiful.font
 
 sep.text = " | "
@@ -453,9 +456,3 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
-local ret, error_string = openbsd.pledge('stdio tty rpath wpath cpath proc exec prot_exec unix')
-if ret == -1 then
-    naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Pledge errors!",
-                     text = error_string })
-end

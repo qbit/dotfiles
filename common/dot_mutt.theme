@@ -21,7 +21,7 @@ mono tree bold
 mono quoted bold
 
 color normal default default
-color status default color252
+#color status default color252
 color attachment brightdefault default
 color body brightdefault default "(http|https|ftp|mailto|gopher|telnet|finger)://[^ ]+"
 color body brightdefault default "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"
@@ -38,10 +38,10 @@ color header brightdefault default "^Importance: high"
 color header brightdefault default '~U'
 color header brightdefault default '~F'
 color signature brightdefault default
-color sidebar_highlight color247 default
+#color sidebar_highlight color247 default
 color tilde brightblack default
-color indicator default color252
-color sidebar_indicator default color252
+#color indicator default color252
+#color sidebar_indicator default color252
 color quoted brightblack default
 
 color index red default '~F'

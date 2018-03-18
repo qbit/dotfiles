@@ -4,6 +4,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'chriskempson/base16-vim'
 Plug 'fatih/vim-go'
 Plug 'https://bitbucket.org/kisom/eink.vim.git'
+Plug 'arcticicestudio/nord-vim'
+Plug 'w0rp/ale'
 
 call plug#end()
 

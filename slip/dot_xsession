@@ -2,6 +2,8 @@
 
 cat /dev/null > ~/.xsession-errors
 
+. ~/.ksh_paths
+
 export LC_CTYPE="en_US.UTF-8"
 OS=$(uname)
 LPREFIX=/usr/local

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-;;(set-default-font "Ubuntu Mono:pixelsize=15")
+(set-default-font "Ubuntu Mono:pixelsize=13")
 (setq inhibit-startup-screen t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -20,7 +20,8 @@
 
 (set-face-attribute 'default t :height 100)
 
-(load-theme 'base16-default-light 1)
+;;(load-theme 'base16-default-light 1)
+(load-theme 'nord 1)
 (require 'spaceline-config)
 (spaceline-emacs-theme)
 

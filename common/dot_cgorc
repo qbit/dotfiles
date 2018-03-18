@@ -4,8 +4,8 @@ start_uri       gopher://cobug.org:70/
 # commands
 cmd_text        less
 cmd_browser     browser
-cmd_image       display
-cmd_player      mplayer
+cmd_image       feh
+cmd_player      mpv
 
 # colors
 color_prompt    1;34

@@ -8,13 +8,11 @@ export LC_CTYPE="en_US.UTF-8"
 OS=$(uname)
 LPREFIX=/usr/local
 
-#wmanager="cwm"
 wmanager="awesome"
+#wmanager="cwm"
+#wmanager="fvwm"
 #wmanager="stumpwm"
 #wmanager="xmonad-x86_64-openbsd"
-#wmanager="fvwm"
-
-grep PATH ~/.kshrc
 
 if [ $OS != "OpenBSD" ]; then
 	LPREFIX=/usr
@@ -30,18 +28,18 @@ fi
 
 case "$wmanager" in
 	cwm)
-		trayer				\
-			--edge top		\
-			--align center		\
-			--width 5		\
-			--height 12		\
-			--alpha 180		\
-			--tint 0		\
-			--transparent true	\
-			--SetDockType true	\
-			--SetPartialStrut true	\
-			--expand true		\
-			--widthtype percent &
+		#trayer				\
+		#	--edge top		\
+		#	--align center		\
+		#	--width 5		\
+		#	--height 12		\
+		#	--alpha 180		\
+		#	--tint 0		\
+		#	--transparent true	\
+		#	--SetDockType true	\
+		#	--SetPartialStrut true	\
+		#	--expand true		\
+		#	--widthtype percent &
 		feh --bg-center ~/.background.png &
 		;;
 	awesome)
@@ -50,6 +48,7 @@ case "$wmanager" in
 		feh --bg-center ~/.background.png &
 		;;
 	fvwm)
+		xsetroot -solid black
 		;;
 esac
 

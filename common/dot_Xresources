@@ -112,12 +112,15 @@ XTerm*letterSpace:	1
 !XTerm*faceName:		Go Mono:pixelsize=13
 !XTerm*faceName:		Anonymous PRO:pixelsize=12
 !XTerm*faceName:		Triplicate T4c:regular:pixelsize=13
-XTerm*faceName:         Ubuntu Mono:pixelsize=14
+XTerm*faceName:         Ubuntu Mono derivative Powerline:pixelsize=14
 XTerm*cursorBlink:	false
 XTerm*loginShell:	true
 XTerm.underlineURLs:	true
 XTerm.matcher.button:	1
 XTerm*inheritPixmap:	true
+XTerm*dynamicColors: true
+! change to red background
+XTerm*keysym.C-8: command:dynamic_colors switch solarized-dark
 !XTerm*background:	#0e3250
 !XTerm*foreground:	#d9e3f2
 !XTerm*color0:		#1f2c36
@@ -146,7 +149,7 @@ irc*metaSendsEscape:	true
 irc*eightBitInput:	false
 irc*saveLines:	4096
 irc*letterSpace:	1
-irc*faceName:         Ubuntu Mono:pixelsize=14
+irc*faceName:         Ubuntu Mono derivative Powerline:pixelsize=14
 irc*cursorBlink:	false
 irc*loginShell:	true
 irc.underlineURLs:	true

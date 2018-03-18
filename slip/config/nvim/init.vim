@@ -14,15 +14,24 @@ nmap <Leader>bu :PlugUpdate<CR>
 nmap <Leader>bc :PlugClean<CR>
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" colorscheme base16-default-light
 set encoding=utf8
-set t_Co=256 "Explicitly tell vim that the terminal supports 256 colors"
-colorscheme eink
+set t_Co=256
+colorscheme nord
+
+filetype plugin indent on
+
+au BufNewFile,BufRead *.html set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
+au BufNewFile,BufRead *.js set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
+au BufNewFile,BufRead *.lua set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 set dir=~/.vim/swaps
 set nolist
-set lazyredraw
+"set lazyredraw
 set mouse-=a
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
 
 " GitGutter
 let g:gitgutter_realtime = 1
@@ -46,11 +55,11 @@ nmap <leader>3 :set nu!<CR>
 nmap <leader>4 :set paste!<CR>
 
 " text & mutt files
-au BufNewFile,BufRead /tmp/mutt*,/tmp/cvs*,*.txt set noai noshowmatch
-au BufNewFile,BufRead /tmp/mutt*,/tmp/cvs*,*.txt setlocal spell spelllang=en_us
+au BufNewFile,BufRead /tmp/*mutt*,/tmp/cvs*,*.txt set noai noshowmatch
+au BufNewFile,BufRead /tmp/*mutt*,/tmp/cvs*,*.txt setlocal spell spelllang=en_us
 
-au BufNewFile,BufRead /private/var/*/mutt* set noai noshowmatch
-au BufNewFile,BufRead /private/var/*/mutt* setlocal spell spelllang=en_us
+au BufNewFile,BufRead /private/var/*/*mutt* set noai noshowmatch
+au BufNewFile,BufRead /private/var/*/*mutt* setlocal spell spelllang=en_us
 
 " git commits
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG set noai noshowmatch

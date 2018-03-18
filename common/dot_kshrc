@@ -29,13 +29,26 @@ alias cdw='cd $(make show=WRKSRC)'
 alias irc="export TERM=xterm; tmux at -t irc"
 alias mkae='make'
 alias mutt='stty discard undef; neomutt'
-alias pass="gopass"
+#alias pass="gopass"
+alias spass="env PASSWORD_STORE_DIR=~/.secret-store pass"
 alias pup='doas -n /usr/sbin/pkg_add -u'
 alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"
 alias tmux="tmux -2"
-alias nord="dynamic_colors set nord"
-alias eink="dynamic_colors set eink"
+#alias nord="dynamic_colors set nord"
+#alias eink="dynamic_colors set eink"
+
+function eink {
+	dynamic_colors set eink
+	sed -i 's/^colorscheme.*/colorscheme eink/' \
+		~/.config/nvim/init.vim
+}
+
+function nord {
+	dynamic_colors set nord
+	sed -i 's/^colorscheme.*/colorscheme nord/' \
+		~/.config/nvim/init.vim
+}
 
 if [ -e ~/.ksh_completions ]; then
     # shellcheck source=/home/qbit/.ksh_completions
@@ -87,13 +100,12 @@ function pclean {
 }
 
 set -A big_gits \
-	/sys \
-	/home/qbit/openbsd/ports	\
-	/home/qbit/openbsd/src		\
-	/home/qbit/dev/mono		\
+	/build/projects/node		\
 	/home/qbit/dev/dotnet/coreclr	\
 	/home/qbit/dev/dotnet/corefx    \
-	/build/projects/node
+	/home/qbit/dev/mono		\
+	/home/qbit/openbsd/ports	\
+	/home/qbit/openbsd/src
 
 function git_branch_name {
     # __git_ps1 causes some slowness on large repos, don't run this there.

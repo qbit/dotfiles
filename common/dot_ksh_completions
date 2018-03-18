@@ -67,3 +67,5 @@ set -A complete_lein_1 -- change check classpath clean compile deploy deps do he
 
 set -A complete_dynamic_colors -- help cycle init list switch create edit audit
 set -A complete_dynamic_colors_2 -- $(dynamic_colors list)
+
+#set -A complete_man_1 -- $(MANPATH=/usr/share/man man -k Nm~. | cut -d\( -f1 | tr -d ,)

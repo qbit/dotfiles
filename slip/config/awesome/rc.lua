@@ -17,7 +17,11 @@ beautiful.init("~/.config/awesome/themes/bold_white/theme.lua")
 local obsd = require('obsd')
 obsd.enable_debug = false
 
+local clip = require('clip')
+clip.enable_debug = true
+
 -- Pledge early
+--local _, _ = openbsd.pledge('stdio tty rpath wpath cpath proc exec prot_exec unix', 'stdio tty rpath wpath cpath proc unix')
 local _, _ = openbsd.pledge('stdio tty rpath wpath cpath proc exec prot_exec unix')
 
 sep.font = beautiful.font
@@ -76,6 +80,7 @@ end
 -- }}}
 
 -- Create a textclock widget
+-- TODO convert this to use the calendar api
 local mytextclock = wibox.widget.textclock("%a %b %_d (%H)%l:%M%p")
 
 local clock_not = function()
@@ -217,6 +222,7 @@ awful.screen.connect_for_each_screen(function(s)
 	  mytextclock,
 	  sep,
 	  wibox.widget.systray(),
+      clip.enable(),
 	  obsd.enable_volume(),
 	  --obsd.enable_snap(),
 	  s.mylayoutbox,

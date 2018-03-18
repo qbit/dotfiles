@@ -1,1 +1,6 @@
-gtk-icon-theme-name="Hicolor"
+# -- THEME AUTO-WRITTEN DO NOT EDIT
+include "/usr/local/share/themes/Emacs/gtk-2.0/gtkrc"
+
+include "/home/qbit/.gtkrc.mine"
+
+# -- THEME AUTO-WRITTEN DO NOT EDIT

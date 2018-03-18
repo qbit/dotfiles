@@ -42,7 +42,7 @@ set -A complete_ssh -- $(awk '{split($1,a,","); print a[1]}' ~/.ssh/known_hosts)
 set -A complete_mosh -- $(awk '{split($1,a,","); print a[1]}' ~/.ssh/known_hosts)
 
 set -A complete_rcctl_1 -- disable enable get ls order set restart start stop
-set -A complete_rcctl_2 -- $(ls /etc/rc.d)
+set -A complete_rcctl_2 -- $(rcctl ls all)
 
 set -A complete_signify_1 -- -C -G -S -V
 set -A complete_signify_2 -- -q -p -x -c -m -t -z

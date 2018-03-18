@@ -26,6 +26,7 @@
       '(
 	(all-the-icons    . "melpa-stable")
 	(base16-theme     . "melpa-stable")
+	(nord-theme       . "melpa-stable")
 	(counsel          . "melpa-stable")
 	(cider            . "melpa-stable")
 	(flycheck         . "melpa-stable")

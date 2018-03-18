@@ -13,7 +13,7 @@
 # Files
 data.location=~/.task
 
-editor=mg
+#editor=mg
 
 # Color theme (uncomment one to use)
 include /usr/local/share/taskwarrior/rc/dark-16.theme
@@ -30,6 +30,3 @@ include /usr/local/share/taskwarrior/rc/dark-16.theme
 #include /usr/local/share/taskwarrior/rc/no-color.theme
 #include /usr/local/share/taskwarrior/rc/solarized-dark-256.theme
 #include /usr/local/share/taskwarrior/rc/solarized-light-256.theme
-
-push.default.uri=qbit@qbit.io:~/.task/
-merge.default.uri=qbit@qbit.io:~/.task/

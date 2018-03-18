@@ -4,6 +4,7 @@
 	signingkey = 0x279160AB1BE1236B
 
 [alias]
+	pus = !git pull upstream master
 	rmdel = !git rm `git ls-files --deleted`
 	upsync = !cvs up && gitsync && git commit -m 'sync'
 	mpush = !git remote | xargs -I '{}' git push '{}' master

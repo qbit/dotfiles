@@ -1,4 +1,4 @@
-INTERACTIVE:false
+WEXIT:true
 MERGE:true
 AFTER:/etc/after_snap
 MIRROR:ftp3.usa.openbsd.org

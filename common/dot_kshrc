@@ -20,6 +20,7 @@ LC_CTYPE="en_US.UTF-8"
 KEYID=0x1F81112D62A9ADCE
 GPG_TTY=$(tty)
 OS=$(uname)
+TERM=screen-256color
 
 unalias ls
 alias ag='ag --nocolor'
@@ -29,14 +30,15 @@ alias cdw='cd $(make show=WRKSRC)'
 alias irc="export TERM=xterm; tmux at -t irc"
 alias mkae='make'
 alias mutt='stty discard undef; neomutt'
-#alias pass="gopass"
-alias spass="env PASSWORD_STORE_DIR=~/.secret-store pass"
+alias pass="gopass"
+#alias spass="env PASSWORD_STORE_DIR=~/.secret-store pass"
 alias pup='doas -n /usr/sbin/pkg_add -u'
 alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"
 alias tmux="tmux -2"
-#alias nord="dynamic_colors set nord"
-#alias eink="dynamic_colors set eink"
+alias pkg_add="pkg_add -Dsnap"
+alias pkg_delete="pkg_delete -Dsnap"
+alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
 
 function eink {
 	dynamic_colors set eink
@@ -154,4 +156,4 @@ fi
 
 dynamic_colors init
 
-export PATH HOME TERM GOPATH GPG_TTY PS1 LC_CTYPE KEYID
+export PATH HOME TERM GOPATH GPG_TTY PS1 LC_CTYPE KEYID TERM

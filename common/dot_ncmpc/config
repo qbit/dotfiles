@@ -1,0 +1,4 @@
+set-xterm-title yes
+xterm-title-format "[%artist%|(artist n/a)] - [%album%|%albumshort%|(album n/a)] - [%title%|(title n/a)]"
+list-format "[%artist%|(artist n/a)]	[%album%|%albumshort%|(album n/a)]	[%title%|(title n/a)]"
+auto-center yes

@@ -14,6 +14,12 @@ set -A dirs \
 	/${DATADIR}/src \
 	/${DATADIR}/xenocara
 
+keys=$(ssh-add -L | grep ^ssh | wc -l)
+
+if [ $keys -lt 1 ]; then
+	ssh-add
+fi
+
 tmux -2 new-session -d -s $session
 
 for mirror in ${mirrors[@]}; do
@@ -28,7 +34,9 @@ for mirror in ${mirrors[@]}; do
 
 		tmux select-pane -t ${counter}
 		tmux send-keys "cd ${dirs[${counter}]}" C-m
-		tmux send-keys "cvs -d${mirror} up" C-m
+
+		tmux send-keys "git pull" C-m
+		#tmux send-keys "cvs -d${mirror} up" C-m
 
 		if [ counter -eq 1 ]; then
 			if [ $width -gt 95 ]; then

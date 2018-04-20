@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (web-mode spaceline slime scpaste scad-mode org-plus-contrib nyan-mode neotree magit golint go-eldoc git-gutter flycheck cider counsel nord-theme base16-theme all-the-icons))))
+    (web-mode spaceline slime scpaste scad-mode org-plus-contrib neotree magit golint go-eldoc git-gutter flycheck counsel nord-theme base16-theme all-the-icons))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

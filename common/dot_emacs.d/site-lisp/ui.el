@@ -25,8 +25,9 @@
 (require 'spaceline-config)
 (spaceline-emacs-theme)
 
-(nyan-mode 1)
 (ivy-mode 1)
+
+(setq x-selection-timeout 10)
 
 (provide 'ui)
 

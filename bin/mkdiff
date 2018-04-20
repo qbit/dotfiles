@@ -3,7 +3,11 @@
 name=$(make show=DISTNAME)
 fname="${HOME}/patches/${name}.diff"
 
-cvs diff . > "$fname"
+if [ -d CVS ]; then
+	cvs diff . > "$fname"
+else
+	git diff . > "$fname"
+fi
 echo "Created: $fname"
 echo "Syncing..."
 rsync -a ${HOME}/patches/ web.akb.io:/var/www/deftly/patches/

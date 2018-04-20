@@ -19,6 +19,6 @@
 (require 'pkgs)
 (require 'config)
 (require 'mode)
-(require 'ui)
 (require 'keyboard)
 (require 'orgie)
+(require 'ui)

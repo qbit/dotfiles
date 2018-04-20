@@ -24,7 +24,7 @@ au BufNewFile,BufRead *.html set tabstop=4 softtabstop=0 expandtab shiftwidth=2 
 au BufNewFile,BufRead *.js set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 au BufNewFile,BufRead *.lua set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
-set dir=~/.vim/swaps
+set dir=/sec/vim/swaps
 set nolist
 "set lazyredraw
 set mouse-=a
@@ -65,7 +65,8 @@ au BufNewFile,BufRead /private/var/*/*mutt* setlocal spell spelllang=en_us
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG set noai noshowmatch
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us
 
-autocmd BufWritePre * %s/\s\+$//e
+"autocmd BufWritePre * %s/\s\+$//e
+nmap <Leader>s :%s/\s\+$//e
 
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)

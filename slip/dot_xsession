@@ -43,6 +43,7 @@ case "$wmanager" in
 		feh --bg-center ~/.background.png &
 		;;
 	awesome)
+		xsetroot -solid grey
 		;;
 	xmonad-x86_64-openbsd)
 		feh --bg-center ~/.background.png &
@@ -59,6 +60,10 @@ fi
 
 if [ -e ${LPREFIX}/bin/tpb ]; then
 	${LPREFIX}/bin/tpb -d
+fi
+
+if [ -e ${LPREFIX}/bin/xbanish ]; then
+	${LPREFIX}/bin/xbanish &
 fi
 
 #if [ -e ${LPREFIX}/bin/conky ]; then

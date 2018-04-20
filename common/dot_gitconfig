@@ -39,4 +39,4 @@
 [commit]
 	gpgsign = true
 #[remote "origin"]
-#fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+#	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*

@@ -1,6 +1,7 @@
 local openbsd = require('openbsd')
 local gears = require("gears")
 local awful = require("awful")
+--local awesompd = require("awesompd/awesompd")
 
 require("awful.autofocus")
 
@@ -17,15 +18,36 @@ beautiful.init("~/.config/awesome/themes/bold_white/theme.lua")
 local obsd = require('obsd')
 obsd.enable_debug = false
 
-local clip = require('clip')
-clip.enable_debug = true
+--musicwidget = awesompd:create() -- Create awesompd widget
+--musicwidget.font = beautiful.font
+--musicwidget.font_color = beautiful.fg_normal
+--musicwidget.background = beautiful.bg_normal
+--musicwidget.scrolling = true
+--musicwidget.output_size = 50
+--musicwidget.update_interval = 1 -- Set the update interval in seconds
+--musicwidget.jamendo_format = awesompd.FORMAT_MP3
+--musicwidget.browser = "browser"
+---- musicwidget.show_album_cover = true
+---- musicwidget.album_cover_size = 50
+--musicwidget.mpd_config = "/etc/mpd.conf"
+--
+--musicwidget.ldecorator = " "
+--musicwidget.rdecorator = " "
+--
+--musicwidget.servers = {
+--   { server = "localhost", port = 6600 }
+--}
+--
+--musicwidget:run()
+
+--local clip = require('clip')
+--clip.enable_debug = true
 
 -- Pledge early
 --local _, _ = openbsd.pledge('stdio tty rpath wpath cpath proc exec prot_exec unix', 'stdio tty rpath wpath cpath proc unix')
 local _, _ = openbsd.pledge('stdio tty rpath wpath cpath proc exec prot_exec unix')
 
 sep.font = beautiful.font
-
 sep.text = " | "
 
 if awesome.startup_errors then
@@ -148,7 +170,7 @@ local function set_wallpaper(s)
 end
 
 awful.screen.connect_for_each_screen(function(s)
-    set_wallpaper(s)
+    --set_wallpaper(s)
     awful.tag.add("emacs", {
         layout             = awful.layout.suit.tile,
         screen             = s,
@@ -219,10 +241,12 @@ awful.screen.connect_for_each_screen(function(s)
        { -- Right widgets
 	  layout = wibox.layout.fixed.horizontal,
 	  sep,
+      --musicwidget.widget,
+	  --sep,
 	  mytextclock,
 	  sep,
 	  wibox.widget.systray(),
-      clip.enable(),
+      --clip.enable(),
 	  obsd.enable_volume(),
 	  --obsd.enable_snap(),
 	  s.mylayoutbox,

@@ -84,7 +84,7 @@ if [ -e ${LPREFIX}/bin/nvim ]; then
 fi
 
 if [ -e ${LPREFIX}/bin/keychain ]; then
-    ${LPREFIX}/bin/keychain --agents ssh,gpg -q
+    ${LPREFIX}/bin/keychain --gpg2 --inherit any --agents ssh,gpg -q -Q
     keychain_conf="$HOME/.keychain/$(uname -n)-sh"
 
     [ -e "$keychain_conf" ]       && . $keychain_conf
@@ -106,8 +106,9 @@ set -A big_gits \
 	/home/qbit/dev/dotnet/coreclr	\
 	/home/qbit/dev/dotnet/corefx    \
 	/home/qbit/dev/mono		\
-	/home/qbit/openbsd/ports	\
-	/home/qbit/openbsd/src
+	/usr/ports			\
+	/usr/src			\
+	/usr/xenocara
 
 function git_branch_name {
     # __git_ps1 causes some slowness on large repos, don't run this there.
@@ -155,5 +156,7 @@ else
 fi
 
 dynamic_colors init
+
+export MPC_FORMAT="[%artist%|(artist n/a)]    [%album%|%albumshort%|(album n/a)]      [%title%|(title n/a)]"
 
 export PATH HOME TERM GOPATH GPG_TTY PS1 LC_CTYPE KEYID TERM

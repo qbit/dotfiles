@@ -16,7 +16,7 @@ nmap <Leader>bc :PlugClean<CR>
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set encoding=utf8
 set t_Co=256
-colorscheme nord
+colorscheme eink
 
 filetype plugin indent on
 

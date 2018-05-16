@@ -11,8 +11,8 @@ set crypt_autosign = no
 set crypt_replyencrypt = yes
 set crypt_verify_sig = yes
 
-set editor = "emacsclient -ct"
-#set editor = "nvim"
+#set editor = "emacsclient -ct"
+set editor = "nvim"
 
 set header_cache =  ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
@@ -54,8 +54,8 @@ set query_command= "abook --mutt-query '%s'"
 macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
 bind editor        <Tab> complete-query
 
-auto_view text/html                                      # view html automatically
-alternative_order text/plain text/enriched text/html     # save html for last
+#auto_view text/html                                      # view html automatically
+#alternative_order text/plain text/enriched text/html     # save html for last
 
 macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
 macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'

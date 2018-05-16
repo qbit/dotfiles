@@ -1,4 +1,5 @@
 #text/html;                      links %s; nametemplate=%s.html
 #text/html;                      links -dump %s; nametemplate=%s.html; copiousoutput
-image/*;	feh '%s'; test=test -n "$DISPLAY"
-text/html;	w3m -cols 80 -I %{charset} -T text/html; copiousoutput;
+#image/*;	feh '%s'; test=test -n "$DISPLAY"
+#text/html;	luakit '%s' &; test=test -n "$DISPLAY"; needsterminal;
+#text/html;	w3m -cols 80 -I %{charset} -T text/html; copiousoutput;

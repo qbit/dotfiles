@@ -12,7 +12,7 @@ local obsd = {}
 obsd.enable_debug = false
 function obsd.enable_volume(widget)
     local vol_timer = gears.timer({ timeout = 1.5 })
-    obsd.current_volume = 100
+    obsd.current_volume = 255
 
     obsd.volume_slider = widget or wibox.widget {
         bar_shape           = gears.shape.rounded_rect,

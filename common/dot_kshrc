@@ -3,7 +3,11 @@
 
 . /etc/ksh.kshrc
 
+# shellcheck source=/home/qbit/.ksh_paths
 . ~/.ksh_paths
+
+export NO_COLOR=1
+export RUBY_TESTOPTS=--color=never
 
 #grey="\033[01;30m"
 #red="\033[01;31m"

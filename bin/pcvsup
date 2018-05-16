@@ -9,10 +9,14 @@ set -A mirrors \
 	anoncvs@anoncvs2.usa.openbsd.org:/cvs \
 	anoncvs@anoncvs3.usa.openbsd.org:/cvs
 
+if [ -z $DATADIR ]; then
+	DATADIR=/usr/
+fi
+
 set -A dirs \
-	/${DATADIR}/ports \
-	/${DATADIR}/src \
-	/${DATADIR}/xenocara
+	"${DATADIR}/ports" \
+	"${DATADIR}/src" \
+	"${DATADIR}/xenocara"
 
 keys=$(ssh-add -L | grep ^ssh | wc -l)
 

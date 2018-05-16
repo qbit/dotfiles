@@ -1,0 +1,8 @@
+#!/bin/sh
+ 
+if [[ -z $1 ]]; then
+  store="$HOME/.password-store/"
+  find "$store" -name '*.gpg' | sed -e "s|^$store||" | sed -e 's|\.gpg$||'
+else
+  gopass otp "$1" | xclip -selection clipboard > /dev/null
+fi

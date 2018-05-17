@@ -4,7 +4,10 @@ cat /dev/null > ~/.xsession-errors
 
 . ~/.ksh_paths
 
-export LC_CTYPE="en_US.UTF-8"
+LC_CTYPE="en_US.UTF-8"
+TERM=screen-256color
+export LC_CTYPE TERM
+
 OS=$(uname)
 LPREFIX=/usr/local
 

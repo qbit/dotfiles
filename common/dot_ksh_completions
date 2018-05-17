@@ -31,9 +31,11 @@ fi
 #set -A complete_pass -- $PASS_LIST ls find show grep insert edit generate rm mv cp git help version
 #set -A complete_spass -- $SPASS_LIST ls find show grep insert edit generate rm mv cp git help version
 
-PASS_LIST=$(gopass ls -f)
-set -A complete_gopass -- $PASS_LIST audit binary bin clone completion config copy cp create new delete remove rm edit set find search fix fsck generate jsonapi otp totp hotp git grep init insert list ls move mv mounts recipients setup show sync templates unclip update version help h
-set -A complete_pass -- $PASS_LIST audit binary bin clone completion config copy cp create new delete remove rm edit set find search fix fsck generate jsonapi otp totp hotp git grep init insert list ls move mv mounts recipients setup show sync templates unclip update version help h
+if [ -e /usr/local/bin/gopass ]; then
+	PASS_LIST=$(gopass ls -f)
+	set -A complete_gopass -- $PASS_LIST audit binary bin clone completion config copy cp create new delete remove rm edit set find search fix fsck generate jsonapi otp totp hotp git grep init insert list ls move mv mounts recipients setup show sync templates unclip update version help h
+	set -A complete_pass -- $PASS_LIST audit binary bin clone completion config copy cp create new delete remove rm edit set find search fix fsck generate jsonapi otp totp hotp git grep init insert list ls move mv mounts recipients setup show sync templates unclip update version help h
+fi
 
 set -A complete_pkg_delete -- $PKG_LIST
 set -A complete_pkg_info -- $PKG_LIST
@@ -65,7 +67,9 @@ set -A complete_mixerctl_1 -- $(mixerctl | cut -d= -f 1)
 
 set -A complete_lein_1 -- change check classpath clean compile deploy deps do help install jar javac new plugin pom release repl retest run search show-profiles test trampoline uberjar update-in upgrade vcs version with-profile
 
-set -A complete_dynamic_colors -- help cycle init list switch create edit audit
-set -A complete_dynamic_colors_2 -- $(dynamic_colors list)
+if [ -d ~/.dynamic-colors ]; then
+	set -A complete_dynamic_colors -- help cycle init list switch create edit audit
+	set -A complete_dynamic_colors_2 -- $(dynamic_colors list)
+fi
 
 #set -A complete_man_1 -- $(MANPATH=/usr/share/man man -k Nm~. | cut -d\( -f1 | tr -d ,)

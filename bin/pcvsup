@@ -26,9 +26,9 @@ fi
 
 tmux -2 new-session -d -s $session
 
-for mirror in ${mirrors[@]}; do
+for mirror in "${mirrors[@]}"; do
 	if [ -d ${dirs[${counter}]} ]; then
-		if [ counter -eq 0 ]; then
+		if [ $counter -eq 0 ]; then
 			if [ $width -gt 95 ]; then
 				tmux split-window -h -p 70
 			else
@@ -42,7 +42,7 @@ for mirror in ${mirrors[@]}; do
 		tmux send-keys "git pull" C-m
 		#tmux send-keys "cvs -d${mirror} up" C-m
 
-		if [ counter -eq 1 ]; then
+		if [ $counter -eq 1 ]; then
 			if [ $width -gt 95 ]; then
 				tmux split-window -h -p 50
 			else

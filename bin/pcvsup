@@ -18,7 +18,7 @@ set -A dirs \
 	"${DATADIR}/src" \
 	"${DATADIR}/xenocara"
 
-keys=$(ssh-add -L | grep ^ssh | wc -l)
+keys=$(ssh-add -L | grep -c ^ssh)
 
 if [ $keys -lt 1 ]; then
 	ssh-add

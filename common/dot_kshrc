@@ -86,10 +86,11 @@ if [ -e ${LPREFIX}/bin/nvim ]; then
 fi
 
 if [ -e ${LPREFIX}/bin/keychain ]; then
-    ${LPREFIX}/bin/keychain --gpg2 --inherit any --agents ssh,gpg -q -Q
+    #${LPREFIX}/bin/keychain --gpg2 --inherit any --agents ssh,gpg -q -Q
+    ${LPREFIX}/bin/keychain --gpg2 --inherit any --agents gpg -q -Q
     keychain_conf="$HOME/.keychain/$(uname -n)-sh"
 
-    [ -e "$keychain_conf" ]       && . $keychain_conf
+    #[ -e "$keychain_conf" ]       && . $keychain_conf
     [ -e "${keychain_conf}-gpg" ] && . ${keychain_conf}-gpg
 fi
 

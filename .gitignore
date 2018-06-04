@@ -16,3 +16,12 @@ xmonad.o
 ac-comphist.dat
 recentf
 /slip/config/nvim/.netrwhist
+common/dot_gnupg/crls.d/
+common/dot_gnupg/private-keys-v1.d/
+common/dot_gnupg/pubring.kbx
+common/dot_gnupg/random_seed
+common/dot_gnupg/reader_0.status
+common/dot_gnupg/sshcontrol
+common/dot_gnupg/tofu.db
+common/dot_gnupg/trustdb.gpg
+

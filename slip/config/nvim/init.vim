@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'chriskempson/base16-vim'
 Plug 'fatih/vim-go'
 Plug 'https://bitbucket.org/kisom/eink.vim.git'

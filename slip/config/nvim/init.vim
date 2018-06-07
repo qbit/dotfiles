@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'chriskempson/base16-vim'
 Plug 'fatih/vim-go'
@@ -50,6 +51,8 @@ noremap <Left>  <NOP>
 noremap <Right> <NOP>
 noremap <Up>    <NOP>
 noremap <Down>  <NOP>
+
+nnoremap ,o :Files<cr>
 
 nmap <leader>2 :set list!<CR>
 nmap <leader>3 :set nu!<CR>

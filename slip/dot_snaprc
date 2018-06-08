@@ -1,6 +1,6 @@
 WEXIT:true
 MERGE:true
 AFTER:/etc/after_snap
-MIRROR:cdn.openbsd.org
+MIRROR:ftp3.usa.openbsd.org
 FTP_OPTS:-C -V
-DST:/tmp/snap.kgynYsweC1
+DST:/tmp/snap

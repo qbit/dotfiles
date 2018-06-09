@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [[ -z $1 ]]; then
+  store="$HOME/.password-store/"
+  find "$store" -name '*.gpg' | sed -e "s|^$store||" | sed -e 's|\.gpg$||'
+else
+  gopass "$1" | awk '$1 ~ "[0-9]" { print $1 }' | xclip -selection clipboard > /dev/null
+fi

@@ -96,7 +96,7 @@ fi
 
 function vdiff {
     cp -p "$1" "$1.orig"
-    emacsclient -c "$1"
+    nvim "$1"
 }
 
 function pclean {

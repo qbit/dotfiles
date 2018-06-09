@@ -24,7 +24,6 @@ command		next	"mpcc next"
 command		pause	"mpcc toggle"
 
 bind-key	M-r	"rofi -show run"
-bind-key	MS-r	"passmenu"
 bind-key	M-n	"mpcc next"
 bind-key	MS-p	"mpcc toggle"
 bind-key	MS-i	"/home/qbit/.screenlayout/internal.sh"

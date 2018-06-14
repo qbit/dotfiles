@@ -87,6 +87,7 @@ mailboxes = "=INBOX.OpenBSD.src-changes"
 mailboxes = "=INBOX.OpenBSD.ports-changes"
 mailboxes = "=INBOX.Root Mail"
 mailboxes = "=INBOX.Speed Tests"
+mailboxes = "=INBOX.OSS-Sec"
 
 #subscribe "hackers@openbsd\\.org"
 #subscribe "bugs@openbsd\\.org"

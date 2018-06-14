@@ -153,7 +153,7 @@ function ltodo {
 }
 
 if [ -z "$DISPLAY" ]; then
-	PS1='\u@\h($(battery -ln)%)[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\W\]$(git_branch_name)$(hg_q_name)$(ltodo)$ '
+	PS1='\u@\h($(battery -nap))[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\W\]$(git_branch_name)$(hg_q_name)$(ltodo)$ '
 else
 	PS1='\u@\h[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\W\]$(git_branch_name)$(hg_q_name)$(ltodo)λ '
 fi

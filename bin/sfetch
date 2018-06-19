@@ -1,0 +1,9 @@
+#!/bin/sh
+
+ITEM=$1
+V=$(uname -r | sed 's/\.//')
+
+ftp -VM -o "${PWD}/${ITEM}" "https://cdn.openbsd.org/pub/OpenBSD/snapshots/$(machine)/${ITEM}" && \
+ftp -VM -o "${PWD}/SHA256.sig" "https://cdn.openbsd.org/pub/OpenBSD/snapshots/$(machine)/SHA256.sig"
+
+signify -C -p "/etc/signify/openbsd-${V}-base.pub" -x SHA256.sig "${ITEM}"

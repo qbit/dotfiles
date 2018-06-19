@@ -63,7 +63,9 @@ set -A complete_git_1 -- pull push mpull mpush clone checkout status commit
 
 set -A complete_ifconfig_1 -- $(ifconfig | grep ^[a-z] | cut -d: -f1)
 
-set -A complete_mixerctl_1 -- $(mixerctl | cut -d= -f 1)
+if [ -f /dev/mixer ]; then
+	set -A complete_mixerctl_1 -- $(mixerctl | cut -d= -f 1)
+fi
 
 set -A complete_lein_1 -- change check classpath clean compile deploy deps do help install jar javac new plugin pom release repl retest run search show-profiles test trampoline uberjar update-in upgrade vcs version with-profile
 

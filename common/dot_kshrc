@@ -142,6 +142,12 @@ hg_q_name() {
 }
 
 ltodo() {
+	if [ -e /usr/local/bin/task ]; then
+		tc=$(task +PENDING count)
+		if [ "${tc}" -gt "0" ]; then
+			printf "[${bold}TODO: %s%s]" "${tc}" "${white}"
+		fi
+	fi
 	if [ -f .todo ]; then
 		items=$(todo | wc -l | awk '{print $1}')
 		if [ "${items}" != "0" ]; then

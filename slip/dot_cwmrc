@@ -20,9 +20,11 @@ command		browser	"browser"
 command		irc	"xterm -class irc"
 command		term	"xterm"
 command		Mail	"xterm -class Mail"
-command		next	"mpcc next"
-command		pause	"mpcc toggle"
+#command		next	"mpcc next"
+#command		pause	"mpcc toggle"
 
+#bind-key	M-Tab	group-cycle
+#bind-key	MS-Tab	group-rcycle
 bind-key	M-r	"rofi -show run"
 bind-key	M-n	"mpcc next"
 bind-key	MS-p	"mpcc toggle"
@@ -33,13 +35,11 @@ bind-key	MS-backslash	window-vtile
 bind-key	M-backslash	window-htile
 bind-key	MC-l	lock
 
-autogroup 1	"emacs,Emacs"
+autogroup 1	"xterm,XTerm"
 autogroup 2	"chromium-browser,Chromium-browser"
 autogroup 2	"Navigator,Firefox"
-
-autogroup 3	"irc"
-autogroup 4	"Mail"
+autogroup 3	"acme"
 autogroup 9	"xconsole,XConsole"
 
-bind-mouse MS-1	menu-cmd
+bind-mouse MS-1	menu-window
 bind-mouse M-3	window-resize

@@ -20,8 +20,6 @@ command		browser	"browser"
 command		irc	"xterm -class irc"
 command		term	"xterm"
 command		Mail	"xterm -class Mail"
-#command		next	"mpcc next"
-#command		pause	"mpcc toggle"
 
 #bind-key	M-Tab	group-cycle
 #bind-key	MS-Tab	group-rcycle

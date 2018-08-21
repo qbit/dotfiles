@@ -2,6 +2,7 @@
 
 set -A paths /usr/games \
     /usr/ports/infrastructure/bin \
+    /usr/local/plan9/bin/ \
     /usr/local/jdk-1.8.0/bin \
     /usr/pkg/bin \
     /usr/pkg/sbin \
@@ -18,7 +19,7 @@ for d in "${paths[@]}"; do
     [[ -d "$d" ]] && PATH="${PATH}:$d"
 done
 
-GOPATH=~
+export GOPATH=~
 if [ -d ~/dev/go ]; then
     export GOROOT_BOOTSTRAP=/usr/local/go/bootstrap
     export GOROOT=~/dev/go/

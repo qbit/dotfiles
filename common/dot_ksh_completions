@@ -17,7 +17,7 @@ fi
 
 pgrep -q mpd
 if [ $? = 0 ]; then
-	set -A complete_mpc_1 -- lsplaylists ls play pause toggle prev random shuffle stop update
+	set -A complete_mpc_1 -- add crop current del play next prev pause pause-if-playing toggle cdprev stop seek clear outputs enable disable toggleoutput outputset shuffle move playlist listall ls lsplaylists load insert prio save rm volume repeat random single consume search searchadd find findadd searchplay list crossfade clearerror mixrampdb mixrampdelay update rescan sticker stats version idle idleloop replaygain channels sendmessage waitmessage subscribe
 	set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
 fi
 

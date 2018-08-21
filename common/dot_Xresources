@@ -109,19 +109,18 @@ XTerm*metaSendsEscape:	true
 XTerm*eightBitInput:	false
 XTerm*saveLines:	4096
 XTerm*letterSpace:	1
-!XTerm*faceName:		Go Mono:pixelsize=13
-!XTerm*faceName:		Anonymous PRO:pixelsize=12
-!XTerm*faceName:		Triplicate T4c:regular:pixelsize=13
+!XTerm*faceName:	Go Mono:pixelsize=12
+XTerm*faceName:		Go Regular:pixelsize=12
+!XTerm*faceName:	Anonymous PRO:pixelsize=12
+!XTerm*faceName:	Triplicate T4c:regular:pixelsize=13
 !XTerm*faceName:         Ubuntu Mono derivative Powerline:pixelsize=14
-XTerm*faceName:         Fantasque Sans Mono:pixelsize=14
+!XTerm*faceName:         Fantasque Sans Mono:pixelsize=14
 XTerm*cursorBlink:	false
 XTerm*loginShell:	true
 XTerm.underlineURLs:	true
 XTerm.matcher.button:	1
 XTerm*inheritPixmap:	true
-XTerm*dynamicColors: true
-! change to red background
-XTerm*keysym.C-8: command:dynamic_colors switch solarized-dark
+XTerm*dynamicColors:	true
 !XTerm*background:	#0e3250
 !XTerm*foreground:	#d9e3f2
 !XTerm*color0:		#1f2c36
@@ -156,6 +155,21 @@ irc*loginShell:	true
 irc.underlineURLs:	true
 irc.matcher.button:	1
 irc*inheritPixmap:	true
+Mail*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+Mail*bellIsUrgent:	true
+Mail*cursorColor:	green
+Mail*scrollBar: 	false
+Mail*locale:		true
+Mail*metaSendsEscape:	true
+Mail*eightBitInput:	false
+Mail*saveLines:	4096
+Mail*letterSpace:	1
+Mail*faceName:         Ubuntu Mono derivative Powerline:pixelsize=14
+Mail*cursorBlink:	false
+Mail*loginShell:	true
+Mail.underlineURLs:	true
+Mail.matcher.button:	1
+Mail*inheritPixmap:	true
 
 Xft.dpi:		100
 !Xft.dpi:		96

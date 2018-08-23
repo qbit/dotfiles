@@ -1,0 +1,29 @@
+#!/bin/ksh
+
+BROWSER_USER=_debrowser
+BROWSER=/usr/local/bin/firefox
+
+# Start Xephyr if it isn't already running
+pgrep -u "$USER" Xephyr || /usr/X11R6/bin/Xephyr -resizeable :1 &
+
+# Create a script to run a few tasks and start the browser
+if [ ! -x /home/${BROWSER_USER}/start.sh ]; then
+	cat > /home/${BROWSER_USER}/start.sh << EOF
+#!/bin/sh
+
+for font in \$(ls /usr/local/share/fonts/); do
+	DISPLAY=:1 xset +fp /usr/local/share/fonts/\${font}
+done
+DISPLAY=:1 xset fp rehash
+
+ulimit -n \$(ulimit -Hn)
+ulimit -d \$(ulimit -Hd)
+
+pgrep -u $BROWSER_USER cwm || DISPLAY=:1 cwm &
+DISPLAY=:1 exec $BROWSER \$@ &
+EOF
+	chmod +x /home/${BROWSER_USER}/start.sh
+fi
+
+# Run the above script as our BROWSER_USER
+su $BROWSER_USER -c "/home/${BROWSER_USER}/start.sh"

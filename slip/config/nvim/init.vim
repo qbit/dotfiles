@@ -8,6 +8,7 @@ Plug 'fatih/vim-go'
 Plug 'https://bitbucket.org/kisom/eink.vim.git'
 Plug 'arcticicestudio/nord-vim'
 Plug 'w0rp/ale'
+Plug 'ngmy/vim-rubocop'
 
 call plug#end()
 
@@ -25,6 +26,8 @@ filetype plugin indent on
 au BufNewFile,BufRead *.html set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 au BufNewFile,BufRead *.js set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 au BufNewFile,BufRead *.lua set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
+au BufNewFile,BufRead *.rb set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
+au BufNewFile,BufRead *.yml set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 set dir=/sec/vim/swaps
 set nolist
@@ -33,6 +36,7 @@ set mouse-=a
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'ruby': ['rubocop25'],
 \}
 
 " GitGutter

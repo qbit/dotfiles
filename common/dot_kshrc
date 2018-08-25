@@ -7,6 +7,7 @@
 
 export NO_COLOR=1
 export RUBY_TESTOPTS=--color=never
+export GEM_HOME=~/ruby_bin
 
 #grey="\033[01;30m"
 #red="\033[01;31m"
@@ -22,6 +23,8 @@ white="\\033[0m"
 KEYID=0x1F81112D62A9ADCE
 GPG_TTY=$(tty)
 OS=$(uname)
+export SPEC_OPTS=--no-color
+export RUBY_TESTOPTS=--color=never
 
 unalias ls
 alias ag='ag --nocolor'
@@ -32,6 +35,7 @@ alias irc="export TERM=xterm; tmux at -t irc"
 alias mkae='make'
 alias mutt='stty discard undef; neomutt'
 alias pass="gopass"
+alias bpass="env DISPLAY=:1 gopass"
 #alias spass="env PASSWORD_STORE_DIR=~/.secret-store pass"
 alias pup='doas -n /usr/sbin/pkg_add -u'
 alias rustc='rustc --color=never'
@@ -40,6 +44,13 @@ alias tmux="tmux -2"
 alias pkg_add="pkg_add -Dsnap"
 alias pkg_delete="pkg_delete -Dsnap"
 alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
+
+ruby_ver=25
+alias ruby="ruby${ruby_ver}"
+alias irb="irb${ruby_ver}"
+alias rake="rake${ruby_ver}"
+alias rubocop="rubocop${ruby_ver}"
+alias gem="gem${ruby_ver}"
 
 eink() {
 	dynamic_colors set eink

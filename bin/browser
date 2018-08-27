@@ -6,15 +6,17 @@ BROWSER=/usr/local/bin/firefox
 # Start Xephyr if it isn't already running
 pgrep -u "$USER" Xephyr || /usr/X11R6/bin/Xephyr -resizeable :1 &
 
-# Create a script to run a few tasks and start the browser
-if [ ! -x /home/${BROWSER_USER}/start.sh ]; then
-	cat > /home/${BROWSER_USER}/start.sh << EOF
+cat > /home/${BROWSER_USER}/start.sh << EOF
 #!/bin/sh
 
 for font in \$(ls /usr/local/share/fonts/); do
+	echo "Adding \${font} to font path"
 	DISPLAY=:1 xset +fp /usr/local/share/fonts/\${font}
 done
 DISPLAY=:1 xset fp rehash
+
+echo "Setting Xmodmap"
+DISPLAY=:1 xmodmap ~/.Xmodmap &
 
 ulimit -n \$(ulimit -Hn)
 ulimit -d \$(ulimit -Hd)
@@ -22,8 +24,15 @@ ulimit -d \$(ulimit -Hd)
 pgrep -u $BROWSER_USER cwm || DISPLAY=:1 cwm &
 DISPLAY=:1 exec $BROWSER \$@ &
 EOF
-	chmod +x /home/${BROWSER_USER}/start.sh
-fi
+
+chmod +x /home/${BROWSER_USER}/start.sh
+
+cat > /home/${BROWSER_USER}/.Xmodmap << EOF
+remove mod1 = Alt_L
+remove mod4 = Super_L
+keycode 64 = Super_L
+keycode 115 = Alt_L
+EOF
 
 # Run the above script as our BROWSER_USER
 su $BROWSER_USER -c "/home/${BROWSER_USER}/start.sh"

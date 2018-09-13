@@ -95,8 +95,8 @@ fi
 DATADIR=/usr
 export DATADIR
 
-if [ -e ${LPREFIX}/bin/nvim ]; then
-	alias vi="nvim"
+if [ -e ${LPREFIX}/bin/vim ]; then
+	alias vi="vim"
 fi
 
 if [ -e ${LPREFIX}/bin/keychain ]; then

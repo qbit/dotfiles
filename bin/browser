@@ -4,7 +4,7 @@ BROWSER_USER=_debrowser
 BROWSER=/usr/local/bin/firefox
 
 # Start Xephyr if it isn't already running
-pgrep -u "$USER" Xephyr || /usr/X11R6/bin/Xephyr -resizeable :1 &
+pgrep -q -u "$USER" Xephyr || /usr/X11R6/bin/Xephyr -resizeable :1 &
 
 cat > /home/${BROWSER_USER}/start.sh << EOF
 #!/bin/sh
@@ -21,11 +21,12 @@ DISPLAY=:1 xmodmap ~/.Xmodmap &
 ulimit -n \$(ulimit -Hn)
 ulimit -d \$(ulimit -Hd)
 
-pgrep -u $BROWSER_USER cwm || DISPLAY=:1 cwm &
+pgrep -q -u $BROWSER_USER cwm || DISPLAY=:1 cwm &
 DISPLAY=:1 exec $BROWSER \$@ &
 EOF
 
 chmod +x /home/${BROWSER_USER}/start.sh
+chmod g+rw /home/${BROWSER_USER}/start.sh
 
 cat > /home/${BROWSER_USER}/.Xmodmap << EOF
 remove mod1 = Alt_L

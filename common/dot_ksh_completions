@@ -35,6 +35,7 @@ if [ -e /usr/local/bin/gopass ]; then
 	PASS_LIST=$(gopass ls -f)
 	set -A complete_gopass -- $PASS_LIST audit binary bin clone completion config copy cp create new delete remove rm edit set find search fix fsck generate jsonapi otp totp hotp git grep init insert list ls move mv mounts recipients setup show sync templates unclip update version help h
 	set -A complete_pass -- $PASS_LIST audit binary bin clone completion config copy cp create new delete remove rm edit set find search fix fsck generate jsonapi otp totp hotp git grep init insert list ls move mv mounts recipients setup show sync templates unclip update version help h
+	set -A complete_bpass -- $PASS_LIST audit binary bin clone completion config copy cp create new delete remove rm edit set find search fix fsck generate jsonapi otp totp hotp git grep init insert list ls move mv mounts recipients setup show sync templates unclip update version help h
 fi
 
 set -A complete_pkg_delete -- $PKG_LIST

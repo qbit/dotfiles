@@ -36,4 +36,4 @@ keycode 115 = Alt_L
 EOF
 
 # Run the above script as our BROWSER_USER
-su $BROWSER_USER -c "/home/${BROWSER_USER}/start.sh"
+doas su -l -c staff $BROWSER_USER -c "/home/${BROWSER_USER}/start.sh"

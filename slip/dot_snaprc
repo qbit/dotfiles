@@ -1,8 +1,0 @@
-WEXIT:true
-MERGE:true
-AFTER:/etc/after_snap
-MIRROR:ftp3.usa.openbsd.org
-FTP_OPTS:-C -V
-DST:/tmp/snap
-COLOR:false
-INTERACTIVE:true

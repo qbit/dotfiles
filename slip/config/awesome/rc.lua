@@ -171,7 +171,7 @@ end
 
 awful.screen.connect_for_each_screen(function(s)
     --set_wallpaper(s)
-    awful.tag.add("emacs", {
+    awful.tag.add("scratch", {
         layout             = awful.layout.suit.tile,
         screen             = s,
         selected           = true,

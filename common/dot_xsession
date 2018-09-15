@@ -31,12 +31,12 @@ fi
 
 case "$wmanager" in
 	cwm)
-		xsetroot -solid grey
+		xsetroot -solid black
 		xbattbar -i green -o "olive drab" -I blue -O red &
 		xcompmgr &
 		;;
 	awesome)
-		xsetroot -solid grey
+		xsetroot -solid black
 		;;
 	xmonad-x86_64-openbsd)
 		feh --bg-center ~/.background.png &

@@ -1,4 +1,5 @@
 PKG_LIST=$(ls -1 /var/db/pkg)
+HOST_LIST=$(awk '{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1]}' ~/.ssh/known_hosts)
 
 function reload_completions {
 	if [ -e ~/.ksh_completions ]; then
@@ -41,8 +42,8 @@ fi
 set -A complete_pkg_delete -- $PKG_LIST
 set -A complete_pkg_info -- $PKG_LIST
 
-set -A complete_ssh -- $(awk '{split($1,a,","); print a[1]}' ~/.ssh/known_hosts)
-set -A complete_mosh -- $(awk '{split($1,a,","); print a[1]}' ~/.ssh/known_hosts)
+set -A complete_ssh -- $HOST_LIST
+set -A complete_mosh -- $HOST_LIST
 
 set -A complete_rcctl_1 -- disable enable get ls order set restart start stop
 set -A complete_rcctl_2 -- $(rcctl ls all)

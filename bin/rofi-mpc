@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [[ -z $1 ]]; then
-	mpc lsp
+	mpc lsp | sort
 else
   	mpc clear
 	mpc load "$1"

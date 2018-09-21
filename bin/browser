@@ -1,7 +1,19 @@
 #!/bin/ksh
 
+if [[ $(id -u) -ne 0 ]]; then
+	echo "need root privileges"
+	exit 1
+fi
+
 BROWSER_USER=_debrowser
 BROWSER=/usr/local/bin/firefox
+
+getent group $BROWSER_USER || \
+	groupadd $BROWSER_USER
+
+getent passwd $BROWSER_USER || \
+	useradd -m -L staff -g $BROWSER_USER \
+	$BROWSER_USER
 
 # Start Xephyr if it isn't already running
 pgrep -q -u "$USER" Xephyr || /usr/X11R6/bin/Xephyr -resizeable :1 &
@@ -36,4 +48,4 @@ keycode 115 = Alt_L
 EOF
 
 # Run the above script as our BROWSER_USER
-doas su -l -c staff $BROWSER_USER -c "/home/${BROWSER_USER}/start.sh"
+su -l -c staff $BROWSER_USER -c "/home/${BROWSER_USER}/start.sh"

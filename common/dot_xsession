@@ -76,8 +76,8 @@ if [ -x ${LPREFIX}/bin/xfce4-clipman ]; then
 fi
 
 xset +fp ~/.fonts
-for font in $(ls /usr/local/share/fonts/); do
-	xset +fp /usr/local/share/fonts/${font}
+for font in /usr/local/share/fonts/*; do
+	xset +fp "${font}"
 done
 xset fp rehash
 

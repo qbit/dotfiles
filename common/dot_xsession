@@ -11,17 +11,11 @@ export LC_CTYPE TERM
 OS=$(uname)
 LPREFIX=/usr/local
 
-#wmanager="awesome"
-wmanager="cwm"
-#wmanager="fvwm"
-#wmanager="stumpwm"
-#wmanager="xmonad-x86_64-openbsd"
+wmanager=$(cat ~/.wmanager 2> /dev/null || echo "/usr/X11R6/bin/cwm")
 
 if [ $OS != "OpenBSD" ]; then
 	LPREFIX=/usr
 fi
-
-mkfifo /tmp/pianobar
 
 xset -b &
 
@@ -30,18 +24,18 @@ if [ -x ${LPREFIX}/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
 fi
 
 case "$wmanager" in
-	cwm)
+	/usr/X11R6/bin/cwm)
 		xsetroot -solid black
 		xbattbar -i green -o "olive drab" -I blue -O red &
 		xcompmgr &
 		;;
-	awesome)
+	/usr/local/bin/awesome)
 		xsetroot -solid black
 		;;
 	xmonad-x86_64-openbsd)
 		feh --bg-center ~/.background.png &
 		;;
-	fvwm)
+	/usr/X11R6/bin/fvwm)
 		xsetroot -solid black
 		;;
 esac
@@ -59,20 +53,12 @@ if [ -e ${LPREFIX}/bin/xbanish ]; then
 	${LPREFIX}/bin/xbanish &
 fi
 
-#if [ -e ${LPREFIX}/bin/conky ]; then
-	#${LPREFIX}/bin/conky -d
-#fi
-
 if [ -x ${LPREFIX}/bin/scmpc ]; then
 	${LPREFIX}/bin/scmpc &
 fi
 
 if [ -x ${LPREFIX}/bin/sctd ]; then
 	${LPREFIX}/bin/sctd &
-fi
-
-if [ -x ${LPREFIX}/bin/xfce4-clipman ]; then
-	xfce4-clipman &
 fi
 
 xset +fp ~/.fonts
@@ -85,4 +71,4 @@ xrdb -merge -load ~/.Xresources &
 
 xidle -delay 5 -program "/usr/X11R6/bin/xlock" -timeout 300 &
 
-exec $wmanager
+exec "$wmanager"

@@ -57,6 +57,9 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 
 nmap <silent> ,/ :let @/=""<CR>
 
+let g:vimrubocop_keymap = 0
+nmap <Leader>r :RuboCop<CR>
+
 noremap <Left>  <NOP>
 noremap <Right> <NOP>
 noremap <Up>    <NOP>

@@ -47,5 +47,10 @@ keycode 64 = Super_L
 keycode 115 = Alt_L
 EOF
 
+[[ -d "/home/${BROWSER_USER}/.sndio" ]] || mkdir -p "/home/${BROWSER_USER}/.sndio"
+
+cp "/home/${USER}/.sndio/cookie" "/home/${BROWSER_USER}/.sndio/cookie"
+chown $BROWSER_USER "/home/${BROWSER_USER}/.sndio/cookie"
+
 # Run the above script as our BROWSER_USER
 su -l -c staff $BROWSER_USER -c "/home/${BROWSER_USER}/start.sh"

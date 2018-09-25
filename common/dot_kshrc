@@ -95,9 +95,9 @@ fi
 DATADIR=/usr
 export DATADIR
 
-if [ -e ${LPREFIX}/bin/vim ]; then
-	alias vi="vim"
-fi
+#if [ -e ${LPREFIX}/bin/vim ]; then
+#	alias vi="vim"
+#fi
 
 if [ -e ${LPREFIX}/bin/keychain ]; then
 	${LPREFIX}/bin/keychain --gpg2 --inherit any --agents gpg -q -Q

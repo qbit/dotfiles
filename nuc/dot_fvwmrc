@@ -10,8 +10,8 @@ ClickTime 750
 #WindowFont "-*-ubuntu mono-medium-*-*-*-12-*-*-*-*-*-*-*"
 #IconFont "-*-ubuntu mono-medium-*-*-*-10-*-*-*-*-*-*-*"
 
-WindowFont "xft:Ubuntu Mono:Medium:Roman:size=14:encoding=iso8859-1"
-IconFont "xft:Ubuntu Mono:Medium:Roman:size=12:encoding=iso8859-1"
+#WindowFont "xft:Ubuntu Mono:Medium:Roman:size=14:encoding=iso8859-1"
+#IconFont "xft:Ubuntu Mono:Medium:Roman:size=12:encoding=iso8859-1"
 
 #HilightColor #bebebe blue
 #MenuStyle #4d4d4d #bebebe #e7e7e7 -anonymous pro-bold-r-*-*-12-*-*-*-*-*-*-* fvwm
@@ -112,7 +112,6 @@ AddToMenu VolumeMenu  "Volume Control"  Title
 
 AddToMenu RootMenu	"Root Menu"	Title
 +			"XTerm%mini.xterm.xpm%"		Exec exec xterm
-+			"Browser"			Exec exec /home/qbit/bin/browser
 +			"Calculator"			Exec exec xcalc
 +			"PRIMARY -> :1 CLIPBOARD"	Exec exec ksh -c 'xclip -out | xclip -selection clipboard -d :1'
 +			":1 CLIPBOARD -> PRIMARY"	Exec exec ksh -c 'xclip -out -selection clipboard -d :1 | xclip'

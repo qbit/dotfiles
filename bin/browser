@@ -18,6 +18,9 @@ getent passwd $BROWSER_USER || \
 # Start Xephyr if it isn't already running
 pgrep -q -u "$USER" Xephyr || /usr/X11R6/bin/Xephyr -resizeable :1 &
 
+# Wait for Xephyr to get up and running
+sleep 3
+
 cat > /home/${BROWSER_USER}/start.sh << EOF
 #!/bin/sh
 

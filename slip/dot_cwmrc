@@ -6,7 +6,7 @@ ignore dock
 ignore menu
 ignore panel
 
-fontname "Ubuntu Mono:pixelsize=14"
+fontname "Go Regular:pixelsize=13"
 
 borderwidth		2
 color activeborder	"#99aab9"
@@ -16,31 +16,27 @@ color menubg		"#798a99"
 color menufg		"#eeeeff"
 color urgencyborder	"red"
 
-command		browser	"browser"
-command		irc	"xterm -class irc"
-command		term	"xterm"
-command		Mail	"xterm -class Mail"
-command "PRIMARY -> :1 CLIPBOARD" "ksh -c 'xclip -out | xclip -selection clipboard -d :1'"
-command ":1 CLIPBOARD -> PRIMARY" "ksh -c 'xclip -out -selection clipboard -d :1 | xclip'"
-command ":1 PRIMARY -> PRIMARY" "ksh -c 'xclip -out -d :1 | xclip'"
+command	term	"xterm"
+command "Primary -> :1 Clipboard" "ksh -c 'xclip -out | xclip -selection clipboard -d :1'"
+command ":1 Clipboard -> Primary" "ksh -c 'xclip -out -selection clipboard -d :1 | xclip'"
+command ":1 Primary -> Primary" "ksh -c 'xclip -out -d :1 | xclip'"
 
-#bind-key	M-Tab	group-cycle
-#bind-key	MS-Tab	group-rcycle
-bind-key	M-r	"rofi -show run"
-bind-key	M-n	"mpcc next"
-bind-key	MS-p	"mpcc toggle"
-bind-key	MS-i	"/home/qbit/.screenlayout/internal.sh"
-bind-key	MS-e	"/home/qbit/.screenlayout/external.sh"
-bind-key 	MS--	window-htile
-bind-key	MS-backslash	window-vtile
-bind-key	M-backslash	window-htile
-bind-key	MC-l	lock
+#bind-key	M-Tab		group-cycle
+#bind-key	MS-Tab		group-rcycle
+bind-key	M-r		"rofi -show run"
+bind-key	M-n		"mpcc next"
+bind-key	MS-p		"mpcc toggle"
+bind-key	MS-i		"/home/qbit/.screenlayout/internal.sh"
+bind-key	MS-e		"/home/qbit/.screenlayout/external.sh"
+bind-key	MS-equal	window-vtile
+bind-key	M-equal		window-htile
+bind-key	MC-l		lock
 
 autogroup 1	"xterm,XTerm"
-autogroup 2	"chromium-browser,Chromium-browser"
-autogroup 2	"Navigator,Firefox"
-autogroup 2	"Xephyr"
-autogroup 3	"acme"
+autogroup 1	"chromium-browser,Chromium-browser"
+autogroup 1	"Navigator,Firefox"
+autogroup 1	"Xephyr"
+autogroup 2	"acme"
 autogroup 9	"xconsole,XConsole"
 
 bind-mouse MS-1	menu-window

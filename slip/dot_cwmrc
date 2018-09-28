@@ -21,8 +21,6 @@ command "Primary -> :1 Clipboard" "ksh -c 'xclip -out | xclip -selection clipboa
 command ":1 Clipboard -> Primary" "ksh -c 'xclip -out -selection clipboard -d :1 | xclip'"
 command ":1 Primary -> Primary" "ksh -c 'xclip -out -d :1 | xclip'"
 
-#bind-key	M-Tab		group-cycle
-#bind-key	MS-Tab		group-rcycle
 bind-key	M-r		"rofi -show run"
 bind-key	M-n		"mpcc next"
 bind-key	MS-p		"mpcc toggle"
@@ -32,11 +30,14 @@ bind-key	MS-equal	window-vtile
 bind-key	M-equal		window-htile
 bind-key	MC-l		lock
 
+unbind-key	C-slash
+
 autogroup 1	"xterm,XTerm"
 autogroup 1	"chromium-browser,Chromium-browser"
 autogroup 1	"Navigator,Firefox"
 autogroup 1	"Xephyr"
 autogroup 2	"acme"
+autogroup 3	"emacs,Emacs"
 autogroup 9	"xconsole,XConsole"
 
 bind-mouse MS-1	menu-window

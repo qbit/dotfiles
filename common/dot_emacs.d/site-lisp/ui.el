@@ -2,7 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(set-default-font "Ubuntu Mono:pixelsize=13")
+;; for some reason I can't set Go Regular here.. Moved it to Xdefaults
+;;(set-default-font "Go Regular:pixelsize=15")
 (setq inhibit-startup-screen t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)

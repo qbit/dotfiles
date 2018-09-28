@@ -1,6 +1,8 @@
 Xcursor.theme:			dmz-aa
 Xcursor.size: 22
 
+Emacs*.font:		Go Regular:pixelsize=12
+
 ! ------------------------------------------------------------------------------
 ! --- end of terminal colors section -------------------------------------------
 ! ------------------------------------------------------------------------------
@@ -45,7 +47,7 @@ ssh-askpass.indicator.borderWidth:	0
 ssh-askpass.indicator.background:	#99aab9
 ssh-askpass.indicator.foreground:	#fffa06
 
-XLock.startCmd:		ssh-add -D; sudo -K; keychain --clear
+XLock.startCmd:		ssh-add -D; sudo -K; keychain --agents gpg,ssh --clear
 !XLock.endCmd:		ssh-add < /dev/null
 !XLock.endCmd:		keychain -q --agents ssh,gpg id_ed25519
 XLock.dpmsoff:		15
@@ -247,5 +249,3 @@ XTerm*foreground: black
 ! ------------------------------------------------------------------------------
 ! --- end of terminal colors section -------------------------------------------
 ! ------------------------------------------------------------------------------
-
-

@@ -1,6 +1,8 @@
 Xcursor.theme:			dmz-aa
 Xcursor.size: 22
 
+Emacs*.font:		Go Regular:pixelsize=12
+
 ! ------------------------------------------------------------------------------
 ! --- end of terminal colors section -------------------------------------------
 ! ------------------------------------------------------------------------------
@@ -20,7 +22,7 @@ rofi.color-enabled: true
 rofi.color-window: #798a99, #99aab9, #99aab9
 rofi.color-normal: #99aab9, #eeeeff, #99aab9, #798a99, #eeeeff
 rofi.color-active: #798a99, #fffa06, #99aab9, #99aab9, #fffa06
-rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
+ofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
 
 !ssh-askpass*font:			-*-dina-bold-r-*-*-18-*-*-*-*-*-*-*
 !ssh-askpass*background:			#3a3a3a
@@ -45,7 +47,7 @@ ssh-askpass.indicator.borderWidth:	0
 ssh-askpass.indicator.background:	#99aab9
 ssh-askpass.indicator.foreground:	#fffa06
 
-XLock.startCmd:		ssh-add -D; sudo -K; keychain --clear
+XLock.startCmd:		ssh-add -D; sudo -K; keychain --agents gpg,ssh --clear
 !XLock.endCmd:		ssh-add < /dev/null
 !XLock.endCmd:		keychain -q --agents ssh,gpg id_ed25519
 XLock.dpmsoff:		15
@@ -247,5 +249,3 @@ XTerm*foreground: black
 ! ------------------------------------------------------------------------------
 ! --- end of terminal colors section -------------------------------------------
 ! ------------------------------------------------------------------------------
-
-

@@ -22,7 +22,7 @@ rofi.color-enabled: true
 rofi.color-window: #798a99, #99aab9, #99aab9
 rofi.color-normal: #99aab9, #eeeeff, #99aab9, #798a99, #eeeeff
 rofi.color-active: #798a99, #fffa06, #99aab9, #99aab9, #fffa06
-ofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
+rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
 
 !ssh-askpass*font:			-*-dina-bold-r-*-*-18-*-*-*-*-*-*-*
 !ssh-askpass*background:			#3a3a3a

@@ -58,14 +58,22 @@ src() {
 
 eink() {
 	dynamic_colors set eink
+
+	rm ~/.tmux.theme
+	ln -s ~/.tmux.eink.theme ~/.tmux.theme
+
 	sed -i 's/^colorscheme.*/colorscheme eink/' \
-		~/.config/nvim/init.vim
+		~/dev/dotfiles/common/dot_vimrc
 }
 
 nord() {
 	dynamic_colors set nord
+
+	rm ~/.tmux.theme
+	ln -s ~/.tmux.nord.theme ~/.tmux.theme
+
 	sed -i 's/^colorscheme.*/colorscheme nord/' \
-		~/.config/nvim/init.vim
+		~/dev/dotfiles/common/dot_vimrc
 }
 
 if [ -e ~/.ksh_completions ]; then

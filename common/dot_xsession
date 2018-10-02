@@ -69,6 +69,7 @@ xset fp rehash
 
 xrdb -merge -load ~/.Xresources &
 
-xidle -delay 5 -program "/usr/X11R6/bin/xlock" -timeout 300 &
+TIMEOUT=$(cat ~/.xtimeout 2> /dev/null || echo "300")
+xidle -delay 5 -program "/usr/X11R6/bin/xlock" -timeout $TIMEOUT &
 
 exec "$wmanager"

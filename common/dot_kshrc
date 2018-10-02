@@ -125,6 +125,12 @@ pclean() {
 	find . -size 0 -exec rm {} \;
 }
 
+maintains() {
+	cd /usr/ports/*/$1 > /dev/null 2>&1 && \
+		make show=MAINTAINER || \
+		echo "No port '/usr/ports/*/$1'"
+}
+
 set -A big_gits \
 	/build/projects/node		\
 	/home/qbit/dev/dotnet/coreclr	\

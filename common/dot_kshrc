@@ -52,6 +52,8 @@ alias rake="rake${ruby_ver}"
 alias rubocop="rubocop${ruby_ver}"
 alias gem="gem${ruby_ver}"
 
+[[ -d /sec/vim/swaps ]] || mkdir -p /sec/vim/swaps
+
 src() {
 	cd /usr/src/*/$1 || return
 }

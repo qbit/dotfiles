@@ -4,12 +4,8 @@ HOST=$(hostname -s || hostname)
 OS=$(uname -s)
 WD=$(pwd)
 
-RED="\033[1;31m"
-GREEN="\033[32m"
-WHITE="\033[0;39m"
-
 setup_flag=false
-verbose=false
+verbose=true
 
 while getopts ":svh" opt; do
 	case "$opt" in
@@ -30,22 +26,19 @@ done
 # need something to install git if it's not there.. some kinda package
 # wrapper that works with apt/dpkg and pkg_add stuff
 
-git submodule init
-git submodule update
-
-function log {
+log() {
     if [ $verbose = true ]; then
 	echo $1
     fi
 }
 
-function lnk {
-    log "$GREEN ln -s $1 $2 $WHITE"
+lnk() {
+    log "ln -s $1 $2"
     ln -s $1 $2
 }
 
-function srm {
-    log "$RED rm $1 $WHITE"
+srm() {
+    log "rm $1"
     if [ -L $1 ]; then
 	if [[ $OS = "OpenBSD" ]]; then
 	    rm $1
@@ -57,7 +50,7 @@ function srm {
     fi
 }
 
-function link_file {
+link_file() {
     if [[ -e $2 ]] || [[ -L $2 ]]; then
 	if [ $setup_flag = true ]; then
 	    diff -q $2 $1
@@ -82,7 +75,7 @@ function link_file {
     fi
 }
 
-function dotify {
+dotify() {
     echo $(echo $1 | sed -e 's/^dot_/\./');
 }
 

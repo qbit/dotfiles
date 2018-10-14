@@ -16,7 +16,8 @@ getent passwd $BROWSER_USER > /dev/null || \
 	$BROWSER_USER
 
 # Start Xephyr if it isn't already running
-pgrep -q -u "$USER" Xephyr || su -l -c staff $USER -c "DISPLAY=:0 /usr/X11R6/bin/Xephyr -resizeable :1 &"
+pgrep -q -u "$USER" Xephyr || su -l -c staff $USER -c \
+	"DISPLAY=:0 /usr/X11R6/bin/Xephyr -resizeable :1 &"
 
 # Wait for Xephyr to get up and running
 sleep 3
@@ -50,7 +51,8 @@ keycode 64 = Super_L
 keycode 115 = Alt_L
 EOF
 
-[[ -d "/home/${BROWSER_USER}/.sndio" ]] || mkdir -p "/home/${BROWSER_USER}/.sndio"
+[[ -d "/home/${BROWSER_USER}/.sndio" ]] || \
+	mkdir -p "/home/${BROWSER_USER}/.sndio"
 
 cp "/home/${USER}/.sndio/cookie" "/home/${BROWSER_USER}/.sndio/cookie"
 chown $BROWSER_USER "/home/${BROWSER_USER}/.sndio/cookie"

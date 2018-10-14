@@ -8,10 +8,10 @@ fi
 BROWSER_USER=_browser
 BROWSER=/usr/local/bin/firefox
 
-getent group $BROWSER_USER || \
+getent group $BROWSER_USER > /dev/null || \
 	groupadd $BROWSER_USER
 
-getent passwd $BROWSER_USER || \
+getent passwd $BROWSER_USER > /dev/null || \
 	useradd -m -L staff -g $BROWSER_USER \
 	$BROWSER_USER
 

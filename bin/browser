@@ -5,18 +5,19 @@ if [[ $(id -u) -ne 0 ]]; then
 	exit 1
 fi
 
-BROWSER_USER=_debrowser
+BROWSER_USER=_browser
 BROWSER=/usr/local/bin/firefox
 
-getent group $BROWSER_USER || \
+getent group $BROWSER_USER > /dev/null || \
 	groupadd $BROWSER_USER
 
-getent passwd $BROWSER_USER || \
+getent passwd $BROWSER_USER > /dev/null || \
 	useradd -m -L staff -g $BROWSER_USER \
 	$BROWSER_USER
 
 # Start Xephyr if it isn't already running
-pgrep -q -u "$USER" Xephyr || su -l -c staff $USER -c "DISPLAY=:0 /usr/X11R6/bin/Xephyr -resizeable :1 &"
+pgrep -q -u "$USER" Xephyr || su -l -c staff $USER -c \
+	"DISPLAY=:0 /usr/X11R6/bin/Xephyr -resizeable :1 &"
 
 # Wait for Xephyr to get up and running
 sleep 3
@@ -50,7 +51,8 @@ keycode 64 = Super_L
 keycode 115 = Alt_L
 EOF
 
-[[ -d "/home/${BROWSER_USER}/.sndio" ]] || mkdir -p "/home/${BROWSER_USER}/.sndio"
+[[ -d "/home/${BROWSER_USER}/.sndio" ]] || \
+	mkdir -p "/home/${BROWSER_USER}/.sndio"
 
 cp "/home/${USER}/.sndio/cookie" "/home/${BROWSER_USER}/.sndio/cookie"
 chown $BROWSER_USER "/home/${BROWSER_USER}/.sndio/cookie"

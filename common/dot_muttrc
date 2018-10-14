@@ -49,8 +49,7 @@ set record="=INBOX.Sent Items"
 set postponed="=INBOX.Drafts"
 set trash = "=INBOX.Trash"
 
-set query_command= "abook --mutt-query '%s'"
-macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Add this sender to Abook"
+set query_command= "ruby25 ~/bin/card_query.rb '%s'"
 bind editor        <Tab> complete-query
 
 #auto_view text/html                                      # view html automatically

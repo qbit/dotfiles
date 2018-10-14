@@ -28,6 +28,14 @@ set message_cache_clean = yes
 set user_agent = no
 set smart_wrap = yes
 
+set attach_format="%u%D%I %t%2n %T%.20d  %> [%.7m/%.10M, %.6e%?C?, %C?, %s]                               "
+set date_format="!%a, %d %b %Y at %H:%M:%S %Z"
+set forward_format="fwd: %s"
+set index_format="%[!%m%d] [%Z] %-54.54s %F"
+set pager_format=" %f: %s"
+set sidebar_format="%B%*  %?N?(%N)?"
+set status_format=" %h: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%d?%?F? flag:%F?%?t? tag:%t?%?p? post:%p?%?b? inc:%b?%?l??) %> %_v "
+
 set move = no
 
 set askcc

@@ -1,1 +1,2 @@
-set -g window-inactive-style 'bg=#023247'
+set -g window-style 'bg=#023247'
+set -g window-active-style 'bg=terminal'

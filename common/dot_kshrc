@@ -216,4 +216,4 @@ fi
 export MPC_FORMAT="[%artist%|(artist n/a)]    [%album%|%albumshort%|(album n/a)]      [%title%|(title n/a)]"
 
 # GOPATH and PATH are set in ~/.ksh_paths
-export GOPATH PATH HOME TERM GPG_TTY PS1 KEYID
+export PATH HOME TERM GPG_TTY PS1 KEYID

@@ -39,6 +39,11 @@ if [ -e /usr/local/bin/gopass ]; then
 	set -A complete_bpass -- $PASS_LIST audit binary bin clone completion config copy cp create new delete remove rm edit set find search fix fsck generate jsonapi otp totp hotp git grep init insert list ls move mv mounts recipients setup show sync templates unclip update version help h
 fi
 
+if [ -d ~/.opm ]; then
+	set -A complete_opm_1 -- add insert del rm list ls encrypt show get verify search
+	set -A complete_opm_2 -- $(/usr/local/bin/opm -b ls)
+fi
+
 set -A complete_pkg_delete -- $PKG_LIST
 set -A complete_pkg_info -- $PKG_LIST
 

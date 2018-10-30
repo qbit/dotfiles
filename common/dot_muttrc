@@ -1,7 +1,18 @@
 ignore *
 unignore from: subject to cc date x-mailer x-url user-agent
 
-source ~/.mutt.creds
+# Folder hooks
+folder-hook 'fm' 'source ~/.mutt.fm.creds'
+folder-hook 'cx' 'source ~/.mutt.cx.creds'
+
+# Default account
+source ~/.mutt.fm.creds
+#source ~/.mutt.cx.creds
+
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt.fm.creds<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt.cx.creds<enter><change-folder>!<enter>'
+
 source ~/.mutt.gpg
 
 set pgp_use_gpg_agent = yes
@@ -13,8 +24,6 @@ set crypt_verify_sig = yes
 
 set editor = "vim"
 
-set header_cache =  ~/.mutt/cache/headers
-set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
 
 set mail_check = 120
@@ -64,37 +73,11 @@ bind index,pager \Ck sidebar-prev
 bind index,pager \Cj sidebar-next
 bind index,pager \Co sidebar-open
 
-folder-hook . set from="aaron@bolddaemon.com"
-
 #reply-hook '~t .@openbsd\.org' 'set from="abieber@openbsd.org"'
 #send-hook '~t .*@openbsd\.org' 'set from="abieber@openbsd.org"'
 
-#macro index t "<pipe-message>mutt2task<enter> <save-message>+TODO<enter>"
-
 macro index \cb "|urlview\n"
 macro pager \cb "|urlview\n"
-
-#unmailboxes *
-
-mailboxes = "=INBOX"
-mailboxes = "=INBOX.OpenBSD.Hackers"
-mailboxes = "=INBOX.OpenBSD.Tech"
-mailboxes = "=INBOX.OpenBSD.Ports"
-mailboxes = "=INBOX.OpenBSD.Arm"
-mailboxes = "=INBOX.OpenBSD.Bugs"
-mailboxes = "=INBOX.OpenBSD.Misc"
-mailboxes = "=INBOX.OpenBSD.src-changes"
-mailboxes = "=INBOX.OpenBSD.ports-changes"
-mailboxes = "=INBOX.Root Mail"
-mailboxes = "=INBOX.Speed Tests"
-mailboxes = "=INBOX.OSS-Sec"
-
-#subscribe "hackers@openbsd\\.org"
-#subscribe "bugs@openbsd\\.org"
-#subscribe "tech@openbsd\\.org"
-#subscribe "ports@openbsd\\.org"
-#subscribe "misc@openbsd\\.org"
-#subscribe "src-changes@openbsd\\.org"
 
 source ~/.mutt.theme
 

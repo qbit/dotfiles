@@ -40,8 +40,8 @@ if [ -e /usr/local/bin/gopass ]; then
 fi
 
 if [ -d ~/.opm ]; then
-	set -A complete_opm_1 -- add insert del rm list ls encrypt show get verify search
-	set -A complete_opm_2 -- $(/usr/local/bin/opm -b ls)
+	set -A complete_opm_1 -- -b -c -d -h -m add insert del rm list ls encrypt show get verify search
+	set -A complete_opm -- $(/usr/local/bin/opm -b ls)
 fi
 
 set -A complete_pkg_delete -- $PKG_LIST

@@ -6,7 +6,18 @@ if [[ $(id -u) -ne 0 ]]; then
 fi
 
 BROWSER_USER=_browser
-BROWSER=/usr/local/bin/firefox
+#BROWSER=/usr/local/bin/firefox
+BROWSER=/usr/local/bin/chrome
+BROWSER_OPTS="--enable-unveil --site-per-process"
+XEPHYR_OPT="-resizeable :1"
+
+if [ -x /usr/local/bin/wattr ]; then
+	ID=$(pfw)
+	WIDTH=$(wattr w $ID)
+	HEIGHT=$(wattr h $ID)
+	echo "Set resolution to ${WIDTH}x${HEIGHT}"
+	XEPHYR_OPT="-screen ${WIDTH}x${HEIGHT} ${XEPHYR_OPT}"
+fi
 
 getent group $BROWSER_USER > /dev/null || \
 	groupadd $BROWSER_USER
@@ -20,7 +31,7 @@ usermod -G $BROWSER_USER $USER
 
 # Start Xephyr if it isn't already running
 pgrep -q -u "$USER" Xephyr || su -l -c staff $USER -c \
-	"DISPLAY=:0 /usr/X11R6/bin/Xephyr -resizeable :1 &"
+	"DISPLAY=:0 /usr/X11R6/bin/Xephyr $XEPHYR_OPT &"
 
 # Wait for Xephyr to get up and running
 sleep 3
@@ -41,7 +52,7 @@ ulimit -n \$(ulimit -Hn)
 ulimit -d \$(ulimit -Hd)
 
 pgrep -q -u $BROWSER_USER cwm || DISPLAY=:1 cwm &
-DISPLAY=:1 exec $BROWSER \$@ &
+DISPLAY=:1 exec $BROWSER $BROWSER_OPTS \$@ &
 EOF
 
 chmod +x /home/${BROWSER_USER}/start.sh

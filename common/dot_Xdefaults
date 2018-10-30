@@ -54,7 +54,7 @@ XLock.dpmsoff:		15
 XLock.mode:		random
 XLock.mousemotion:	on
 XLock.program:		/usr/games/fortune -a
-!XLock.random.modelist:	flag
+XLock.random.modelist:	flag
 
 XIdle.timeout:		300
 

@@ -26,9 +26,7 @@
       '(
 	(all-the-icons    . "melpa-stable")
 	(base16-theme     . "melpa-stable")
-	(nord-theme       . "melpa-stable")
 	(counsel          . "melpa-stable")
-	;;(cider            . "melpa-stable")
 	(flycheck         . "melpa-stable")
 	(git-gutter       . "melpa-stable")
 	(go-eldoc         . "melpa-stable")
@@ -37,7 +35,7 @@
 	(ivy              . "melpa-stable")
 	(magit            . "melpa-stable")
 	(neotree          . "melpa-stable")
-	;;(nyan-mode        . "melpa-stable")
+	(nord-theme       . "melpa-stable")
 	(org              . "org")
 	(org-plus-contrib . "org")
 	(scad-mode        . "melpa-stable")

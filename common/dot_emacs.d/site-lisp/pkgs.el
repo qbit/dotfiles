@@ -9,7 +9,7 @@
 	     (elt (file-attributes pkgs-file-name) 5))))
 
 (setq package-archives '(("org" .
-			  "http://orgmode.org/elpa/")
+			  "https://orgmode.org/elpa/")
 			 ("melpa-stable" .
 			  "https://stable.melpa.org/packages/")
 			 ("melpa" .

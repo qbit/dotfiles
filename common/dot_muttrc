@@ -4,14 +4,17 @@ unignore from: subject to cc date x-mailer x-url user-agent
 # Folder hooks
 folder-hook 'fm' 'source ~/.mutt.fm.creds'
 folder-hook 'cx' 'source ~/.mutt.cx.creds'
+folder-hook 'gm' 'source ~/.mutt.gm.creds'
 
 # Default account
 source ~/.mutt.fm.creds
 #source ~/.mutt.cx.creds
+#source ~/.mutt.gm.creds
 
 # Macros for switching accounts
 macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt.fm.creds<enter><change-folder>!<enter>'
 macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt.cx.creds<enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt.gm.creds<enter><change-folder>!<enter>'
 
 source ~/.mutt.gpg
 

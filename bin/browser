@@ -10,6 +10,19 @@ BROWSER=/usr/local/bin/chrome
 BROWSER_OPTS="--enable-unveil --site-per-process"
 XEPHYR_OPT="-resizeable :1"
 
+while getopts "cf" arg; do
+	case $arg in
+		c)
+			BROWSER=/usr/local/bin/chrome
+			BROWSER_OPTS="--enable-unveil --site-per-process"
+			;;
+		f)
+			BROWSER=/usr/local/bin/firefox
+			BROWSER_OPTS=""
+			;;
+	esac
+done
+
 if [ -x /usr/local/bin/wattr ]; then
 	ID=$(pfw)
 	WIDTH=$(wattr w $ID)

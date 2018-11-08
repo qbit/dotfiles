@@ -10,14 +10,22 @@ BROWSER=/usr/local/bin/chrome
 BROWSER_OPTS="--enable-unveil --site-per-process"
 XEPHYR_OPT="-resizeable :1"
 
-while getopts "cf" arg; do
+while getopts "cfil" arg; do
 	case $arg in
 		c)
 			BROWSER=/usr/local/bin/chrome
 			BROWSER_OPTS="--enable-unveil --site-per-process"
 			;;
+		i)
+			BROWSER=/usr/local/bin/iridium
+			BROWSER_OPTS="--enable-unveil --site-per-process"
+			;;
 		f)
 			BROWSER=/usr/local/bin/firefox
+			BROWSER_OPTS=""
+			;;
+		l)
+			BROWSER=/usr/local/bin/luakit
 			BROWSER_OPTS=""
 			;;
 	esac

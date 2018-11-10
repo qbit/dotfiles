@@ -137,6 +137,9 @@ set -A big_gits \
 	/build/projects/node		\
 	/home/qbit/dev/dotnet/coreclr	\
 	/home/qbit/dev/dotnet/corefx    \
+	/sys/arch/$(machine -a)/compile/GENERIC    \
+	/sys/arch/$(machine -a)/compile/GENERIC.MP    \
+	/home/qbit/dev/linux            \
 	/home/qbit/dev/mono		\
 	/usr/ports			\
 	/usr/src			\

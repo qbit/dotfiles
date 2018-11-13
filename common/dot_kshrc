@@ -133,6 +133,22 @@ maintains() {
 		echo "No port '/usr/ports/*/$1'"
 }
 
+seq() {
+	start=$1
+	end=$2
+	if [ "$start" -lt "$end" ]; then
+		while [ $start -le "${end}" ]; do
+			echo $start
+			start=$((start + 1))
+		done
+	else
+		while [ $start -ge "${end}" ]; do
+			echo $start
+			start=$((start - 1))
+		done
+	fi
+}
+
 set -A big_gits \
 	/build/projects/node		\
 	/home/qbit/dev/dotnet/coreclr	\

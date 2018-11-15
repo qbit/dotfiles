@@ -79,8 +79,14 @@ dotify() {
     echo $(echo $1 | sed -e 's/^dot_/\./');
 }
 
-for file in $(ls common); do
-    link_file $WD/common/$file ~/$(dotify $file)
+for file in common/*; do
+	if [ "$file" == "common/config" ]; then
+            for cfile in $(ls $file); do
+	        link_file $WD/$file/$cfile ~/.config/$cfile
+            done
+	else
+		echo link_file $WD/$file ~/$(dotify $file)
+	fi
 done
 
 if [ -d $HOST ]; then

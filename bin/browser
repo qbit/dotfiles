@@ -68,6 +68,9 @@ DISPLAY=:1 xset fp rehash
 echo "Setting Xmodmap"
 DISPLAY=:1 xmodmap ~/.Xmodmap &
 
+echo "Setting kbmap to colemak"
+DISPLAY=:1 setxkbmap us -variant colemak
+
 ulimit -n \$(ulimit -Hn)
 ulimit -d \$(ulimit -Hd)
 

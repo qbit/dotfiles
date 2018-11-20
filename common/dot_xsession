@@ -40,6 +40,7 @@ case "$wmanager" in
 		;;
 esac
 
+setxkbmap us -variant colemak
 
 if [ -f ~/.Xmodmap ]; then
 	xmodmap ~/.Xmodmap &

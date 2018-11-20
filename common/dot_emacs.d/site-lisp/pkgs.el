@@ -38,6 +38,7 @@
 	(nord-theme       . "melpa-stable")
 	(org              . "org")
 	(org-plus-contrib . "org")
+	(rust-mode        . "melpa-stable")
 	(scad-mode        . "melpa-stable")
 	(scpaste          . "melpa-stable")
 	(slime            . "melpa-stable")

@@ -65,6 +65,9 @@ for font in \$(ls /usr/local/share/fonts/); do
 done
 DISPLAY=:1 xset fp rehash
 
+echo "Setting kbmap to colemak"
+DISPLAY=:1 setxkbmap us -variant colemak
+
 echo "Setting Xmodmap"
 DISPLAY=:1 xmodmap ~/.Xmodmap &
 
@@ -83,6 +86,7 @@ remove mod1 = Alt_L
 remove mod4 = Super_L
 keycode 64 = Super_L
 keycode 115 = Alt_L
+pointer = 1 2 3 5 4 7 6 8 9 10 11 12
 EOF
 
 [[ -d "/home/${BROWSER_USER}/.sndio" ]] || \

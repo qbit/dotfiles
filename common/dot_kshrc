@@ -33,6 +33,7 @@ alias cabal='env TMPDIR=/usr/local/cabal/build/ cabal'
 alias cdw='cd $(make show=WRKSRC)'
 alias irc="export TERM=xterm; tmux at -t irc"
 alias mkae='make'
+alias 'gopatch=WRKDIST=$(make show=WRKSRC) make update-patches'
 alias mutt='stty discard undef; neomutt'
 alias pass="gopass"
 alias bpass="env DISPLAY=:1 gopass"

@@ -35,9 +35,9 @@ alias irc="export TERM=xterm; tmux at -t irc"
 alias mkae='make'
 alias 'gopatch=WRKDIST=$(make show=WRKSRC) make update-patches'
 alias mutt='stty discard undef; neomutt'
-alias pass="gopass"
-alias bpass="env DISPLAY=:1 gopass"
-#alias spass="env PASSWORD_STORE_DIR=~/.secret-store pass"
+#alias pass="gopass"
+alias bpass="env DISPLAY=:1 pass"
+alias spass="env PASSWORD_STORE_DIR=~/.secret-store pass"
 alias pup='doas -n /usr/sbin/pkg_add -u'
 alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"

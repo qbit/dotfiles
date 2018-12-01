@@ -1,14 +1,10 @@
 #!/bin/ksh
 
-if [[ $(id -u) -ne 0 ]]; then
-	echo "need root privileges"
-	exit 1
-fi
-
 BROWSER_USER=_browser
 BROWSER=/usr/local/bin/iridium
 BROWSER_OPTS="--enable-unveil --site-per-process"
 XEPHYR_OPT="-resizeable :1"
+USE_XEPHYR=false
 
 while getopts "cfil" arg; do
 	case $arg in
@@ -23,40 +19,48 @@ while getopts "cfil" arg; do
 		f)
 			BROWSER=/usr/local/bin/firefox
 			BROWSER_OPTS=""
+			USE_XEPHYR=true
 			;;
 		l)
 			BROWSER=/usr/local/bin/luakit
 			BROWSER_OPTS=""
+			USE_XEPHYR=true
 			;;
 	esac
 done
 
-if [ -x /usr/local/bin/wattr ]; then
-	ID=$(pfw)
-	WIDTH=$(wattr w $ID)
-	HEIGHT=$(wattr h $ID)
-	echo "Set resolution to ${WIDTH}x${HEIGHT}"
-	XEPHYR_OPT="-screen ${WIDTH}x${HEIGHT} ${XEPHYR_OPT}"
-fi
+if [ $USE_XEPHYR == true ]; then
+	if [[ $(id -u) -ne 0 ]]; then
+		echo "need root privileges"
+		exit 1
+	fi
 
-getent group $BROWSER_USER > /dev/null || \
-	groupadd $BROWSER_USER
+	if [ -x /usr/local/bin/wattr ]; then
+		ID=$(pfw)
+		WIDTH=$(wattr w $ID)
+		HEIGHT=$(wattr h $ID)
+		echo "Set resolution to ${WIDTH}x${HEIGHT}"
+		XEPHYR_OPT="-screen ${WIDTH}x${HEIGHT} ${XEPHYR_OPT}"
+	fi
 
-getent passwd $BROWSER_USER > /dev/null || \
-	useradd -m -L staff -g $BROWSER_USER \
-	$BROWSER_USER
+	getent group $BROWSER_USER > /dev/null || \
+		groupadd $BROWSER_USER
 
-# Make sure the runnnig user is in our browser user group
-usermod -G $BROWSER_USER $USER
+	getent passwd $BROWSER_USER > /dev/null || \
+		useradd -m -L staff -g $BROWSER_USER \
+		$BROWSER_USER
 
-# Start Xephyr if it isn't already running
-pgrep -q -u "$USER" Xephyr || su -l -c staff $USER -c \
-	"DISPLAY=:0 /usr/X11R6/bin/Xephyr $XEPHYR_OPT &"
+	# Make sure the runnnig user is in our browser user group
+	usermod -G $BROWSER_USER $USER
 
-# Wait for Xephyr to get up and running
-sleep 3
+	# Start Xephyr if it isn't already running
+	pgrep -q -u "$USER" Xephyr || su -l -c staff $USER -c \
+		"DISPLAY=:0 /usr/X11R6/bin/Xephyr $XEPHYR_OPT &"
 
-cat > /home/${BROWSER_USER}/start.sh << EOF
+	# Wait for Xephyr to get up and running
+	sleep 3
+
+	cat > /home/${BROWSER_USER}/start.sh << EOF
 #!/bin/sh
 
 for font in \$(ls /usr/local/share/fonts/); do
@@ -78,10 +82,10 @@ pgrep -q -u $BROWSER_USER cwm || DISPLAY=:1 cwm &
 DISPLAY=:1 exec $BROWSER $BROWSER_OPTS \$@ &
 EOF
 
-chmod +x /home/${BROWSER_USER}/start.sh
-chmod g+rw /home/${BROWSER_USER}/start.sh
+	chmod +x /home/${BROWSER_USER}/start.sh
+	chmod g+rw /home/${BROWSER_USER}/start.sh
 
-cat > /home/${BROWSER_USER}/.Xmodmap << EOF
+	cat > /home/${BROWSER_USER}/.Xmodmap << EOF
 remove mod1 = Alt_L
 remove mod4 = Super_L
 keycode 64 = Super_L
@@ -89,11 +93,16 @@ keycode 115 = Alt_L
 pointer = 1 2 3 5 4 7 6 8 9 10 11 12
 EOF
 
-[[ -d "/home/${BROWSER_USER}/.sndio" ]] || \
-	mkdir -p "/home/${BROWSER_USER}/.sndio"
+	[[ -d "/home/${BROWSER_USER}/.sndio" ]] || \
+		mkdir -p "/home/${BROWSER_USER}/.sndio"
 
-cp "/home/${USER}/.sndio/cookie" "/home/${BROWSER_USER}/.sndio/cookie"
-chown $BROWSER_USER "/home/${BROWSER_USER}/.sndio/cookie"
+	cp "/home/${USER}/.sndio/cookie" "/home/${BROWSER_USER}/.sndio/cookie"
+	chown $BROWSER_USER "/home/${BROWSER_USER}/.sndio/cookie"
 
-# Run the above script as our BROWSER_USER
-su -l -c staff $BROWSER_USER -c "/home/${BROWSER_USER}/start.sh"
+	# Run the above script as our BROWSER_USER
+	su -l -c staff $BROWSER_USER -c "/home/${BROWSER_USER}/start.sh"
+else
+	ulimit -n $(ulimit -Hn)
+	ulimit -d $(ulimit -Hd)
+	$BROWSER $BROWSER_OPTS $@ &
+fi

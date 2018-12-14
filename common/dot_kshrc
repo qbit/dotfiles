@@ -67,6 +67,7 @@ eink() {
 
 	sed -i 's/^colorscheme.*/colorscheme eink/' \
 		~/dev/dotfiles/common/dot_vimrc
+	tmux source-file ~/.tmux.conf
 }
 
 nord() {
@@ -77,6 +78,7 @@ nord() {
 
 	sed -i 's/^colorscheme.*/colorscheme nord/' \
 		~/dev/dotfiles/common/dot_vimrc
+	tmux source-file ~/.tmux.conf
 }
 
 if [ -e ~/.ksh_completions ]; then

@@ -1,5 +1,5 @@
 PKG_LIST=$(ls -1 /var/db/pkg)
-HOST_LIST=$(awk '{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1] " root@" a[1]}' ~/.ssh/known_hosts)
+HOST_LIST=$(awk '{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1] " root@" a[1]}' ~/.ssh/known_hosts /etc/ssh/ssh_known_hosts | sort | uniq)
 
 function reload_completions {
 	if [ -e ~/.ksh_completions ]; then

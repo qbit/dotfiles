@@ -2,10 +2,6 @@
 
 tmux -2 new-session -d -s "Main"
 tmux rename-window "IRC" 
-tmux split-window -h -b -l 5
-tmux select-pane -t 0
-tmux send-keys "aussh slackers.openbsd.org" C-m 
-tmux select-pane -t 1
 tmux new-window -n "Mail" 
 tmux new-window -n "Music"
 tmux new-window 

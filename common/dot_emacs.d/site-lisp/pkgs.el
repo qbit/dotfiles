@@ -34,6 +34,7 @@
 	(golint           . "melpa-stable")
 	(ivy              . "melpa-stable")
 	(magit            . "melpa-stable")
+	(forge            . "melpa-stable")
 	(neotree          . "melpa-stable")
 	(nord-theme       . "melpa-stable")
 	(org              . "org")

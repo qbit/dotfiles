@@ -85,7 +85,8 @@ for file in common/*; do
 	        link_file $WD/$file/$cfile ~/.config/$cfile
             done
 	else
-		echo link_file $WD/$file ~/$(dotify $file)
+		f=$(basename $file)
+		link_file $WD/$file ~/$(dotify $f)
 	fi
 done
 

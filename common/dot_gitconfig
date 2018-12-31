@@ -40,3 +40,5 @@
 	gpgsign = true
 #[remote "origin"]
 #	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+[github]
+	user = qbit

@@ -28,17 +28,19 @@
 	(base16-theme     . "melpa-stable")
 	(counsel          . "melpa-stable")
 	(flycheck         . "melpa-stable")
+	(forge            . "melpa-stable")
 	(git-gutter       . "melpa-stable")
 	(go-eldoc         . "melpa-stable")
 	(go-mode          . "melpa-stable")
 	(golint           . "melpa-stable")
 	(ivy              . "melpa-stable")
 	(magit            . "melpa-stable")
-	(forge            . "melpa-stable")
 	(neotree          . "melpa-stable")
 	(nord-theme       . "melpa-stable")
+	(fzf              . "melpa-stable")
 	(org              . "org")
 	(org-plus-contrib . "org")
+	(rubocop          . "melpa-stable")
 	(rust-mode        . "melpa-stable")
 	(scad-mode        . "melpa-stable")
 	(scpaste          . "melpa-stable")
@@ -52,6 +54,11 @@
   (setq package-pinned-packages 'my-packages))
 
 (install-if-missing my-packages)
+
+(defun update-packages ()
+  (package-refresh-contents)
+  (package-menu-mark-upgrades)
+  (package-menu-execute 'noquery))
 
 (provide 'pkgs)
 

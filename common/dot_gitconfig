@@ -7,6 +7,7 @@
 	pus = !git pull upstream master
 	rmdel = !git rm `git ls-files --deleted`
 	upsync = !cvs up && gitsync && git commit -m 'sync'
+	ustatus = ls-files --others --exclude-standard
 	mpush = !git remote | xargs -I '{}' git push '{}' master
 	mpull = !git remote | xargs -I '{}' git pull '{}' master
 	mup = !git remote update

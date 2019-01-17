@@ -46,7 +46,7 @@ alias pkg_add="pkg_add -Dsnap"
 alias pkg_delete="pkg_delete -Dsnap"
 alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
 
-ruby_ver=25
+ruby_ver=26
 alias ruby="ruby${ruby_ver}"
 alias irb="irb${ruby_ver}"
 alias rake="rake${ruby_ver}"

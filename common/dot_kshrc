@@ -27,24 +27,25 @@ export SPEC_OPTS=--no-color
 export RUBY_TESTOPTS=--color=never
 
 unalias ls
+#alias bpass="env DISPLAY=:1 pass"
+#alias spass="env PASSWORD_STORE_DIR=~/.secret-store pass"
+alias 'gopatch=WRKDIST=$(make show=WRKSRC) make update-patches'
 alias ag='ag --nocolor'
 alias build="dpb -c -h /home/buildie/hosts -P"
 alias cabal='env TMPDIR=/usr/local/cabal/build/ cabal'
 alias cdw='cd $(make show=WRKSRC)'
+alias ec='emacsclient -ct'
 alias irc="export TERM=xterm; tmux at -t irc"
+alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
 alias mkae='make'
-alias 'gopatch=WRKDIST=$(make show=WRKSRC) make update-patches'
 alias mutt='stty discard undef; neomutt'
 alias pass="gopass"
-#alias bpass="env DISPLAY=:1 pass"
-#alias spass="env PASSWORD_STORE_DIR=~/.secret-store pass"
+alias pkg_add="pkg_add -Dsnap"
+alias pkg_delete="pkg_delete -Dsnap"
 alias pup='doas -n /usr/sbin/pkg_add -u'
 alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"
 alias tmux="tmux -2"
-alias pkg_add="pkg_add -Dsnap"
-alias pkg_delete="pkg_delete -Dsnap"
-alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
 
 ruby_ver=26
 alias ruby="ruby${ruby_ver}"

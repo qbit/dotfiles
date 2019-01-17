@@ -47,6 +47,9 @@ fi
 set -A complete_pkg_delete -- $PKG_LIST
 set -A complete_pkg_info -- $PKG_LIST
 
+set -A complete_pkg_1 -- add check create delete info
+set -A complete_pkg_2 -- $PKG_LIST
+
 set -A complete_ssh -- $HOST_LIST
 set -A complete_mosh -- $HOST_LIST
 

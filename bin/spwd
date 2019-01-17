@@ -1,0 +1,44 @@
+#!/usr/bin/awk -f
+# spwd: pure AWK path shortener for PS1
+# Shortens a path by keeping only the first character of each directory, or the
+# two firsts if it starts with a dot.
+
+# Usage:
+# export PS1="\u:\$(awk -f /where/is/spwd -- "\${PWD}")> "
+
+# Runtime example:
+# charlene:/u/s/d/mg> echo $PWD
+# /usr/share/doc/mg
+# charlene:/u/s/d/mg> cd /home/charlene/.vim/colors/
+# charlene:~/.v/colors>
+
+# Should be POSIX-compliant, tested with OpenBSD's awk, mawk and gawk.
+# May break if you have funny chars in $HOME
+
+BEGIN {
+    # dealing with directories with spaces
+    for (elem = 1; elem < length(ARGV); elem++) {
+        pwd = sprintf("%s %s", pwd, ARGV[elem])
+    }
+    sub(/^ /, "", pwd)
+
+    home = ENVIRON["HOME"]
+    # Regex-ify $HOME
+    gsub(/\//, "\\/", home)
+    sub("^"home, "~", pwd)
+    if (pwd == "~") {
+        printf(pwd)
+        exit
+    }
+
+    split(pwd, pelems, /\//)
+    # we don't need the useless pelems[0], and the shortened "basename $PWD"
+    # (last one). Also the pelems[1] is empty because pwd starts with the
+    # seperator, so it will always prints '/'.
+    for (i = 1; i < length(pelems); i++) {
+        # two characters for dotfiles/dirs
+        nchar = substr(pelems[i], 1, 1) == "." ? 2 : 1
+        printf("%s/", substr(pelems[i], 1, nchar))
+    }
+    printf("%s", pelems[length(pelems)])
+}

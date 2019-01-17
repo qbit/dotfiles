@@ -229,7 +229,7 @@ batt() {
 	fi
 }
 
-PS1='\u@\h$(batt)[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:\W\]$(git_branch_name)$(hg_q_name)$(ltodo)$(amroot) '
+PS1='\u@\h$(batt)[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:$(awk -f "${HOME}/bin/spwd" -- "${PWD}")\]$(git_branch_name)$(hg_q_name)$(ltodo)$(amroot) '
 
 if [ -d ~/.dynamic-colors ]; then
 	dynamic_colors init

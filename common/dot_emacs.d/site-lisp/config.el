@@ -14,6 +14,10 @@
 (setq inferior-lisp-program "sbcl")
 (setq slime-contribs '(slime-fancy))
 
+(setq lsp-enable-flycheck t
+      lsp-enable-eldoc t
+      lsp-enable-completion-at-point t)
+
 (provide 'config)
 
 ;;; config.el ends here

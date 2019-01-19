@@ -2,6 +2,7 @@
 # ex:ts=8 sw=4:
 # $OpenBSD: pkg,v 1.19 2010/12/05 09:41:55 espie Exp $
 #
+# Copyright (c) 2019 Aaron Beiber <abieber@openbsd.org>
 # Copyright (c) 2010 Marc Espie <espie@openbsd.org>
 #
 # Permission to use, copy, modify, and distribute this software for any
@@ -19,6 +20,15 @@
 use strict;
 use warnings;
 
+my @l = qw(add check create delete info);
+my %a = (
+    "install" => "add",
+    "i" => "add",
+    "rm" => "delete",
+    "del" => "delete",
+    "inf" => "info"
+);
+
 sub run
 {
     my ($cmd, $name) = @_;
@@ -29,7 +39,6 @@ sub run
     }
     exit($module->parse_and_run($name));
 }
-my @l = qw(add check create delete info);
 
 for my $i (@l) {
     if ($0 =~ m/\/?pkg_$i$/) {
@@ -39,6 +48,7 @@ for my $i (@l) {
 
 if (@ARGV) {
     for my $i (@l) {
+	$ARGV[0] = $a{$ARGV[0]} if defined $a{$ARGV[0]};
 	if ($ARGV[0] eq $i) {
 	    shift;
 	    run($i, "pkg $i");

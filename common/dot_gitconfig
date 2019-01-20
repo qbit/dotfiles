@@ -1,21 +1,21 @@
 [user]
-	name = Aaron Bieber
 	email = aaron@bolddaemon.com
+	name = Aaron Bieber
 	signingkey = 0x279160AB1BE1236B
 
 [alias]
+	graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	mpull = !git remote | xargs -I '{}' git pull '{}' master
+	mpush = !git remote | xargs -I '{}' git push '{}' master
+	mup = !git remote update
 	pus = !git pull upstream master
 	rmdel = !git rm `git ls-files --deleted`
+	s2b = "!f() { git stash branch $1 stash@{0}; }; f"
+	sapply = "!f() { git stash apply stash^{/$*}; }; f"
+	sshow = "!f() { git stash show stash^{/$*} -p; }; f"
 	upsync = !cvs up && gitsync && git commit -m 'sync'
 	ustatus = ls-files --others --exclude-standard
-	mpush = !git remote | xargs -I '{}' git push '{}' master
-	mpull = !git remote | xargs -I '{}' git pull '{}' master
-	mup = !git remote update
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-	graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
-	sshow = "!f() { git stash show stash^{/$*} -p; }; f"
-	sapply = "!f() { git stash apply stash^{/$*}; }; f"
-	s2b = "!f() { git stash branch $1 stash@{0}; }; f"
 
 [push]
 	default = simple
@@ -34,12 +34,10 @@
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+	smudge = git-lfs smudge -- %f
 [commit]
 	gpgsign = true
-#[remote "origin"]
-#	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
 [github]
 	user = qbit

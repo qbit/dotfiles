@@ -1,2 +1,7 @@
-(add-hook 'ruby-mode-hook 'lsp)
-(add-hook 'ruby-mode-hook 'rubocop-mode)
+;;; hooks --- init for hooks
+;;; Commentary:
+;;; Code:
+
+(add-hook 'ruby-mode-hook 'lsp 'rubocop-mode)
+
+(provide 'hooks)

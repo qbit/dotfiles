@@ -47,13 +47,6 @@ alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"
 alias tmux="tmux -2"
 
-ruby_ver=26
-alias ruby="ruby${ruby_ver}"
-alias irb="irb${ruby_ver}"
-alias rake="rake${ruby_ver}"
-alias rubocop="rubocop${ruby_ver}"
-alias gem="gem${ruby_ver}"
-
 [[ -d /sec/vim/swaps ]] || mkdir -p /sec/vim/swaps
 
 src() {

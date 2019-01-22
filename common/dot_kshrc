@@ -47,8 +47,6 @@ alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"
 alias tmux="tmux -2"
 
-[[ -d /sec/vim/swaps ]] || mkdir -p /sec/vim/swaps
-
 src() {
 	cd /usr/src/*/$1 || return
 }

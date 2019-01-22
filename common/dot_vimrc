@@ -33,7 +33,7 @@ au BufNewFile,BufRead *.yml set tabstop=4 softtabstop=0 expandtab shiftwidth=2 s
 highlight OverLength ctermbg=red
 match OverLength /\%79v.\+/
 
-set dir=/sec/vim/swaps
+set dir=~/.swaps
 set nolist
 set ruler
 "set lazyredraw
@@ -144,4 +144,3 @@ if has('viminfo')
         augroup END
     endif
 endif
-

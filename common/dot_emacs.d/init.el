@@ -22,4 +22,6 @@
 (require 'hooks)
 (require 'keyboard)
 (require 'orgie)
+(require 'email)
+(require 'pass)
 (require 'ui)

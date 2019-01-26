@@ -17,6 +17,13 @@
 (setq inferior-lisp-program "sbcl")
 (setq slime-contribs '(slime-fancy))
 
+(require 'openbsd-knf-style)
+(c-add-style "OpenBSD" openbsd-knf-style)
+(setq c-default-style '((c-mode . "OpenBSD")
+			(java-mode . "java")
+			(awk-mode . "awk")
+			(other . "OpenBSD")))
+
 (setq lsp-enable-flycheck t
       lsp-enable-eldoc t
       lsp-enable-completion-at-point t)

@@ -4,6 +4,9 @@
 
 (setq backup-directory-alist '(("." . "~/.emacs-saves")))
 
+(setq auth-sources
+      '((:source "~/.authinfo.gpg")))
+
 (setq x-select-enable-clipboard-manager nil)
 
 (setq delete-old-versions t

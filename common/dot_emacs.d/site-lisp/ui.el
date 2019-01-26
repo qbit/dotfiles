@@ -14,6 +14,8 @@
 (global-font-lock-mode 1)
 (display-battery-mode 1)
 
+(global-git-gutter-mode +1)
+
 (setq initial-scratch-message
       (concat
        (shell-command-to-string "fortune -o | sed -e 's/^/;; /g'")

@@ -71,6 +71,4 @@ xrdb -merge -load ~/.Xresources &
 TIMEOUT=$(cat ~/.xtimeout 2> /dev/null || echo "300")
 xidle -delay 5 -program "/usr/X11R6/bin/xlock" -timeout $TIMEOUT &
 
-pgrep -q emacs || (emacs --daemon &)
-
 exec "$wmanager"

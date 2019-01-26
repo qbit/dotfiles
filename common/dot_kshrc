@@ -9,6 +9,8 @@ export NO_COLOR=1
 export RUBY_TESTOPTS=--color=never
 export GEM_HOME=~/ruby_bin
 
+pgrep -q emacs || (emacs --daemon &)
+
 #grey="\033[01;30m"
 #red="\033[01;31m"
 #green="\033[01;32m"

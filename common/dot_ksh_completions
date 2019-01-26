@@ -61,6 +61,7 @@ set -A complete_pkg_1 -- add check create delete info
 set -A complete_pkg_2 -- $PKG_LIST
 
 set -A complete_ssh -- $HOST_LIST
+set -A complete_scp -- $HOST_LIST
 set -A complete_mosh -- $HOST_LIST
 
 set -A complete_rcctl_1 -- disable enable get ls order set restart start stop

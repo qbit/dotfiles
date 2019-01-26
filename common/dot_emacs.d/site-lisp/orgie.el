@@ -28,6 +28,21 @@
 	 entry (file+olp+datetree "~/org/journal.org")
 	 "* %?\nEntered on %U\n  %i\n  %a" :prepend t)))
 
+(setq org-agenda-custom-commands
+      '(("d" "Daily habits"
+         ((agenda ""))
+         ((org-agenda-show-log t)
+          (org-agenda-ndays 7)
+          (org-agenda-log-mode-items '(state))
+          (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp ":DAILY:"))))
+	("p" "OpenBSD Ports"
+	 ((agenda ""))
+	 ((org-adenda-show-log t)
+	  (org-agenda-ndays 7)
+	  (org-agenda-log-mode-items '(state))
+	  (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp ":ports:"))
+        ))))
+
 (provide 'orgie)
 
 ;;; orgie.el ends here

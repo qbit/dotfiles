@@ -3,6 +3,12 @@
 ;;; Code:
 
 (setq backup-directory-alist '(("." . "~/.emacs-saves")))
+(setq auto-mode-alist
+      (append
+       (list
+        '("\\.gpg$" . sensitive-minor-mode)
+        )
+       auto-mode-alist))
 
 (setq auth-sources
       '((:source "~/.authinfo.gpg")))

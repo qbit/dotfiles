@@ -8,7 +8,12 @@
 (setq org-directory "~/org")
 (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
 (setq org-journal-dir "~/org/journal/")
+
+;;; local
 (setq org-mobile-directory "~/org/mobile")
+;;; webdav
+;;(setq org-mobile-directory "/davs:user@server:/path")
+
 (setq org-log-done 'time)
 
 (setq org-capture-templates

@@ -13,6 +13,8 @@
 (setq auth-sources
       '((:source "~/.authinfo.gpg")))
 
+(setq explicit-ksh-args '("-l"))
+
 (setq x-select-enable-clipboard-manager nil)
 
 (setq delete-old-versions t

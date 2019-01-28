@@ -36,7 +36,10 @@
 	   :key ?u)
 	 ,(make-mu4e-bookmark
 	   :name  "Today's messages"
-	   :query "date:today..now"
+	   :query (concat
+		   "date:today..now"
+		   " AND NOT list:ports-changes.openbsd.org"
+		   " AND NOT list:source-changes.openbsd.org")
 	   :key ?t)
 	 ,(make-mu4e-bookmark
 	   :name  "Last 7 days"

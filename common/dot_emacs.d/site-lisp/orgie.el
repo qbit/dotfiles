@@ -40,13 +40,19 @@
           (org-agenda-ndays 7)
           (org-agenda-log-mode-items '(state))
           (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp ":DAILY:"))))
+	("o" "OpenBSD"
+	 ((agenda ""))
+	 ((org-adenda-show-log t)
+	  (org-agenda-ndays 7)
+	  (org-agenda-log-mode-items '(state))
+	  (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp ":OpenBSD:"))))
 	("p" "OpenBSD Ports"
 	 ((agenda ""))
 	 ((org-adenda-show-log t)
 	  (org-agenda-ndays 7)
 	  (org-agenda-log-mode-items '(state))
-	  (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp ":ports:"))
-        ))))
+	  (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp ":ports:"))))
+	))
 
 (provide 'orgie)
 

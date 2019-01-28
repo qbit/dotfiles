@@ -1,7 +1,6 @@
 [user]
 	email = aaron@bolddaemon.com
 	name = Aaron Bieber
-	signingkey = 0x279160AB1BE1236B
 
 [alias]
 	graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'

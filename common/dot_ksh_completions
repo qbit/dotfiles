@@ -1,5 +1,15 @@
 PKG_LIST=$(ls -1 /var/db/pkg)
-HOST_LIST=$(awk '{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1] " root@" a[1]}' ~/.ssh/known_hosts /etc/ssh/ssh_known_hosts | sort | uniq)
+if [ -f /etc/ssh/ssh_known_hosts ]; then
+	HOST_LIST=$(awk '{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1] " root@" a[1]}' ~/.ssh/known_hosts /etc/ssh/ssh_known_hosts | sort | uniq)
+else
+	HOST_LIST=$(awk '{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1] " root@" a[1]}' ~/.ssh/known_hosts | sort | uniq)
+fi
+
+if [ -f ~/.config/rclone/rclone.conf ]; then
+	RCLONE_LIST=$(rclone listremotes)
+	set -A complete_rclone_1 -- about authorize cachestats cat check cleanup config copy copyto copyurl cryptcheck cryptdecode dbhashsum dedupe delete deletefile genautocomplete gendocs hashsum help link listremotes ls lsd lsf lsjson lsl md5sum mkdir move moveto ncdu obscure purge rc rcat rcd rmdir rmdirs serve settier sha1sum size sync touch tree version
+	set -A complete_rclone -- $RCLONE_LIST
+fi
 
 function reload_completions {
 	if [ -e ~/.ksh_completions ]; then
@@ -10,13 +20,13 @@ function reload_completions {
 
 set -A complete_kill_1 -- -9 -HUP -INFO -KILL -TERM
 
-pgrep -q vmd
+pgrep -fq '/usr/sbin/vmd'
 if [ $? = 0 ]; then
 	set -A complete_vmctl -- console load reload start stop reset status send receive
 	set -A complete_vmctl_2 -- $(vmctl status | awk '!/NAME/{print $NF}')
 fi
 
-pgrep -q mpd
+pgrep -fq '/usr/local/sbin/mpd'
 if [ $? = 0 ]; then
 	set -A complete_mpc_1 -- add crop current del play next prev pause pause-if-playing toggle cdprev stop seek clear outputs enable disable toggleoutput outputset shuffle move playlist listall ls lsplaylists load insert prio save rm volume repeat random single consume search searchadd find findadd searchplay list crossfade clearerror mixrampdb mixrampdelay update rescan sticker stats version idle idleloop replaygain channels sendmessage waitmessage subscribe
 	set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
@@ -51,6 +61,7 @@ set -A complete_pkg_1 -- add check create delete info
 set -A complete_pkg_2 -- $PKG_LIST
 
 set -A complete_ssh -- $HOST_LIST
+set -A complete_scp -- $HOST_LIST
 set -A complete_mosh -- $HOST_LIST
 
 set -A complete_rcctl_1 -- disable enable get ls order set restart start stop

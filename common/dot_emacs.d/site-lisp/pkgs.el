@@ -1,4 +1,4 @@
-;;; pkgs --- installtion / package management
+55;;; pkgs --- installtion / package management
 ;;; Commentary:
 ;;; Code:
 (setq pkgs-file-name
@@ -25,8 +25,10 @@
 (setq my-packages
       '(
 	(all-the-icons    . "melpa-stable")
+	(arduino-mode     . "melpa-stable")
 	(base16-theme     . "melpa-stable")
 	(company-lsp      . "melpa-stable")
+	(moe-theme        . "melpa-stable")
 	(counsel          . "melpa-stable")
 	(flycheck         . "melpa-stable")
 	(forge            . "melpa-stable")

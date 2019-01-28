@@ -9,6 +9,8 @@ export NO_COLOR=1
 export RUBY_TESTOPTS=--color=never
 export GEM_HOME=~/ruby_bin
 
+pgrep -q emacs || (emacs --daemon &)
+
 #grey="\033[01;30m"
 #red="\033[01;31m"
 #green="\033[01;32m"
@@ -46,8 +48,6 @@ alias pup='doas -n /usr/sbin/pkg_add -u'
 alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"
 alias tmux="tmux -2"
-
-[[ -d /sec/vim/swaps ]] || mkdir -p /sec/vim/swaps
 
 src() {
 	cd /usr/src/*/$1 || return

@@ -26,4 +26,6 @@ common/dot_gnupg/tofu.db
 common/dot_gnupg/trustdb.gpg
 common/dot_emacs.d/forge-database.sqlite
 common/dot_gnupg/openpgp-revocs.d/
-
+common/dot_emacs.d/site-lisp/custom.el
+/common/dot_emacs.d/.org-id-locations
+/*.core

@@ -14,6 +14,8 @@
 ;;; webdav
 ;;(setq org-mobile-directory "/davs:user@server:/path")
 
+(setq org-mobile-inbox-for-pull "~/.org/mobileorg.org")
+
 (setq org-log-done 'time)
 
 (setq org-capture-templates

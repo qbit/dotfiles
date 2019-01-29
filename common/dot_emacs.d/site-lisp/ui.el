@@ -34,6 +34,7 @@
 (require 'moe-theme)
 (require 'powerline)
 (require 'moe-theme-switcher) ;; Gives us dark at night, light during the day
+(powerline-moe-theme)
 
 (provide 'ui)
 

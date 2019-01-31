@@ -30,3 +30,4 @@ common/dot_emacs.d/site-lisp/custom.el
 /common/dot_emacs.d/.org-id-locations
 /*.core
 /common/dot_emacs.d/.lsp-session-v1
+*.core

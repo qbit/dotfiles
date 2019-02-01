@@ -3,6 +3,9 @@
 ;;(toggle-debug-on-quit)
 ;;(toggle-debug-on-error)
 
+(load "server")
+(unless (server-running-p) (server-start))
+
 (setq custom-file "~/.emacs.d/site-lisp/custom.el")
 
 (let ((default-directory user-emacs-directory))

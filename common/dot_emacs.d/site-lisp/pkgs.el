@@ -23,12 +23,9 @@
       ((symbolp package-archive-contents) (package-refresh-contents)))
 
 (setq my-packages
-      '(
-	(all-the-icons    . "melpa-stable")
-	(arduino-mode     . "melpa-stable")
+      '((arduino-mode     . "melpa-stable")
 	(base16-theme     . "melpa-stable")
 	(company-lsp      . "melpa-stable")
-	(moe-theme        . "melpa-stable")
 	(counsel          . "melpa-stable")
 	(flycheck         . "melpa-stable")
 	(forge            . "melpa-stable")
@@ -41,7 +38,6 @@
 	(lsp-mode         . "melpa-stable")
 	(magit            . "melpa-stable")
 	(neotree          . "melpa-stable")
-	(nord-theme       . "melpa-stable")
 	(org              . "org")
 	(org-plus-contrib . "org")
 	(rubocop          . "melpa-stable")
@@ -49,10 +45,8 @@
 	(scad-mode        . "melpa-stable")
 	(scpaste          . "melpa-stable")
 	(slime            . "melpa-stable")
-	(spaceline        . "melpa-stable")
 	(swiper           . "melpa-stable")
-	(web-mode         . "melpa-stable")
-	))
+	(web-mode         . "melpa-stable")))
 
 (when (boundp 'package-pinned-packages)
   (setq package-pinned-packages 'my-packages))

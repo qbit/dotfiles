@@ -21,19 +21,7 @@
 (ivy-mode 1)
 (global-git-gutter-mode +1)
 
-;;; Nord theme
-;;; - currently there is a bug that prevents loading as daemon:
-;;;   https://github.com/arcticicestudio/nord-emacs/issues/59
-;;(require 'spaceline-config)
-;;(spaceline-emacs-theme)
-;; (load-theme 'nord 1)
-
-;; (load-theme 'base16-default-dark 1)
-
-(require 'moe-theme)
-(require 'powerline)
-(require 'moe-theme-switcher) ;; Gives us dark at night, light during the day
-(powerline-moe-theme)
+(load-theme 'base16-nord 1)
 
 (provide 'ui)
 

@@ -6,6 +6,9 @@
 (require 'org-habit)
 (require 'org-protocol)
 
+(setq x-selection-timeout 5)
+(setq x-select-enable-clipboard-manager nil)
+
 (setq org-directory "~/org")
 (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
 (setq org-journal-dir "~/org/journal/")
@@ -24,7 +27,6 @@
 	 entry (file+headline "~/org/todo.org" "TODOs")
 	 ,(concat
 	  "* TODO %?\n"
-	  "SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n"
 	  ":PROPERTIES:\n"
 	  ":LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)\n"
 	  ":END:\n") :prepend t)
@@ -32,11 +34,10 @@
 	 entry (file+headline "~/org/todo.org" "TODOs")
 	 ,(concat
 	  "* TODO %?\n"
-	  "SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+0d\"))\n"
 	  ":PROPERTIES:\n"
-	  ":FILE: %a \n"
 	  ":LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)\n"
-	  ":END:\n") :prepend t)
+	  ":END:\n"
+	  "%i\n  %a") :prepend t)
 	("b" "Bug"
 	 entry (file+olp+datetree "~/org/bugs.org" "Bugs")
 	 "* BUG %?\nEntered on %U\n  :PROPERTIES:\n  :FILE: %a\n  :END:\n" :prepend t)

@@ -1,0 +1,14 @@
+#!/bin/ksh
+
+case "$1" in
+    push)
+	/usr/local/bin/rclone sync ~/org/mobile/ fm_web:/org-mobile/
+	;;
+    pull)
+	/usr/local/bin/rclone sync fm_web:/org-mobile/ ~/org/mobile/
+	;;
+    *)
+	echo "Must specify 'push' or 'pull'."
+	exit 1
+	;;
+esac

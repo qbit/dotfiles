@@ -1,14 +1,32 @@
 #!/bin/ksh
 
 case "$1" in
+    mobile)
+	case "$2" in
+	    push)
+		echo "Pushing ~/org/mobile to fm_web:/org-mobile"
+		/usr/local/bin/rclone sync ~/org/mobile/ fm_web:/org-mobile/
+		;;
+	    pull)
+		echo "Pulling fm_web:/org-mobile to ~/org/mobile"
+		/usr/local/bin/rclone sync fm_web:/org-mobile/ ~/org/mobile/
+		;;
+	    *)
+		echo "Must specify 'push' or 'pull'."
+		exit 1
+		;;
+	esac
+	;;
     push)
-	/usr/local/bin/rclone sync ~/org/mobile/ fm_web:/org-mobile/
+	echo "Pushing ~/org to fm_web:/org"
+	/usr/local/bin/rclone sync ~/org/ fm_web:/org/
 	;;
     pull)
-	/usr/local/bin/rclone sync fm_web:/org-mobile/ ~/org/mobile/
+	echo "Pulling fm_web:/org to ~/org"
+	/usr/local/bin/rclone sync fm_web:/org/ ~/org/
 	;;
     *)
-	echo "Must specify 'push' or 'pull'."
+	echo "Must specify 'mobile', 'push' or 'pull'."
 	exit 1
 	;;
 esac

@@ -113,6 +113,7 @@ XTerm*saveLines:	4096
 XTerm*letterSpace:	1
 !XTerm*faceName:	Go Mono:pixelsize=12
 XTerm*faceName:		Go Regular:pixelsize=12
+!XTerm*faceName:		Go Mono for Powerline:pixelsize=12
 !XTerm*faceName:	Anonymous PRO:pixelsize=12
 !XTerm*faceName:	Triplicate T4c:regular:pixelsize=13
 !XTerm*faceName:         Ubuntu Mono derivative Powerline:pixelsize=14
@@ -141,6 +142,7 @@ XTerm*dynamicColors:	true
 !XTerm*color13:		#ce87e8
 !XTerm*color14:		#87e8ce
 !XTerm*color15:		#dae7f1
+!xterm*faceName: spleen:pixelsize=16:antialias=false
 
 irc*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 irc*bellIsUrgent:	true

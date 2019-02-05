@@ -31,3 +31,6 @@ common/dot_emacs.d/site-lisp/custom.el
 /*.core
 /common/dot_emacs.d/.lsp-session-v1
 *.core
+diary
+ido.last
+smex-items

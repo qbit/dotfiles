@@ -2,10 +2,13 @@
 ;;; Commentary:
 ;;; Code:
 
+(add-to-list 'default-frame-alist '(font . "Fantasque Sans Mono-12" ))
+(set-face-attribute 'default t :font "Fantasque Sans Mono-12")
+
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message
       (concat
-       (shell-command-to-string "fortune -o | sed -e 's/^/;; /g'")
+       (shell-command-to-string "fortune | sed -e 's/^/;; /g'")
        "\n\n"))
 (setq whitespace-style '(trailing lines space-before-tab)
       whitespace-line-column 80)
@@ -18,7 +21,7 @@
 (show-paren-mode +1)
 (global-font-lock-mode 1)
 (display-battery-mode 1)
-(ivy-mode 1)
+(display-time-mode 1)
 (global-git-gutter-mode +1)
 
 (load-theme 'base16-nord 1)

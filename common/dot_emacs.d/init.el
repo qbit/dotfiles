@@ -27,3 +27,6 @@
 (require 'email)
 (require 'pass)
 (require 'ui)
+
+(diary)
+(eshell)

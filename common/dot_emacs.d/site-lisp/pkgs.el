@@ -1,4 +1,4 @@
-55;;; pkgs --- installtion / package management
+;;; pkgs --- installtion / package management
 ;;; Commentary:
 ;;; Code:
 (setq pkgs-file-name
@@ -26,18 +26,15 @@
       '((arduino-mode     . "melpa-stable")
 	(base16-theme     . "melpa-stable")
 	(company-lsp      . "melpa-stable")
-	(counsel          . "melpa-stable")
 	(flycheck         . "melpa-stable")
 	(forge            . "melpa-stable")
-	(fzf              . "melpa-stable")
+	(ido-completing-read+ . "melpa-stable")
 	(git-gutter       . "melpa-stable")
 	(go-eldoc         . "melpa-stable")
 	(go-mode          . "melpa-stable")
 	(golint           . "melpa-stable")
-	(ivy              . "melpa-stable")
 	(lsp-mode         . "melpa-stable")
 	(magit            . "melpa-stable")
-	(neotree          . "melpa-stable")
 	(org              . "org")
 	(org-plus-contrib . "org")
 	(rubocop          . "melpa-stable")
@@ -46,7 +43,10 @@
 	(scpaste          . "melpa-stable")
 	(slime            . "melpa-stable")
 	(swiper           . "melpa-stable")
-	(web-mode         . "melpa-stable")))
+	(smex             . "melpa-stable")
+	(weechat          . "melpa-stable")
+	(web-mode         . "melpa-stable")
+	(yaml-mode        . "melpa-stable")))
 
 (when (boundp 'package-pinned-packages)
   (setq package-pinned-packages 'my-packages))

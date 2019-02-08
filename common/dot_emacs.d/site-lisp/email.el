@@ -2,7 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+(if (file-directory-p "/usr/local/share/emacs/site-lisp/mu4e")
+    (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e"))
 
 (require 'mu4e)
 (require 'org-mu4e)
@@ -26,6 +27,7 @@
       (lambda (fname mtype)
 	(cond
 	 ((and fname (string-match "\\.diff$" fname))  "~/patches")
+	 ((and fname (string-match "\\.patch$" fname))  "~/patches")
 	 ((and fname (string-match "\\.diff.gz$" fname))  "~/patches")
 	 (t "~/Downloads"))))
 

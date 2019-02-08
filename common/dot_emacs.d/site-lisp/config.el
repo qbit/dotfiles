@@ -36,6 +36,8 @@
       lsp-enable-eldoc t
       lsp-enable-completion-at-point t)
 
+(desktop-save-mode 1)
+
 (provide 'config)
 
 ;;; config.el ends here

@@ -53,6 +53,11 @@ src() {
 	cd /usr/src/*/$1 || return
 }
 
+port() {
+	cd /usr/ports/*/$1 || return
+}
+
+
 eink() {
 	dynamic_colors set eink
 

@@ -9,9 +9,9 @@
 	    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
 	      (which-func-mode 1))))
 
-(add-hook 'before-save-hook (lambda ()
-			      (delete-trailing-whitespace)
-			      ))
+;(add-hook 'before-save-hook (lambda ()
+;			      (delete-trailing-whitespace)
+;			      ))
 
 (add-hook 'mu4e-view-mode-hook #'visual-line-mode)
 (add-hook 'mu4e-compose-mode-hook 'flyspell-mode)

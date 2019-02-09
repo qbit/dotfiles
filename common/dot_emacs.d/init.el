@@ -17,6 +17,7 @@
 	    (normal-top-level-add-subdirs-to-load-path)))
 	 load-path)))
 
+(require 'notifications)
 (require 'functions)
 (require 'tls)
 (require 'pkgs)

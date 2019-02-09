@@ -5,6 +5,10 @@
 # shellcheck source=/home/qbit/.ksh_paths
 . ~/.ksh_paths
 
+if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
+	eval `dbus-launch --sh-syntax`
+fi
+
 export NO_COLOR=1
 export RUBY_TESTOPTS=--color=never
 export GEM_HOME=~/ruby_bin

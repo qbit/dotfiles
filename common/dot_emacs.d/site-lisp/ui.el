@@ -5,14 +5,14 @@
 (add-to-list 'default-frame-alist '(font . "Fantasque Sans Mono-12" ))
 (set-face-attribute 'default t :font "Fantasque Sans Mono-12")
 
-(setq inhibit-startup-screen t)
-(setq initial-scratch-message
+(setq inhibit-startup-screen t
+      initial-scratch-message
       (concat
        (shell-command-to-string "fortune | sed -e 's/^/;; /g'")
-       "\n\n"))
-(setq whitespace-style '(trailing lines space-before-tab)
-      whitespace-line-column 80)
-(setq x-selection-timeout 10)
+       "\n\n")
+      whitespace-style '(trailing lines space-before-tab)
+      whitespace-line-column 80
+      x-selection-timeout 10)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)

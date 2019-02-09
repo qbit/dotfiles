@@ -112,12 +112,12 @@ XTerm*eightBitInput:	false
 XTerm*saveLines:	4096
 XTerm*letterSpace:	1
 !XTerm*faceName:	Go Mono:pixelsize=12
-XTerm*faceName:		Go Regular:pixelsize=12
+!XTerm*faceName:		Go Regular:pixelsize=12
 !XTerm*faceName:		Go Mono for Powerline:pixelsize=12
 !XTerm*faceName:	Anonymous PRO:pixelsize=12
 !XTerm*faceName:	Triplicate T4c:regular:pixelsize=13
 !XTerm*faceName:         Ubuntu Mono derivative Powerline:pixelsize=14
-!XTerm*faceName:         Fantasque Sans Mono:pixelsize=14
+XTerm*faceName:         Fantasque Sans Mono:pixelsize=14
 XTerm*cursorBlink:	true
 XTerm*loginShell:	true
 XTerm.underlineURLs:	true

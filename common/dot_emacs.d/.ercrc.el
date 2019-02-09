@@ -14,7 +14,11 @@
       erc-fill-column 200
       erc-fill-function 'erc-fill-static
       erc-fill-static-center 15
-      erc-max-buffer-size 10000)
+      erc-max-buffer-size 10000
+      erc-kill-buffer-on-part t
+      erc-kill-server-buffer-on-quit t
+      erc-kill-queries-on-quit t
+      erc-hide-list '("JOIN" "PART" "QUIT"))
 
 (defun erc-cmd-UNAME (&rest ignore)
   "Display 'uname -a' of the system"

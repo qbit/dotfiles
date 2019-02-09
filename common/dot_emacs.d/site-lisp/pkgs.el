@@ -25,7 +25,6 @@
 				(forge            . "melpa-stable")
 				(ido-completing-read+ . "melpa-stable")
 				(git-gutter       . "melpa-stable")
-				;(ivy              . "melpa-stable")
 				(go-eldoc         . "melpa-stable")
 				(go-mode          . "melpa-stable")
 				(golint           . "melpa-stable")
@@ -38,7 +37,6 @@
 				(scad-mode        . "melpa-stable")
 				(scpaste          . "melpa-stable")
 				(slime            . "melpa-stable")
-				;(swiper           . "melpa-stable")
 				(smex             . "melpa-stable")
 				(weechat          . "melpa-stable")
 				(web-mode         . "melpa-stable")
@@ -49,13 +47,12 @@
 (cond ((< pkgs-mod-time 300) (package-refresh-contents))
       ((symbolp package-archive-contents) (package-refresh-contents)))
 
-;(when (boundp 'package-pinned-packages)
-;  (setq package-pinned-packages 'my-packages))
-
 (install-if-missing package-pinned-packages)
 
 (defun update-packages ()
+  (interactive)
   (package-refresh-contents)
+  ;; Need to switch to the updates buffer here
   (package-menu-mark-upgrades)
   (package-menu-execute 'noquery))
 

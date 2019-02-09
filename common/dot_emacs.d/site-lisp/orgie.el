@@ -13,6 +13,11 @@
 (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
 (setq org-journal-dir "~/org/journal/")
 
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "|" "DONE(d)")
+        (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+        (sequence "|" "CANCELED(c)")))
+
 ;;; local
 (setq org-mobile-directory "~/org/mobile")
 ;;; webdav

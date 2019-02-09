@@ -1,6 +1,7 @@
 ;;; pkgs --- installtion / package management
 ;;; Commentary:
 ;;; Code:
+
 (setq pkgs-file-name
       (expand-file-name "~/.emacs.d/site-lisp/pkgs.el"))
 
@@ -15,43 +16,43 @@
 			 ("melpa" .
 			  "https://melpa.org/packages/")
 			 ("gnu" .
-			  "https://elpa.gnu.org/packages/")))
+			  "https://elpa.gnu.org/packages/"))
+      package-pinned-packages '(
+				(arduino-mode     . "melpa-stable")
+				(base16-theme     . "melpa-stable")
+				(company-lsp      . "melpa-stable")
+				(flycheck         . "melpa-stable")
+				(forge            . "melpa-stable")
+				(ido-completing-read+ . "melpa-stable")
+				(git-gutter       . "melpa-stable")
+				;(ivy              . "melpa-stable")
+				(go-eldoc         . "melpa-stable")
+				(go-mode          . "melpa-stable")
+				(golint           . "melpa-stable")
+				(lsp-mode         . "melpa-stable")
+				(magit            . "melpa-stable")
+				(org              . "org")
+				(org-plus-contrib . "org")
+				(rubocop          . "melpa-stable")
+				(rust-mode        . "melpa-stable")
+				(scad-mode        . "melpa-stable")
+				(scpaste          . "melpa-stable")
+				(slime            . "melpa-stable")
+				;(swiper           . "melpa-stable")
+				(smex             . "melpa-stable")
+				(weechat          . "melpa-stable")
+				(web-mode         . "melpa-stable")
+				(yaml-mode        . "melpa-stable")))
 
 ;;; Update our package contents if we have modified our pkgs.el file
 ;;; since the last day or if we don't have package-archive-contents
 (cond ((< pkgs-mod-time 300) (package-refresh-contents))
       ((symbolp package-archive-contents) (package-refresh-contents)))
 
-(setq my-packages
-      '((arduino-mode     . "melpa-stable")
-	(base16-theme     . "melpa-stable")
-	(company-lsp      . "melpa-stable")
-	(flycheck         . "melpa-stable")
-	(forge            . "melpa-stable")
-	(ido-completing-read+ . "melpa-stable")
-	(git-gutter       . "melpa-stable")
-	(go-eldoc         . "melpa-stable")
-	(go-mode          . "melpa-stable")
-	(golint           . "melpa-stable")
-	(lsp-mode         . "melpa-stable")
-	(magit            . "melpa-stable")
-	(org              . "org")
-	(org-plus-contrib . "org")
-	(rubocop          . "melpa-stable")
-	(rust-mode        . "melpa-stable")
-	(scad-mode        . "melpa-stable")
-	(scpaste          . "melpa-stable")
-	(slime            . "melpa-stable")
-	(swiper           . "melpa-stable")
-	(smex             . "melpa-stable")
-	(weechat          . "melpa-stable")
-	(web-mode         . "melpa-stable")
-	(yaml-mode        . "melpa-stable")))
+;(when (boundp 'package-pinned-packages)
+;  (setq package-pinned-packages 'my-packages))
 
-(when (boundp 'package-pinned-packages)
-  (setq package-pinned-packages 'my-packages))
-
-(install-if-missing my-packages)
+(install-if-missing package-pinned-packages)
 
 (defun update-packages ()
   (package-refresh-contents)

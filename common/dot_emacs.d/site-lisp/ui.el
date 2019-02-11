@@ -5,6 +5,14 @@
 (add-to-list 'default-frame-alist '(font . "Fantasque Sans Mono-12" ))
 (set-face-attribute 'default t :font "Fantasque Sans Mono-12")
 
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+
+;; Hopefully this helps with the OpenBSD org-capture lockups
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
 (setq inhibit-startup-screen t
       initial-scratch-message
       (concat

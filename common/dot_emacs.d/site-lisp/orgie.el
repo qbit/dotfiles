@@ -18,6 +18,8 @@
         (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
         (sequence "|" "CANCELED(c)")))
 
+(setq org-agenda-skip-scheduled-if-deadline-is-shown t)
+
 ;;; local
 (setq org-mobile-directory "~/org/mobile")
 ;;; webdav

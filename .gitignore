@@ -34,3 +34,6 @@ common/dot_emacs.d/site-lisp/custom.el
 diary
 ido.last
 smex-items
+/common/dot_emacs.d/.emacs.desktop
+/common/dot_emacs.d/history
+/common/dot_emacs.d/.emacs.desktop.lock

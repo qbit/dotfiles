@@ -32,11 +32,10 @@ bind-key	MC-l		lock
 
 unbind-key	C-slash
 
-autogroup 1	"xterm,XTerm"
 autogroup 1	"chromium-browser,Chromium-browser"
 autogroup 1	"Navigator,Firefox"
 autogroup 1	"Xephyr"
-autogroup 2	"acme"
+autogroup 2	"xterm,XTerm"
 autogroup 3	"emacs,Emacs"
 autogroup 9	"xconsole,XConsole"
 

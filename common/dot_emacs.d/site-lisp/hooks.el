@@ -18,4 +18,9 @@
 
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+(add-hook 'org-mode-hook (lambda ()
+			   (turn-on-flyspell)
+			   (auto-revert-mode)
+			   (auto-fill-mode 1)))
+
 (provide 'hooks)

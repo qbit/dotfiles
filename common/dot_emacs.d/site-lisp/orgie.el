@@ -9,25 +9,23 @@
 (setq x-selection-timeout 5)
 (setq x-select-enable-clipboard-manager nil)
 
-(setq org-directory "~/org")
-(setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
-(setq org-journal-dir "~/org/journal/")
-
-(setq org-todo-keywords
+(setq org-directory "~/org"
+      org-agenda-files (file-expand-wildcards "~/org/*.org")
+      org-journal-dir "~/org/journal/"
+      org-export-with-planning t
+      org-todo-keywords
       '((sequence "TODO(t)" "|" "DONE(d)")
         (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-        (sequence "|" "CANCELED(c)")))
-
-(setq org-agenda-skip-scheduled-if-deadline-is-shown t)
+        (sequence "|" "CANCELED(c)"))
+      org-mobile-inbox-for-pull "~/.org/mobileorg.org"
+      org-log-done 'time
+      org-refile-targets '((org-agenda-files :maxlevel . 3))
+      org-agenda-skip-scheduled-if-deadline-is-shown t)
 
 ;;; local
 (setq org-mobile-directory "~/org/mobile")
 ;;; webdav
 ;;(setq org-mobile-directory "/davs:user@server:/path")
-
-(setq org-mobile-inbox-for-pull "~/.org/mobileorg.org")
-
-(setq org-log-done 'time)
 
 (setq org-capture-templates
       `(("t" "TODO"

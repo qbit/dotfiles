@@ -1,32 +1,18 @@
 #!/bin/ksh
 
+set -eu
+
 case "$1" in
-    mobile)
-	case "$2" in
-	    push)
-		echo "Pushing ~/org/mobile to fm_web:/org-mobile"
-		/usr/local/bin/rclone sync ~/org/mobile/ fm_web:/org-mobile/
+	sync)
+		cd ~/org && ~/bin/git-sync > /dev/null 2>&1
+		if [ $? != 0 ]; then
+			echo "org sync failed"
+			/usr/local/bin/git status
+			exit 1
+		fi
 		;;
-	    pull)
-		echo "Pulling fm_web:/org-mobile to ~/org/mobile"
-		/usr/local/bin/rclone sync fm_web:/org-mobile/ ~/org/mobile/
-		;;
-	    *)
-		echo "Must specify 'push' or 'pull'."
+	*)
+		echo "Usage: org sync"
 		exit 1
 		;;
-	esac
-	;;
-    push)
-	echo "Pushing ~/org to fm_web:/org"
-	/usr/local/bin/rclone sync ~/org/ fm_web:/org/
-	;;
-    pull)
-	echo "Pulling fm_web:/org to ~/org"
-	/usr/local/bin/rclone sync fm_web:/org/ ~/org/
-	;;
-    *)
-	echo "Must specify 'mobile', 'push' or 'pull'."
-	exit 1
-	;;
 esac

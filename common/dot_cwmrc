@@ -22,8 +22,8 @@ command ":1 Clipboard -> Primary" "ksh -c 'xclip -out -selection clipboard -d :1
 command ":1 Primary -> Primary" "ksh -c 'xclip -out -d :1 | xclip'"
 
 bind-key	M-r		"rofi -show run"
-bind-key	M-n		"mpcc next"
-bind-key	MS-p		"mpcc toggle"
+#bind-key	M-n		"mpcc next"
+#bind-key	MS-p		"mpcc toggle"
 bind-key	MS-i		"/home/qbit/.screenlayout/internal.sh"
 bind-key	MS-e		"/home/qbit/.screenlayout/external.sh"
 bind-key	MS-equal	window-vtile

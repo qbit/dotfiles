@@ -60,6 +60,10 @@ if [ -x ${LPREFIX}/bin/sctd ]; then
 	${LPREFIX}/bin/sctd &
 fi
 
+if [ -f ~/.background.png ]; then
+	feh --bg-center ~/.background.png &
+fi
+
 xset +fp ~/.fonts
 for font in /usr/local/share/fonts/*; do
 	xset +fp "${font}"

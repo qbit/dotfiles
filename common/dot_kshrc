@@ -71,6 +71,7 @@ eink() {
 	sed -i 's/^colorscheme.*/colorscheme eink/' \
 		~/dev/dotfiles/common/dot_vimrc
 	tmux source-file ~/.tmux.conf
+	emacsclient -e "(load-theme 'eink 1)"
 }
 
 nord() {
@@ -82,6 +83,7 @@ nord() {
 	sed -i 's/^colorscheme.*/colorscheme nord/' \
 		~/dev/dotfiles/common/dot_vimrc
 	tmux source-file ~/.tmux.conf
+	emacsclient -e "(load-theme 'base16-nord 1)"
 }
 
 if [ -e ~/.ksh_completions ]; then

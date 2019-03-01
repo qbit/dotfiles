@@ -32,7 +32,9 @@
 (display-time-mode 1)
 (global-git-gutter-mode +1)
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'base16-nord 1)
+;;(load-theme 'eink 1)
 
 (provide 'ui)
 

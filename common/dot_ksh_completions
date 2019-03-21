@@ -80,7 +80,7 @@ set -A complete_emacsclient -- -c -t
 
 set -A complete_gpg2 -- --refresh --receive-keys --armor --clearsign --sign --list-key --decrypt --verify --detach-sig
 
-set -A complete_git_1 -- pull push mpull mpush clone checkout status commit
+set -A complete_git_1 -- pull push mpull mpush clone checkout status commit clean config cherry-pick
 
 set -A complete_ifconfig_1 -- $(ifconfig | grep ^[a-z] | cut -d: -f1)
 

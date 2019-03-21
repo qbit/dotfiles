@@ -4,10 +4,17 @@
 
 (require 'org)
 (require 'org-habit)
-(require 'org-protocol)
 
 (setq x-selection-timeout 5)
 (setq x-select-enable-clipboard-manager nil)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(;; other Babel languages
+   (plantuml . t)))
+
+(setq org-plantuml-jar-path
+      (expand-file-name "~/Docs/plantuml.jar"))
 
 (setq org-directory "~/org"
       org-agenda-files (file-expand-wildcards "~/org/*.org")

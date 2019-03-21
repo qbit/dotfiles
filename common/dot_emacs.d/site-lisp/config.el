@@ -13,6 +13,9 @@
 (setq auth-sources
       '((:source "~/.authinfo.gpg")))
 
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "~/bin/browser")
+
 (setq explicit-ksh-args '("-l"))
 
 (setq x-select-enable-clipboard-manager nil)

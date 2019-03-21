@@ -72,4 +72,42 @@
       smtpmail-default-smtp-server "smtp.fastmail.com"
       smtpmail-stream-type 'ssl)
 
+(setq mu4e-contexts
+      `( ,(make-mu4e-context
+     	   :name "Fastmail"
+     	   :enter-func (lambda () (mu4e-message "Entering Fastmail context"))
+           :leave-func (lambda () (mu4e-message "Leaving Fastmail context"))
+	   :match-func (lambda (msg)
+     			 (when msg
+     			   (string-match-p "^/fastmail" (mu4e-message-field msg :maildir))))
+     	   :vars '( ( user-mail-address	    . "aaron@bolddaemon.com"  )
+     		    ( user-full-name	    . "Aaron Bieber" )
+     		    ( mu4e-compose-signature . "")))
+
+	 ,(make-mu4e-context
+     	   :name "Work"
+     	   :enter-func (lambda () (mu4e-message "Entering Work context"))
+	   :leave-func (lambda () (mu4e-message "Leaving Work context"))
+     	   :match-func (lambda (msg)
+     			 (when msg
+     			   (string-match-p "^/calyptix" (mu4e-message-field msg :maildir))))
+     	   :vars '( ( user-mail-address	     . "aarin.bieber@calyptix.com" )
+     		    ( user-full-name	     . "Aaron Bieber" )
+     		    ( mu4e-compose-signature  . "")))
+
+
+         ,(make-mu4e-context
+     	   :name "Gmail"
+     	   :enter-func (lambda () (mu4e-message "Entering Gmail context"))
+	   :leave-func (lambda () (mu4e-message "Leaving Gmail context"))
+     	   :match-func (lambda (msg)
+     			 (when msg
+     			   (string= (mu4e-message-field msg :maildir) "/gmail")))
+     	   :vars '( ( user-mail-address	     . "deftly@gmail.com" )
+     		    ( user-full-name	     . "Aaron Bieber" )
+     		    ( mu4e-compose-signature  . nil)))))
+
+(setq mu4e-context-policy 'pick-first)
+(setq mu4e-compose-context-policy nil)
+
 (provide 'email)

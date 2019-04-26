@@ -21,9 +21,23 @@ command "Primary -> :1 Clipboard" "ksh -c 'xclip -out | xclip -selection clipboa
 command ":1 Clipboard -> Primary" "ksh -c 'xclip -out -selection clipboard -d :1 | xclip'"
 command ":1 Primary -> Primary" "ksh -c 'xclip -out -d :1 | xclip'"
 
+# make emacs usable again
+unbind-key	C-slash
+unbind-key	CM-f
+unbind-key	CM-a
+unbind-key	CM-h
+unbind-key	CM-j
+unbind-key	CM-k
+unbind-key	CM-l
+unbind-key	M-period
+unbind-key	M-h
+unbind-key	M-j
+unbind-key	M-k
+unbind-key	M-l
+
 bind-key	M-r		"rofi -show run"
-#bind-key	M-n		"mpcc next"
-#bind-key	MS-p		"mpcc toggle"
+bind-key	M-n		"mpcc next"
+bind-key	MS-p		"mpcc toggle"
 bind-key	MS-i		"/home/qbit/.screenlayout/internal.sh"
 bind-key	MS-e		"/home/qbit/.screenlayout/external.sh"
 bind-key	MS-equal	window-vtile

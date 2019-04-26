@@ -1,8 +1,8 @@
 #!/bin/ksh
 
 BROWSER_USER=_browser
-BROWSER=/usr/local/bin/iridium
-BROWSER_OPTS="--enable-unveil --site-per-process"
+BROWSER=/usr/local/bin/chrome
+BROWSER_OPTS="--enable-unveil --site-per-process --js-flages='--noexpose_wasm'"
 XEPHYR_OPT="-resizeable :1"
 USE_XEPHYR=false
 
@@ -10,11 +10,11 @@ while getopts "cfil" arg; do
 	case $arg in
 		c)
 			BROWSER=/usr/local/bin/chrome
-			BROWSER_OPTS="--enable-unveil --site-per-process"
+			BROWSER_OPTS="--enable-unveil --site-per-process --js-flages='--noexpose_wasm'"
 			;;
 		i)
 			BROWSER=/usr/local/bin/iridium
-			BROWSER_OPTS="--enable-unveil --site-per-process"
+			BROWSER_OPTS="--enable-unveil --site-per-process --js-flages='--noexpose_wasm'"
 			;;
 		f)
 			BROWSER=/usr/local/bin/firefox

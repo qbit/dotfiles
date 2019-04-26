@@ -9,3 +9,4 @@ map gx !'ptmux load-buffer -
 map gc !'ptmux load-buffer -u
 map gp :r!tmux show-buffer
 map gg 1G
+map \s :%s/ *$//g

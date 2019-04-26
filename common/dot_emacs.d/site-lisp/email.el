@@ -42,7 +42,7 @@
 		   "date:today..now"
 		   " AND NOT list:ports-changes.openbsd.org"
 		   " AND NOT list:source-changes.openbsd.org")
-	   :key ?t)
+	   :key ?d)
 	 ,(make-mu4e-bookmark
 	   :name  "Last 7 days"
 	   :query "date:7d..now"

@@ -61,6 +61,10 @@ port() {
 	cd /usr/ports/*/$1 || return
 }
 
+if [ -d /usr/local/plan9/ ]; then
+	pgrep -q fontsrv || (/usr/local/plan9/bin/fontsrv &)
+	pgrep -q plumber || (/usr/local/plan9/bin/plumber &)
+fi
 
 eink() {
 	dynamic_colors set eink

@@ -25,7 +25,8 @@ set crypt_autosign = no
 set crypt_replyencrypt = yes
 set crypt_verify_sig = yes
 
-set editor = "emacsclient -ct"
+#set editor = "emacsclient -ct"
+set editor = "/usr/bin/vi"
 
 set certificate_file = ~/.mutt/certificates
 

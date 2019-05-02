@@ -1,7 +1,6 @@
 set autoindent
 set ruler
 set lock
-set recdir=/sec
 set showmode
 set windowname
 

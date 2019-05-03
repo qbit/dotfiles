@@ -16,6 +16,12 @@ macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt.fm.creds<enter><ch
 macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt.cx.creds<enter><change-folder>!<enter>'
 macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt.gm.creds<enter><change-folder>!<enter>'
 
+# Macro to mark all as read
+# https://brianbuccola.com/how-to-mark-all-emails-as-read-in-mutt/
+macro index A \
+    "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" \
+    "mark all new as read"
+
 source ~/.mutt.gpg
 
 set pgp_use_gpg_agent = yes

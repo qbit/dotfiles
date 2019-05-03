@@ -13,7 +13,6 @@ read_known_hosts() {
           for _host in $_line; do
             _host=${_host#\[}
             _host=${_host%%\]*}
-            #[[ -n ${HOST_LIST[*]} ]] && for i in ${HOST_LIST[*]}; do
             for i in ${HOST_LIST[*]}; do
               [[ $_host == $i ]] && continue 2
             done

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -eu
+
+qemu-system-x86_64 -hda "$1" -display curses -net nic,model=virtio,macaddr=52:54:00:00:EE:03 -net tap

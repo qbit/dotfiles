@@ -1,0 +1,13 @@
+#!/usr/bin/env rc
+
+TERM=dumb
+	
+fn cd { builtin cd $1 && awd $sysname }
+tabstop=4
+
+font='/mnt/font/Fantasque Sans Mono Regular/13a/font'
+lfont='/mnt/font/Go Mono/13a/font'
+
+SHELL=rc
+BROWSER=browser
+exec acme -a -f $font -F $lfont $*

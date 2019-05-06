@@ -1,6 +1,6 @@
 PKG_LIST=$(ls -1 /var/db/pkg)
 read_known_hosts() {
-        local _file=$1 _line
+        local _file=$1 _line _host
 
         while read _line ; do
           _line=${_line%%#*} # delete comments

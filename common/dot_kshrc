@@ -64,8 +64,10 @@ port() {
 }
 
 if [ -d /usr/local/plan9/ ]; then
-	pgrep -q fontsrv || (/usr/local/plan9/bin/fontsrv &)
-	pgrep -q plumber || (/usr/local/plan9/bin/plumber &)
+	if [ ! -z "$DISPLAY" ]; then
+		pgrep -q fontsrv || (/usr/local/plan9/bin/fontsrv &)
+		pgrep -q plumber || (/usr/local/plan9/bin/plumber &)
+	fi
 fi
 
 eink() {

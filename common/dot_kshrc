@@ -6,7 +6,9 @@
 . ~/.ksh_paths
 
 if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
-	eval `dbus-launch --sh-syntax`
+	if [ -e /usr/local/bin/dbus-launch ]; then
+		eval `/usr/local/bin/dbus-launch --sh-syntax`
+	fi
 fi
 
 export NO_COLOR=1

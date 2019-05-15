@@ -1,3 +1,5 @@
+*VT100*translations: #override Shift <Btn1Up>: exec-formatted("/home/qbit/bin/browser '%t'", PRIMARY)
+
 Xcursor.theme:			dmz-aa
 Xcursor.size: 22
 

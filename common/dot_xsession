@@ -33,7 +33,7 @@ case "$wmanager" in
 		xsetroot -solid black
 		;;
 	xmonad-x86_64-openbsd)
-		feh --bg-center ~/.background.png &
+		hsetroot -center ~/.background.png &
 		;;
 	/usr/X11R6/bin/fvwm)
 		xsetroot -solid black
@@ -58,10 +58,6 @@ fi
 
 if [ -x ${LPREFIX}/bin/sctd ]; then
 	${LPREFIX}/bin/sctd &
-fi
-
-if [ -f ~/.background.png ]; then
-	feh --bg-center ~/.background.png &
 fi
 
 xset +fp ~/.fonts

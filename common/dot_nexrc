@@ -1,3 +1,4 @@
+set wraplen=80
 set autoindent
 set ruler
 set lock

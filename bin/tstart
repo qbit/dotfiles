@@ -1,8 +1,9 @@
 #!/bin/ksh
-
-tmux -2 new-session -d -s "Main"
-tmux rename-window "IRC" 
-tmux new-window -n "Mail"
-tmux new-window -n "Music"
-tmux new-window 
+SSES="-s Main"
+tmux -2 new-session -d $SSES
+tmux $SESS rename-window "IRC"
+tmux $SESS new-window -n "Mail"
+tmux $SESS new-window -n "Music"
+tmux $SESS new-window
+tmux $SESS select-window -t0
 tmux -2 attach-session -t "Main"

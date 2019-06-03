@@ -36,6 +36,7 @@ unbind-key	M-k
 unbind-key	M-l
 
 bind-key	M-r		"rofi -show run"
+bind-key	MS-r		restart
 bind-key	M-n		"mpcc next"
 bind-key	MS-p		"mpcc toggle"
 bind-key	MS-i		"/home/qbit/.screenlayout/internal.sh"

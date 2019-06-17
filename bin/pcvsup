@@ -24,36 +24,38 @@ if [ $keys -lt 1 ]; then
 	ssh-add
 fi
 
-tmux -2 new-session -d -s $session
+if ! tmux ls | grep -q "^${session}:"; then
+	tmux -2 new-session -d -s $session
 
-for mirror in "${mirrors[@]}"; do
-	if [ -d ${dirs[${counter}]} ]; then
-		if [ $counter -eq 0 ]; then
+	for mirror in "${mirrors[@]}"; do
+		if [ -d ${dirs[${counter}]} ]; then
+			if [ $counter -eq 0 ]; then
 			if [ $width -gt 95 ]; then
 				tmux split-window -h -p 70
-			else
-				tmux split-window -p 70
+				else
+					tmux split-window -p 70
+				fi
 			fi
-		fi
-
-		tmux select-pane -t ${counter}
-		tmux send-keys "cd ${dirs[${counter}]}" C-m
-
-		tmux send-keys "git pull" C-m
-		#tmux send-keys "cvs -d${mirror} up" C-m
-
-		if [ $counter -eq 1 ]; then
-			if [ $width -gt 95 ]; then
-				tmux split-window -h -p 50
-			else
-				tmux split-window -p 50
+	
+			tmux select-pane -t ${counter}
+			tmux send-keys "cd ${dirs[${counter}]}" C-m
+	
+			tmux send-keys "git pull" C-m
+				#tmux send-keys "cvs -d${mirror} up" C-m
+	
+			if [ $counter -eq 1 ]; then
+				if [ $width -gt 95 ]; then
+					tmux split-window -h -p 50
+				else
+					tmux split-window -p 50
+				fi
 			fi
+	
+			((counter=counter+1))
+		else
+			tmux send-keys C-d
 		fi
-
-		((counter=counter+1))
-	else
-		tmux send-keys C-d
-	fi
-done
+	done
+fi
 
 tmux -2 attach-session -t $session

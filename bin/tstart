@@ -1,9 +1,16 @@
-#!/bin/ksh
-SSES="-s Main"
-tmux -2 new-session -d $SSES
-tmux $SESS rename-window "IRC"
-tmux $SESS new-window -n "Mail"
-tmux $SESS new-window -n "Music"
-tmux $SESS new-window
-tmux $SESS select-window -t0
-tmux -2 attach-session -t "Main"
+#!/bin/sh
+
+SNAME="Main"
+SSES="-s ${SNAME}"
+
+if tmux ls | grep -q "^${SNAME}:"; then
+	tmux at -t "${SNAME}"
+else
+	tmux -2 new-session -d $SSES
+	tmux $SESS rename-window "IRC"
+	tmux $SESS new-window -n "Mail"
+	tmux $SESS new-window -n "Music"
+	tmux $SESS new-window
+	tmux $SESS select-window -t0
+	tmux -2 attach-session -t "Main"
+fi

@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/ksh
+
+set -eu
 
 SNAME="Main"
 SSES="-s ${SNAME}"
@@ -7,10 +9,27 @@ if tmux ls | grep -q "^${SNAME}:"; then
 	tmux at -t "${SNAME}"
 else
 	tmux -2 new-session -d $SSES
-	tmux $SESS rename-window "IRC"
-	tmux $SESS new-window -n "Mail"
-	tmux $SESS new-window -n "Music"
-	tmux $SESS new-window
-	tmux $SESS select-window -t0
-	tmux -2 attach-session -t "Main"
+	if [ -e ~/.tmux.windows ]; then
+		count=0
+		for n in $(cat ~/.tmux.windows); do
+			if [ $n == "_" ]; then
+				tmux new-window
+			else
+				if [ $count -eq 0 ]; then
+					tmux rename-window "${n}"
+				else
+					tmux new-window -n "${n}"
+				fi
+			fi
+			((count=count+1))
+		done
+
+	else
+		tmux rename-window "IRC"
+		tmux new-window -n "Mail"
+		tmux new-window -n "Music"
+		tmux new-window
+	fi
+	tmux select-window -t0
+	tmux -2 attach-session -t $SNAME
 fi

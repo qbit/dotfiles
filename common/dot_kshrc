@@ -128,8 +128,11 @@ if [ -e ${LPREFIX}/bin/vim ]; then
 fi
 
 if [ -e ${LPREFIX}/bin/keychain ]; then
-	${LPREFIX}/bin/keychain --gpg2 --inherit any --agents gpg -q -Q
+	${LPREFIX}/bin/keychain --gpg2 --inherit any --agents ssh,gpg -q -Q
 	keychain_conf="$HOME/.keychain/$(uname -n)-sh"
+
+	# shellcheck source=/home/qbit/.keychain/slip.bold.daemon-sh
+	[ -e "${keychain_conf}" ] && . ${keychain_conf}
 
 	# shellcheck source=/home/qbit/.keychain/slip.bold.daemon-sh-gpg
 	[ -e "${keychain_conf}-gpg" ] && . ${keychain_conf}-gpg

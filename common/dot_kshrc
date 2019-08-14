@@ -2,10 +2,10 @@
 
 ${DEBUG:-}
 
-. /etc/ksh.kshrc
+[[ -x /etc/ksh.kshrc ]] && . /etc/ksh.kshrc
 
 # shellcheck source=/home/qbit/.ksh_paths
-. ~/.ksh_paths
+[[ -x ~/.ksh_paths ]] && . ~/.ksh_paths
 
 k() {
 	${DEBUG}
@@ -91,26 +91,24 @@ fi
 
 eink() {
 	dynamic_colors set eink
+	pgrep -q emacs && emacsclient -e "(load-theme 'eink 1)"
 
-	rm ~/.tmux.theme
-	ln -s ~/.tmux.eink.theme ~/.tmux.theme
+	ln -sf ~/.tmux.eink.theme ~/.tmux.theme
 
 	sed -i 's/^colorscheme.*/colorscheme eink/' \
 		~/dev/dotfiles/common/dot_vimrc
 	tmux source-file ~/.tmux.conf
-	emacsclient -e "(load-theme 'eink 1)"
 }
 
 nord() {
 	dynamic_colors set nord
+	pgrep -q emacs && emacsclient -e "(load-theme 'base16-nord 1)"
 
-	rm ~/.tmux.theme
-	ln -s ~/.tmux.nord.theme ~/.tmux.theme
+	ln -sf ~/.tmux.nord.theme ~/.tmux.theme
 
 	sed -i 's/^colorscheme.*/colorscheme nord/' \
 		~/dev/dotfiles/common/dot_vimrc
 	tmux source-file ~/.tmux.conf
-	emacsclient -e "(load-theme 'base16-nord 1)"
 }
 
 if [ -e ~/.ksh_completions ]; then

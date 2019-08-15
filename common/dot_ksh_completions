@@ -1,11 +1,34 @@
+# Package Managers
 # OpenBSD pkg_*
-PKG_LIST=$(ls -1 /var/db/pkg)
-set -A complete_pkg_delete -- $PKG_LIST
-set -A complete_pkg_info -- $PKG_LIST
+if [ -d /var/db/pkg ]; then
+	PKG_LIST=$(ls -1 /var/db/pkg)
+	set -A complete_pkg_delete -- $PKG_LIST
+	set -A complete_pkg_info -- $PKG_LIST
 
-set -A complete_pkg_1 -- add check create delete info
-set -A complete_pkg_2 -- $PKG_LIST
-# / OpenBSD pkg_*
+	set -A complete_pkg_1 -- add check create delete info
+	set -A complete_pkg_2 -- $PKG_LIST
+fi
+
+# Homebrew
+if [ -e /usr/local/bin/brew ]; then
+	PKG_LIST=$(ls -1 /usr/local/Cellar)
+	set -A complete_brew_1 -- \
+		commands \
+		config \
+		create \
+		doctor \
+		edit \
+		help \
+		info \
+		install \
+		list \
+		search \
+		uninstall \
+		update \
+		upgrade
+	set -A complete_brew_2 -- $PKG_LIST
+fi
+# / Package Managers
 
 # ssh, scp, mosh
 set -A SSH_KNOWN_HOSTS ~/.ssh/known_hosts

@@ -42,17 +42,8 @@ let g:ale_linters = {
 \   'ruby': ['rubocop25'],
 \}
 
-let g:ale_ruby_rubocop_executable = '/home/qbit/ruby_bin/bin/rubocop25'
-
 " GitGutter
 let g:gitgutter_realtime = 1
-
-" Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 
 nmap <silent> ,/ :let @/=""<CR>
 

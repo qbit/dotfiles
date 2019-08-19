@@ -5,9 +5,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'chriskempson/base16-vim'
 Plug 'fatih/vim-go'
 Plug 'https://bitbucket.org/kisom/eink.vim.git'
-Plug 'junegunn/fzf.vim'
 Plug 'ngmy/vim-rubocop'
-Plug 'tpope/vim-fugitive'
 Plug 'w0rp/ale'
 
 call plug#end()

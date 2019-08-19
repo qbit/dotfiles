@@ -45,8 +45,6 @@ export SPEC_OPTS=--no-color
 export RUBY_TESTOPTS=--color=never
 
 unalias ls
-#alias bpass="env DISPLAY=:1 pass"
-#alias spass="env PASSWORD_STORE_DIR=~/.secret-store pass"
 alias 'gopatch=WRKDIST=$(make show=WRKSRC) make update-patches'
 alias ag='ag --nocolor'
 alias build="dpb -c -h /home/buildie/hosts -P"
@@ -64,6 +62,7 @@ alias pup='doas -n /usr/sbin/pkg_add -u'
 alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"
 alias tmux="tmux -2"
+alias vi=vim
 
 src() {
 	cd /usr/src/*/$1 || return
@@ -142,7 +141,7 @@ fi
 
 vdiff() {
 	cp -p "$1" "$1.orig"
-	nvim "$1"
+	vi "$1"
 }
 
 pclean() {

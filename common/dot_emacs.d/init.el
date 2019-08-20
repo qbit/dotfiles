@@ -31,5 +31,6 @@
     (require 'pass))
 (require 'ui)
 
-(diary)
+(if (file-exists-p "~/.emacs.d/diary")
+    (diary))
 (eshell)

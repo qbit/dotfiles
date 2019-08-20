@@ -1,5 +1,6 @@
 export PLAN9=/Users/qbit/dev/plan9port
 export PATH=$PATH:$HOME/go/bin:$PLAN9/bin
+export GEM_HOME=~/ruby_bin
 
 # That sweet sweet ^W
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
@@ -23,3 +24,22 @@ zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' formats '[%b]'
 
 PROMPT="%n@%m[%(?.%{$fg[white]%}.%{$fg[red]%})%?%{$reset_color%}]:%~\${vcs_info_msg_0_}%# "
+#alias bpass="env DISPLAY=:1 pass"
+#alias spass="env PASSWORD_STORE_DIR=~/.secret-store pass"
+alias 'gopatch=WRKDIST=$(make show=WRKSRC) make update-patches'
+alias ag='ag --nocolor'
+alias build="dpb -c -h /home/buildie/hosts -P"
+alias cabal='env TMPDIR=/usr/local/cabal/build/ cabal'
+alias cdw='cd $(make show=WRKSRC)'
+alias ec='emacsclient -ct'
+alias irc="export TERM=xterm; tmux at -t irc"
+alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
+alias mkae='make'
+alias mutt='stty discard undef; neomutt'
+alias pass="gopass"
+alias pkg_add="pkg_add -Dsnap"
+alias pkg_delete="pkg_delete -Dsnap"
+alias pup='doas -n /usr/sbin/pkg_add -u'
+alias rustc='rustc --color=never'
+alias sbcl="rlwrap sbcl"
+alias tmux="tmux -2"

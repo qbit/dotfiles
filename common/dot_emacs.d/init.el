@@ -25,8 +25,10 @@
 (require 'hooks)
 (require 'keyboard)
 (require 'orgie)
-(require 'email)
-(require 'pass)
+(if (file-directory-p "/usr/local/share/emacs/site-lisp/mu4e")
+    (require 'email))
+(if (file-directory-p "/usr/local/share/examples/password-store/emacs/")
+    (require 'pass))
 (require 'ui)
 
 (diary)

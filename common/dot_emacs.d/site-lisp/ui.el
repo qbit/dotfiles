@@ -13,14 +13,15 @@
 ;; Hopefully this helps with the OpenBSD org-capture lockups
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
-(setq inhibit-startup-screen t
-      initial-scratch-message
-      (concat
-       (shell-command-to-string "fortune | sed -e 's/^/;; /g'")
-       "\n\n")
-      whitespace-style '(trailing lines space-before-tab)
-      whitespace-line-column 80
-      x-selection-timeout 10)
+(if (file-executable-p "/usr/games/fortune")
+    (setq inhibit-startup-screen t
+	  initial-scratch-message
+	  (concat
+	   (shell-command-to-string "fortune | sed -e 's/^/;; /g'")
+	   "\n\n")
+	  whitespace-style '(trailing lines space-before-tab)
+	  whitespace-line-column 80
+	  x-selection-timeout 10))
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)

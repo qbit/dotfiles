@@ -18,7 +18,6 @@
 			 ("gnu" .
 			  "https://elpa.gnu.org/packages/"))
       package-pinned-packages '(
-				(arduino-mode     . "melpa-stable")
 				(base16-theme     . "melpa-stable")
 				(company-lsp      . "melpa-stable")
 				(flycheck         . "melpa-stable")
@@ -27,18 +26,15 @@
 				(git-gutter       . "melpa-stable")
 				(go-eldoc         . "melpa-stable")
 				(go-mode          . "melpa-stable")
-				(golint           . "melpa-stable")
 				(lsp-mode         . "melpa-stable")
 				(magit            . "melpa-stable")
 				(org              . "org")
 				(org-plus-contrib . "org")
 				(rubocop          . "melpa-stable")
 				(rust-mode        . "melpa-stable")
-				(scad-mode        . "melpa-stable")
 				(scpaste          . "melpa-stable")
 				(slime            . "melpa-stable")
 				(smex             . "melpa-stable")
-				(weechat          . "melpa-stable")
 				(web-mode         . "melpa-stable")
 				(yaml-mode        . "melpa-stable")))
 

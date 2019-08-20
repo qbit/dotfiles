@@ -28,7 +28,7 @@ au BufNewFile,BufRead *.lua set tabstop=4 softtabstop=0 expandtab shiftwidth=2 s
 au BufNewFile,BufRead *.rb set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 au BufNewFile,BufRead *.yml set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
-highlight OverLength ctermbg=red
+highlight OverLength ctermfg=red
 match OverLength /\%79v.\+/
 
 set dir=~/.swaps
@@ -39,7 +39,7 @@ set mouse-=a
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'ruby': ['rubocop25'],
+\   'ruby': ['rubocop26'],
 \}
 
 " GitGutter
@@ -49,11 +49,6 @@ nmap <silent> ,/ :let @/=""<CR>
 
 let g:vimrubocop_keymap = 0
 nmap <Leader>r :RuboCop<CR>
-
-noremap <Left>  <NOP>
-noremap <Right> <NOP>
-noremap <Up>    <NOP>
-noremap <Down>  <NOP>
 
 nnoremap ,o :Files<cr>
 

@@ -27,8 +27,6 @@
 (require 'orgie)
 (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu4e")
     (require 'email))
-(if (file-directory-p "/usr/local/share/examples/password-store/emacs/")
-    (require 'pass))
 (require 'ui)
 
 (if (file-exists-p "~/.emacs.d/diary")

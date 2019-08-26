@@ -69,14 +69,23 @@ src() {
 }
 
 port() {
-	cd /usr/ports/*/$1 || return
+	cd /usr/ports/*/$1 2>/dev/null || \
+		cd /usr/ports/*/*/$1 2>/dev/null || \
+		return
 }
+
+[[ -x ~/.swaps ]] || mkdir -m 700 ~/.swaps;
 
 if [ -d /usr/local/plan9/ ]; then
 	if [ ! -z "$DISPLAY" ]; then
 		pgrep -q fontsrv || (/usr/local/plan9/bin/fontsrv &)
 		pgrep -q plumber || (/usr/local/plan9/bin/plumber &)
 	fi
+fi
+
+if [ ! -d ~/.dynamic-colors ]; then
+	git clone git@github.com:qbit/dynamic-colors.git \
+		~/.dynamic-colors
 fi
 
 eink() {

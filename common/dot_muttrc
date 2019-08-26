@@ -32,7 +32,7 @@ set crypt_replyencrypt = yes
 set crypt_verify_sig = yes
 
 #set editor = "emacsclient -ct"
-set editor = "/usr/bin/vi"
+set editor = "vim"
 
 set certificate_file = ~/.mutt/certificates
 

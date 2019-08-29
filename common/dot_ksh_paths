@@ -8,7 +8,6 @@ set -A paths /usr/games \
 	~/bin \
 	~/.bin \
 	~/go/bin \
-	~/.dynamic-colors/bin \
 	~/node_bin/node_modules/.bin \
 	~/ruby_bin/bin \
 	~/dev/depot_tools \

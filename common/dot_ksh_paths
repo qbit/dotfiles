@@ -10,6 +10,7 @@ set -A paths /usr/games \
 	~/go/bin \
 	~/node_bin/node_modules/.bin \
 	~/ruby_bin/bin \
+	~/.dcolor \
 	~/dev/depot_tools \
 	~/.cabal/bin \
 	~/.cargo/bin \

@@ -45,6 +45,7 @@ export SPEC_OPTS=--no-color
 export RUBY_TESTOPTS=--color=never
 
 unalias ls
+alias goget='env GO111MODULES=on go get'
 alias 'gopatch=WRKDIST=$(make show=WRKSRC) make update-patches'
 alias ag='ag --nocolor'
 alias build="dpb -c -h /home/buildie/hosts -P"

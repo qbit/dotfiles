@@ -26,7 +26,8 @@ fi
 case "$wmanager" in
 	/usr/X11R6/bin/cwm)
 		xsetroot -solid black
-		xbattbar -T -i green -o "olive drab" -I blue -O red &
+		#xbattbar -T -i green -o "olive drab" -I blue -O red &
+		while true; do ~/bin/bar; sleep 1; done | lemonbar -d -B "#000000" &
 		/usr/X11R6/bin/xcompmgr &
 		;;
 	/usr/local/bin/awesome)

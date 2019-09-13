@@ -1,0 +1,61 @@
+#!/bin/ksh
+
+red="%{F#cd0000}"
+yellow="%{F#cdcd00}"
+white="%{F#ffffff}"
+
+# TODO check lengte and make sure we aren't wayy off base
+wifi() {
+	set -A wifi $(ifconfig | awk '$1 ~ "ieee80211" { print $3 " " $8 }')
+
+	local sig
+	sig=${wifi[1]}
+	sig=${sig%\%}
+	printf "%s : %3d%%" "${wifi[0]}" "${sig}"
+}
+
+beat() {
+	local b
+	b=$(echo "(($(date +'%s')+3600)%86400)/86.4" | bc)
+	printf "%03d" "${b}"
+}
+
+temp() {
+	local TMP
+	TMP=$(sysctl -n hw.sensors.acpithinkpad0.temp0)
+	TMP=${TMP% degC}
+	TMP=${TMP%.00}
+	printf "%2d°C" "${TMP}"
+}
+battery() {
+	local BATT BAR BATT_LINE
+	set -A batt_info $(apm -al)
+
+	BATT=$((${batt_info[0]}/10))
+	BAR="#"
+	if [ "${batt_info[1]}" == "1" ] ; then
+		BAR="+"
+	fi
+
+	BATT_LINE=""
+	for i in $(jot 10); do
+		if [ "$i" -le "$BATT" ]; then
+			BATT_LINE="${BATT_LINE}${BAR}"
+		else
+			BATT_LINE="${BATT_LINE}-"
+		fi
+	done
+
+	if [ $BATT -lt 3 ] && [ "${batt_info[1]}" == "0" ]; then
+		BATT_LINE="${red}${BATT_LINE}${white}"
+	fi
+
+	if [ $BATT -lt 5 ] && [ "${batt_info[1]}" == "0" ]; then
+		BATT_LINE="${yellow}${BATT_LINE}${white}"
+	fi
+	echo "$BATT_LINE"
+}
+
+printf "%%{l} %s | %s %%{r} %s | %s | @%s \\n" \
+	"$(battery)" "$(temp)" \
+	"$(wifi)" "$(date '+%Y-%m-%d %H:%M')" "$(beat)"

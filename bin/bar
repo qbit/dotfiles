@@ -53,7 +53,7 @@ battery() {
 	if [ $BATT -lt 5 ] && [ "${batt_info[1]}" == "0" ]; then
 		BATT_LINE="${yellow}${BATT_LINE}${white}"
 	fi
-	echo "$BATT_LINE"
+	echo "${batt_info[0]}%" "$BATT_LINE"
 }
 
 printf "%%{l} %s | %s %%{r} %s | %s | @%s \\n" \

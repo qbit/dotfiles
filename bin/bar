@@ -33,11 +33,11 @@ temp() {
 }
 battery() {
 	local BATT BAR BATT_LINE
-	set -A batt_info $(apm -al)
+	set -A batt_info $(apm -alm)
 
 	BATT=$((${batt_info[0]}/10))
 	BAR="#"
-	if [ "${batt_info[1]}" == "1" ] ; then
+	if [ "${batt_info[2]}" == "1" ] ; then
 		BAR="+"
 	fi
 
@@ -50,11 +50,11 @@ battery() {
 		fi
 	done
 
-	if [ $BATT -lt 3 ] && [ "${batt_info[1]}" == "0" ]; then
+	if [ $BATT -lt 3 ] && [ "${batt_info[2]}" == "0" ]; then
 		BATT_LINE="${red}${BATT_LINE}${white}"
 	fi
 
-	if [ $BATT -lt 5 ] && [ "${batt_info[1]}" == "0" ]; then
+	if [ $BATT -lt 5 ] && [ "${batt_info[2]}" == "0" ]; then
 		BATT_LINE="${yellow}${BATT_LINE}${white}"
 	fi
 	echo "${batt_info[0]}%" "$BATT_LINE"

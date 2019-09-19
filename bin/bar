@@ -4,14 +4,30 @@ red="%{F#cd0000}"
 yellow="%{F#cdcd00}"
 white="%{F#ffffff}"
 
+wifi_ssid=$(cat <<EOF
+\$1 ~ "ieee80211" {
+	split(\$0, chars, "");
+	match(\$0, /join .* chan/);
+	print substr(\$0, RSTART + 5, RLENGTH - 10)
+}
+EOF
+)
+wifi_sig=$(cat <<EOF
+\$1 ~ "ieee80211" {
+	split(\$0, chars, "");
+	match(\$0, /[0-9]+%/);
+	print substr(\$0, RSTART, RLENGTH)
+}
+EOF
+)
+
 # TODO check lengte and make sure we aren't wayy off base
 wifi() {
-	set -A wifi $(ifconfig | awk '$1 ~ "ieee80211" { print $3 " " $8 }')
-
-	local sig
-	sig=${wifi[1]}
-	sig=${sig%\%}
-	printf "%s : %3d%%" "${wifi[0]}" "${sig}"
+	local w sig ssid
+	w=$(ifconfig | grep "ieee80211")
+	ssid="$(echo "$w" | awk "${wifi_ssid}")"
+	sig="$(echo "$w" | awk "${wifi_sig}")"
+	printf "%s : %3d%%" "${ssid}" "${sig}"
 }
 
 beat() {

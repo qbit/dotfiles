@@ -76,6 +76,20 @@ battery() {
 	echo "${batt_info[0]}%" "$BATT_LINE"
 }
 
-printf "%%{l} %s | %s %%{r} %s | %s | @%s \\n" \
+mail() {
+	set -A mail_list $(ls -1 ~/Maildir | grep -vi trash)
+	count=0
+	for dir in ${mail_list[@]}; do
+		echo -n "${dir}:"
+		ls -1 ~/Maildir/${dir}/Inbox/new | wc -l | \
+			awk '{ if ($1 > 0) { printf $1 } else { printf "0" }}'
+		count=$((count+1))
+		if [ $count -ne ${#mail_list[@]} ]; then
+			echo -n ", "
+		fi
+	done
+}
+
+printf "%%{l} %s | %s %%{r} %s | %s | %s | @%s \\n" \
 	"$(battery)" "$(temp)" \
-	"$(wifi)" "$(date '+%Y-%m-%d %H:%M')" "$(beat)"
+	"$(mail)" "$(wifi)" "$(date '+%Y-%m-%d %H:%M')" "$(beat)"

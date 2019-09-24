@@ -41,7 +41,7 @@ temp() {
 	TMP=$(sysctl -n hw.sensors.acpithinkpad0.temp0)
 	TMP=${TMP% degC}
 	TMP=${TMP%.00}
-	if [ $TMP -ge 50 ]; then
+	if [ $TMP -ge 60 ]; then
 		printf "\\${red}%2d\\${white}°C" "${TMP}"
 	else
 		printf "%2d°C" "${TMP}"

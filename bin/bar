@@ -8,7 +8,9 @@ wifi_ssid=$(cat <<EOF
 \$1 ~ "ieee80211" {
 	split(\$0, chars, "");
 	match(\$0, /join .* chan/);
-	print substr(\$0, RSTART + 5, RLENGTH - 10)
+	ssid = substr(\$0, RSTART + 5, RLENGTH - 10)
+	gsub(/\"/, "", ssid)
+	print ssid
 }
 EOF
 )

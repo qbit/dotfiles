@@ -38,6 +38,14 @@ beat() {
 	printf "%03d" "${b}"
 }
 
+hz() {
+	local hz
+	hz=$(apm -Pv | \
+		awk \
+		'{gsub(/\(/, "", $5); gsub(/\)/, "", $6); print $5 " " $6}')
+	printf "$hz"
+}
+
 temp() {
 	local TMP
 	TMP=$(sysctl -n hw.sensors.acpithinkpad0.temp0)
@@ -92,6 +100,6 @@ mail() {
 	done
 }
 
-printf "%%{l} %s | %s %%{r} %s | %s | %s | @%s \\n" \
-	"$(battery)" "$(temp)" \
+printf "%%{l} %s | %s | %s %%{r} %s | %s | %s | @%s \\n" \
+	"$(battery)" "$(temp)" "$(hz)" \
 	"$(mail)" "$(wifi)" "$(date '+%Y-%m-%d %H:%M')" "$(beat)"

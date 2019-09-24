@@ -89,7 +89,7 @@ battery() {
 mail() {
 	set -A mail_list $(ls -1 ~/Maildir | grep -vi trash)
 	count=0
-	for dir in ${mail_list[@]}; do
+	for dir in "${mail_list[@]}"; do
 		echo -n "${dir}:"
 		ls -1 ~/Maildir/${dir}/Inbox/new | wc -l | \
 			awk '{ if ($1 > 0) { printf $1 } else { printf "0" }}'

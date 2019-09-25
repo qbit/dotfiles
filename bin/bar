@@ -43,8 +43,8 @@ hz() {
 	local hz
 	hz=$(apm -Pv | \
 		awk \
-		'{gsub(/\(/, "", $5); gsub(/\)/, "", $6); print $5 " " $6}')
-	printf "$hz"
+		'{gsub(/\(/, "", $5); gsub(/\)/, "", $6); print $5 " " $6 " " $4}')
+	printf "%s %s %s" "$hz"
 }
 
 temp() {
@@ -101,6 +101,6 @@ mail() {
 	done
 }
 
-printf "%%{l} %s | %s | %s %%{r} %s | %s | %s | @%s \\n" \
+printf "%%{l} %s | %s | %%{A:apm -A:}%%{A2:apm -L:}%%{A3:apm -H:}%s%%{A}%%{A}%%{A} %%{r} %s | %s%% | %s | @%s " \
 	"$(battery)" "$(temp)" "$(hz)" \
 	"$(mail)" "$(wifi)" "$(date '+%Y-%m-%d %H:%M')" "$(beat)"

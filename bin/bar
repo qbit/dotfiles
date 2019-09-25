@@ -29,7 +29,8 @@ wifi() {
 	w=$(ifconfig | grep "ieee80211")
 	ssid="$(echo "$w" | awk "${wifi_ssid}")"
 	sig="$(echo "$w" | awk "${wifi_sig}")"
-	printf "%s : %3d%%" "${ssid}" "${sig}"
+	sig=${sig%%\%}
+	printf "%s : %3d" "${ssid}" "${sig}"
 }
 
 beat() {

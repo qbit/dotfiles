@@ -18,17 +18,31 @@ if [ $OS != "OpenBSD" ]; then
 fi
 
 xset -b &
+xset +fp ~/.fonts
+for font in /usr/local/share/fonts/*; do
+	xset +fp "${font}"
+done
+xset fp rehash
+
+xrdb -merge -load ~/.Xresources &
 
 if [ -x ${LPREFIX}/bin/dbus-launch -a -z "${DBUS_SESSION_BUS_ADDRESS}" ]; then
         eval `dbus-launch --sh-syntax --exit-with-session`
 fi
 
+get_font() {
+	grep "$1" ~/.Xdefaults | awk -F: '{sub(/^ +/, "", $2); print $2 ":" $3}'
+}
+
+echo "FONT NAME: $(get_font '^XTerm*face')"
+
 case "$wmanager" in
 	/usr/X11R6/bin/cwm)
 		xsetroot -solid black
-		#xbattbar -T -i green -o "olive drab" -I blue -O red &
 		while true; do ~/bin/bar; sleep 1; done | lemonbar -d \
-			-B "#000000" -f 'Fantasque Sans Mono:pixelsize=14' | \
+			-f "$(get_font '^XTerm\*face')" \
+			-B "#2E3440" \
+			-F "#D8DEE9" \
 			sh &
 		/usr/X11R6/bin/xcompmgr &
 		;;
@@ -62,14 +76,6 @@ fi
 if [ -x ${LPREFIX}/bin/sctd ]; then
 	${LPREFIX}/bin/sctd &
 fi
-
-xset +fp ~/.fonts
-for font in /usr/local/share/fonts/*; do
-	xset +fp "${font}"
-done
-xset fp rehash
-
-xrdb -merge -load ~/.Xresources &
 
 TIMEOUT=$(cat ~/.xtimeout 2> /dev/null || echo "300")
 xidle -delay 5 -program "/usr/X11R6/bin/xlock" -timeout $TIMEOUT &

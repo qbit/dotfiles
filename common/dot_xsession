@@ -42,8 +42,7 @@ case "$wmanager" in
 		while true; do ~/bin/bar; sleep 1; done | lemonbar -d \
 			-f "$(get_font '^XTerm\*face')" \
 			-B "#2E3440" \
-			-F "#D8DEE9" \
-			sh &
+			-F "#D8DEE9" | sh &
 		/usr/X11R6/bin/xcompmgr &
 		;;
 	/usr/local/bin/awesome)

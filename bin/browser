@@ -1,8 +1,8 @@
 #!/bin/ksh
 
 BROWSER_USER=_browser
-BROWSER=/usr/local/bin/chrome
-BROWSER_OPTS="--enable-unveil --site-per-process --js-flages='--noexpose_wasm'"
+BROWSER=/usr/local/bin/firefox
+BROWSER_OPTS=""
 XEPHYR_OPT="-resizeable :1"
 USE_XEPHYR=false
 
@@ -19,7 +19,7 @@ while getopts "cfil" arg; do
 		f)
 			BROWSER=/usr/local/bin/firefox
 			BROWSER_OPTS=""
-			USE_XEPHYR=true
+			#USE_XEPHYR=true
 			;;
 		l)
 			BROWSER=/usr/local/bin/luakit

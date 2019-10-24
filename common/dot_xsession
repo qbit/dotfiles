@@ -79,6 +79,19 @@ fi
 TIMEOUT=$(cat ~/.xtimeout 2> /dev/null || echo "300")
 xidle -delay 5 -program "/usr/X11R6/bin/xlock" -timeout $TIMEOUT &
 
-#pgrep -q emacs || (emacs --daemon &)
+if [ -e ${LPREFIX}/bin/keychain ]; then
+	${LPREFIX}/bin/keychain --gpg2 --inherit any --agents ssh,gpg -q -Q
+	keychain_conf="$HOME/.keychain/$(uname -n)-sh"
+
+	# shellcheck source=/home/qbit/.keychain/slip.bold.daemon-sh
+	[ -e "${keychain_conf}" ] && . ${keychain_conf}
+
+	# shellcheck source=/home/qbit/.keychain/slip.bold.daemon-sh-gpg
+	[ -e "${keychain_conf}-gpg" ] && . ${keychain_conf}-gpg
+fi
+
+if [ -e ${LPREFIX}/bin/ssh-agent-card-prompt ]; then
+	${LPREFIX}/bin/ssh-agent-card-prompt &
+fi
 
 exec "$wmanager"

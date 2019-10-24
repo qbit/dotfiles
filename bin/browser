@@ -1,7 +1,7 @@
 #!/bin/ksh
 
 BROWSER_USER=_browser
-BROWSER=/usr/local/bin/firefox
+BROWSER=/usr/local/bin/chrome
 BROWSER_OPTS=""
 XEPHYR_OPT="-resizeable :1"
 USE_XEPHYR=false

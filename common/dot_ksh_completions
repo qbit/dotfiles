@@ -47,7 +47,12 @@ set -A complete_mosh -- $HOST_LIST
 # / ssh, scp, mosh
 
 # Utilities
-#set -A complete_man_1 -- $(MANPATH=/usr/share/man man -k Nm~. | cut -d\( -f1 | tr -d ,)
+if [ ! -f /tmp/man_list ]; then
+	MANPATH=/usr/share/man man -k Nm~. | cut -d\( -f1 | tr -d , | \
+		sort | \
+		uniq > /tmp/man_list
+fi
+set -A complete_man_1 -- $(cat /tmp/man_list)
 
 set -A complete_kill_1 -- -9 -HUP -INFO -KILL -TERM
 

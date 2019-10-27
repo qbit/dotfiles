@@ -41,6 +41,9 @@
 
 (desktop-save-mode 1)
 
+(with-eval-after-load 'magit
+  (require 'forge))
+
 (provide 'config)
 
 ;;; config.el ends here

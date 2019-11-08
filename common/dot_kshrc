@@ -31,6 +31,7 @@ fi
 export NO_COLOR=1
 export RUBY_TESTOPTS=--color=never
 export GEM_HOME=~/ruby_bin
+export PSQL_EDITOR=vim
 
 export GOT_AUTHOR="Aaron Bieber <abieber@openbsd.org>"
 

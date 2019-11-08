@@ -189,6 +189,21 @@ set -A big_gits \
 	/usr/src			\
 	/usr/xenocara
 
+gut_str() {
+	# take the middle bits out
+	if [ "${#1}" -gt "10" ]; then
+		echo "${@}" | awk '{ \
+			split($0, a, ""); \
+			for (i=0; i<7; i++) {printf "%s", a[i]} \
+			l=length(a); \
+			printf "%s", ".."; \
+			for (i=l-10; i<l; i++) {printf "%s", a[i]} \
+		}'
+	else
+		echo "${@}"
+	fi
+}
+
 git_branch_name() {
 	# __git_ps1 causes some slowness on large repos, don't run this there.
 	for d in "${big_gits[@]}"; do
@@ -204,6 +219,7 @@ git_branch_name() {
 			br_ch=$( perl -e 'binmode STDOUT, ":utf8"; print "\x{16D8}";' )
 			branch="$br_ch $( git describe --tags | head -n 1 )"
 		fi
+		branch=$(gut_str $branch)
 		echo "[${bold}${branch}${white}]"
 	fi
 }

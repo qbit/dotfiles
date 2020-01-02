@@ -191,7 +191,7 @@ set -A big_gits \
 
 gut_str() {
 	# take the middle bits out
-	if [ "${#1}" -gt "10" ]; then
+	if [ "${#1}" -gt "15" ]; then
 		echo "${@}" | awk '{ \
 			split($0, a, ""); \
 			for (i=0; i<7; i++) {printf "%s", a[i]} \

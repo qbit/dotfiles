@@ -37,7 +37,7 @@
 	required = true
 	smudge = git-lfs smudge -- %f
 [commit]
-	gpgsign = true
+	gpgsign = false
 [github]
 	user = qbit
 

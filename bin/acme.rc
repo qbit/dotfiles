@@ -3,10 +3,10 @@
 TERM=dumb
 	
 fn cd { builtin cd $1 && awd $sysname }
-tabstop=4
+#tabstop=4
 
-font='/mnt/font/Fantasque Sans Mono Regular/13a/font'
-lfont='/mnt/font/Go Mono/13a/font'
+font='/mnt/font/FantasqueSansMono-Regular/13a/font'
+lfont='/mnt/font/GoMono/13a/font'
 
 SHELL=rc
 BROWSER=browser

@@ -39,7 +39,7 @@ echo "FONT NAME: $(get_font '^XTerm*face')"
 case "$wmanager" in
 	/usr/X11R6/bin/cwm)
 		xsetroot -solid black
-		while true; do ~/bin/bar; sleep 5; done | lemonbar -d \
+		while true; do ~/bin/bar; sleep 5; done | lemonbar-xft -d \
 			-f "$(get_font '^XTerm\*face')" \
 			-B "#2E3440" \
 			-F "#D8DEE9" | sh &

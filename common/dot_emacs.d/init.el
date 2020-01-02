@@ -1,10 +1,15 @@
+(require 'package)
+(setq package-archives '(("org" .
+			       "https://orgmode.org/elpa/")
+			 ("gnu" .
+			  	"https://elpa.gnu.org/packages/")
+			     ("melpa" .
+			           "https://melpa.org/packages/")))
 (package-initialize)
 
-;;(toggle-debug-on-quit)
-;;(toggle-debug-on-error)
-
-(load "server")
-(unless (server-running-p) (server-start))
+(unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+      (package-install 'use-package))
 
 (setq custom-file "~/.emacs.d/site-lisp/custom.el")
 

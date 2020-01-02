@@ -94,25 +94,27 @@ if [ $? = 0 ]; then
 	set -A complete_mpc_2 -- $(mpc lsplaylists | sort)
 fi
 
-if [ -f ~/.config/rclone/rclone.conf ]; then
-	RCLONE_LIST=$(rclone listremotes)
-	set -A complete_rclone_1 -- \
-		about authorize \
-		cachestats cat check cleanup config copy copyto \
-		copyurl cryptcheck \ cryptdecode \
-		dbhashsum dedupe delete deletefile \
-		genautocomplete gendocs \
-		hashsum help \
-		link listremotes ls lsd lsf lsjson lsl \
-		md5sum mkdir move moveto \
-		ncdu \
-		obscure \
-		purge \
-		rc rcat rcd rmdir rmdirs \
-		serve settier sha1sum size sync \
-		touch tree \
-		version
-	set -A complete_rclone -- $RCLONE_LIST
+if [ -e /usr/local/bin/rclone ]; then
+	if [ -f ~/.config/rclone/rclone.conf ]; then
+		RCLONE_LIST=$(rclone listremotes)
+		set -A complete_rclone_1 -- \
+			about authorize \
+			cachestats cat check cleanup config copy copyto \
+			copyurl cryptcheck \ cryptdecode \
+			dbhashsum dedupe delete deletefile \
+			genautocomplete gendocs \
+			hashsum help \
+			link listremotes ls lsd lsf lsjson lsl \
+			md5sum mkdir move moveto \
+			ncdu \
+			obscure \
+			purge \
+			rc rcat rcd rmdir rmdirs \
+			serve settier sha1sum size sync \
+			touch tree \
+			version
+		set -A complete_rclone -- $RCLONE_LIST
+	fi
 fi
 
 if [ -x /usr/rbin/rcctl ]; then

@@ -1,5 +1,5 @@
 sticky yes
-gap 17 0 0 0
+gap 18 0 0 0
 snapdist 10
 
 ignore dock
@@ -16,7 +16,7 @@ color menubg		"#798a99"
 color menufg		"#eeeeff"
 color urgencyborder	"red"
 
-command	term	"xterm"
+command	term	"/bin/ksh -l -c /usr/local/bin/st"
 command "Primary -> :1 Clipboard" "ksh -c 'xclip -out | xclip -selection clipboard -d :1'"
 command ":1 Clipboard -> Primary" "ksh -c 'xclip -out -selection clipboard -d :1 | xclip'"
 command ":1 Primary -> Primary" "ksh -c 'xclip -out -d :1 | xclip'"
@@ -37,7 +37,7 @@ unbind-key	M-l
 
 bind-key	M-r		"rofi -show run"
 bind-key	MS-r		restart
-bind-key	M-n		"mpcc next"
+bind-key	MS-n		"mpcc next"
 bind-key	MS-p		"mpcc toggle"
 bind-key	MS-i		"/home/qbit/.screenlayout/internal.sh"
 bind-key	MS-e		"/home/qbit/.screenlayout/external.sh"
@@ -52,6 +52,7 @@ autogroup 1	"Navigator,Firefox"
 autogroup 1	"Xephyr"
 autogroup 2	"xterm,XTerm"
 autogroup 3	"emacs,Emacs"
+autogroup 4	"drawterm,DrawTerm"
 autogroup 9	"xconsole,XConsole"
 
 bind-mouse MS-1	menu-window

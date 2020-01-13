@@ -11,7 +11,7 @@ fontname "Go Regular:pixelsize=13"
 borderwidth		2
 color activeborder	"#99aab9"
 color font		"#eeeeff"
-color inactiveborder	"#eeeeee"
+color inactiveborder	"#000000"
 color menubg		"#798a99"
 color menufg		"#eeeeff"
 color urgencyborder	"red"

@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'chriskempson/base16-vim'
+Plug 'andreypopp/vim-colors-plain'
 Plug 'fatih/vim-go'
 Plug 'https://bitbucket.org/kisom/eink.vim.git'
 Plug 'ngmy/vim-rubocop'
@@ -17,7 +18,8 @@ nmap <Leader>bc :PlugClean<CR>
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set encoding=utf8
 set t_Co=256
-colorscheme nord
+set background=dark " Or 'light'
+colorscheme plain
 
 set nocp
 filetype plugin indent on

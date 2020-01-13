@@ -280,3 +280,7 @@ export MPC_FORMAT="[%artist%|(artist n/a)]    [%album%|%albumshort%|(album n/a)]
 
 # PATH is set in ~/.ksh_paths
 export PATH HOME TERM GPG_TTY PS1 KEYID
+
+if [ -e ~/.ksh_local ]; then
+	. ~/.ksh_local
+fi

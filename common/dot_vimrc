@@ -1,11 +1,13 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
+Plug 'andreypopp/vim-colors-plain'
 Plug 'arcticicestudio/nord-vim'
 Plug 'chriskempson/base16-vim'
-Plug 'andreypopp/vim-colors-plain'
 Plug 'fatih/vim-go'
 Plug 'https://bitbucket.org/kisom/eink.vim.git'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'ngmy/vim-rubocop'
 Plug 'w0rp/ale'
 
@@ -14,6 +16,10 @@ call plug#end()
 nmap <Leader>bi :PlugInstall<CR>
 nmap <Leader>bu :PlugUpdate<CR>
 nmap <Leader>bc :PlugClean<CR>
+
+command! -bang -nargs=? -complete=dir Files
+	\ call fzf#vim#files(<q-args>, {'options': ['--no-color']}, <bang>0)
+nmap <C-p> :Files<cr>
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set encoding=utf8

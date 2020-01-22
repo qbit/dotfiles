@@ -39,7 +39,7 @@ echo "FONT NAME: $(get_font '^XTerm*face')"
 case "$wmanager" in
 	/usr/X11R6/bin/cwm)
 		xsetroot -solid black
-		while true; do ~/bin/bar; sleep 5; done | lemonbar-xft -d \
+		while true; do ~/bin/bar; sleep 3; done | lemonbar-xft -d \
 			-f "$(get_font '^XTerm\*face')" \
 			-B "#2E3440" \
 			-F "#D8DEE9" | sh &
@@ -54,14 +54,15 @@ case "$wmanager" in
 	/usr/X11R6/bin/fvwm)
 		xsetroot -solid black
 		;;
-	/usr/local/plan9/bin/rio)
-		/usr/local/plan9/bin/plumber &
-		/usr/local/plan9/bin/fontsrv &
-		;;
 esac
 
 if [ -f ~/.Xmodmap ]; then
 	xmodmap ~/.Xmodmap &
+fi
+
+if [ -d /usr/local/plan9/ ]; then
+	pgrep -q fontsrv || (/usr/local/plan9/bin/fontsrv &)
+	pgrep -q plumber || (/usr/local/plan9/bin/plumber &)
 fi
 
 for tool in tpb xbanish scmpc sctd autocutsel keychain; do

@@ -63,7 +63,7 @@ alias pkg_delete="pkg_delete -Dsnap"
 alias pup='doas -n /usr/sbin/pkg_add -u'
 alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"
-alias tmux="tmux -2"
+alias tmux="tmux -u2"
 alias vi=vim
 
 src() {

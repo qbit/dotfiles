@@ -41,5 +41,17 @@
 [github]
 	user = qbit
 
+[sendemail]
+	smtpserver = mail.messagingengine.com
+	smtpuser = qbit@fastmail.com
+	smtpAuth = PLAIN
+	smtpEncryption = tls
+	smtpserverport = 587
+	cc = aaron@bolddaemon.com
+	confirm = auto
+
 [include]
 	path = ~/work/git/gitconfig
+
+[credential]
+	helper = netrc

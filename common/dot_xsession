@@ -68,6 +68,9 @@ fi
 for tool in tpb xbanish scmpc sctd autocutsel keychain; do
 	if [ -e "${LPREFIX}/bin/${tool}" ]; then
 		case "${i}" in
+			sctd)
+				${LPREFIX}/bin/sctd 3500
+				;;
 			tpb)
 				${LPREFIX}/bin/tpb -d
 				;;

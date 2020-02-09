@@ -104,78 +104,79 @@ XCalc*Cursor:				hand2
 XCalc*ShapeStyle:			rectangle
 
 XTerm*charClass:        33:48,37:48,42:48,45-47:48,58:48,63-64:48,126:48
-!XTerm*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
-XTerm*bellIsUrgent:	true
+! !XTerm*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+! XTerm*bellIsUrgent:	true
 XTerm*cursorColor:	green
 XTerm*scrollBar: 	false
-XTerm*locale:		true
-XTerm*metaSendsEscape:	true
-XTerm*eightBitInput:	false
-XTerm*saveLines:	4096
-XTerm*letterSpace:	1
-!XTerm*faceName:	Go Mono:pixelsize=12
-!XTerm*faceName		Go Regular:pixelsize=12
-!XTerm*faceName		Go Mono for Powerline:pixelsize=12
-!XTerm*faceName:	Anonymous PRO:pixelsize=12
-!XTerm*faceName:	Triplicate T4c:regular:pixelsize=13
-!XTerm*faceName:	Ubuntu Mono derivative Powerline:pixelsize=14
-XTerm*faceName:         Fantasque Sans Mono:pixelsize=14
+! XTerm*locale:		true
+! XTerm*metaSendsEscape:	true
+! XTerm*eightBitInput:	false
+! XTerm*saveLines:	4096
+! XTerm*letterSpace:	1
+! !XTerm*faceName:	Go Mono:pixelsize=12
+!XTerm*faceName		Go Regular:pixelsize=12:antialias=true
+XTerm*faceName:		Go Mono:pixelsize=12:antialias=true:autohint=false
+! XTerm*faceName		Go Mono for Powerline:pixelsize=12
+! !XTerm*faceName:	Anonymous PRO:pixelsize=12
+! !XTerm*faceName:	Triplicate T4c:regular:pixelsize=13
+! !XTerm*faceName:	Ubuntu Mono derivative Powerline:pixelsize=14
+! XTerm*faceName:         Fantasque Sans Mono:pixelsize=14
 XTerm*cursorBlink:	true
 XTerm*loginShell:	true
-XTerm.underlineURLs:	true
-XTerm.matcher.button:	1
-XTerm*inheritPixmap:	true
+! XTerm.underlineURLs:	true
+! XTerm.matcher.button:	1
+! XTerm*inheritPixmap:	true
 XTerm*dynamicColors:	true
-!XTerm*background:	#0e3250
-!XTerm*foreground:	#d9e3f2
-!XTerm*color0:		#1f2c36
-!XTerm*color1:		#d93c66
-!XTerm*color2:		#66d93c
-!XTerm*color3:		#d9af3c
-!XTerm*color4:		#3c66d9
-!XTerm*color5:		#af3cd9
-!XTerm*color6:		#3cd9af
-!XTerm*color7:		#c1ced8
-!XTerm*color8:		#36434d
-!XTerm*color9:		#e887a1
-!XTerm*color10:		#a1e887
-!XTerm*color11:		#e8ce87
-!XTerm*color12:		#87a1e8
-!XTerm*color13:		#ce87e8
-!XTerm*color14:		#87e8ce
-!XTerm*color15:		#dae7f1
-!xterm*faceName: spleen:pixelsize=16:antialias=false
-
-irc*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
-irc*bellIsUrgent:	true
-irc*cursorColor:	green
-irc*scrollBar: 	false
-irc*locale:		true
-irc*metaSendsEscape:	true
-irc*eightBitInput:	false
-irc*saveLines:	4096
-irc*letterSpace:	1
-irc*faceName:         Ubuntu Mono derivative Powerline:pixelsize=14
-irc*cursorBlink:	false
-irc*loginShell:	true
-irc.underlineURLs:	true
-irc.matcher.button:	1
-irc*inheritPixmap:	true
-Mail*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
-Mail*bellIsUrgent:	true
-Mail*cursorColor:	green
-Mail*scrollBar: 	false
-Mail*locale:		true
-Mail*metaSendsEscape:	true
-Mail*eightBitInput:	false
-Mail*saveLines:	4096
-Mail*letterSpace:	1
-Mail*faceName:         Ubuntu Mono derivative Powerline:pixelsize=14
-Mail*cursorBlink:	false
-Mail*loginShell:	true
-Mail.underlineURLs:	true
-Mail.matcher.button:	1
-Mail*inheritPixmap:	true
+XTerm*background: rgb:ff/ff/ea
+XTerm*foreground: rgb:00/00/00
+! !XTerm*color0:		#1f2c36
+! !XTerm*color1:		#d93c66
+! !XTerm*color2:		#66d93c
+! !XTerm*color3:		#d9af3c
+! !XTerm*color4:		#3c66d9
+! !XTerm*color5:		#af3cd9
+! !XTerm*color6:		#3cd9af
+! !XTerm*color7:		#c1ced8
+! !XTerm*color8:		#36434d
+! !XTerm*color9:		#e887a1
+! !XTerm*color10:		#a1e887
+! !XTerm*color11:		#e8ce87
+! !XTerm*color12:		#87a1e8
+! !XTerm*color13:		#ce87e8
+! !XTerm*color14:		#87e8ce
+! !XTerm*color15:		#dae7f1
+! !xterm*faceName: spleen:pixelsize=16:antialias=false
+! 
+! irc*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+! irc*bellIsUrgent:	true
+! irc*cursorColor:	green
+! irc*scrollBar: 	false
+! irc*locale:		true
+! irc*metaSendsEscape:	true
+! irc*eightBitInput:	false
+! irc*saveLines:	4096
+! irc*letterSpace:	1
+! irc*faceName:         Ubuntu Mono derivative Powerline:pixelsize=14
+! irc*cursorBlink:	false
+! irc*loginShell:	true
+! irc.underlineURLs:	true
+! irc.matcher.button:	1
+! irc*inheritPixmap:	true
+! Mail*charClass:	33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+! Mail*bellIsUrgent:	true
+! Mail*cursorColor:	green
+! Mail*scrollBar: 	false
+! Mail*locale:		true
+! Mail*metaSendsEscape:	true
+! Mail*eightBitInput:	false
+! Mail*saveLines:	4096
+! Mail*letterSpace:	1
+! Mail*faceName:         Ubuntu Mono derivative Powerline:pixelsize=14
+! Mail*cursorBlink:	false
+! Mail*loginShell:	true
+! Mail.underlineURLs:	true
+! Mail.matcher.button:	1
+! Mail*inheritPixmap:	true
 
 Xft.dpi:		100
 !Xft.dpi:		96

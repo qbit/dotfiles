@@ -33,10 +33,10 @@
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
-(use-package base16-theme)
+;;(use-package base16-theme)
 ;;(use-package berrys-theme)
 ;;(use-package nord-theme)
-;;(use-package moe-theme)
+(use-package moe-theme)
 
 (use-package flycheck)
 (use-package forge)
@@ -58,7 +58,6 @@
 (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu4e")
       (require 'email))
 (require 'ui)
-
 
 (load "server")
 (unless (server-running-p) (server-start))

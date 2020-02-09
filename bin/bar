@@ -88,7 +88,7 @@ battery() {
 }
 
 mail() {
-	set -A mail_list $(ls -1 ~/Maildir | grep -vi trash)
+	set -A mail_list $(ls -1 ~/Maildir | egrep -vi "gmail|trash")
 	count=0
 	for dir in "${mail_list[@]}"; do
 		echo -n "${dir}:"

@@ -24,8 +24,10 @@ nmap <C-p> :Files<cr>
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set encoding=utf8
 set t_Co=256
-set background=dark " Or 'light'
-colorscheme plain
+"set background=dark " Or 'light'
+"set background=light
+"colorscheme eink
+syntax off
 
 set nocp
 filetype plugin indent on
@@ -55,6 +57,7 @@ let g:gitgutter_realtime = 1
 
 nmap <silent> ,/ :let @/=""<CR>
 
+let g:go_fmt_command = "goimports"
 let g:vimrubocop_keymap = 0
 nmap <Leader>r :RuboCop<CR>
 

@@ -6,4 +6,4 @@
 #xbattbar -i green -o "olive drab" -I blue -O red &
 
 pkill lemonbar-xft
-while true; do ~/bin/bar; sleep 5; done | lemonbar-xft -d -f "Fantasque Sans Mono:pixelsize=14" -B "#2E3440"  -F "#D8DEE9" | sh &
+while true; do ~/bin/bar; sleep 5; done | lemonbar-xft -d -f "Fantasque Sans Mono:pixelsize=14" -B "#FFFFEA"  -F "#000000" | sh &

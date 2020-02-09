@@ -41,8 +41,8 @@ case "$wmanager" in
 		xsetroot -solid black
 		while true; do ~/bin/bar; sleep 3; done | lemonbar-xft -d \
 			-f "$(get_font '^XTerm\*face')" \
-			-B "#2E3440" \
-			-F "#D8DEE9" | sh &
+			-B "#FFFFEA" \
+			-F "#000000" | sh &
 		/usr/X11R6/bin/xcompmgr &
 		;;
 	/usr/local/bin/awesome)

@@ -17,6 +17,17 @@ nmap <Leader>bi :PlugInstall<CR>
 nmap <Leader>bu :PlugUpdate<CR>
 nmap <Leader>bc :PlugClean<CR>
 
+noremap <silent> <Leader>g :GitGutterBufferToggle<CR>
+" Open files in horizontal split
+nnoremap <silent> <Leader>S :call fzf#run({
+\   'down': '40%',
+\   'sink': 'botright split' })<CR>
+
+" Open files in vertical horizontal split
+nnoremap <silent> <Leader>v :call fzf#run({
+\   'right': winwidth('.') / 2,
+\   'sink':  'vertical botright split' })<CR>
+
 command! -bang -nargs=? -complete=dir Files
 	\ call fzf#vim#files(<q-args>, {'options': ['--no-color']}, <bang>0)
 nmap <C-p> :Files<cr>

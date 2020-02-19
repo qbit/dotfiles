@@ -3,6 +3,7 @@
 red="%{F#cd0000}"
 yellow="%{F#cdcd00}"
 white="%{F#ffffff}"
+black="%{F#000000}"
 
 wifi_ssid=$(cat <<EOF
 \$1 ~ "ieee80211" {
@@ -53,7 +54,7 @@ temp() {
 	TMP=${TMP% degC}
 	TMP=${TMP%.??}
 	if [ $TMP -ge 85 ]; then
-		printf "\\${red}%2d\\${white}°C" "${TMP}"
+		printf "\\${red}%2d\\${black}°C" "${TMP}"
 	else
 		printf "%2d°C" "${TMP}"
 	fi
@@ -78,11 +79,11 @@ battery() {
 	done
 
 	if [ $BATT -lt 3 ] && [ "${batt_info[2]}" == "0" ]; then
-		BATT_LINE="${red}${BATT_LINE}${white}"
+		BATT_LINE="${red}${BATT_LINE}${black}"
 	fi
 
 	if [ $BATT -lt 5 ] && [ "${batt_info[2]}" == "0" ]; then
-		BATT_LINE="${yellow}${BATT_LINE}${white}"
+		BATT_LINE="${yellow}${BATT_LINE}${black}"
 	fi
 	echo "${batt_info[0]}%" "$BATT_LINE"
 }

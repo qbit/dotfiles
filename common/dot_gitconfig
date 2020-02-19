@@ -3,8 +3,9 @@
 	name = Aaron Bieber
 
 [alias]
-	graph = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	graph = log --graph --color=never --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+	log = log --color=never
+	lg = log --color=never --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 	mpull = !git remote | xargs -I '{}' git pull '{}' master
 	mpush = !git remote | xargs -I '{}' git push '{}' master
 	mup = !git remote update
@@ -19,7 +20,13 @@
 [push]
 	default = simple
 [color]
-	ui = auto
+	branch = false
+	diff = true
+	interactive = false
+	log = false
+	status = false
+	ui = false
+
 [core]
 	deltaBaseCacheLimit = 1G
 [http]

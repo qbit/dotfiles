@@ -1,5 +1,11 @@
 source /usr/local/share/fish/functions/fzf-key-bindings.fish
+
+source ~/.po.fish
+
+keychain --inherit any --agents ssh -q -Q
 source ~/.keychain/(uname -n)-fish
+
+#dcolor
 
 fzf_key_bindings
 
@@ -17,6 +23,32 @@ alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"
 alias tmux="tmux -u2"
 alias vi='vim'
+
+function install_go_tools
+	set -l tools \
+		github.com/jesseduffield/lazygit \
+		github.com/jrick/ss \
+		github.com/mdempsky/gocode \
+		golang.org/x/lint/golint \
+		golang.org/x/review/git-codereview \
+		golang.org/x/tools/cmd/eg \
+		golang.org/x/tools/cmd/fiximports \
+		golang.org/x/tools/cmd/godoc \
+		golang.org/x/tools/cmd/goimports \
+		golang.org/x/tools/cmd/gorename \
+		golang.org/x/tools/cmd/gorename \
+		golang.org/x/tools/cmd/guru \
+		golang.org/x/tools/cmd/present \
+		golang.org/x/tools/cmd/stress \
+		golang.org/x/tools/gopls \
+		honnef.co/go/tools/cmd/staticcheck \
+		rsc.io/goversion \
+		suah.dev/ogvt
+
+	for t in $tools;
+		go get -v -u $t;
+	end
+end
 
 function pclean
 	find . -name \*.orig -exec rm {} \;

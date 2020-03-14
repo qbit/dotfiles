@@ -1,16 +1,41 @@
 function fish_prompt --description 'Write out the prompt'
-	set -l last_status $status
+    set -l last_status $status
     set -l normal (set_color normal)
 
-    if not set -q __fish_git_prompt_show_informative_status
-        set -g __fish_git_prompt_show_informative_status 1
+    set -g __fish_big_gits \
+        /build/projects/node		\
+        /home/qbit/dev/dotnet/coreclr	\
+        /home/qbit/dev/dotnet/corefx    \
+        /sys/arch/(machine)/compile/GENERIC    \
+        /sys/arch/(machine)/compile/GENERIC.MP    \
+        /home/qbit/dev/linux            \
+        /home/qbit/dev/mono		\
+        /usr/ports			\
+        /usr/src			\
+        /usr/xenocara
+    
+    set -g git_informative 0
+    for b in $__fish_big_gits
+        if string match -a -q -r "$b" "$PWD"
+	    set -g git_informative 1
+	    break
+	end
     end
-    if not set -q __fish_git_prompt_hide_untrackedfiles
-        set -g __fish_git_prompt_hide_untrackedfiles 1
+
+    if test $git_informative -eq 0
+        if not set -q __fish_git_prompt_show_informative_status
+            set -g __fish_git_prompt_show_informative_status 1
+        end
+        if not set -q __fish_git_prompt_hide_untrackedfiles
+            #set -g __fish_git_prompt_hide_untrackedfiles 1
+        end
+    else
+        set -g -e __fish_git_prompt_show_informative_status
+        #set -g -e __fish_git_prompt_hide_untrackedfiles
     end
 
     if not set -q __fish_git_prompt_color_branch
-        set -g __fish_git_prompt_color_branch white --bold
+        set -g __fish_git_prompt_color_branch black
     end
     if not set -q __fish_git_prompt_showupstream
         set -g __fish_git_prompt_showupstream "informative"
@@ -29,23 +54,23 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_git_prompt_char_stagedstate "●"
     end
     if not set -q __fish_git_prompt_char_dirtystate
-        set -g __fish_git_prompt_char_dirtystate "✚"
+        set -g __fish_git_prompt_char_dirtystate "+"
     end
     if not set -q __fish_git_prompt_char_untrackedfiles
         set -g __fish_git_prompt_char_untrackedfiles "…"
     end
     if not set -q __fish_git_prompt_char_invalidstate
-        set -g __fish_git_prompt_char_invalidstate "✖"
+        set -g __fish_git_prompt_char_invalidstate "x"
     end
     if not set -q __fish_git_prompt_char_cleanstate
         set -g __fish_git_prompt_char_cleanstate "✔"
     end
 
     if not set -q __fish_git_prompt_color_dirtystate
-        set -g __fish_git_prompt_color_dirtystate white --bold
+        set -g __fish_git_prompt_color_dirtystate black
     end
     if not set -q __fish_git_prompt_color_stagedstate
-        set -g __fish_git_prompt_color_stagedstate white --bold
+        set -g __fish_git_prompt_color_stagedstate black
     end
     if not set -q __fish_git_prompt_color_invalidstate
         set -g __fish_git_prompt_color_invalidstate red
@@ -54,7 +79,7 @@ function fish_prompt --description 'Write out the prompt'
         set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
     end
     if not set -q __fish_git_prompt_color_cleanstate
-        set -g __fish_git_prompt_color_cleanstate green --bold
+        set -g __fish_git_prompt_color_cleanstate green
     end
 
 
@@ -89,7 +114,7 @@ function fish_prompt --description 'Write out the prompt'
         # initialize our new variables
         if not set -q __fish_classic_git_prompt_initialized
             set -qU fish_color_user
-            or set -U fish_color_user -o green
+            or set -U fish_color_user -o black
             set -qU fish_color_host
             or set -U fish_color_host -o cyan
             set -qU fish_color_status

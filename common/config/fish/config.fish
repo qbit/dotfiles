@@ -42,6 +42,7 @@ function install_go_tools
 		golang.org/x/tools/cmd/stress \
 		golang.org/x/tools/gopls \
 		honnef.co/go/tools/cmd/staticcheck \
+		mvdan.cc/gofumpt \
 		rsc.io/goversion \
 		suah.dev/ogvt
 

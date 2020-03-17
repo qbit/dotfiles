@@ -1,6 +1,7 @@
 #!/bin/ksh
 
 session='pcvsup'
+IDX=1
 counter=0
 width=$(stty -e | awk  '$0 ~ "columns" {print $6}')
 

@@ -2,6 +2,9 @@
 
 ${DEBUG:-}
 
+
+[[ -x ~/.po ]] && . ~/.po
+
 [[ -x /etc/ksh.kshrc ]] && . /etc/ksh.kshrc
 
 # shellcheck source=/home/qbit/.ksh_paths

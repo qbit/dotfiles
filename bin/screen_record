@@ -6,4 +6,5 @@
 #	-video_size 1920x1080 \
 #	-f x11grab \
 #	-i :0.0 /tmp/output.mkv
-ffmpeg -f sndio -i snd/0.mon -f x11grab -r 30 -s 1920x1080 -i :0 -c:v libx264 -preset ultrafast -acodec copy /tmp/output.mkv
+#ffmpeg -f sndio -i snd/0.mon -f x11grab -r 30 -s 1920x1080 -i :0 -c:v libx264 -preset ultrafast -acodec copy /tmp/output.mkv
+ffmpeg -f sndio -i snd/0.mon -f x11grab -r 30 -s 1920x1080 -i :0 -vcodec libvpx -acodec libvorbis /tmp/output.webm

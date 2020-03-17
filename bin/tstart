@@ -4,18 +4,19 @@ set -eu
 
 SNAME="Main"
 SSES="-s ${SNAME}"
+IDX=1
 
 if tmux ls | grep -q "^${SNAME}:"; then
 	tmux at -t "${SNAME}"
 else
 	tmux -2 new-session -d $SSES
 	if [ -e ~/.tmux.windows ]; then
-		count=0
+		count=${IDX}
 		for n in $(cat ~/.tmux.windows); do
 			if [ $n == "_" ]; then
 				tmux new-window
 			else
-				if [ $count -eq 0 ]; then
+				if [ $count -eq ${IDX} ]; then
 					tmux rename-window "${n}"
 				else
 					tmux new-window -n "${n}"
@@ -30,6 +31,6 @@ else
 		tmux new-window -n "Music"
 		tmux new-window
 	fi
-	tmux select-window -t0
+	tmux select-window -t${IDX}
 	tmux -2 attach-session -t $SNAME
 fi

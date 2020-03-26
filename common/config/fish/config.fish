@@ -1,9 +1,15 @@
-source /usr/local/share/fish/functions/fzf-key-bindings.fish
+function ifsource
+	if test -f $argv
+		source $argv
+	end
+end
 
-source ~/.po.fish
+ifsource /usr/local/share/taskwarrior/scripts/fish/task.fish
+ifsource /usr/local/share/fish/functions/fzf-key-bindings.fish
+ifsource ~/.po.fish
 
 keychain --inherit any --agents ssh -q -Q
-source ~/.keychain/(uname -n)-fish
+ifsource ~/.keychain/(uname -n)-fish
 
 #dcolor
 

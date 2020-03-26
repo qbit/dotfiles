@@ -35,6 +35,7 @@ function install_go_tools
 		github.com/jesseduffield/lazygit \
 		github.com/jrick/ss \
 		github.com/mdempsky/gocode \
+		github.com/rjkroege/edwood \
 		golang.org/x/lint/golint \
 		golang.org/x/review/git-codereview \
 		golang.org/x/tools/cmd/eg \

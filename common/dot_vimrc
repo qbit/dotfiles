@@ -78,8 +78,8 @@ nmap <leader>2 :set list!<CR>
 nmap <leader>3 :set nu!<CR>
 nmap <leader>4 :set paste!<CR>
 
-au BufNewFile,BufRead *.md set noai noshowmatch
-au BufNewFile,BufRead *.md setlocal spell spelllang=en_us
+au BufNewFile,BufRead *.md set noai noshowmatch tw=79
+au BufNewFile,BufRead *.md setlocal spell spelllang=en_us tw=79
 
 " text & mutt files
 au BufNewFile,BufRead /tmp/*mutt*,/tmp/cvs*,*.txt set noai noshowmatch tw=79

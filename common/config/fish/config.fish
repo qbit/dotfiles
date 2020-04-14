@@ -30,6 +30,15 @@ alias sbcl="rlwrap sbcl"
 alias tmux="tmux -u2"
 alias vi='vim'
 
+function mbuild
+	set -l pkg (make show=PKGSTEM)
+	make clean=all
+	make && po -title "Port build complete!" \
+		-body "$pkg build was successful!" || \
+		po -title  "Port build failed" \
+		-body "$pkg build failed!"
+end
+
 function install_go_tools
 	set -l tools \
 		github.com/jesseduffield/lazygit \

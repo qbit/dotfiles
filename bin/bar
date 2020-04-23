@@ -97,11 +97,23 @@ mail() {
 			awk '{ if ($1 > 0) { printf $1 } else { printf "0" }}'
 		count=$((count+1))
 		if [ $count -ne ${#mail_list[@]} ]; then
-			echo -n ", "
+			echo -n ","
 		fi
 	done
 }
 
-printf "%%{l} %s | %s | %%{A:apm -A:}%%{A2:apm -L:}%%{A3:apm -H:}%s%%{A}%%{A}%%{A} %%{r} %s | %s%% | %s | @%s " \
+vmm() {
+	if pgrep -q vmd; then
+		set -A running_vms $(vmctl status | grep running | awk '{print $NF"("$5")"}')
+		echo -n "VMs: "
+		for vm in "${running_vms[@]}"; do
+			echo -n "${vm}"
+		done
+	else
+		echo -n ""
+	fi
+}
+
+printf "%%{l} %s | %s | %%{A:apm -A:}%%{A2:apm -L:}%%{A3:apm -H:}%s%%{A}%%{A}%%{A} %%{r} %s | %s | %s%% | %s | @%s " \
 	"$(battery)" "$(temp)" "$(hz)" \
-	"$(mail)" "$(wifi)" "$(date '+%Y-%m-%d %H:%M')" "$(beat)"
+	"$(vmm)" "$(mail)" "$(wifi)" "$(date '+%Y-%m-%d %H:%M')" "$(beat)"

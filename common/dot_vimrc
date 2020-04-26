@@ -1,11 +1,11 @@
 call plug#begin('~/.vim/plugged')
 
+"Plug 'andreypopp/vim-colors-plain'
+"Plug 'arcticicestudio/nord-vim'
+"Plug 'chriskempson/base16-vim'
+"Plug 'https://bitbucket.org/kisom/eink.vim.git'
 Plug 'airblade/vim-gitgutter'
-Plug 'andreypopp/vim-colors-plain'
-Plug 'arcticicestudio/nord-vim'
-Plug 'chriskempson/base16-vim'
 Plug 'fatih/vim-go'
-Plug 'https://bitbucket.org/kisom/eink.vim.git'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'ngmy/vim-rubocop'

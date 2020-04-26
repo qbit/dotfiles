@@ -107,7 +107,7 @@ vmm() {
 		set -A running_vms $(vmctl status | grep running | awk '{print $NF"("$5")"}')
 		echo -n "VMs: "
 		for vm in "${running_vms[@]}"; do
-			echo -n "${vm}"
+			echo -n "${vm} "
 		done
 	else
 		echo -n ""

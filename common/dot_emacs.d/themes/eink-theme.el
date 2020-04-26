@@ -39,7 +39,7 @@
 
 (let ((fg "#111111")
       (fg-table "#222291")
-      (bg "#fffff8")
+      (bg "#ffffea")
       (bg-light "#ddddd8")
       (fg-light "#ddddd8")
       (bg-highlight "#FFF1AA")

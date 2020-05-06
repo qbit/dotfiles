@@ -1,4 +1,11 @@
+;;; init.el -- My emacs config
+;;; Commentary:
+
+;;; Code:
 (require 'package)
+
+(setq tls-checktrust t)
+(setq gnutls-verify-error t)
 
 (setenv "PATH" (concat (getenv "PATH") ":~/go/bin:~/ruby_bin/bin"))
 (setenv "GEM_HOME" (expand-file-name "~/ruby_bin"))
@@ -91,6 +98,7 @@
 
 ;; ----------- Packages -------------
 
+(use-package keychain-environment)
 (use-package all-the-icons
   :init
   (if (not
@@ -98,6 +106,7 @@
       (all-the-icons-install-fonts "t")))
 (use-package all-the-icons-ivy)
 (use-package counsel)
+(use-package smex)
 (use-package ivy
   :hook (after-init . ivy-mode)
   :bind
@@ -291,7 +300,7 @@
 				 entry (file+olp+datetree "~/org/journal.org")
 				 "* %?\nEntered on %U\n  %i\n  %a" :prepend t))))
 (use-package org-roam
-      :hook 
+      :hook
       (after-init . org-roam-mode)
       :custom
       (org-roam-directory "~/org")
@@ -308,6 +317,9 @@
 	scpaste-scp-destination "suah.dev:/var/www/htdocs/p"))
 
 (use-package fish-mode)
+
+(use-package nix-mode
+  :mode "\\.nix\\'")
 
 (load "server")
 (unless (server-running-p) (server-start))

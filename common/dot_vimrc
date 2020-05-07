@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'arcticicestudio/nord-vim'
 "Plug 'chriskempson/base16-vim'
 "Plug 'https://bitbucket.org/kisom/eink.vim.git'
+Plug 'LnL7/vim-nix'
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'junegunn/fzf'

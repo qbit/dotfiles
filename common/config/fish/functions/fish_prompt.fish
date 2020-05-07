@@ -4,12 +4,13 @@ function fish_prompt --description 'Write out the prompt'
 
     set -g __fish_big_gits \
         /build/projects/node		\
-        /home/qbit/dev/dotnet/coreclr	\
-        /home/qbit/dev/dotnet/corefx    \
+        /home/qbit/src/dotnet/coreclr	\
+        /home/qbit/src/dotnet/corefx    \
         /sys/arch/(machine)/compile/GENERIC    \
         /sys/arch/(machine)/compile/GENERIC.MP    \
-        /home/qbit/dev/linux            \
-        /home/qbit/dev/mono		\
+        /home/qbit/src/linux            \
+        /home/qbit/src/mono		\
+        /home/qbit/src/nixpkgs		\
         /usr/ports			\
         /usr/src			\
         /usr/xenocara

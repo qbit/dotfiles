@@ -331,15 +331,44 @@
 		(auto-fill-mode 1)))
   :bind
   ("C-c c" . org-capture)
+  ("C-c p" . org-publish)
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda)
   ("C-c b" . org-iswitchb)
   :config
+  (require 'ox-publish)
+  (require 'org-tempo)
+  (setq org-publish-project-alist
+	'(("notes" :components ("org-notes" "notes-static"))
+	  ("org-notes"
+	   :auto-preamble t
+	   :auto-sitemap t
+	   :headline-levels 4
+	   :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
+	   :publishing-function org-html-publish-to-html
+	   :recursive t
+	   :section-numbers nil
+	   :html-head "<link rel=\"stylesheet\" href=\"https://suah.dev/p/css/stylesheet.css\" type=\"text/css\" />"
+	   :style-include-default nil
+	   :sitemap-filename "index.org"
+	   :sitemap-title "Notes"
+	   :with-title t
+           :author-info nil
+           :creator-info nil
+	   :base-directory "~/org/notes")
+	  ("notes-static"
+	   :base-directory "~/org/notes"
+	   :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
+	   :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg"
+	   :recursive t
+	   :publishing-function org-publish-attachment)))
   (setq org-directory "~/org"
-	org-agenda-files (file-expand-wildcards "~/org/*.org")
-	org-journal-dir "~/org/journal/"
+	;; Look for agenda items in _all_ files.
+	org-agenda-files '("~/org")
 	org-log-done 'time
+	;; make use of the SCHEDULED,DEADLINE lines in exports.
 	org-export-with-planning t
+	org-export-with-title t
 	org-agenda-skip-scheduled-if-deadline-is-shown t
 	org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")
 			    (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")

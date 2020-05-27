@@ -1,5 +1,12 @@
 #!/bin/sh
 
+# Make ~/.cache a temp dir
+TMP_CACHE=$(mktemp -d /tmp/cache.XXXXXXXXXX)
+ln -sf $TMP_CACHE ~/.cache
+
+# Disable coredumps
+ulimit -Sc 0
+
 cat /dev/null > ~/.xsession-errors
 
 . ~/.ksh_paths

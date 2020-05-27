@@ -1,4 +1,4 @@
-export PLAN9=/Users/qbit/dev/plan9port
+export PLAN9=~/src/plan9port
 export PATH=$PATH:$HOME/go/bin:$PLAN9/bin
 export GEM_HOME=~/ruby_bin
 
@@ -8,6 +8,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 autoload -Uz compinit && compinit
 autoload -Uz vcs_info
 autoload -Uz colors && colors
+[ -n "$BASH" ] && complete -F _fzf_complete_doge -o default -o bashdefault doge
 
 export GPG_AGENT_INFO="~/.gnupg/S.gpg-agent:$(pgrep gpg-agent):1"
 /usr/local/bin/keychain --inherit any --agents ssh,gpg -q -Q

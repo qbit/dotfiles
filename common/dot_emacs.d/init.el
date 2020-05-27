@@ -323,6 +323,7 @@
       (expand-file-name "~/Docs/plantuml.jar"))
 
 (use-package org
+  :ensure org-plus-contrib
   :hook
   (org-mode . (lambda ()
 		(turn-on-flyspell)

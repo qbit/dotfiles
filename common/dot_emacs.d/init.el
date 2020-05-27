@@ -32,6 +32,82 @@
 (require 'org-install)
 (require 'org-habit)
 
+(if (file-directory-p "/usr/local/share/emacs/site-lisp")
+    (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/"))
+
+ ;; Don't bother configuring mail if we don't have mu4e installed
+(if (file-exists-p "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
+    (progn
+      (load "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
+      (require 'mu4e)
+      (require 'smtpmail)
+      (require 'org-mu4e)
+      (setq mu4e-maildir "~/Maildir/fastmail"
+	    mail-user-agent 'mu4e-user-agent
+	    message-kill-buffer-on-exit t
+
+	    mu4e-drafts-folder "/Drafts"
+	    mu4e-sent-folder   "/Sent Items"
+	    mu4e-trash-folder  "/Trash"
+
+	    mu4e-maildir-shortcuts
+	    '( ("/INBOX"        . ?i)
+	       ("/Archive"      . ?a)
+	       ("/Sent Items"   . ?s))
+
+	    org-mu4e-link-query-in-headers-mode nil
+
+	    mu4e-attachment-dir
+	    (lambda (fname mtype)
+	      (cond
+	       ((and fname (string-match "\\.diff$" fname))  "~/patches")
+	       ((and fname (string-match "\\.patch$" fname))  "~/patches")
+	       ((and fname (string-match "\\.diff.gz$" fname))  "~/patches")
+	       (t "~/Downloads")))
+
+	    mu4e-bookmarks
+	    `( ,(make-mu4e-bookmark
+		 :name  "Unread messages"
+		 :query "flag:unread AND NOT flag:trashed AND NOT list:ports-changes.openbsd.org AND NOT list:source-changes.openbsd.org"
+		 :key ?u)
+	       ,(make-mu4e-bookmark
+		 :name  "Today's messages"
+		 :query (concat
+			 "date:today..now"
+			 " AND NOT list:ports-changes.openbsd.org"
+			 " AND NOT list:source-changes.openbsd.org")
+		 :key ?d)
+	       ,(make-mu4e-bookmark
+		 :name  "Last 7 days"
+		 :query "date:7d..now"
+		 :key ?w)
+	       ,(make-mu4e-bookmark
+		 :name  "Hackers"
+		 :query "list:hackers.openbsd.org"
+		 :key ?h)
+	       ,(make-mu4e-bookmark
+		 :name  "Tech"
+		 :query "list:tech.openbsd.org"
+		 :key ?t)
+	       ,(make-mu4e-bookmark
+		 :name  "Ports"
+		 :query "list:ports.openbsd.org"
+		 :key ?p))
+
+	    user-mail-address     "aaron@bolddaemon.com"
+	    user-full-name        "Aaron Bieber"
+	    mu4e-get-mail-command "mbsync fastmail"
+
+	    message-send-mail-function 'smtpmail-send-it
+	    smtpmail-smtp-user "qbit@fastmail.com"
+	    smtpmail-smtp-server "smtp.fastmail.com"
+	    smtpmail-smtp-service 465
+	    smtpmail-default-smtp-server "smtp.fastmail.com"
+	    smtpmail-stream-type 'ssl
+
+	    mu4e-context-policy 'pick-first
+	    mu4e-compose-context-policy nil)))
+
 ;; Prevent custom file from cluttering SCM
 (setq custom-file (make-temp-file ""))
 

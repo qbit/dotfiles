@@ -127,7 +127,7 @@
 
 ;; ----------- UI ----------
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'eink 1)
+;;(load-theme 'eink 1)
 
 (setq-default fill-column 80)
 (add-hook 'text-mode-hook (lambda ()
@@ -173,11 +173,14 @@
        auto-mode-alist))
 
 (setq auth-sources
-      '((:source "~/.authinfo.gpg")))
+      '((:source "~/.netrc")))
 
 
 ;; ----------- Packages -------------
 
+(use-package parchment-theme
+  :ensure t
+  :config (load-theme 'parchment t))
 (use-package keychain-environment)
 (use-package all-the-icons
   :init

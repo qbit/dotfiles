@@ -122,6 +122,9 @@
     (after term-kill-buffer-on-exit activate)
   (kill-buffer))
 
+;; Remember where we were previously
+(desktop-save-mode)
+
 ;; ----------- UI ----------
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'eink 1)

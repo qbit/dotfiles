@@ -11,6 +11,7 @@
 (setenv "GEM_HOME" (expand-file-name "~/ruby_bin"))
 (setenv "GEM_BIN" (expand-file-name "~/ruby_bin/bin"))
 (setenv "BUNDLE_PATH" (expand-file-name "~/ruby_bin"))
+(setenv "JAVA_HOME" "/usr/local/jdk-11/")
 (setq exec-path (append exec-path '("~/go/bin:~/ruby_bin/bin")))
 
 ;;(setq package-enable-at-startup nil)

@@ -26,6 +26,7 @@ alias mutt='stty discard undef; neomutt'
 alias pass="gopass"
 alias pup='doas -n /usr/sbin/pkg_add -u'
 alias rustc='rustc --color=never'
+alias cabal='env TMPDIR=/build/cabal/build/ cabal'
 alias sbcl="rlwrap sbcl"
 alias tmux="tmux -u2"
 alias vi='vim'

@@ -270,15 +270,11 @@
   :after treemacs magit
   :ensure t)
 
-(use-package flycheck
-  :hook
-  (after-init . global-flycheck-mode))
-
 (use-package company
   :config
   (setq company-tooltip-limit 20
 	company-minimum-prefix-length 1
-	company-idle-delay 0
+	company-idle-delay .3
 	company-echo-delay 0)
   :hook (prog-mode . company-mode))
 
@@ -299,6 +295,10 @@
 (use-package go-mode
   :bind
   ("C-c t" . go-add-tags))
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 (use-package go-eldoc
   :hook
   (go-mode . go-eldoc-setup))

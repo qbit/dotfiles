@@ -114,7 +114,7 @@
 ;; Y is sufficient
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; I need all the spelling help I can get
+;; I need all the spelling hep I can get
 ;; (setq ispell-program-name "aspell")
 
 ;; Kill terminal buffers on exit so I din't have to kill the buffer after I exit.

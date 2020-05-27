@@ -1,5 +1,5 @@
 sticky yes
-gap 18 0 0 0
+gap 18 1 1 1
 snapdist 10
 
 ignore dock

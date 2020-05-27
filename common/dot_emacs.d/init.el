@@ -310,6 +310,11 @@
 	 (ruby-mode . lsp))
   :commands (lsp lsp-deferred))
 
+;; this blows away 'C-c !' in in org :(
+;;(use-package flycheck
+;;  :hook
+;;  (after-init . global-flycheck-mode))
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '(;; other Babel languages

@@ -13,7 +13,9 @@ ifsource ~/.keychain/(uname -n)-fish
 
 #dcolor
 
-fzf_key_bindings
+if test -f /usr/local/share/fish/functions/fzf-key-bindings.fish
+	fzf_key_bindings
+end
 
 set -Ux fish_greeting ""
 

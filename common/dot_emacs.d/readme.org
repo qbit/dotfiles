@@ -1,0 +1,448 @@
+#+TITLE: Emacs Configuration
+* Literate emacs configuration
+
+I can never rembember what various configs do. Jumping on this literate emacs
+config to see if it helps!
+
+** Set some ENV vars
+
+   These are needed to make emacs aware of various things (like Go binaries,
+   etc). I have them here because sometimes when emacs is launched from ~rofi~
+   or similar it doesn't have the same ENV as it does when launching from the
+   shell.
+
+#+begin_src emacs-lisp
+(setenv "PATH" (concat (getenv "PATH") ":~/go/bin:~/ruby_bin/bin"))
+(setenv "GEM_HOME" (expand-file-name "~/ruby_bin"))
+(setenv "GEM_BIN" (expand-file-name "~/ruby_bin/bin"))
+(setenv "BUNDLE_PATH" (expand-file-name "~/ruby_bin"))
+(setenv "JAVA_HOME" "/usr/local/jdk-11/")
+(setq exec-path (append exec-path '("~/go/bin:~/ruby_bin/bin")))
+#+end_src
+
+
+** Start the emacs server
+
+   Starting as a server lets me connect externally to do things like change
+   themes, save buffers via cron and other such dumbary!
+
+   #+begin_src emacs-lisp
+   (load "server")
+   (unless (server-running-p) (server-start))
+   #+end_src
+
+** Interface and Behavior modifications
+*** Interface
+
+Use 80 columns, this helps keep things readable when windows are split
+#+begin_src emacs-lisp
+  (setq whitespace-style '(trailing lines space-before-tab)
+	whitespace-line-column 80)
+  (setq-default fill-column 80)
+#+end_src
+
+Add in some org-mode helpers:
+
+- ~org-tempo~ lets me easily add src blocks with ~C-c C-,~.
+- ~org-habit~ lets me keep track of TODOs and other things.
+#+begin_src emacs-lisp
+  (require 'org-tempo)
+  (require 'org-habit)
+#+end_src
+
+I know I am in emacs, don't need to see the startup screen.
+#+begin_src emacs-lisp
+  (setq inhibit-startup-screen t)
+#+end_src
+
+If we are on OpenBSD, fill the scratch buffer with fortune \o/.
+
+#+begin_src emacs-lisp
+  (if (file-executable-p "/usr/games/fortune")
+      (setq initial-scratch-message
+	    (concat
+	     (shell-command-to-string "fortune | sed -e 's/^/;; /g'")
+	     "\n\n")))
+#+end_src
+
+**** Use UTF8 where ever possible
+#+begin_src emacs-lisp
+  (prefer-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+#+end_src
+
+**** Change various UI bits
+#+begin_src emacs-lisp
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (column-number-mode +1)
+  (global-font-lock-mode 1)
+
+  ;; Hopefully this helps with the OpenBSD org-capture lockups
+  ;;(setq x-select-enable-clipboard-manager nil)
+  ;;(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+#+end_src
+
+*** Behavior
+
+   Switch various defaults to be more comfortable for myself.
+
+   #+begin_src emacs-lisp
+     (fset 'yes-or-no-p 'y-or-n-p)
+     (show-paren-mode t)
+     (desktop-save-mode)
+     (setq backup-directory-alist '(("." . "~/.emacs-saves")))
+     (setq auto-mode-alist
+	   (append
+	    (list
+	     '("\\.gpg$" . sensitive-minor-mode)
+	     )
+	    auto-mode-alist))
+     (setq auth-sources
+	   '((:source "~/.netrc")))
+
+   #+end_src
+
+   Use spelling and auto-fill when we are in text mode.
+
+   #+begin_src emacs-lisp
+     (add-hook 'text-mode-hook (lambda ()
+				 (auto-fill-mode 1)
+				 (turn-on-flyspell)))
+   #+end_src
+
+** Include ports site-lisp
+
+   On OpenBSD various packages (mu, git.. etc) install elisp things into a global
+   directory, this makes sure we include it.
+
+   #+begin_src emacs-lisp
+     (if (file-directory-p "/usr/local/share/emacs/site-lisp")
+	 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/"))
+   #+end_src
+
+** Unset the customization file
+
+   The customization file mostly just causes churn in the SCM so we disable it
+   here.
+   #+begin_src emacs-lisp
+     (setq custom-file (make-temp-file ""))
+   #+end_src
+
+* Packages
+** parchment-theme
+   This is a nice theme that resembles acme in plan9. Minimal.
+
+#+begin_src emacs-lisp
+  (use-package parchment-theme
+    :ensure t
+    :config (load-theme 'parchment t))
+#+end_src
+
+** keychain-environment
+
+   I make heavy use of ~ssh-agent~ this lets emacs pickup / use the existing
+   agents I have running.
+
+#+begin_src emacs-lisp
+  (use-package keychain-environment)
+#+end_src
+
+** ivy
+
+~ivy~ is fantastic. It gives me nice visual search for buffers,
+code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
+~counsel~ (extends ivy into various areas like the help stuff).
+
+#+begin_src emacs-lisp
+  (use-package counsel)
+  (use-package smex)
+  (use-package ivy
+    :hook (after-init . ivy-mode)
+    :bind
+    ("C-s"     . swiper)
+    ("M-x"     . counsel-M-x)
+    ("C-x C-f" . counsel-find-file)
+    ("C-x b"   . ivy-switch-buffer)
+    ("C-c n"   . counsel-fzf))
+#+end_src
+
+** magit
+
+   Magit is a awesome. Not sure what else to say about it. :P
+
+   #+begin_src emacs-lisp
+     (use-package magit
+       :bind ("C-c m" . magit-status)
+       :init
+       (setq magit-completing-read-function 'ivy-completing-read))
+   #+end_src
+
+** flycheck
+
+   ~flycheck~ does automatic syntax checking for most things
+
+   #+begin_src
+   (use-package flycheck
+     :ensure t
+     :init (global-flycheck-mode))
+  #+end_src
+
+   - [2020-05-29 Fri] Unfortunately it clobbers the "C-c !" prefix, so we need
+     to add this to get it back:
+
+#+begin_src
+   (define-key flycheck-mode-map (kbd "C-c ! !") 'org-time-stamp-inactive)
+#+end_src
+
+** Go configuration
+
+*** go-add-tags
+
+    This lets one select a ~struct~ or similar and auto add the ~`json:"NAME"`~ bits.
+
+   #+begin_src emacs-lisp
+     (use-package go-add-tags
+       :bind
+       ("C-c t" . go-add-tags))
+   #+end_src
+
+*** go-mode
+
+    This allows for things like ~gofmt~ and auto adding / removing of imports.
+
+   #+begin_src emacs-lisp
+     (use-package go-mode
+       :bind
+       ("C-c t" . go-add-tags))
+     (defun lsp-go-install-save-hooks ()
+       (add-hook 'before-save-hook #'lsp-format-buffer t t)
+       (add-hook 'before-save-hook #'lsp-organize-imports t t))
+   #+end_src
+
+*** go-eldoc
+
+    This extends eldoc to be able to speak Go - quite handy for quickly looking
+    up what things do.
+
+   #+begin_src emacs-lisp
+     (use-package go-eldoc
+       :hook
+       (go-mode . go-eldoc-setup))
+   #+end_src
+
+*** yasnippet
+
+    Some go tools use this.
+
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :commands yas-minor-mode
+    :hook (go-mode . yas-minor-mode))
+#+end_src
+
+** lsp-mode
+
+   ~lsp-mode~ supports language servers for various things. I pretty much only
+   care about Go and Ruby.
+
+   #+begin_src emacs-lisp
+     (use-package lsp-mode
+       :hook ((go-mode    . lsp-deferred)
+	      (ruby-mode . lsp))
+       :commands (lsp lsp-deferred))
+   #+end_src
+
+** company and friends
+
+   ~company~ allows for auto-completion of various things. It can interface with ~lsp-mode~ to complete
+   things like Go.
+
+   #+begin_src emacs-lisp
+     (use-package company
+       :config
+       (setq company-tooltip-limit 20
+	     company-minimum-prefix-length 1
+	     company-idle-delay .3
+	     company-echo-delay 0)
+       :hook (prog-mode . company-mode))
+
+     (use-package company-lsp
+       :ensure t
+       :commands company-lsp)
+   #+end_src
+
+** gitgutter
+   This gives me a nice in-ui way to see modifications and what not.
+
+#+begin_src emacs-lisp
+  (use-package git-gutter
+    :hook
+    (after-init . global-git-gutter-mode))
+#+end_src
+
+** nix
+
+   Add support for nix files. I don't use nix much atm, but it was recently
+   ported to OpenBSD, so I am hopeful I can start using it there more!
+
+#+begin_src emacs-lisp
+  (use-package nix-mode
+    :mode "\\.nix\\'")
+#+end_src
+
+** shell
+
+   I don't often use the shell from emacs, but when I do these bits make it
+   easier for me to treat it like a regular shell.
+
+#+begin_src emacs-lisp
+  (use-package fish-mode)
+
+  ;; Kill terminal buffers on exit so I din't have to kill the buffer after I exit.
+  (defadvice term-handle-exit
+      (after term-kill-buffer-on-exit activate)
+    (kill-buffer))
+#+end_src
+
+* Mail
+
+~mu~ has been the best mail client for me on emacs.
+
+** General mail configuration
+
+#+begin_src emacs-lisp
+  (require 'smtpmail)
+  (setq
+   user-mail-address              "aaron@bolddaemon.com"
+   user-full-name                 "Aaron Bieber"
+   message-send-mail-function     'smtpmail-send-it
+   message-kill-buffer-on-exit    t
+   smtpmail-smtp-user             "qbit@fastmail.com"
+   smtpmail-smtp-server           "smtp.fastmail.com"
+   smtpmail-smtp-service          465
+   smtpmail-default-smtp-server   "smtp.fastmail.com"
+   smtpmail-stream-type           'ssl)
+#+end_src
+
+** mu4e specific configs
+#+begin_src emacs-lisp
+  (if (file-exists-p "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
+      (progn
+	(load "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
+	(require 'mu4e)
+
+	(require 'org-mu4e)
+	(setq mu4e-maildir "~/Maildir/fastmail"
+	      mail-user-agent 'mu4e-user-agent
+	      mu4e-get-mail-command "mbsync fastmail"
+	      mu4e-compose-context-policy nil
+	      mu4e-context-policy 'pick-first
+	      mu4e-drafts-folder "/Drafts"
+	      mu4e-sent-folder   "/Sent Items"
+	      mu4e-trash-folder  "/Trash"
+	      mu4e-maildir-shortcuts
+	      '( ("/INBOX"        . ?i)
+		 ("/Archive"      . ?a)
+		 ("/Sent Items"   . ?s))
+	      org-mu4e-link-query-in-headers-mode nil
+	      mu4e-attachment-dir
+	      (lambda (fname mtype)
+		(cond
+		 ((and fname (string-match "\\.diff$" fname))  "~/patches")
+		 ((and fname (string-match "\\.patch$" fname))  "~/patches")
+		 ((and fname (string-match "\\.diff.gz$" fname))  "~/patches")
+		 (t "~/Downloads")))
+	      mu4e-bookmarks
+	      `( ,(make-mu4e-bookmark
+		   :name  "Unread messages"
+		   :query "flag:unread AND NOT flag:trashed AND NOT list:ports-changes.openbsd.org AND NOT list:source-changes.openbsd.org"
+		   :key ?u)
+		 ,(make-mu4e-bookmark
+		   :name  "Today's messages"
+		   :query (concat
+			   "date:today..now"
+			   " AND NOT list:ports-changes.openbsd.org"
+			   " AND NOT list:source-changes.openbsd.org")
+		   :key ?d)
+		 ,(make-mu4e-bookmark
+		   :name  "Last 7 days"
+		   :query "date:7d..now"
+		   :key ?w)
+		 ,(make-mu4e-bookmark
+		   :name  "Hackers"
+		   :query "list:hackers.openbsd.org"
+		   :key ?h)
+		 ,(make-mu4e-bookmark
+		   :name  "Tech"
+		   :query "list:tech.openbsd.org"
+		   :key ?t)
+		 ,(make-mu4e-bookmark
+		   :name  "Ports"
+		   :query "list:ports.openbsd.org"
+		   :key ?p)))))
+#+end_src
+
+* org-mode
+
+  Oh ~org-mode~. It's the reason I started using emacs.. and it's the reason I
+  can't quit!
+
+  I publish some of my notes [[https://suah.dev/p][on suah.dev/p]].
+
+#+begin_src emacs-lisp
+  (use-package org
+    :ensure org-plus-contrib
+    :hook
+    (org-mode . (lambda ()
+		  (turn-on-flyspell)
+		  (auto-revert-mode)
+		  (auto-fill-mode 1)))
+    :bind
+    ("C-c c" . org-capture)
+    ("C-c p" . org-publish)
+    ("C-c l" . org-store-link)
+    ("C-c a" . org-agenda)
+    ("C-c b" . org-iswitchb)
+    :config
+    (setq org-directory "~/org"
+	  org-agenda-files '("~/org")
+	  org-log-done 'time
+	  org-src-tab-acts-natively t
+	  org-journal-dir "~/org/journal/"
+	  org-agenda-skip-scheduled-if-deadline-is-shown t
+	  org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")
+			      (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+			      (sequence "|" "CANCELED(c)")))
+     (setq org-publish-project-alist
+       '(("notes" :components ("org-notes" "notes-static"))
+	    ("org-notes"
+	     :auto-preamble t
+	     :auto-sitemap t
+	     :headline-levels 4
+	     :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
+	     :publishing-function org-html-publish-to-html
+	     :recursive t
+	     :section-numbers nil
+	     :html-head "<link rel=\"stylesheet\" href=\"https://suah.dev/p/css/stylesheet.css\" type=\"text/css\" />"
+	     :html-link-home "http://suah.dev/p/"
+	     :html-link-up "../"
+	     :style-include-default nil
+	     :sitemap-filename "index.org"
+	     :sitemap-title "Notes"
+	     :with-title t
+	     :author-info nil
+	     :creator-info nil
+	     :base-directory "~/org/notes")
+	    ("notes-static"
+	     :base-directory "~/org/notes"
+	     :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
+	     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg"
+	     :recursive t
+	     :publishing-function org-publish-attachment)
+	     )))
+#+end_src

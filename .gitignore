@@ -41,3 +41,5 @@ xmonad.errors
 xmonad.hi
 xmonad.o
 /common/dot_emacs.d/readme.el
+/common/dot_gnupg/trustlist.txt
+/common/dot_gnupg/.#*

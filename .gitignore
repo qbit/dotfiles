@@ -40,3 +40,4 @@ xmonad-x86_64-openbsd
 xmonad.errors
 xmonad.hi
 xmonad.o
+/common/dot_emacs.d/readme.el

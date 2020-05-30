@@ -31,7 +31,7 @@ config to see if it helps!
    (unless (server-running-p) (server-start))
    #+end_src
 
-** Interface and Behavior modifications
+** Interface and Behavior
 *** Interface
 
 Use 80 columns, this helps keep things readable when windows are split
@@ -39,15 +39,6 @@ Use 80 columns, this helps keep things readable when windows are split
   (setq whitespace-style '(trailing lines space-before-tab)
 	whitespace-line-column 80)
   (setq-default fill-column 80)
-#+end_src
-
-Add in some org-mode helpers:
-
-- ~org-tempo~ lets me easily add src blocks with ~C-c C-,~.
-- ~org-habit~ lets me keep track of TODOs and other things.
-#+begin_src emacs-lisp
-  (require 'org-tempo)
-  (require 'org-habit)
 #+end_src
 
 I know I am in emacs, don't need to see the startup screen.
@@ -124,7 +115,7 @@ If we are on OpenBSD, fill the scratch buffer with fortune \o/.
 	 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/"))
    #+end_src
 
-** Unset the customization file
+** Unset custom-file
 
    The customization file mostly just causes churn in the SCM so we disable it
    here.
@@ -445,4 +436,15 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 	     :recursive t
 	     :publishing-function org-publish-attachment)
 	     )))
+#+end_src
+
+Add in some org-mode helpers:
+
+- ~org-tempo~ lets me easily add src blocks with ~C-c C-,~.
+- ~org-habit~ lets me keep track of TODOs and other things.
+#+begin_src emacs-lisp
+  (require 'org-tempo)
+  (require 'org-habit)
+#+end_src
+
 #+end_src

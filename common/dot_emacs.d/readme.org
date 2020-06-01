@@ -94,7 +94,6 @@ If we are on OpenBSD, fill the scratch buffer with fortune \o/.
 	    auto-mode-alist))
      (setq auth-sources
 	   '((:source "~/.netrc")))
-
    #+end_src
 
    Use spelling and auto-fill when we are in text mode.
@@ -417,8 +416,9 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 			      (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
 			      (sequence "|" "CANCELED(c)")))
      (setq org-publish-project-alist
-       '(("notes" :components ("org-notes" "notes-static"))
-	    ("org-notes"
+       '(
+	 ("notes" :components ("org-notes" "notes-static"))
+	 ("org-notes"
 	     :auto-preamble t
 	     :auto-sitemap t
 	     :headline-levels 4
@@ -436,13 +436,31 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 	     :author-info nil
 	     :creator-info nil
 	     :base-directory "~/org/notes")
-	    ("notes-static"
-	     :base-directory "~/org/notes"
-	     :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
-	     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg"
-	     :recursive t
-	     :publishing-function org-publish-attachment)
-	     )))
+	 ("notes-static"
+	  :base-directory "~/org/notes"
+	  :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
+	  :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg"
+	  :recursive t
+	  :publishing-function org-publish-attachment)
+	 ("recipes"
+	  :auto-preamble t
+	  :auto-sitemap t
+	  :headline-levels 4
+	  :publishing-directory "/ssh:suah.dev:/var/www/htdocs/recipes/"
+	  :publishing-function org-html-publish-to-html
+	  :recursive t
+	  :section-numbers nil
+	  :html-head "<link rel=\"stylesheet\" href=\"https://suah.dev/p/css/stylesheet.css\" type=\"text/css\" />"
+	  :html-link-home "http://suah.dev/recipes/"
+	  :html-link-up "../"
+	  :style-include-default nil
+	  :sitemap-filename "index.org"
+	  :sitemap-title "Recipes"
+	  :with-title t
+	  :author-info nil
+	  :creator-info nil
+	  :base-directory "~/org/recipes")
+	 )))
 #+end_src
 
 Add in some org-mode helpers:

@@ -300,6 +300,13 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
     (kill-buffer))
 #+end_src
 
+** pinboard
+
+   A pinboard.in client
+
+#+begin_src emacs-lisp
+  (use-package pinboard)
+#+end_src
 * Mail
 
 ~mu~ has been the best mail client for me on emacs.
@@ -445,6 +452,23 @@ Add in some org-mode helpers:
 #+begin_src emacs-lisp
   (require 'org-tempo)
   (require 'org-habit)
+#+end_src
+
+Found this bad boy to integrate pinboard with org-mode:
+- https://gist.github.com/khinsen/7ed357eed9b27f142e4fa6f5c4ad45dd
+#+begin_src emacs-lisp
+  (defun org-pinboard-store-link ()
+    "Store a link taken from a pinboard buffer."
+    (when (eq major-mode 'pinboard-mode)
+      (pinboard-with-current-pin pin
+	(org-store-link-props
+	 :type "pinboard"
+	 :link (alist-get 'href pin)
+	 :description (alist-get 'description pin)))))
+
+  (org-link-set-parameters "pinboard"
+			   :follow #'browse-url
+			   :store #'org-pinboard-store-link)
 #+end_src
 
 #+end_src

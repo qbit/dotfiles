@@ -41,7 +41,7 @@ if ! tmux ls | grep -q "^${session}:"; then
 			tmux select-pane -t ${counter}
 			tmux send-keys "cd ${dirs[${counter}]}" C-m
 	
-			tmux send-keys "git pull" C-m
+			tmux send-keys "update_git.sh" C-m
 				#tmux send-keys "cvs -d${mirror} up" C-m
 	
 			if [ $counter -eq 1 ]; then

@@ -2,7 +2,6 @@
 
 red="%{F#cd0000}"
 yellow="%{F#cdcd00}"
-white="%{F#ffffff}"
 black="%{F#000000}"
 
 wifi_ssid=$(cat <<EOF

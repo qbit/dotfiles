@@ -408,8 +408,7 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
     :config
     (load-library "find-lisp")
     (setq org-directory "~/org"
-	  (setq org-agenda-files
-		(find-lisp-find-files "~/org" "\.org$"))
+	  org-agenda-files (find-lisp-find-files "~/org" "\.org$")
 	  org-log-done 'time
 	  org-src-tab-acts-natively t
 	  org-journal-dir "~/org/journal/"
@@ -417,10 +416,10 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 	  org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")
 			      (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
 			      (sequence "|" "CANCELED(c)")))
-     (setq org-publish-project-alist
-       '(
-	 ("notes" :components ("org-notes" "notes-static"))
-	 ("org-notes"
+    (setq org-publish-project-alist
+	  '(
+	    ("notes" :components ("org-notes" "notes-static"))
+	    ("org-notes"
 	     :auto-preamble t
 	     :auto-sitemap t
 	     :headline-levels 4
@@ -438,40 +437,45 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 	     :author-info nil
 	     :creator-info nil
 	     :base-directory "~/org/notes")
-	 ("notes-static"
-	  :base-directory "~/org/notes"
-	  :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
-	  :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg"
-	  :recursive t
-	  :publishing-function org-publish-attachment)
-	 ("recipes"
-	  :auto-preamble t
-	  :auto-sitemap t
-	  :headline-levels 4
-	  :publishing-directory "/ssh:suah.dev:/var/www/htdocs/recipes/"
-	  :publishing-function org-html-publish-to-html
-	  :recursive t
-	  :section-numbers nil
-	  :html-head "<link rel=\"stylesheet\" href=\"https://suah.dev/p/css/stylesheet.css\" type=\"text/css\" />"
-	  :html-link-home "http://suah.dev/recipes/"
-	  :html-link-up "../"
-	  :style-include-default nil
-	  :sitemap-filename "index.org"
-	  :sitemap-title "Recipes"
-	  :with-title t
-	  :author-info nil
-	  :creator-info nil
-	  :base-directory "~/org/recipes")
-	 )))
+	    ("notes-static"
+	     :base-directory "~/org/notes"
+	     :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
+	     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg"
+	     :recursive t
+	     :publishing-function org-publish-attachment)
+	    ("recipes"
+	     :auto-preamble t
+	     :auto-sitemap t
+	     :headline-levels 4
+	     :publishing-directory "/ssh:suah.dev:/var/www/htdocs/recipes/"
+	     :publishing-function org-html-publish-to-html
+	     :recursive t
+	     :section-numbers nil
+	     :html-head "<link rel=\"stylesheet\" href=\"https://suah.dev/p/css/stylesheet.css\" type=\"text/css\" />"
+	     :html-link-home "http://suah.dev/recipes/"
+	     :html-link-up "../"
+	     :style-include-default nil
+	     :sitemap-filename "index.org"
+	     :sitemap-title "Recipes"
+	     :with-title t
+	     :author-info nil
+	     :creator-info nil
+	     :base-directory "~/org/recipes")
+	    )))
 #+end_src
 
 Add in some org-mode helpers:
 
 - ~org-tempo~ lets me easily add src blocks with ~C-c C-,~.
 - ~org-habit~ lets me keep track of TODOs and other things.
+- ~org-checklist~ lets me reset checklists for reoccurring tasks.
+  - This requires one to ~pkg_add a2ps~.
+  - ~RESET_CHECK_BOXES~ property to be set to ~t~ on a task
+    headline. (properties can be set via ~C-c C-x d~
 #+begin_src emacs-lisp
   (require 'org-tempo)
   (require 'org-habit)
+  (require 'org-checklist)
 #+end_src
 
 Found this bad boy to integrate pinboard with org-mode:
@@ -491,4 +495,3 @@ Found this bad boy to integrate pinboard with org-mode:
 			   :store #'org-pinboard-store-link)
 #+end_src
 
-#+end_src

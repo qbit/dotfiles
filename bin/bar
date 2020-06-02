@@ -50,8 +50,10 @@ hz() {
 
 temp() {
 	local TMP
-	TMP=$(sysctl -n hw.sensors.ksmn0.temp0)
-	TMP=${TMP% degC}
+	# Average all the sensors
+	TMP=$(sysctl hw.sensors | grep temp | \
+		awk -F= '{print $2}' | \
+		awk 'BEGIN {count=0; sum=0;} {count++; sum += $1;} END {print sum / count}')
 	TMP=${TMP%.??}
 	if [ $TMP -ge 85 ]; then
 		printf "\\${red}%2d\\${black}°C" "${TMP}"

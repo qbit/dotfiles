@@ -27,7 +27,7 @@ EOF
 # TODO check lengte and make sure we aren't wayy off base
 wifi() {
 	local w sig ssid
-	w=$(ifconfig egress | grep "ieee80211")
+	w=$(ifconfig wlan | grep "ieee80211")
 	ssid="$(echo "$w" | awk "${wifi_ssid}")"
 	sig="$(echo "$w" | awk "${wifi_sig}")"
 	sig=${sig%%\%}

@@ -499,3 +499,14 @@ Found this bad boy to integrate pinboard with org-mode:
 			   :store #'org-pinboard-store-link)
 #+end_src
 
+Custom agenda commands for various things.
+
+- ~Daily habits~ shows how well I am keeping track of daily things.
+#+begin_src emacs-lisp
+  (setq org-agenda-custom-commands
+	'(("h" "Daily habits"
+	   ((agenda ""))
+	   ((org-agenda-show-log t)
+	    (org-agenda-ndays 7)
+	    (org-agenda-log-mode-items '(state))))))
+#+end_src

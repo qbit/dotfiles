@@ -31,6 +31,22 @@ mem_fix=$(cat <<EOF
 EOF
 )
 
+temp_avg=$(cat <<EOF
+BEGIN {
+	count=0
+	sum=0
+}
+{
+	count++
+	sum += \$1
+}
+END {
+	b = sum / count
+	printf("%d",b+=b<0?0:0.9)
+}
+EOF
+)
+
 # TODO check lengte and make sure we aren't wayy off base
 wifi() {
 	local w sig ssid
@@ -66,8 +82,7 @@ temp() {
 	# Average all the sensors
 	TMP=$(sysctl hw.sensors | grep temp | \
 		awk -F= '{print $2}' | \
-		awk 'BEGIN {count=0; sum=0;} {count++; sum += $1;} END {print sum / count}')
-	TMP=${TMP%.??????}
+		awk "${temp_avg}")
 	if [ $TMP -ge 85 ]; then
 		printf "\\${red}%2d\\${black}°C" "${TMP}"
 	else

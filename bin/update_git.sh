@@ -6,6 +6,8 @@ msg() {
 	echo "==> ${1}"
 }
 
+clear
+
 msg "Updating ${PWD}"
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 if git remote | grep -q upstream; then

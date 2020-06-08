@@ -212,11 +212,13 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 
    #+begin_src emacs-lisp
      (use-package go-mode
+       :after (go-add-tags lsp-mode)
        :bind
        ("C-c t" . go-add-tags))
      (defun lsp-go-install-save-hooks ()
        (add-hook 'before-save-hook #'lsp-format-buffer t t)
        (add-hook 'before-save-hook #'lsp-organize-imports t t))
+     (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
    #+end_src
 
 *** go-eldoc
@@ -226,6 +228,7 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 
    #+begin_src emacs-lisp
      (use-package go-eldoc
+       :after (go-mode lsp-mode)
        :hook
        (go-mode . go-eldoc-setup))
    #+end_src
@@ -248,7 +251,7 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
    #+begin_src emacs-lisp
      (use-package lsp-mode
        :hook ((go-mode    . lsp-deferred)
-	      (ruby-mode . lsp))
+	      (ruby-mode  . lsp))
        :commands (lsp lsp-deferred))
    #+end_src
 

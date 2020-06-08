@@ -310,6 +310,13 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 #+begin_src emacs-lisp
   (use-package pinboard)
 #+end_src
+
+** restclient
+
+#+begin_src emacs-lisp
+  (use-package restclient)
+#+end_src
+
 * Mail
 
 ~mu~ has been the best mail client for me on emacs.

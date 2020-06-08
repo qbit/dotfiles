@@ -318,7 +318,7 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 
 #+begin_src emacs-lisp
   (use-package restclient
-    :mode (("\\.http$" . restclient-mode))
+    :mode (("\\.http$" . restclient-mode)))
 #+end_src
 
 * Mail

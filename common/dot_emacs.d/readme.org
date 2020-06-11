@@ -157,6 +157,7 @@ If we are on OpenBSD, fill the scratch buffer with fortune \o/.
 
 #+begin_src emacs-lisp
   (use-package keychain-environment)
+  (keychain-refresh-environment)
 #+end_src
 
 ** ivy

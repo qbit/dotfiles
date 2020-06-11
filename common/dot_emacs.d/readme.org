@@ -360,9 +360,9 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 	(require 'mu4e)
 
 	(require 'org-mu4e)
-	(setq mu4e-maildir "~/Maildir/fastmail"
-	      mail-user-agent 'mu4e-user-agent
+	(setq mail-user-agent 'mu4e-user-agent
 	      mu4e-get-mail-command "mbsync fastmail"
+	      mu4e-update-interval 420
 	      mu4e-compose-context-policy nil
 	      mu4e-context-policy 'pick-first
 	      mu4e-drafts-folder "/Drafts"

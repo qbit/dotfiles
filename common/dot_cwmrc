@@ -54,6 +54,7 @@ autogroup 1	"Xephyr"
 autogroup 2	"xterm,XTerm"
 autogroup 3	"emacs,Emacs"
 autogroup 4	"drawterm,DrawTerm"
+autogroup 5	"jetbrains-goland,jetbrains-goland"
 autogroup 9	"xconsole,XConsole"
 
 bind-mouse MS-1	menu-window

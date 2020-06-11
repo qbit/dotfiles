@@ -381,7 +381,11 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 		 ((and fname (string-match "\\.diff.gz$" fname))  "~/patches")
 		 (t "~/Downloads")))
 	      mu4e-bookmarks
-	      `( ,(make-mu4e-bookmark
+	      `(,(make-mu4e-bookmark
+		  :name "Inbox"
+		  :query "maildir:/Inbox AND NOT flag:trashed"
+		  :key ?i)
+		,(make-mu4e-bookmark
 		   :name  "Unread messages"
 		   :query "flag:unread AND NOT flag:trashed AND NOT list:ports-changes.openbsd.org AND NOT list:source-changes.openbsd.org"
 		   :key ?u)
@@ -389,25 +393,34 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 		   :name  "Today's messages"
 		   :query (concat
 			   "date:today..now"
+			   " AND NOT flag:trashed"
 			   " AND NOT list:ports-changes.openbsd.org"
 			   " AND NOT list:source-changes.openbsd.org")
 		   :key ?d)
 		 ,(make-mu4e-bookmark
 		   :name  "Last 7 days"
-		   :query "date:7d..now"
+		   :query "date:7d..now AND NOT flag:trashed"
 		   :key ?w)
 		 ,(make-mu4e-bookmark
 		   :name  "Hackers"
-		   :query "list:hackers.openbsd.org"
+		   :query "list:hackers.openbsd.org AND NOT flag:trashed"
 		   :key ?h)
 		 ,(make-mu4e-bookmark
 		   :name  "Tech"
-		   :query "list:tech.openbsd.org"
+		   :query "list:tech.openbsd.org AND NOT flag:trashed"
 		   :key ?t)
 		 ,(make-mu4e-bookmark
 		   :name  "Ports"
-		   :query "list:ports.openbsd.org"
-		   :key ?p)))))
+		   :query "list:ports.openbsd.org AND NOT flag:trashed"
+		   :key ?p)
+		 ,(make-mu4e-bookmark
+		   :name "9front"
+		   :query "list:9front.9front.org AND NOT flag:trashed"
+		   :key ?9)
+		 ,(make-mu4e-bookmark
+		   :name "Lobste.rs"
+		   :query "list:lobsters* AND NOT flag:trashed"
+		   :key ?l)))))
 #+end_src
 
 * org-mode

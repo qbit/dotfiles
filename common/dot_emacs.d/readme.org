@@ -132,13 +132,14 @@ If we are on OpenBSD, fill the scratch buffer with fortune \o/.
      (setq custom-file (make-temp-file ""))
    #+end_src
 
-** Ensure packages are installed
+** Ensure packages are pinned and installed
 
    This makes sure ~use-package~ installs things (and makes it so we don't need
    ~:ensure t~ set for every package.
 
 #+begin_src emacs-lisp
   (setq use-package-always-ensure t)
+  (setq use-package-always-pin "melpa-stable")
 #+end_src
 
 * Packages
@@ -156,8 +157,10 @@ If we are on OpenBSD, fill the scratch buffer with fortune \o/.
    agents I have running.
 
 #+begin_src emacs-lisp
-  (use-package keychain-environment)
-  (keychain-refresh-environment)
+  (use-package keychain-environment
+       :pin "melpa"
+       :init
+  	(keychain-refresh-environment))
 #+end_src
 
 ** ivy
@@ -433,6 +436,7 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 
 #+begin_src emacs-lisp
   (use-package org
+    :pin "org"
     :ensure org-plus-contrib
     :hook
     (org-mode . (lambda ()

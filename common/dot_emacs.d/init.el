@@ -9,13 +9,19 @@
 (setq gnutls-verify-error t)
 
 (setq package-enable-at-startup nil)
-(unless (assoc-default "melpa" package-archives)
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
 (unless (assoc-default "melpa-stable" package-archives)
   (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t))
 (unless (assoc-default "org" package-archives)
   (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t))
+(unless (assoc-default "melpa" package-archives)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
 (package-initialize)
+
+;; Pin use-package to the stable package repo
+(setq package-pinned-packages
+                '(
+		  (use-package        . "melpa")
+		  ))
 
 (unless (package-installed-p 'use-package)
     (package-refresh-contents)

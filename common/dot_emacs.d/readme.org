@@ -613,7 +613,7 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 	     "* %? %:link\n%:description\n")
 	    ("j" "Journal"
 	     entry (file+olp+datetree "~/org/journal.org")
-	     "* %?\nEntered on %U\n  %i\n" :prepend t))))
+	     "* %?\nEntered on %U\n  %i\n"))))
 #+end_src
 
 Add in some org-mode helpers:

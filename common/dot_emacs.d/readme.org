@@ -30,6 +30,15 @@ config to see if it helps!
      (unless (server-running-p) (server-start))
    #+end_src
 
+** OpenBSD Lockups
+
+   For some reason OpenBSD hangs, these seem to help a bit
+#+begin_src emacs-lisp
+  (setq x-select-enable-clipboard-manager nil)
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+  (setf x-selection-timeout 500)
+#+end_src
+
 ** Interface and Behavior
 *** Interface
 
@@ -70,13 +79,6 @@ If we are on OpenBSD, fill the scratch buffer with fortune \o/.
   (scroll-bar-mode -1)
   (column-number-mode +1)
   (global-font-lock-mode 1)
-#+end_src
-
- For some reason OpenBSD hangs, these seem to help a bit
-#+begin_src emacs-lisp
-  (setq x-select-enable-clipboard-manager nil)
-  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-  (setf x-selection-timeout 500)
 #+end_src
 
 *** Behavior

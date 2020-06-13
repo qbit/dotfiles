@@ -12,12 +12,12 @@ config to see if it helps!
    shell.
 
 #+begin_src emacs-lisp
-(setenv "PATH" (concat (getenv "PATH") ":~/go/bin:~/ruby_bin/bin"))
-(setenv "GEM_HOME" (expand-file-name "~/ruby_bin"))
-(setenv "GEM_BIN" (expand-file-name "~/ruby_bin/bin"))
-(setenv "BUNDLE_PATH" (expand-file-name "~/ruby_bin"))
-(setenv "JAVA_HOME" "/usr/local/jdk-11/")
-(setq exec-path (append exec-path '("~/go/bin:~/ruby_bin/bin")))
+  (setenv "PATH" (concat (getenv "PATH") ":~/go/bin:~/ruby_bin/bin"))
+  (setenv "GEM_HOME" (expand-file-name "~/ruby_bin"))
+  (setenv "GEM_BIN" (expand-file-name "~/ruby_bin/bin"))
+  (setenv "BUNDLE_PATH" (expand-file-name "~/ruby_bin"))
+  (setenv "JAVA_HOME" "/usr/local/jdk-11/")
+  (setq exec-path (append exec-path '("~/go/bin:~/ruby_bin/bin")))
 #+end_src
 
 ** Start the emacs server
@@ -26,8 +26,8 @@ config to see if it helps!
    themes, save buffers via cron and other such dumbary!
 
    #+begin_src emacs-lisp
-   (load "server")
-   (unless (server-running-p) (server-start))
+     (load "server")
+     (unless (server-running-p) (server-start))
    #+end_src
 
 ** Interface and Behavior
@@ -266,7 +266,7 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
    #+begin_src emacs-lisp
      (use-package lsp-mode
        :hook ((go-mode    . lsp-deferred)
-	      (ruby-mode  . lsp))
+              (ruby-mode  . lsp))
        :commands (lsp lsp-deferred))
    #+end_src
 
@@ -279,9 +279,9 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
      (use-package company
        :config
        (setq company-tooltip-limit 20
-	     company-minimum-prefix-length 1
-	     company-idle-delay .3
-	     company-echo-delay 0)
+             company-minimum-prefix-length 1
+             company-idle-delay .3
+             company-echo-delay 0)
        :hook (prog-mode . company-mode))
 
      (use-package company-lsp

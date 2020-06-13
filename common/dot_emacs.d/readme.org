@@ -526,6 +526,7 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
     ("C-c a" . org-agenda)
     ("C-c b" . org-iswitchb)
     :config
+    (org-reload)
     (load-library "find-lisp")
     (setq org-directory "~/org"
 	  org-agenda-files (find-lisp-find-files "~/org" "\.org$")

@@ -612,19 +612,17 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 	     "* %? %:link\n%:description\n")
 	    ("j" "Journal"
 	     entry (file+olp+datetree "~/org/journal.org")
-	     "* %?\nEntered on %U\n  %i\n  %a" :prepend t))))
+	     "* %?\nEntered on %U\n  %i\n" :prepend t))))
 #+end_src
 
 Add in some org-mode helpers:
 
-- ~org-tempo~ lets me easily add src blocks with ~C-c C-,~.
 - ~org-habit~ lets me keep track of TODOs and other things.
 - ~org-checklist~ lets me reset checklists for reoccurring tasks.
   - This requires one to ~pkg_add a2ps~.
   - ~RESET_CHECK_BOXES~ property to be set to ~t~ on a task
     headline. (properties can be set via ~C-c C-x d~
 #+begin_src emacs-lisp
-  (require 'org-tempo)
   (require 'org-habit)
   (require 'org-checklist)
 #+end_src

@@ -513,8 +513,93 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
   Oh ~org-mode~. It's the reason I started using emacs.. and it's the reason I
   can't quit!
 
-  I publish some of my notes [[https://suah.dev/p][on suah.dev/p]].
 
+** Publish bits
+
+  I publish some of my notes [[https://suah.dev/p][on suah.dev/p]]. Also some recipes.
+
+#+begin_src emacs-lisp
+  (setq my-org-publish-alist
+      '(
+	("notes" :components ("org-notes" "notes-static"))
+	("org-notes"
+	 :auto-preamble t
+	 :auto-sitemap t
+	 :headline-levels 4
+	 :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
+	 :publishing-function org-html-publish-to-html
+	 :recursive t
+	 :section-numbers nil
+	 :html-head "<link rel=\"stylesheet\" href=\"https://suah.dev/p/css/stylesheet.css\" type=\"text/css\" />"
+	 :html-link-home "http://suah.dev/p/"
+	 :html-link-up "../"
+	 :style-include-default nil
+	 :sitemap-filename "index.org"
+	 :sitemap-title "Notes"
+	 :with-title t
+	 :author-info nil
+	 :creator-info nil
+	 :base-directory "~/org/notes")
+	("notes-static"
+	 :base-directory "~/org/notes"
+	 :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg"
+	 :recursive t
+	 :publishing-function org-publish-attachment)
+	("recipes"
+	 :auto-preamble t
+	 :auto-sitemap t
+	 :headline-levels 4
+	 :publishing-directory "/ssh:suah.dev:/var/www/htdocs/recipes/"
+	 :publishing-function org-html-publish-to-html
+	 :recursive t
+	 :section-numbers nil
+	 :html-head "<link rel=\"stylesheet\" href=\"https://suah.dev/p/css/stylesheet.css\" type=\"text/css\" />"
+	 :html-link-home "http://suah.dev/recipes/"
+	 :html-link-up "../"
+	 :style-include-default nil
+	 :sitemap-filename "index.org"
+	 :sitemap-title "Recipes"
+	 :with-title t
+	 :author-info nil
+	 :creator-info nil
+	 :base-directory "~/org/recipes")
+	))
+#+end_src
+
+** Capture templates
+
+#+begin_src emacs-lisp
+  (setq my-org-capture-templates
+	`(("t" "TODO"
+	   entry (file+headline "~/org/todo.org" "TODOs")
+	   ,(concat
+	     "* TODO %?\n"
+	     ":PROPERTIES:\n"
+	     ":LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)\n"
+	     ":END:\n") :prepend t)
+	  ("f" "TODO with File"
+	   entry (file+headline "~/org/todo.org" "TODOs")
+	   ,(concat
+	     "* TODO %?\n"
+	     ":PROPERTIES:\n"
+	     ":LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)\n"
+	     ":END:\n"
+	     "%i\n  %a") :prepend t)
+	  ("b" "Bug"
+	   entry (file+olp+datetree "~/org/bugs.org" "Bugs")
+	   "* BUG %?\nEntered on %U\n  :PROPERTIES:\n  :FILE: %a\n  :END:\n" :prepend t)
+	  ("p" "Protocol"
+	   entry (file+headline "~/org/links.org" "Links")
+	   "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+	  ("L" "Protocol Link" entry (file+headline "~/org/links.org" "Links")
+	   "* %? %:link\n%:description\n")
+	  ("j" "Journal"
+	   entry (file+olp+datetree "~/org/journal.org")
+	   "* %?\nEntered on %U\n  %i\n")))
+#+end_src
+
+** org
 #+begin_src emacs-lisp
   (use-package org
     :pin "org"
@@ -535,85 +620,23 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
     (setq org-directory "~/org"
 	  org-agenda-files (find-lisp-find-files "~/org" "\.org$")
 	  org-log-done 'time
-	  org-src-tab-acts-natively t
-	  org-journal-dir "~/org/journal/"
+	  org-src-tab-acts-natively nil
 	  org-agenda-skip-scheduled-if-deadline-is-shown t
 	  org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")
 			      (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
 			      (sequence "|" "CANCELED(c)")))
-    (setq org-publish-project-alist
-	  '(
-	    ("notes" :components ("org-notes" "notes-static"))
-	    ("org-notes"
-	     :auto-preamble t
-	     :auto-sitemap t
-	     :headline-levels 4
-	     :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
-	     :publishing-function org-html-publish-to-html
-	     :recursive t
-	     :section-numbers nil
-	     :html-head "<link rel=\"stylesheet\" href=\"https://suah.dev/p/css/stylesheet.css\" type=\"text/css\" />"
-	     :html-link-home "http://suah.dev/p/"
-	     :html-link-up "../"
-	     :style-include-default nil
-	     :sitemap-filename "index.org"
-	     :sitemap-title "Notes"
-	     :with-title t
-	     :author-info nil
-	     :creator-info nil
-	     :base-directory "~/org/notes")
-	    ("notes-static"
-	     :base-directory "~/org/notes"
-	     :publishing-directory "/ssh:suah.dev:/var/www/htdocs/p/"
-	     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg"
-	     :recursive t
-	     :publishing-function org-publish-attachment)
-	    ("recipes"
-	     :auto-preamble t
-	     :auto-sitemap t
-	     :headline-levels 4
-	     :publishing-directory "/ssh:suah.dev:/var/www/htdocs/recipes/"
-	     :publishing-function org-html-publish-to-html
-	     :recursive t
-	     :section-numbers nil
-	     :html-head "<link rel=\"stylesheet\" href=\"https://suah.dev/p/css/stylesheet.css\" type=\"text/css\" />"
-	     :html-link-home "http://suah.dev/recipes/"
-	     :html-link-up "../"
-	     :style-include-default nil
-	     :sitemap-filename "index.org"
-	     :sitemap-title "Recipes"
-	     :with-title t
-	     :author-info nil
-	     :creator-info nil
-	     :base-directory "~/org/recipes")
-	    ))
-    (setq org-capture-templates
-	  `(("t" "TODO"
-	     entry (file+headline "~/org/todo.org" "TODOs")
-	     ,(concat
-	       "* TODO %?\n"
-	       ":PROPERTIES:\n"
-	       ":LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)\n"
-	       ":END:\n") :prepend t)
-	    ("f" "TODO with File"
-	     entry (file+headline "~/org/todo.org" "TODOs")
-	     ,(concat
-	       "* TODO %?\n"
-	       ":PROPERTIES:\n"
-	       ":LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)\n"
-	       ":END:\n"
-	       "%i\n  %a") :prepend t)
-	    ("b" "Bug"
-	     entry (file+olp+datetree "~/org/bugs.org" "Bugs")
-	     "* BUG %?\nEntered on %U\n  :PROPERTIES:\n  :FILE: %a\n  :END:\n" :prepend t)
-	    ("p" "Protocol"
-	     entry (file+headline "~/org/links.org" "Links")
-	     "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-	    ("L" "Protocol Link" entry (file+headline "~/org/links.org" "Links")
-	     "* %? %:link\n%:description\n")
-	    ("j" "Journal"
-	     entry (file+olp+datetree "~/org/journal.org")
-	     "* %?\nEntered on %U\n  %i\n"))))
+    (setq org-publish-project-alist my-org-publish-alist)
+    (setq org-capture-templates my-org-capture-templates))
+
+#+end_src
+** Extra bits
+#+begin_src emacs-lisp
+  (use-package org-journal
+    :defer t
+    :config
+    (setq org-journal-dir "~/org/journal/"
+	  org-journal-file-format "%Y/%m-%d"
+	  org-journal-date-format "%A, %d %B %Y"))
 #+end_src
 
 Add in some org-mode helpers:

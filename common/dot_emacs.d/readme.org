@@ -518,7 +518,7 @@ plantuml is a pretty easy way to make decent looking flow chart sorta things.
 	      ,(make-mu4e-bookmark
 		:name "Misc"
 		:query "list:misc.openbsd.org AND NOT flag:trashed"
-		key ?m)
+		:key ?m)
 	      ,(make-mu4e-bookmark
 		:name "9front"
 		:query "list:9front.9front.org AND NOT flag:trashed"

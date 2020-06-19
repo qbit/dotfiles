@@ -6,37 +6,37 @@ config to see if it helps!
 
 ** Set some ENV vars
 
-   These are needed to make emacs aware of various things (like Go binaries,
-   etc). I have them here because sometimes when emacs is launched from ~rofi~
-   or similar it doesn't have the same ENV as it does when launching from the
-   shell.
+These are needed to make emacs aware of various things (like Go binaries,
+etc). I have them here because sometimes when emacs is launched from ~rofi~
+or similar it doesn't have the same ENV as it does when launching from the
+shell.
 
 #+begin_src emacs-lisp
-  (setenv "PATH" (concat (getenv "PATH") ":~/go/bin:~/ruby_bin/bin"))
-  (setenv "GEM_HOME" (expand-file-name "~/ruby_bin"))
-  (setenv "GEM_BIN" (expand-file-name "~/ruby_bin/bin"))
-  (setenv "BUNDLE_PATH" (expand-file-name "~/ruby_bin"))
-  (setenv "JAVA_HOME" "/usr/local/jdk-11/")
-  (setq exec-path (append exec-path '("~/go/bin:~/ruby_bin/bin")))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/jdk-11/bin:~/go/bin:~/ruby_bin/bin"))
+(setenv "GEM_HOME" (expand-file-name "~/ruby_bin"))
+(setenv "GEM_BIN" (expand-file-name "~/ruby_bin/bin"))
+(setenv "BUNDLE_PATH" (expand-file-name "~/ruby_bin"))
+(setenv "JAVA_HOME" "/usr/local/jdk-11/")
+(setq exec-path (append exec-path '("~/go/bin:~/ruby_bin/bin")))
 #+end_src
 
 ** Start the emacs server
 
-   Starting as a server lets me connect externally to do things like change
-   themes, save buffers via cron and other such dumbary!
+Starting as a server lets me connect externally to do things like change
+themes, save buffers via cron and other such dumbary!
 
-   #+begin_src emacs-lisp
-     (load "server")
-     (unless (server-running-p) (server-start))
-   #+end_src
+#+begin_src emacs-lisp
+(load "server")
+(unless (server-running-p) (server-start))
+#+end_src
 
 ** OpenBSD Lockups
 
-   For some reason OpenBSD hangs, these seem to help a bit
+For some reason OpenBSD hangs, these seem to help a bit
 #+begin_src emacs-lisp
-  (setq x-select-enable-clipboard-manager nil)
-  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-  (setf x-selection-timeout 500)
+(setq x-select-enable-clipboard-manager nil)
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+(setf x-selection-timeout 500)
 #+end_src
 
 ** Interface and Behavior
@@ -44,128 +44,128 @@ config to see if it helps!
 
 Use 80 columns, this helps keep things readable when windows are split
 #+begin_src emacs-lisp
-  (setq whitespace-style '(trailing lines space-before-tab)
-	whitespace-line-column 80)
-  (setq-default fill-column 80)
+(setq whitespace-style '(trailing lines space-before-tab)
+      whitespace-line-column 80)
+(setq-default fill-column 80)
 #+end_src
 
 I know I am in emacs, don't need to see the startup screen.
 #+begin_src emacs-lisp
-  (setq inhibit-startup-screen t)
+(setq inhibit-startup-screen t)
 #+end_src
 
 If we are on OpenBSD, fill the scratch buffer with fortune \o/.
 
 #+begin_src emacs-lisp
-  (if (file-executable-p "/usr/games/fortune")
-      (setq initial-scratch-message
-	    (concat
-	     (shell-command-to-string "fortune | sed -e 's/^/;; /g'")
-	     "\n\n")))
+(if (file-executable-p "/usr/games/fortune")
+    (setq initial-scratch-message
+	  (concat
+	   (shell-command-to-string "fortune | sed -e 's/^/;; /g'")
+	   "\n\n")))
 #+end_src
 
 **** Use UTF8 where ever possible
 #+begin_src emacs-lisp
-  (prefer-coding-system 'utf-8)
-  (set-default-coding-systems 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 #+end_src
 
 **** Change various UI bits
 #+begin_src emacs-lisp
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
-  (column-number-mode +1)
-  (global-font-lock-mode 1)
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(column-number-mode +1)
+(global-font-lock-mode 1)
 #+end_src
 
 *** Behavior
 
-   Switch various defaults to be more comfortable for myself.
+Switch various defaults to be more comfortable for myself.
 
-   #+begin_src emacs-lisp
-     (fset 'yes-or-no-p 'y-or-n-p)
-     (show-paren-mode t)
-     (desktop-save-mode)
-     (setq backup-directory-alist '(("." . "~/.emacs-saves")))
-     (setq auto-mode-alist
-	   (append
-	    (list
-	     '("\\.gpg$" . sensitive-minor-mode)
-	     )
-	    auto-mode-alist))
-     (setq auth-sources
-	   '((:source "~/.netrc")))
-   #+end_src
-
-   Use spelling and auto-fill when we are in text mode.
-
-   #+begin_src emacs-lisp
-     (add-hook 'text-mode-hook (lambda ()
-				 (auto-fill-mode 1)
-				 (turn-on-flyspell)))
-   #+end_src
-
-   This fixes some tramp "waiting for prompt" errors.
 #+begin_src emacs-lisp
-  ;;(setq shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>λ\n]*#?[]#$%>λ].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
-  (require 'tramp-sh nil t)
+(fset 'yes-or-no-p 'y-or-n-p)
+(show-paren-mode t)
+(desktop-save-mode)
+(setq backup-directory-alist '(("." . "~/.emacs-saves")))
+(setq auto-mode-alist
+      (append
+       (list
+	'("\\.gpg$" . sensitive-minor-mode)
+	)
+       auto-mode-alist))
+(setq auth-sources
+      '((:source "~/.netrc")))
+#+end_src
 
-  (setf tramp-ssh-controlmaster-options
-	(concat
-	 "-o ControlPath=/tmp/ssh-%%r@%%h:%%p "
-	 "-o ControlMaster=auto -o ControlPersist=yes"))
+Use spelling and auto-fill when we are in text mode.
+
+#+begin_src emacs-lisp
+(add-hook 'text-mode-hook (lambda ()
+			    (auto-fill-mode 1)
+			    (turn-on-flyspell)))
+#+end_src
+
+This fixes some tramp "waiting for prompt" errors.
+#+begin_src emacs-lisp
+;; (setq shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>λ\n]*#?[]#$%>λ].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+(require 'tramp-sh nil t)
+
+(setf tramp-ssh-controlmaster-options
+      (concat
+       "-o ControlPath=/tmp/ssh-%%r@%%h:%%p "
+       "-o ControlMaster=auto -o ControlPersist=yes"))
 #+end_src
 
 ** Include ports site-lisp
 
-   On OpenBSD various packages (mu, git.. etc) install elisp things into a global
-   directory, this makes sure we include it.
+On OpenBSD various packages (mu, git.. etc) install elisp things into a global
+directory, this makes sure we include it.
 
-   #+begin_src emacs-lisp
-     (if (file-directory-p "/usr/local/share/emacs/site-lisp")
-	 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/"))
-   #+end_src
+#+begin_src emacs-lisp
+(if (file-directory-p "/usr/local/share/emacs/site-lisp")
+    (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/"))
+#+end_src
 
 ** Unset custom-file
 
-   The customization file mostly just causes churn in the SCM so we disable it
-   here.
-   #+begin_src emacs-lisp
-     (setq custom-file (make-temp-file ""))
-   #+end_src
+The customization file mostly just causes churn in the SCM so we disable it
+here.
+#+begin_src emacs-lisp
+(setq custom-file (make-temp-file ""))
+#+end_src
 
 ** Ensure packages are pinned and installed
 
-   This makes sure ~use-package~ installs things (and makes it so we don't need
-   ~:ensure t~ set for every package.
+This makes sure ~use-package~ installs things (and makes it so we don't need
+~:ensure t~ set for every package.
 
 #+begin_src emacs-lisp
-  (setq use-package-always-ensure t)
-  (setq use-package-always-pin "melpa-stable")
+(setq use-package-always-ensure t)
+;;(setq use-package-always-pin "melpa-stable")
 #+end_src
 
 * Packages
 ** parchment-theme
-   This is a nice theme that resembles acme in plan9. Minimal.
+This is a nice theme that resembles acme in plan9. Minimal.
 
 #+begin_src emacs-lisp
-  (use-package parchment-theme
-    :config (load-theme 'parchment t))
+(use-package parchment-theme
+  :config (load-theme 'parchment t))
 #+end_src
 
 ** keychain-environment
 
-   I make heavy use of ~ssh-agent~ this lets emacs pickup / use the existing
-   agents I have running.
+I make heavy use of ~ssh-agent~ this lets emacs pickup / use the existing
+agents I have running.
 
 #+begin_src emacs-lisp
-  (use-package keychain-environment
-       :pin "melpa"
-       :init
-  	(keychain-refresh-environment))
+(use-package keychain-environment
+  ;;:pin "melpa"
+  :init
+  (keychain-refresh-environment))
 #+end_src
 
 ** ivy
@@ -175,246 +175,259 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 ~counsel~ (extends ivy into various areas like the help stuff).
 
 #+begin_src emacs-lisp
-  (use-package counsel)
-  (use-package smex)
-  (use-package ivy
-    :hook (after-init . ivy-mode)
-    :bind
-    ("C-s"     . swiper)
-    ("M-x"     . counsel-M-x)
-    ("C-x C-f" . counsel-find-file)
-    ("C-x b"   . ivy-switch-buffer)
-    ("C-c n"   . counsel-fzf))
+(use-package counsel)
+(use-package smex)
+(use-package ivy
+  :hook (after-init . ivy-mode)
+  :bind
+  ("C-s"     . swiper)
+  ("M-x"     . counsel-M-x)
+  ("C-x C-f" . counsel-find-file)
+  ("C-x b"   . ivy-switch-buffer)
+  ("C-c n"   . counsel-fzf))
 #+end_src
 
 ** magit
 
-   Magit is a awesome. Not sure what else to say about it. :P
+Magit is a awesome. Not sure what else to say about it. :P
 
-   #+begin_src emacs-lisp
-     (use-package magit
-       :bind ("C-c m" . magit-status)
-       :init
-       (setq magit-completing-read-function 'ivy-completing-read))
-   #+end_src
+#+begin_src emacs-lisp
+(use-package magit
+  :bind ("C-c m" . magit-status)
+  :init
+  (setq magit-completing-read-function 'ivy-completing-read))
+#+end_src
 
 ** flycheck
 
-   ~flycheck~ does automatic syntax checking for most things
+~flycheck~ does automatic syntax checking for most things
 
-   #+begin_src
-   (use-package flycheck
-     :init (global-flycheck-mode))
-  #+end_src
+#+begin_src emacs-lisp
+(use-package flycheck
+  :init (global-flycheck-mode))
+#+end_src
 
-   - [2020-05-29 Fri] Unfortunately it clobbers the "C-c !" prefix, so we need
-     to add this to get it back:
+- [2020-05-29 Fri] Unfortunately it clobbers the "C-c !" prefix, so we need
+  to add this to get it back:
 
-#+begin_src
-   (define-key flycheck-mode-map (kbd "C-c ! !") 'org-time-stamp-inactive)
+#+begin_src emacs-lisp
+(define-key flycheck-mode-map (kbd "C-c ! !") 'org-time-stamp-inactive)
 #+end_src
 
 ** Go configuration
 
 *** go-add-tags
 
-    This lets one select a ~struct~ or similar and auto add the ~`json:"NAME"`~ bits.
+This lets one select a ~struct~ or similar and auto add the ~`json:"NAME"`~ bits.
 
-   #+begin_src emacs-lisp
-     (use-package go-add-tags
-       :bind
-       ("C-c t" . go-add-tags))
-   #+end_src
+#+begin_src emacs-lisp
+(use-package go-add-tags
+  :bind
+  ("C-c t" . go-add-tags))
+#+end_src
 
 *** go-mode
 
-    This allows for things like ~gofmt~ and auto adding / removing of imports.
+This allows for things like ~gofmt~ and auto adding / removing of imports.
 
-   #+begin_src emacs-lisp
-     (use-package go-mode
-       :after (go-add-tags lsp-mode)
-       :bind
-       ("C-c t" . go-add-tags))
-     (defun lsp-go-install-save-hooks ()
-       (add-hook 'before-save-hook #'lsp-format-buffer t t)
-       (add-hook 'before-save-hook #'lsp-organize-imports t t))
-     (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-   #+end_src
+#+begin_src emacs-lisp
+(use-package go-mode
+  :after (go-add-tags lsp-mode)
+  :bind
+  ("C-c t" . go-add-tags))
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+#+end_src
 
 *** go-eldoc
 
-    This extends eldoc to be able to speak Go - quite handy for quickly looking
-    up what things do.
+This extends eldoc to be able to speak Go - quite handy for quickly looking
+up what things do.
 
-   #+begin_src emacs-lisp
-     (use-package go-eldoc
-       :after (go-mode lsp-mode)
-       :hook
-       (go-mode . go-eldoc-setup))
-   #+end_src
+#+begin_src emacs-lisp
+(use-package go-eldoc
+  :after (go-mode lsp-mode)
+  :hook
+  (go-mode . go-eldoc-setup))
+#+end_src
 
 *** yasnippet
 
-    Some go tools use this.
+Some go tools use this.
 
 #+begin_src emacs-lisp
-  (use-package yasnippet
-    :commands yas-minor-mode
-    :hook (go-mode . yas-minor-mode))
+(use-package yasnippet
+  :commands yas-minor-mode
+  :hook (go-mode . yas-minor-mode))
 #+end_src
 
 ** lsp-mode
 
-   ~lsp-mode~ supports language servers for various things. I pretty much only
-   care about Go and Ruby.
+~lsp-mode~ supports language servers for various things. I pretty much only
+care about Go and Ruby.
 
-   #+begin_src emacs-lisp
-     (use-package lsp-mode
-       :hook ((go-mode    . lsp-deferred)
-              (ruby-mode  . lsp))
-       :commands (lsp lsp-deferred))
-   #+end_src
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :hook ((go-mode    . lsp-deferred)
+	 (ruby-mode  . lsp))
+  :commands (lsp lsp-deferred))
+#+end_src
 
 ** company and friends
 
-   ~company~ allows for auto-completion of various things. It can interface with ~lsp-mode~ to complete
-   things like Go.
-
-   #+begin_src emacs-lisp
-     (use-package company
-       :config
-       (setq company-tooltip-limit 20
-             company-minimum-prefix-length 1
-             company-idle-delay .3
-             company-echo-delay 0)
-       :hook (prog-mode . company-mode))
-
-     (use-package company-lsp
-       :commands company-lsp)
-   #+end_src
-
-** gitgutter
-   This gives me a nice in-ui way to see modifications and what not.
+~company~ allows for auto-completion of various things. It can interface with ~lsp-mode~ to complete
+things like Go.
 
 #+begin_src emacs-lisp
-  (use-package git-gutter
-    :hook
-    (after-init . global-git-gutter-mode))
+(use-package company
+  :config
+  (setq company-tooltip-limit 20
+	company-minimum-prefix-length 1
+	company-idle-delay .3
+	company-echo-delay 0)
+  :hook (prog-mode . company-mode))
+
+(use-package company-lsp
+  :commands company-lsp)
+#+end_src
+
+** gitgutter
+This gives me a nice in-ui way to see modifications and what not.
+
+#+begin_src emacs-lisp
+(use-package git-gutter
+  :hook
+  (after-init . global-git-gutter-mode))
 #+end_src
 
 ** nix
 
-   Add support for nix files. I don't use nix much atm, but it was recently
-   ported to OpenBSD, so I am hopeful I can start using it there more!
+Add support for nix files. I don't use nix much atm, but it was recently
+ported to OpenBSD, so I am hopeful I can start using it there more!
 
 #+begin_src emacs-lisp
-  (use-package nix-mode
-    :mode "\\.nix\\'")
+(use-package nix-mode
+  :mode "\\.nix\\'")
 #+end_src
 
 ** shell
 
-   I don't often use the shell from emacs, but when I do these bits make it
-   easier for me to treat it like a regular shell.
+I don't often use the shell from emacs, but when I do these bits make it
+easier for me to treat it like a regular shell.
 
 #+begin_src emacs-lisp
-  (use-package fish-mode)
+(use-package fish-mode)
 
-  ;; Kill terminal buffers on exit so I din't have to kill the buffer after I exit.
-  (defadvice term-handle-exit
-      (after term-kill-buffer-on-exit activate)
-    (kill-buffer))
+;; Kill terminal buffers on exit so I din't have to kill the buffer after I exit.
+(defadvice term-handle-exit
+    (after term-kill-buffer-on-exit activate)
+  (kill-buffer))
 #+end_src
 
 ** pinboard
 
-   A pinboard.in client
+A pinboard.in client
 
 #+begin_src emacs-lisp
-  (use-package pinboard)
+(use-package pinboard)
 #+end_src
 
 ** restclient
 
 #+begin_src emacs-lisp
-  (use-package restclient
-    :pin "melpa"
-    :mode (("\\.http$" . restclient-mode)))
+(use-package restclient
+  ;;:pin "melpa"
+  :mode (("\\.http$" . restclient-mode)))
 #+end_src
 
 ** treemacs
 
-   This gives me a decent "sidebar" that is project oriented - the workspaces
-   are handy too.
+This gives me a decent "sidebar" that is project oriented - the workspaces
+are handy too.
 
-   - ~C-s C-w s~ to switch workspaces.
-   - ~C-s C-w e~ to edit workspaces.
+- ~C-s C-w s~ to switch workspaces.
+- ~C-s C-w e~ to edit workspaces.
 
 #+begin_src emacs-lisp
-    (use-package treemacs
-      :config
-      (progn
-	(setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
-	      treemacs-deferred-git-apply-delay      0.5
-	      treemacs-directory-name-transformer    #'identity
-	      treemacs-display-in-side-window        t
-	      treemacs-eldoc-display                 t
-	      treemacs-file-event-delay              5000
-	      treemacs-file-extension-regex          treemacs-last-period-regex-value
-	      treemacs-file-follow-delay             0.2
-	      treemacs-file-name-transformer         #'identity
-	      treemacs-follow-after-init             t
-	      treemacs-git-command-pipe              ""
-	      treemacs-goto-tag-strategy             'refetch-index
-	      treemacs-indentation                   2
-	      treemacs-indentation-string            " "
-	      treemacs-is-never-other-window         nil
-	      treemacs-max-git-entries               5000
-	      treemacs-missing-project-action        'ask
-	      treemacs-move-forward-on-expand        nil
-	      treemacs-no-png-images                 nil
-	      treemacs-no-delete-other-windows       t
-	      treemacs-project-follow-cleanup        nil
-	      treemacs-persist-file                  (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
-	      treemacs-position                      'left
-	      treemacs-recenter-distance             0.1
-	      treemacs-recenter-after-file-follow    nil
-	      treemacs-recenter-after-tag-follow     nil
-	      treemacs-recenter-after-project-jump   'always
-	      treemacs-recenter-after-project-expand 'on-distance
-	      treemacs-show-cursor                   nil
-	      treemacs-show-hidden-files             t
-	      treemacs-silent-filewatch              nil
-	      treemacs-silent-refresh                nil
-	      treemacs-sorting                       'alphabetic-asc
-	      treemacs-space-between-root-nodes      t
-	      treemacs-tag-follow-cleanup            t
-	      treemacs-tag-follow-delay              1.5
-	      treemacs-user-mode-line-format         nil
-	      treemacs-user-header-line-format       nil
-	      treemacs-width                         35)
+(use-package treemacs
+  :config
+  (progn
+    (setq treemacs-collapse-dirs                 (if treemacs-python-executable 3 0)
+	  treemacs-deferred-git-apply-delay      0.5
+	  treemacs-directory-name-transformer    #'identity
+	  treemacs-display-in-side-window        t
+	  treemacs-eldoc-display                 t
+	  treemacs-file-event-delay              5000
+	  treemacs-file-extension-regex          treemacs-last-period-regex-value
+	  treemacs-file-follow-delay             0.2
+	  treemacs-file-name-transformer         #'identity
+	  treemacs-follow-after-init             t
+	  treemacs-git-command-pipe              ""
+	  treemacs-goto-tag-strategy             'refetch-index
+	  treemacs-indentation                   2
+	  treemacs-indentation-string            " "
+	  treemacs-is-never-other-window         nil
+	  treemacs-max-git-entries               5000
+	  treemacs-missing-project-action        'ask
+	  treemacs-move-forward-on-expand        nil
+	  treemacs-no-png-images                 nil
+	  treemacs-no-delete-other-windows       t
+	  treemacs-project-follow-cleanup        nil
+	  treemacs-persist-file                  (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
+	  treemacs-position                      'left
+	  treemacs-recenter-distance             0.1
+	  treemacs-recenter-after-file-follow    nil
+	  treemacs-recenter-after-tag-follow     nil
+	  treemacs-recenter-after-project-jump   'always
+	  treemacs-recenter-after-project-expand 'on-distance
+	  treemacs-show-cursor                   nil
+	  treemacs-show-hidden-files             t
+	  treemacs-silent-filewatch              nil
+	  treemacs-silent-refresh                nil
+	  treemacs-sorting                       'alphabetic-asc
+	  treemacs-space-between-root-nodes      t
+	  treemacs-tag-follow-cleanup            t
+	  treemacs-tag-follow-delay              1.5
+	  treemacs-user-mode-line-format         nil
+	  treemacs-user-header-line-format       nil
+	  treemacs-width                         35)
 
-	(treemacs-follow-mode t)
-	(treemacs-filewatch-mode t)
-	(treemacs-fringe-indicator-mode t)
-	(pcase (cons (not (null (executable-find "git")))
-		     (not (null treemacs-python-executable)))
-	  (`(t . t)
-	   (treemacs-git-mode 'deferred))
-	  (`(t . _)
-	   (treemacs-git-mode 'simple))))
-      :bind
-      (:map global-map
-	    ("M-0"       . treemacs-select-window)
-	    ("C-x t 1"   . treemacs-delete-other-windows)
-	    ("C-x t t"   . treemacs)
-	    ("C-x t B"   . treemacs-bookmark)
-	    ("C-x t C-t" . treemacs-find-file)
-	    ("C-x t M-t" . treemacs-find-tag)))
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-fringe-indicator-mode t)
+    (pcase (cons (not (null (executable-find "git")))
+		 (not (null treemacs-python-executable)))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple))))
+  :bind
+  (:map global-map
+	("M-0"       . treemacs-select-window)
+	("C-x t 1"   . treemacs-delete-other-windows)
+	("C-x t t"   . treemacs)
+	("C-x t B"   . treemacs-bookmark)
+	("C-x t C-t" . treemacs-find-file)
+	("C-x t M-t" . treemacs-find-tag)))
 
-  (use-package treemacs-magit
-    :after treemacs magit
-    :ensure t)
+(use-package treemacs-magit
+  :after treemacs magit
+  :ensure t)
+#+end_src
+
+** plantuml
+
+plantuml is a pretty easy way to make decent looking flow chart sorta things.
+
+#+begin_src emacs-lisp
+(use-package plantuml-mode
+  :config
+  (progn
+    (setq org-plantuml-jar-path (expand-file-name "~/Docs/plantuml.jar"))
+    (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+    (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))))
 #+end_src
 
 * Mail
@@ -424,104 +437,102 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 ** General mail configuration
 
 #+begin_src emacs-lisp
-  (require 'smtpmail)
-  (setq
-   user-mail-address              "aaron@bolddaemon.com"
-   user-full-name                 "Aaron Bieber"
-   message-send-mail-function     'smtpmail-send-it
-   message-kill-buffer-on-exit    t
-   smtpmail-smtp-user             "qbit@fastmail.com"
-   smtpmail-smtp-server           "smtp.fastmail.com"
-   smtpmail-smtp-service          465
-   smtpmail-default-smtp-server   "smtp.fastmail.com"
-   smtpmail-stream-type           'ssl)
+(require 'smtpmail)
+(setq user-mail-address              "aaron@bolddaemon.com"
+      user-full-name                 "Aaron Bieber"
+      message-send-mail-function     'smtpmail-send-it
+      message-kill-buffer-on-exit    t
+      smtpmail-smtp-user             "qbit@fastmail.com"
+      smtpmail-smtp-server           "smtp.fastmail.com"
+      smtpmail-smtp-service          465
+      smtpmail-default-smtp-server   "smtp.fastmail.com"
+      smtpmail-stream-type           'ssl)
 #+end_src
 
 ** mu4e specific configs
 #+begin_src emacs-lisp
-  (if (file-exists-p "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
-      (progn
-	(load "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
-	(require 'mu4e)
+(if (file-exists-p "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
+    (progn
+      (load "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
+      (require 'mu4e)
 
-	(require 'org-mu4e)
-	(setq mail-user-agent 'mu4e-user-agent
-	      mu4e-get-mail-command "mbsync fastmail"
-	      mu4e-update-interval 420
-	      mu4e-compose-context-policy nil
-	      mu4e-context-policy 'pick-first
-	      mu4e-drafts-folder "/Drafts"
-	      mu4e-sent-folder   "/Sent Items"
-	      mu4e-trash-folder  "/Trash"
-	      mu4e-maildir-shortcuts
-	      '( ("/INBOX"        . ?i)
-		 ("/Archive"      . ?a)
-		 ("/Sent Items"   . ?s))
-	      org-mu4e-link-query-in-headers-mode nil
-	      mu4e-attachment-dir
-	      (lambda (fname mtype)
-		(cond
-		 ((and fname (string-match "\\.diff$" fname))  "~/patches")
-		 ((and fname (string-match "\\.patch$" fname))  "~/patches")
-		 ((and fname (string-match "\\.diff.gz$" fname))  "~/patches")
-		 (t "~/Downloads")))
-	      mu4e-bookmarks
-	      `(,(make-mu4e-bookmark
-		  :name "Inbox"
-		  :query "maildir:/Inbox AND NOT flag:trashed"
-		  :key ?i)
-		,(make-mu4e-bookmark
-		   :name  "Unread messages"
-		   :query "flag:unread AND NOT flag:trashed AND NOT list:ports-changes.openbsd.org AND NOT list:source-changes.openbsd.org"
-		   :key ?u)
-		 ,(make-mu4e-bookmark
-		   :name  "Today's messages"
-		   :query (concat
-			   "date:today..now"
-			   " AND NOT flag:trashed"
-			   " AND NOT list:ports-changes.openbsd.org"
-			   " AND NOT list:source-changes.openbsd.org")
-		   :key ?d)
-		 ,(make-mu4e-bookmark
-		   :name  "Last 7 days"
-		   :query "date:7d..now AND NOT flag:trashed"
-		   :key ?w)
-		 ,(make-mu4e-bookmark
-		   :name  "Hackers"
-		   :query "list:hackers.openbsd.org AND NOT flag:trashed"
-		   :key ?h)
-		 ,(make-mu4e-bookmark
-		   :name  "Tech"
-		   :query "list:tech.openbsd.org AND NOT flag:trashed"
-		   :key ?t)
-		 ,(make-mu4e-bookmark
-		   :name  "Ports"
-		   :query "list:ports.openbsd.org AND NOT flag:trashed"
-		   :key ?p)
-		 ,(make-mu4e-bookmark
-		   :name "9front"
-		   :query "list:9front.9front.org AND NOT flag:trashed"
-		   :key ?9)
-		 ,(make-mu4e-bookmark
-		   :name "Lobste.rs"
-		   :query "list:lobsters* AND NOT flag:trashed"
-		   :key ?l)))))
+      (require 'org-mu4e)
+      (setq mail-user-agent 'mu4e-user-agent
+	    mu4e-get-mail-command "mbsync fastmail"
+	    mu4e-update-interval 420
+	    mu4e-compose-context-policy nil
+	    mu4e-context-policy 'pick-first
+	    mu4e-drafts-folder "/Drafts"
+	    mu4e-sent-folder   "/Sent Items"
+	    mu4e-trash-folder  "/Trash"
+	    mu4e-maildir-shortcuts
+	    '( ("/INBOX"        . ?i)
+	       ("/Archive"      . ?a)
+	       ("/Sent Items"   . ?s))
+	    org-mu4e-link-query-in-headers-mode nil
+	    mu4e-attachment-dir
+	    (lambda (fname mtype)
+	      (cond
+	       ((and fname (string-match "\\.diff$" fname))  "~/patches")
+	       ((and fname (string-match "\\.patch$" fname))  "~/patches")
+	       ((and fname (string-match "\\.diff.gz$" fname))  "~/patches")
+	       (t "~/Downloads")))
+	    mu4e-bookmarks
+	    `(,(make-mu4e-bookmark
+		:name "Inbox"
+		:query "maildir:/Inbox AND NOT flag:trashed"
+		:key ?i)
+	      ,(make-mu4e-bookmark
+		:name  "Unread messages"
+		:query "flag:unread AND NOT flag:trashed AND NOT list:ports-changes.openbsd.org AND NOT list:source-changes.openbsd.org"
+		:key ?u)
+	      ,(make-mu4e-bookmark
+		:name  "Today's messages"
+		:query (concat
+			"date:today..now"
+			" AND NOT flag:trashed"
+			" AND NOT list:ports-changes.openbsd.org"
+			" AND NOT list:source-changes.openbsd.org")
+		:key ?d)
+	      ,(make-mu4e-bookmark
+		:name  "Last 7 days"
+		:query "date:7d..now AND NOT flag:trashed"
+		:key ?w)
+	      ,(make-mu4e-bookmark
+		:name  "Hackers"
+		:query "list:hackers.openbsd.org AND NOT flag:trashed"
+		:key ?h)
+	      ,(make-mu4e-bookmark
+		:name  "Tech"
+		:query "list:tech.openbsd.org AND NOT flag:trashed"
+		:key ?t)
+	      ,(make-mu4e-bookmark
+		:name  "Ports"
+		:query "list:ports.openbsd.org AND NOT flag:trashed"
+		:key ?p)
+	      ,(make-mu4e-bookmark
+		:name "9front"
+		:query "list:9front.9front.org AND NOT flag:trashed"
+		:key ?9)
+	      ,(make-mu4e-bookmark
+		:name "Lobste.rs"
+		:query "list:lobsters* AND NOT flag:trashed"
+		:key ?l)))))
 #+end_src
 
 * org-mode
 
-  Oh ~org-mode~. It's the reason I started using emacs.. and it's the reason I
-  can't quit!
+Oh ~org-mode~. It's the reason I started using emacs.. and it's the reason I
+can't quit!
 
 
 ** Publish bits
 
-  I publish some of my notes [[https://suah.dev/p][on suah.dev/p]]. Also some recipes.
+I publish some of my notes [[https://suah.dev/p][on suah.dev/p]]. Also some recipes.
 
 #+begin_src emacs-lisp
-  (setq my-org-publish-alist
-      '(
-	("notes" :components ("org-notes" "notes-static"))
+(setq my-org-publish-alist
+      '(("notes" :components ("org-notes" "notes-static"))
 	("org-notes"
 	 :auto-preamble t
 	 :auto-sitemap t
@@ -570,73 +581,74 @@ code.. etc. Combined with ~smex~ for sorting (shows last used things first) and
 ** Capture templates
 
 #+begin_src emacs-lisp
-  (setq my-org-capture-templates
-	`(("t" "TODO"
-	   entry (file+headline "~/org/todo.org" "TODOs")
-	   ,(concat
-	     "* TODO %?\n"
-	     ":PROPERTIES:\n"
-	     ":LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)\n"
-	     ":END:\n") :prepend t)
-	  ("f" "TODO with File"
-	   entry (file+headline "~/org/todo.org" "TODOs")
-	   ,(concat
-	     "* TODO %?\n"
-	     ":PROPERTIES:\n"
-	     ":LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)\n"
-	     ":END:\n"
-	     "%i\n  %a") :prepend t)
-	  ("b" "Bug"
-	   entry (file+olp+datetree "~/org/bugs.org" "Bugs")
-	   "* BUG %?\nEntered on %U\n  :PROPERTIES:\n  :FILE: %a\n  :END:\n" :prepend t)
-	  ("p" "Protocol"
-	   entry (file+headline "~/org/links.org" "Links")
-	   "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-	  ("L" "Protocol Link" entry (file+headline "~/org/links.org" "Links")
-	   "* %? %:link\n%:description\n")
-	  ("j" "Journal"
-	   entry (file+olp+datetree "~/org/journal.org")
-	   "* %?\nEntered on %U\n  %i\n")))
+(setq my-org-capture-templates
+      `(("t" "TODO"
+	 entry (file+headline "~/org/todo.org" "TODOs")
+	 ,(concat
+	   "* TODO %?\n"
+	   ":PROPERTIES:\n"
+	   ":LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)\n"
+	   ":END:\n") :prepend t)
+	("f" "TODO with File"
+	 entry (file+headline "~/org/todo.org" "TODOs")
+	 ,(concat
+	   "* TODO %?\n"
+	   ":PROPERTIES:\n"
+	   ":LOGGING: TODO(!) WAIT(!) DONE(!) CANCELED(!)\n"
+	   ":END:\n"
+	   "%i\n  %a") :prepend t)
+	("b" "Bug"
+	 entry (file+olp+datetree "~/org/bugs.org" "Bugs")
+	 "* BUG %?\nEntered on %U\n  :PROPERTIES:\n  :FILE: %a\n  :END:\n" :prepend t)
+	("p" "Protocol"
+	 entry (file+headline "~/org/links.org" "Links")
+	 "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+	("L" "Protocol Link" entry (file+headline "~/org/links.org" "Links")
+	 "* %? %:link\n%:description\n")
+	("j" "Journal"
+	 entry (file+olp+datetree "~/org/journal.org")
+	 "* %?\nEntered on %U\n  %i\n")))
 #+end_src
 
 ** org
 #+begin_src emacs-lisp
-  (use-package org
-    :pin "org"
-    :ensure org-plus-contrib
-    :hook
-    (org-mode . (lambda ()
-		  (turn-on-flyspell)
-		  (auto-revert-mode)
-		  (auto-fill-mode 1)))
-    :bind
-    ("C-c c" . org-capture)
-    ("C-c p" . org-publish)
-    ("C-c l" . org-store-link)
-    ("C-c a" . org-agenda)
-    ("C-c b" . org-iswitchb)
-    :config
-    (load-library "find-lisp")
-    (setq org-directory "~/org"
-	  org-agenda-files (find-lisp-find-files "~/org" "\.org$")
-	  org-log-done 'time
-	  org-src-tab-acts-natively nil
-	  org-agenda-skip-scheduled-if-deadline-is-shown t
-	  org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")
-			      (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-			      (sequence "|" "CANCELED(c)")))
-    (setq org-publish-project-alist my-org-publish-alist)
-    (setq org-capture-templates my-org-capture-templates))
+(use-package org
+  ;;:pin "org"
+  :ensure org-plus-contrib
+  :hook
+  (org-mode . (lambda ()
+		(turn-on-flyspell)
+		(auto-revert-mode)
+		(auto-fill-mode 1)))
+  :bind
+  ("C-c c" . org-capture)
+  ("C-c p" . org-publish)
+  ("C-c l" . org-store-link)
+  ("C-c a" . org-agenda)
+  ("C-c b" . org-iswitchb)
+  :config
+  (load-library "find-lisp")
+  (setq org-directory "~/org"
+	org-agenda-files (find-lisp-find-files "~/org" "\.org$")
+	org-startup-indented t
+	org-log-done 'time
+	org-src-tab-acts-natively nil
+	org-agenda-skip-scheduled-if-deadline-is-shown t
+	org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")
+			    (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+			    (sequence "|" "CANCELED(c)")))
+  (setq org-publish-project-alist my-org-publish-alist)
+  (setq org-capture-templates my-org-capture-templates))
 
 #+end_src
 ** Extra bits
 #+begin_src emacs-lisp
-  (use-package org-journal
-    :defer t
-    :config
-    (setq org-journal-dir "~/org/journal/"
-	  org-journal-file-format "%Y/%m-%d"
-	  org-journal-date-format "%A, %d %B %Y"))
+(use-package org-journal
+  :defer t
+  :config
+  (setq org-journal-dir "~/org/journal/"
+	org-journal-file-format "%Y/%m-%d"
+	org-journal-date-format "%A, %d %B %Y"))
 #+end_src
 
 Add in some org-mode helpers:
@@ -647,35 +659,35 @@ Add in some org-mode helpers:
   - ~RESET_CHECK_BOXES~ property to be set to ~t~ on a task
     headline. (properties can be set via ~C-c C-x d~
 #+begin_src emacs-lisp
-  (require 'org-habit)
-  (require 'org-checklist)
+(require 'org-habit)
+(require 'org-checklist)
 #+end_src
 
 Found this bad boy to integrate pinboard with org-mode:
 - https://gist.github.com/khinsen/7ed357eed9b27f142e4fa6f5c4ad45dd
 #+begin_src emacs-lisp
-  (defun org-pinboard-store-link ()
-    "Store a link taken from a pinboard buffer."
-    (when (eq major-mode 'pinboard-mode)
-      (pinboard-with-current-pin pin
-	(org-store-link-props
-	 :type "pinboard"
-	 :link (alist-get 'href pin)
-	 :description (alist-get 'description pin)))))
+(defun org-pinboard-store-link ()
+  "Store a link taken from a pinboard buffer."
+  (when (eq major-mode 'pinboard-mode)
+    (pinboard-with-current-pin pin
+      (org-store-link-props
+       :type "pinboard"
+       :link (alist-get 'href pin)
+       :description (alist-get 'description pin)))))
 
-  (org-link-set-parameters "pinboard"
-			   :follow #'browse-url
-			   :store #'org-pinboard-store-link)
+(org-link-set-parameters "pinboard"
+			 :follow #'browse-url
+			 :store #'org-pinboard-store-link)
 #+end_src
 
 Custom agenda commands for various things.
 
 - ~Daily habits~ shows how well I am keeping track of daily things.
 #+begin_src emacs-lisp
-  (setq org-agenda-custom-commands
-	'(("h" "Daily habits"
-	   ((agenda ""))
-	   ((org-agenda-show-log t)
-	    (org-agenda-ndays 7)
-	    (org-agenda-log-mode-items '(state))))))
+(setq org-agenda-custom-commands
+      '(("h" "Daily habits"
+	 ((agenda ""))
+	 ((org-agenda-show-log t)
+	  (org-agenda-ndays 7)
+	  (org-agenda-log-mode-items '(state))))))
 #+end_src

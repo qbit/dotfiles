@@ -1,0 +1,32 @@
+#!/bin/sh
+
+bold="\\033[01;39m"
+regular="\\033[0m"
+
+PORT=$(basename "${PWD}")
+DATE=$(date +'%Y-%m-%d')
+
+msg() {
+	echo "==> ${bold}$*${regular}"
+}
+
+case "$1" in
+	done)
+		git add -p .
+		git commit -v
+		;;
+	diff)
+		find . -name "*$(make show=PATCHORIG)" -exec rm {} \;
+		find . -size 0 -exec rm {} \;
+		for file in $(git ls-files . --exclude-standard --others); do
+			git add -N "$file"
+		done
+		git diff .
+		;;
+	*)
+		msg "Updating ${PORT}"
+		git checkout -b "${PORT}-update-${DATE}"
+		;;
+
+esac
+

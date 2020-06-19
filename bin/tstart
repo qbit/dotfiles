@@ -7,7 +7,7 @@ SSES="-s ${SNAME}"
 IDX=1
 
 if tmux ls | grep -q "^${SNAME}:"; then
-	tmux at -t "${SNAME}"
+	tmux -u2 at -t "${SNAME}"
 else
 	tmux -2 new-session -d $SSES
 	if [ -e ~/.tmux.windows ]; then

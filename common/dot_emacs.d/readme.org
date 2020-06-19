@@ -451,73 +451,76 @@ plantuml is a pretty easy way to make decent looking flow chart sorta things.
 
 ** mu4e specific configs
 #+begin_src emacs-lisp
-(if (file-exists-p "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
-    (progn
-      (load "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
-      (require 'mu4e)
+  (if (file-exists-p "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
+      (progn
+        (load "/usr/local/share/emacs/site-lisp/mu4e/mu4e.el")
+        (require 'mu4e)
 
-      (require 'org-mu4e)
-      (setq mail-user-agent 'mu4e-user-agent
-	    mu4e-get-mail-command "mbsync fastmail"
-	    mu4e-update-interval 420
-	    mu4e-compose-context-policy nil
-	    mu4e-context-policy 'pick-first
-	    mu4e-drafts-folder "/Drafts"
-	    mu4e-sent-folder   "/Sent Items"
-	    mu4e-trash-folder  "/Trash"
-	    mu4e-maildir-shortcuts
-	    '( ("/INBOX"        . ?i)
-	       ("/Archive"      . ?a)
-	       ("/Sent Items"   . ?s))
-	    org-mu4e-link-query-in-headers-mode nil
-	    mu4e-attachment-dir
-	    (lambda (fname mtype)
-	      (cond
-	       ((and fname (string-match "\\.diff$" fname))  "~/patches")
-	       ((and fname (string-match "\\.patch$" fname))  "~/patches")
-	       ((and fname (string-match "\\.diff.gz$" fname))  "~/patches")
-	       (t "~/Downloads")))
-	    mu4e-bookmarks
-	    `(,(make-mu4e-bookmark
-		:name "Inbox"
-		:query "maildir:/Inbox AND NOT flag:trashed"
-		:key ?i)
-	      ,(make-mu4e-bookmark
-		:name  "Unread messages"
-		:query "flag:unread AND NOT flag:trashed AND NOT list:ports-changes.openbsd.org AND NOT list:source-changes.openbsd.org"
-		:key ?u)
-	      ,(make-mu4e-bookmark
-		:name  "Today's messages"
-		:query (concat
-			"date:today..now"
-			" AND NOT flag:trashed"
-			" AND NOT list:ports-changes.openbsd.org"
-			" AND NOT list:source-changes.openbsd.org")
-		:key ?d)
-	      ,(make-mu4e-bookmark
-		:name  "Last 7 days"
-		:query "date:7d..now AND NOT flag:trashed"
-		:key ?w)
-	      ,(make-mu4e-bookmark
-		:name  "Hackers"
-		:query "list:hackers.openbsd.org AND NOT flag:trashed"
-		:key ?h)
-	      ,(make-mu4e-bookmark
-		:name  "Tech"
-		:query "list:tech.openbsd.org AND NOT flag:trashed"
-		:key ?t)
-	      ,(make-mu4e-bookmark
-		:name  "Ports"
-		:query "list:ports.openbsd.org AND NOT flag:trashed"
-		:key ?p)
-	      ,(make-mu4e-bookmark
-		:name "9front"
-		:query "list:9front.9front.org AND NOT flag:trashed"
-		:key ?9)
-	      ,(make-mu4e-bookmark
-		:name "Lobste.rs"
-		:query "list:lobsters* AND NOT flag:trashed"
-		:key ?l)))))
+        (require 'org-mu4e)
+        (setq mail-user-agent 'mu4e-user-agent
+              mu4e-get-mail-command "mbsync fastmail"
+              mu4e-update-interval 420
+              mu4e-compose-context-policy nil
+              mu4e-context-policy 'pick-first
+              mu4e-drafts-folder "/Drafts"
+              mu4e-sent-folder   "/Sent Items"
+              mu4e-trash-folder  "/Trash"
+              mu4e-maildir-shortcuts
+              '( ("/INBOX"        . ?i)
+                 ("/Archive"      . ?a)
+                 ("/Sent Items"   . ?s))
+              org-mu4e-link-query-in-headers-mode nil
+              mu4e-attachment-dir
+              (lambda (fname mtype)
+                (cond
+                 ((and fname (string-match "\\.diff$" fname))  "~/patches")
+                 ((and fname (string-match "\\.patch$" fname))  "~/patches")
+                 ((and fname (string-match "\\.diff.gz$" fname))  "~/patches")
+                 (t "~/Downloads")))
+              mu4e-bookmarks
+              `(,(make-mu4e-bookmark
+                  :name "Inbox"
+                  :query "maildir:/Inbox AND NOT flag:trashed"
+                  :key ?i)
+                ,(make-mu4e-bookmark
+                  :name  "Unread messages"
+                  :query "flag:unread AND NOT flag:trashed AND NOT list:ports-changes.openbsd.org AND NOT list:source-changes.openbsd.org"
+                  :key ?u)
+                ,(make-mu4e-bookmark
+                  :name  "Today's messages"
+                  :query (concat
+                          "date:today..now"
+                          " AND NOT flag:trashed"
+                          " AND NOT list:ports-changes.openbsd.org"
+                          " AND NOT list:source-changes.openbsd.org")
+                  :key ?d)
+                ,(make-mu4e-bookmark
+                  :name  "Last 7 days"
+                  :query "date:7d..now AND NOT flag:trashed"
+                  :key ?w)
+                ,(make-mu4e-bookmark
+                  :name  "Hackers"
+                  :query "list:hackers.openbsd.org AND NOT flag:trashed"
+                  :key ?h)
+                ,(make-mu4e-bookmark
+                  :name  "Tech"
+                  :query "list:tech.openbsd.org AND NOT flag:trashed"
+                  :key ?t)
+                ,(make-mu4e-bookmark
+                  :name  "Ports"
+                  :query "list:ports.openbsd.org AND NOT flag:trashed"
+                  :key ?p)
+                ,(make-mu4e-bookmark
+                  :name "Misc"
+                  :query "list:misc.openbsd.org AND NOT flag:trashed"
+                  ,(make-mu4e-bookmark
+                    :name "9front"
+                    :query "list:9front.9front.org AND NOT flag:trashed"
+                    :key ?9)
+                  ,(make-mu4e-bookmark
+                    :name "Lobste.rs"
+                    :query "list:lobsters* AND NOT flag:trashed"
+                    :key ?l)))))
 #+end_src
 
 * org-mode
@@ -612,33 +615,33 @@ I publish some of my notes [[https://suah.dev/p][on suah.dev/p]]. Also some reci
 
 ** org
 #+begin_src emacs-lisp
-(use-package org
-  ;;:pin "org"
-  :ensure org-plus-contrib
-  :hook
-  (org-mode . (lambda ()
-		(turn-on-flyspell)
-		(auto-revert-mode)
-		(auto-fill-mode 1)))
-  :bind
-  ("C-c c" . org-capture)
-  ("C-c p" . org-publish)
-  ("C-c l" . org-store-link)
-  ("C-c a" . org-agenda)
-  ("C-c b" . org-iswitchb)
-  :config
-  (load-library "find-lisp")
-  (setq org-directory "~/org"
-	org-agenda-files (find-lisp-find-files "~/org" "\.org$")
-	org-startup-indented t
-	org-log-done 'time
-	org-src-tab-acts-natively nil
-	org-agenda-skip-scheduled-if-deadline-is-shown t
-	org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")
-			    (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-			    (sequence "|" "CANCELED(c)")))
-  (setq org-publish-project-alist my-org-publish-alist)
-  (setq org-capture-templates my-org-capture-templates))
+  (use-package org
+    ;;:pin "org"
+    :ensure org-plus-contrib
+    :hook
+    (org-mode . (lambda ()
+                  (turn-on-flyspell)
+                  (auto-revert-mode)
+                  (auto-fill-mode 1)))
+    :bind
+    ("C-c c" . org-capture)
+    ("C-c p" . org-publish)
+    ("C-c l" . org-store-link)
+    ("C-c a" . org-agenda)
+    ("C-c b" . org-iswitchb)
+    :config
+    (load-library "find-lisp")
+    (setq org-directory "~/org"
+          org-agenda-files (find-lisp-find-files "~/org" "\.org$")
+          org-startup-indented t
+          org-log-done 'time
+          org-src-tab-acts-natively t
+          org-agenda-skip-scheduled-if-deadline-is-shown t
+          org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)")
+                              (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
+                              (sequence "|" "CANCELED(c)")))
+    (setq org-publish-project-alist my-org-publish-alist)
+    (setq org-capture-templates my-org-capture-templates))
 
 #+end_src
 ** Extra bits

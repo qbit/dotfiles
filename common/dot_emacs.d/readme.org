@@ -110,13 +110,18 @@ Use spelling and auto-fill when we are in text mode.
 
 This fixes some tramp "waiting for prompt" errors.
 #+begin_src emacs-lisp
-;; (setq shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>λ\n]*#?[]#$%>λ].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
-(require 'tramp-sh nil t)
+  ;;(setq trarmp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>λ\n]*#?[]#$%>λ].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+  ;;(require 'tramp-sh nil t)
+  ;;(setf tramp-ssh-controlmaster-options
+  ;;      (concat
+  ;;       "-o ControlPath=/tmp/ssh-%%r@%%h:%%p "
+  ;;       "-o ControlMaster=auto -o ControlPersist=yes"))
+#+end_src
 
-(setf tramp-ssh-controlmaster-options
-      (concat
-       "-o ControlPath=/tmp/ssh-%%r@%%h:%%p "
-       "-o ControlMaster=auto -o ControlPersist=yes"))
+If things _aren't_ working the way we want:
+
+#+begin_src emacs-lisp
+(setq tramp-verbose 6)
 #+end_src
 
 ** Include ports site-lisp

@@ -32,7 +32,7 @@ set crypt_replyencrypt = yes
 set crypt_verify_sig = yes
 
 #set editor = "emacsclient -ct"
-set editor = "/usr/bin/vi"
+set editor = "vim"
 
 set certificate_file = ~/.mutt/certificates
 
@@ -50,7 +50,7 @@ set smart_wrap = yes
 set attach_format="%u%D%I %t%2n %T%.20d  %> [%.7m/%.10M, %.6e%?C?, %C?, %s]                               "
 set date_format="!%a, %d %b %Y at %H:%M:%S %Z"
 set forward_format="fwd: %s"
-set index_format="%[!%m%d] [%Z] %-54.54s %F"
+set index_format="%[%m-%d] [%Z] %-54.54s %F"
 set pager_format=" %f: %s"
 set sidebar_format="%B%*  %?N?(%N)?"
 set status_format=" %h: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%d?%?F? flag:%F?%?t? tag:%t?%?p? post:%p?%?b? inc:%b?%?l??) %> %_v "
@@ -75,9 +75,6 @@ set spoolfile = "="
 set record="=INBOX.Sent Items"
 set postponed="=INBOX.Drafts"
 set trash = "=INBOX.Trash"
-
-set query_command= "ruby25 ~/bin/card_query.rb '%s'"
-bind editor        <Tab> complete-query
 
 bind index,pager \Ck sidebar-prev
 bind index,pager \Cj sidebar-next

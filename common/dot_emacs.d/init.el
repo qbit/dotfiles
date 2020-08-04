@@ -1,33 +1,42 @@
+;;; init.el -- My emacs config
+;;; Commentary:
+
+;;; Code:
+(require 'package)
+
+;; Make sure we are doing things a bit more securely
+(setq tls-checktrust t)
+(setq gnutls-verify-error t)
+
+(setq package-enable-at-startup nil)
+(unless (assoc-default "melpa-stable" package-archives)
+  (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t))
+(unless (assoc-default "org" package-archives)
+  (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t))
+(unless (assoc-default "melpa" package-archives)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t))
 (package-initialize)
 
-;;(toggle-debug-on-quit)
-;;(toggle-debug-on-error)
+;; Pin use-package to the stable package repo
+(setq package-pinned-packages
+                '(
+		  (use-package        . "melpa")
+		  ))
 
-(load "server")
-(unless (server-running-p) (server-start))
+(unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+      (package-install 'use-package))
 
-(setq custom-file "~/.emacs.d/site-lisp/custom.el")
+(setq emacs-dir (file-name-directory (or (buffer-file-name) load-file-name)))
 
-(let ((default-directory user-emacs-directory))
-  (setq load-path
-	(append
-	 (let ((load-path (copy-sequence load-path)))
-	   (append
-	    (copy-sequence (normal-top-level-add-to-load-path '("./site-lisp")))
-	    (normal-top-level-add-subdirs-to-load-path)))
-	 load-path)))
+(require 'org-install)
+(require 'ob-tangle)
 
-(require 'notifications)
-(require 'functions)
-(require 'tls)
-(require 'pkgs)
-(require 'config)
-(require 'hooks)
-(require 'keyboard)
-(require 'orgie)
-(require 'email)
-(require 'pass)
-(require 'ui)
+(defun load-org-config ()
+  ;; this is a convenience function to parse the my literate config.
+  (interactive)
+  (mapc #'org-babel-load-file (directory-files emacs-dir t "\\.org$")))
 
-(diary)
-(eshell)
+(load-org-config)
+
+;;; init.el ends here

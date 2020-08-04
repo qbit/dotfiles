@@ -1,6 +1,6 @@
 #!/bin/sh
 
-name=$(make show=DISTNAME)
+name=$(make show=PKGNAME)
 fname="${HOME}/patches/${name}.diff"
 
 if [ -d CVS ]; then
@@ -10,7 +10,8 @@ else
 fi
 echo "Created: $fname"
 echo "Syncing..."
-rsync -a ${HOME}/patches/ web.akb.io:/var/www/deftly/patches/
+openrsync -a --rsync-path=/usr/bin/openrsync \
+	${HOME}/patches/ suah.dev:/var/www/deftly/patches/
 URL="https://deftly.net/patches/${name}.diff"
 echo -n "${URL}" | xclip
 echo "Copied '${URL}' to clipboard.."

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd /sys/arch/$(machine)/compile/GENERIC.MP && \
+	make obj && make config && make -j$(sysctl -n hw.ncpuonline) && make install

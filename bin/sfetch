@@ -2,8 +2,10 @@
 
 SERVER=ftp3.usa.openbsd.org
 ITEM=$1
+MACHINE=$(machine)
+[[ ! -z $2 ]] && MACHINE=$2
 V=$(uname -r | sed 's/\.//')
-ftp -o "${PWD}/${ITEM}" "https://${SERVER}/pub/OpenBSD/snapshots/$(machine)/${ITEM}" && \
-ftp -VM -o "${PWD}/SHA256.sig" "https://${SERVER}/pub/OpenBSD/snapshots/$(machine)/SHA256.sig"
+ftp -o "${PWD}/${ITEM}" "https://${SERVER}/pub/OpenBSD/snapshots/${MACHINE}/${ITEM}" && \
+ftp -VM -o "${PWD}/SHA256.sig" "https://${SERVER}/pub/OpenBSD/snapshots/${MACHINE}/SHA256.sig"
 
 signify -C -p "/etc/signify/openbsd-${V}-base.pub" -x SHA256.sig "${ITEM}"

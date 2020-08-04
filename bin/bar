@@ -1,0 +1,149 @@
+#!/bin/ksh
+
+red="%{F#cd0000}"
+yellow="%{F#cdcd00}"
+black="%{F#000000}"
+
+wifi_ssid=$(cat <<EOF
+\$1 ~ "ieee80211" {
+	split(\$0, chars, "");
+	match(\$0, /join .* chan/);
+	ssid = substr(\$0, RSTART + 5, RLENGTH - 10)
+	gsub(/\"/, "", ssid)
+	print ssid
+}
+EOF
+)
+wifi_sig=$(cat <<EOF
+\$1 ~ "ieee80211" {
+	split(\$0, chars, "");
+	match(\$0, /[0-9]+%/);
+	print substr(\$0, RSTART, RLENGTH)
+}
+EOF
+)
+
+mem_fix=$(cat <<EOF
+{
+	split(\$3, real, "/")
+	print "Mem: U: " real[2] " F: " \$6 " C: " \$8
+}
+EOF
+)
+
+temp_avg=$(cat <<EOF
+BEGIN {
+	count=0
+	sum=0
+}
+{
+	count++
+	sum += \$1
+}
+END {
+	b = sum / count
+	printf("%d",b+=b<0?0:0.9)
+}
+EOF
+)
+
+# TODO check lengte and make sure we aren't wayy off base
+wifi() {
+	local w sig ssid
+	w=$(ifconfig wlan | grep "ieee80211")
+	ssid="$(echo "$w" | awk "${wifi_ssid}")"
+	sig="$(echo "$w" | awk "${wifi_sig}")"
+	sig=${sig%%\%}
+	printf "%s : %3d" "${ssid}" "${sig}"
+}
+
+beat() {
+	local b
+	b=$(echo "(($(date +'%s')+3600)%86400)/86.4" | bc)
+	printf "%03d" "${b}"
+}
+
+hz() {
+	local hz
+	hz=$(apm -Pv | \
+		awk \
+		'{gsub(/\(/, "", $5); gsub(/\)/, "", $6); print $5 " " $6 " " $4}')
+	printf "%s" "$hz"
+}
+
+mem() {
+	local mem_info
+	mem_info=$(top -n | grep Mem | awk "${mem_fix}")
+	printf "%s" "${mem_info}"
+}
+
+temp() {
+	local TMP
+	# Average all the sensors
+	TMP=$(sysctl hw.sensors | grep temp | \
+		awk -F= '{print $2}' | \
+		awk "${temp_avg}")
+	if [ $TMP -ge 85 ]; then
+		printf "\\${red}%2d\\${black}°C" "${TMP}"
+	else
+		printf "%2d°C" "${TMP}"
+	fi
+}
+battery() {
+	local BATT BAR BATT_LINE
+	set -A batt_info $(apm -alm)
+
+	BATT=$((${batt_info[0]}/10))
+	BAR="#"
+	if [ "${batt_info[2]}" == "1" ] ; then
+		BAR="+"
+	fi
+
+	BATT_LINE=""
+	for i in $(jot 10); do
+		if [ "$i" -le "$BATT" ]; then
+			BATT_LINE="${BATT_LINE}${BAR}"
+		else
+			BATT_LINE="${BATT_LINE}-"
+		fi
+	done
+
+	if [ $BATT -lt 3 ] && [ "${batt_info[2]}" == "0" ]; then
+		BATT_LINE="${red}${BATT_LINE}${black}"
+	fi
+
+	if [ $BATT -lt 5 ] && [ "${batt_info[2]}" == "0" ]; then
+		BATT_LINE="${yellow}${BATT_LINE}${black}"
+	fi
+	echo "${batt_info[0]}%" "$BATT_LINE"
+}
+
+mail() {
+	set -A mail_list $(ls -1 ~/Maildir | egrep -vi "gmail|trash")
+	count=0
+	for dir in "${mail_list[@]}"; do
+		echo -n "${dir}:"
+		ls -1 ~/Maildir/${dir}/Inbox/new | wc -l | \
+			awk '{ if ($1 > 0) { printf $1 } else { printf "0" }}'
+		count=$((count+1))
+		if [ $count -ne ${#mail_list[@]} ]; then
+			echo -n ","
+		fi
+	done
+}
+
+vmm() {
+	if pgrep -q vmd; then
+		set -A running_vms $(vmctl status | grep running | awk '{print $NF"("$5")"}')
+		echo -n "VMs: "
+		for vm in "${running_vms[@]}"; do
+			echo -n "${vm} "
+		done
+	else
+		echo -n ""
+	fi
+}
+
+printf "%%{l} %s | %s | %%{A:apm -A:}%%{A2:apm -L:}%%{A3:apm -H:}%s%%{A}%%{A}%%{A} | %s %%{r} %s | %s | %s%% | %s | @%s " \
+	"$(battery)" "$(temp)" "$(hz)" "$(mem)" \
+	"$(vmm)" "$(mail)" "$(wifi)" "$(date '+%Y-%m-%d %H:%M')" "$(beat)"

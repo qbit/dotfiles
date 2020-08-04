@@ -13,7 +13,7 @@
 # Files
 data.location=~/.task
 
-#editor=mg
+editor=vim
 
 # Color theme (uncomment one to use)
 include /usr/local/share/taskwarrior/rc/dark-16.theme
@@ -27,6 +27,6 @@ include /usr/local/share/taskwarrior/rc/dark-16.theme
 #include /usr/local/share/taskwarrior/rc/dark-yellow-green.theme
 #include /usr/local/share/taskwarrior/rc/light-16.theme
 #include /usr/local/share/taskwarrior/rc/light-256.theme
-#include /usr/local/share/taskwarrior/rc/no-color.theme
+include /usr/local/share/taskwarrior/rc/no-color.theme
 #include /usr/local/share/taskwarrior/rc/solarized-dark-256.theme
 #include /usr/local/share/taskwarrior/rc/solarized-light-256.theme

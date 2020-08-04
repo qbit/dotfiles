@@ -1,27 +1,43 @@
 #!/bin/ksh
 
-. /etc/ksh.kshrc
+${DEBUG:-}
+
+
+[[ -x ~/.po ]] && . ~/.po
+
+[[ -x /etc/ksh.kshrc ]] && . /etc/ksh.kshrc
 
 # shellcheck source=/home/qbit/.ksh_paths
-. ~/.ksh_paths
+[[ -x ~/.ksh_paths ]] && . ~/.ksh_paths
+
+k() {
+	${DEBUG}
+	if [ -z $1 ]; then
+		echo $PWD >> ~/.k
+	else
+		K=~/.k
+		case $1 in
+		clean)	sort $K | uniq > ${K}.tmp && mv ${K}.tmp ${K};;
+		rm)	sed -i -E "\#^${PWD}\$#d" ${K};;
+		ls)	cat ${K};;
+		*)	cd "$(grep -e "$1" ${K} | head -n 1)";;
+		esac
+	fi
+}
 
 if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
-	eval `dbus-launch --sh-syntax`
+	if [ -e /usr/local/bin/dbus-launch ]; then
+		eval $(/usr/local/bin/dbus-launch --sh-syntax)
+	fi
 fi
 
 export NO_COLOR=1
 export RUBY_TESTOPTS=--color=never
 export GEM_HOME=~/ruby_bin
+export PSQL_EDITOR=vim
 
-#pgrep -q emacs || (emacs --daemon &)
+export GOT_AUTHOR="Aaron Bieber <abieber@openbsd.org>"
 
-#grey="\033[01;30m"
-#red="\033[01;31m"
-#green="\033[01;32m"
-#yellow="\033[01;33m"
-#blue="\033[01;34m"
-#magenta="\033[01;35m"
-#cyan="\033[01;35m"
 bold="\\033[01;39m"
 white="\\033[0m"
 
@@ -33,15 +49,14 @@ export SPEC_OPTS=--no-color
 export RUBY_TESTOPTS=--color=never
 
 unalias ls
-#alias bpass="env DISPLAY=:1 pass"
-#alias spass="env PASSWORD_STORE_DIR=~/.secret-store pass"
+alias goget='env GO111MODULES=on go get'
 alias 'gopatch=WRKDIST=$(make show=WRKSRC) make update-patches'
 alias ag='ag --nocolor'
 alias build="dpb -c -h /home/buildie/hosts -P"
 alias cabal='env TMPDIR=/usr/local/cabal/build/ cabal'
 alias cdw='cd $(make show=WRKSRC)'
 alias ec='emacsclient -ct'
-alias irc="export TERM=xterm; tmux at -t irc"
+alias irc="export TERM=xterm; tmux -u2 at -t irc"
 alias man='man -Owidth=$(($COLUMNS<80?($COLUMNS-2):78))'
 alias mkae='make'
 alias mutt='stty discard undef; neomutt'
@@ -51,43 +66,48 @@ alias pkg_delete="pkg_delete -Dsnap"
 alias pup='doas -n /usr/sbin/pkg_add -u'
 alias rustc='rustc --color=never'
 alias sbcl="rlwrap sbcl"
-alias tmux="tmux -2"
+alias tmux="tmux -u2"
+alias vi=vim
 
 src() {
 	cd /usr/src/*/$1 || return
 }
 
 port() {
-	cd /usr/ports/*/$1 || return
+	cd /usr/ports/*/$1 2>/dev/null || \
+		cd /usr/ports/*/*/$1 2>/dev/null || \
+		return
 }
 
+[[ -x ~/.swaps ]] || mkdir -m 700 ~/.swaps;
+
 if [ -d /usr/local/plan9/ ]; then
-	pgrep -q fontsrv || (/usr/local/plan9/bin/fontsrv &)
-	pgrep -q plumber || (/usr/local/plan9/bin/plumber &)
+	if [ ! -z "$DISPLAY" ]; then
+		pgrep -q fontsrv || (/usr/local/plan9/bin/fontsrv &)
+		pgrep -q plumber || (/usr/local/plan9/bin/plumber &)
+	fi
 fi
 
 eink() {
-	dynamic_colors set eink
+	~/.dcolor/dcolor eink
+	pgrep -q emacs && emacsclient -e "(load-theme 'eink 1)"
 
-	rm ~/.tmux.theme
-	ln -s ~/.tmux.eink.theme ~/.tmux.theme
+	ln -sf ~/.tmux.eink.theme ~/.tmux.theme
 
 	sed -i 's/^colorscheme.*/colorscheme eink/' \
 		~/dev/dotfiles/common/dot_vimrc
 	tmux source-file ~/.tmux.conf
-	emacsclient -e "(load-theme 'eink 1)"
 }
 
 nord() {
-	dynamic_colors set nord
+	~/.dcolor/dcolor nord
+	pgrep -q emacs && emacsclient -e "(load-theme 'base16-nord 1)"
 
-	rm ~/.tmux.theme
-	ln -s ~/.tmux.nord.theme ~/.tmux.theme
+	ln -sf ~/.tmux.nord.theme ~/.tmux.theme
 
 	sed -i 's/^colorscheme.*/colorscheme nord/' \
 		~/dev/dotfiles/common/dot_vimrc
 	tmux source-file ~/.tmux.conf
-	emacsclient -e "(load-theme 'base16-nord 1)"
 }
 
 if [ -e ~/.ksh_completions ]; then
@@ -117,13 +137,12 @@ fi
 DATADIR=/usr
 export DATADIR
 
-if [ -e ${LPREFIX}/bin/vim ]; then
-	alias vi="vim"
-fi
-
 if [ -e ${LPREFIX}/bin/keychain ]; then
-	${LPREFIX}/bin/keychain --gpg2 --inherit any --agents gpg -q -Q
+	${LPREFIX}/bin/keychain --gpg2 --inherit any --agents ssh,gpg -q -Q
 	keychain_conf="$HOME/.keychain/$(uname -n)-sh"
+
+	# shellcheck source=/home/qbit/.keychain/slip.bold.daemon-sh
+	[ -e "${keychain_conf}" ] && . ${keychain_conf}
 
 	# shellcheck source=/home/qbit/.keychain/slip.bold.daemon-sh-gpg
 	[ -e "${keychain_conf}-gpg" ] && . ${keychain_conf}-gpg
@@ -131,7 +150,7 @@ fi
 
 vdiff() {
 	cp -p "$1" "$1.orig"
-	nvim "$1"
+	vi "$1"
 }
 
 pclean() {
@@ -165,13 +184,28 @@ set -A big_gits \
 	/build/projects/node		\
 	/home/qbit/dev/dotnet/coreclr	\
 	/home/qbit/dev/dotnet/corefx    \
-	/sys/arch/$(machine -a)/compile/GENERIC    \
-	/sys/arch/$(machine -a)/compile/GENERIC.MP    \
+	/sys/arch/$(machine)/compile/GENERIC    \
+	/sys/arch/$(machine)/compile/GENERIC.MP    \
 	/home/qbit/dev/linux            \
 	/home/qbit/dev/mono		\
 	/usr/ports			\
 	/usr/src			\
 	/usr/xenocara
+
+gut_str() {
+	# take the middle bits out
+	if [ "${#1}" -gt "15" ]; then
+		echo "${@}" | awk '{ \
+			split($0, a, ""); \
+			for (i=0; i<7; i++) {printf "%s", a[i]} \
+			l=length(a); \
+			printf "%s", ".."; \
+			for (i=l-10; i<l; i++) {printf "%s", a[i]} \
+		}'
+	else
+		echo "${@}"
+	fi
+}
 
 git_branch_name() {
 	# __git_ps1 causes some slowness on large repos, don't run this there.
@@ -188,6 +222,7 @@ git_branch_name() {
 			br_ch=$( perl -e 'binmode STDOUT, ":utf8"; print "\x{16D8}";' )
 			branch="$br_ch $( git describe --tags | head -n 1 )"
 		fi
+		branch=$(gut_str $branch)
 		echo "[${bold}${branch}${white}]"
 	fi
 }
@@ -240,11 +275,15 @@ batt() {
 
 PS1='\u@\h$(batt)[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:$(awk -f "${HOME}/bin/spwd" -- "${PWD}")\]$(git_branch_name)$(hg_q_name)$(ltodo)$(amroot) '
 
-if [ -d ~/.dynamic-colors ]; then
-	dynamic_colors init
+if [ -d ~/.dcolor ]; then
+	~/.dcolor/dcolor
 fi
 
 export MPC_FORMAT="[%artist%|(artist n/a)]    [%album%|%albumshort%|(album n/a)]      [%title%|(title n/a)]"
 
-# GOPATH and PATH are set in ~/.ksh_paths
+# PATH is set in ~/.ksh_paths
 export PATH HOME TERM GPG_TTY PS1 KEYID
+
+if [ -e ~/.ksh_local ]; then
+	. ~/.ksh_local
+fi

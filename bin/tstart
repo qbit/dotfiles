@@ -1,8 +1,36 @@
 #!/bin/ksh
 
-tmux -2 new-session -d -s "Main"
-tmux rename-window "IRC" 
-tmux new-window -n "Mail"
-tmux new-window -n "Music"
-tmux new-window 
-tmux -2 attach-session -t "Main"
+set -eu
+
+SNAME="Main"
+SSES="-s ${SNAME}"
+IDX=1
+
+if tmux ls | grep -q "^${SNAME}:"; then
+	tmux -u2 at -t "${SNAME}"
+else
+	tmux -2 new-session -d $SSES
+	if [ -e ~/.tmux.windows ]; then
+		count=${IDX}
+		for n in $(cat ~/.tmux.windows); do
+			if [ $n == "_" ]; then
+				tmux new-window
+			else
+				if [ $count -eq ${IDX} ]; then
+					tmux rename-window "${n}"
+				else
+					tmux new-window -n "${n}"
+				fi
+			fi
+			((count=count+1))
+		done
+
+	else
+		tmux rename-window "IRC"
+		tmux new-window -n "Mail"
+		tmux new-window -n "Music"
+		tmux new-window
+	fi
+	tmux select-window -t${IDX}
+	tmux -2 attach-session -t $SNAME
+fi

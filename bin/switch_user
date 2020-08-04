@@ -1,0 +1,7 @@
+#!/bin/sh
+
+/usr/bin/ssh-add -D
+
+for p in chrome firefox emacs cwm; do
+	/usr/bin/pkill -15 "${p}"
+done

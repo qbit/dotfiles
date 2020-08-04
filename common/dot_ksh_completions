@@ -1,13 +1,31 @@
-# Package Managers
-# OpenBSD pkg_*
-if [ -d /var/db/pkg ]; then
-	PKG_LIST=$(ls -1 /var/db/pkg)
-	set -A complete_pkg_delete -- $PKG_LIST
-	set -A complete_pkg_info -- $PKG_LIST
+read_known_hosts() {
+        local _file=$1 _line _host
 
-	set -A complete_pkg_1 -- add check create delete info
-	set -A complete_pkg_2 -- $PKG_LIST
-fi
+        while read _line ; do
+          _line=${_line%%#*} # delete comments
+          _line=${_line%%@*} # ignore markers
+          _line=${_line%% *} # keep only host field
+
+          [[ -z $_line ]] && continue
+
+          local IFS=,
+          for _host in $_line; do
+            _host=${_host#\[}
+            _host=${_host%%\]*}
+            for i in ${HOST_LIST[*]}; do
+              [[ $_host == $i ]] && continue 2
+            done
+            set -s -A HOST_LIST ${HOST_LIST[*]} $_host
+          done
+        done <$_file
+}
+
+[[ -s /etc/ssh/ssh_known_hosts ]] && read_known_hosts /etc/ssh/ssh_known_hosts
+[[ -s ~/.ssh/known_hosts ]] && read_known_hosts ~/.ssh/known_hosts
+
+set -A complete_ssh -- ${HOST_LIST[*]}
+set -A complete_scp -- ${HOST_LIST[*]}
+set -A complete_mosh -- ${HOST_LIST[*]}
 
 # Homebrew
 if [ -e /usr/local/bin/brew ]; then
@@ -28,23 +46,17 @@ if [ -e /usr/local/bin/brew ]; then
 		upgrade
 	set -A complete_brew_2 -- $PKG_LIST
 fi
-# / Package Managers
 
-# ssh, scp, mosh
-set -A SSH_KNOWN_HOSTS ~/.ssh/known_hosts
+# Package Managers
+# OpenBSD pkg_*
+if [ -d /var/db/pkg ]; then
+	PKG_LIST=$(ls -1 /var/db/pkg)
+	set -A complete_pkg_delete -- $PKG_LIST
+	set -A complete_pkg_info -- $PKG_LIST
 
-if [ -f /etc/ssh/ssh_known_hosts ]; then
-	SSH_KNOWN_HOSTS="${SSH_KNOWN_HOSTS[@]} /etc/ssh/ssh_known_hosts"
+	set -A complete_pkg_1 -- add check create delete info
+	set -A complete_pkg_2 -- $PKG_LIST
 fi
-
-HOST_LIST=$(awk \
-	'{split($1,a,","); gsub("].*", "", a[1]); gsub("\\[", "", a[1]); print a[1] " root@" a[1]}' \
-		$SSH_KNOWN_HOSTS | sort | uniq)
-
-set -A complete_ssh -- $HOST_LIST
-set -A complete_scp -- $HOST_LIST
-set -A complete_mosh -- $HOST_LIST
-# / ssh, scp, mosh
 
 # Utilities
 if [ ! -f /tmp/man_list ]; then
@@ -128,6 +140,15 @@ set -A complete_make_1 -- \
 	port-lib-depends-check \
 	reinstall \
 	repackage
+
+set -A complete_rcctl_1 -- disable enable get ls order set restart start stop
+set -A complete_rcctl_2 -- $(rcctl ls all)
+
+set -A complete_signify_1 -- -C -G -S -V
+set -A complete_signify_2 -- -q -p -x -c -m -t -z
+set -A complete_signify_3 -- -p -x -c -m -t -z
+
+set -A complete_make_1 -- install clean repackage reinstall
 
 set -A complete_beet_1 -- \
 	as \

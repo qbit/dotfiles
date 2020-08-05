@@ -16,11 +16,9 @@ color menubg		"#798a99"
 color menufg		"#eeeeff"
 color urgencyborder	"red"
 
-#command	term	"/bin/ksh -l -c /usr/local/bin/st"
-command	term	"/usr/X11R6/bin/xterm"
-command "Primary -> :1 Clipboard" "ksh -c 'xclip -out | xclip -selection clipboard -d :1'"
-command ":1 Clipboard -> Primary" "ksh -c 'xclip -out -selection clipboard -d :1 | xclip'"
-command ":1 Primary -> Primary" "ksh -c 'xclip -out -d :1 | xclip'"
+command "Browser"	"~/bin/browser"
+command	"Terminal"	"/usr/X11R6/bin/xterm"
+command	"Emacs"		"/usr/local/bin/emacs"
 
 # make emacs usable again
 unbind-key	C-slash

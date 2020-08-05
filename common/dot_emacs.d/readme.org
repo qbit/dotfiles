@@ -655,6 +655,23 @@ I publish some of my notes [[https://suah.dev/p][on suah.dev/p]]. Also some reci
     (setq org-capture-templates my-org-capture-templates))
 
 #+end_src
+** org-roam
+
+#+begin_src emacs-lisp
+  ;; (use-package org-roam
+  ;;   :hook
+  ;;   (after-init . org-roam-mode)
+  ;;   :custom
+  ;;   (org-roam-directory "~/org-roam")
+  ;;   :bind (:map org-roam-mode-map
+  ;;               (("C-c n l" . org-roam)
+  ;;                ("C-c n f" . org-roam-find-file)
+  ;;                ("C-c n g" . org-roam-graph-show))
+  ;;               :map org-mode-map
+  ;;               (("C-c n i" . org-roam-insert))
+  ;;               (("C-c n I" . org-roam-insert-immediate))))
+#+end_src
+
 ** Extra bits
 #+begin_src emacs-lisp
 (use-package org-journal

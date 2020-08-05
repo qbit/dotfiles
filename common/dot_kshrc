@@ -275,9 +275,9 @@ batt() {
 
 PS1='\u@\h$(batt)[\[\e[01;$(($??31:39))m\]$?\[\e[0m]\]:$(awk -f "${HOME}/bin/spwd" -- "${PWD}")\]$(git_branch_name)$(hg_q_name)$(ltodo)$(amroot) '
 
-if [ -d ~/.dcolor ]; then
-	~/.dcolor/dcolor
-fi
+#if [ -d ~/.dcolor ]; then
+#	~/.dcolor/dcolor
+#fi
 
 export MPC_FORMAT="[%artist%|(artist n/a)]    [%album%|%albumshort%|(album n/a)]      [%title%|(title n/a)]"
 

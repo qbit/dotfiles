@@ -91,7 +91,13 @@ temp() {
 }
 battery() {
 	local BATT BAR BATT_LINE
-	set -A batt_info $(apm -alm)
+	if sysctl -n hw.product | grep -iq pine64; then
+		pct=$(sysctl -n hw.sensors.cwfg0.percent0)
+		pct=${pct%%.}
+		set -A batt_info $pct 0 0
+	else
+		set -A batt_info $(apm -alm)
+	fi
 
 	BATT=$((${batt_info[0]}/10))
 	BAR="#"

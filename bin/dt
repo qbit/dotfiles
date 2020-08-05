@@ -1,5 +1,5 @@
 #!/bin/sh
 
 HN=$1
-U=${1:-glenda}
+U=${2:-glenda}
 drawterm -a $HN -p -h $HN -u $U -c rio -i riostart

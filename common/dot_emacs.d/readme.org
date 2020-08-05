@@ -42,6 +42,11 @@ For some reason OpenBSD hangs, these seem to help a bit
 ** Interface and Behavior
 *** Interface
 
+Global font
+#+begin_src emacs-lisp
+  ;;(set-default-font "Go Regular")
+#+end_src
+
 Use 80 columns, this helps keep things readable when windows are split
 #+begin_src emacs-lisp
 (setq whitespace-style '(trailing lines space-before-tab)

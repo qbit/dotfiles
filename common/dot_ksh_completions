@@ -176,18 +176,20 @@ if [ -d ~/.dynamic-colors ]; then
 	set -A complete_dynamic_colors_2 -- $(dynamic_colors list)
 fi
 
-if [ -d ~/.opm ]; then
-	set -A complete_opm_1 -- -b -c -d -h -m \
-		add \
-		del \
-		encrypt \
-		get \
-		insert \
-		list ls \
-		rm \
-		search show \
-		verify
-	set -A complete_opm -- $(/usr/local/bin/opm -b ls)
+if [ -e /usr/local/bin/opm ]; then
+	if [ -d ~/.opm ]; then
+		set -A complete_opm_1 -- -b -c -d -h -m \
+			add \
+			del \
+			encrypt \
+			get \
+			insert \
+			list ls \
+			rm \
+			search show \
+			verify
+		set -A complete_opm -- $(/usr/local/bin/opm -b ls)
+	fi
 fi
 
 if [ -e /usr/local/bin/gopass ]; then

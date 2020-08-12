@@ -18,7 +18,12 @@ wifi_sig=$(cat <<EOF
 \$1 ~ "ieee80211" {
 	split(\$0, chars, "");
 	match(\$0, /[0-9]+%/);
-	print substr(\$0, RSTART, RLENGTH)
+	val=substr(\$0, RSTART, RLENGTH)
+	if (val == "") {
+		printf \$(NF - 9)
+	} else {
+		printf "%3d%%", val
+	}
 }
 EOF
 )
@@ -53,8 +58,7 @@ wifi() {
 	w=$(ifconfig wlan | grep "ieee80211")
 	ssid="$(echo "$w" | awk "${wifi_ssid}")"
 	sig="$(echo "$w" | awk "${wifi_sig}")"
-	sig=${sig%%\%}
-	printf "%s : %3d" "${ssid}" "${sig}"
+	printf "%s : %s" "${ssid}" "${sig}"
 }
 
 beat() {
@@ -150,6 +154,6 @@ vmm() {
 	fi
 }
 
-printf "%%{l} %s | %s | %%{A:apm -A:}%%{A2:apm -L:}%%{A3:apm -H:}%s%%{A}%%{A}%%{A} | %s %%{r} %s | %s | %s%% | %s | @%s " \
+printf "%%{l} %s | %s | %%{A:apm -A:}%%{A2:apm -L:}%%{A3:apm -H:}%s%%{A}%%{A}%%{A} | %s %%{r} %s | %s | %s | %s | @%s " \
 	"$(battery)" "$(temp)" "$(hz)" "$(mem)" \
 	"$(vmm)" "$(mail)" "$(wifi)" "$(date '+%Y-%m-%d %H:%M')" "$(beat)"
